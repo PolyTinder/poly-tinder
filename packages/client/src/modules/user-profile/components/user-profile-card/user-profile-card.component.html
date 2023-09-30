@@ -31,6 +31,9 @@
 
         <div class="user-profile__table">
             <div class="user-profile__table__entry user-profile__table__entry--multiple">
+                <div class="user-profile__table__entry__item" *ngIf="userProfile.height">
+                    <i class="fas fa-ruler"></i> {{height}}
+                </div>
                 <div class="user-profile__table__entry__item" *ngIf="userProfile.workout">
                     <i class="fas fa-running"></i> {{userProfile.workout}}
                 </div>

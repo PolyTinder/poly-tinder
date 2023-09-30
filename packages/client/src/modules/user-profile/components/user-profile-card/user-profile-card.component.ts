@@ -61,4 +61,16 @@ export class UserProfileCardComponent {
             (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,
         );
     }
+
+    get height() {
+        if (!this.userProfile?.height) {
+            return undefined;
+        }
+
+        const heightCm = this.userProfile.height;
+        const heightFeet = Math.floor(heightCm / 30.48);
+        const heightInches = Math.round((heightCm % 30.48) / 2.54);
+
+        return `${heightCm} cm / ${heightFeet}'${heightInches}"`;
+    }
 }
