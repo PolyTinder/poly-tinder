@@ -11,6 +11,10 @@
         overflow-y: auto;
     }
 
+    &--no-nav {
+        grid-template-columns: 1fr;
+    }
+
     @media screen and (max-width: $mobile-breakpoint) {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr auto;

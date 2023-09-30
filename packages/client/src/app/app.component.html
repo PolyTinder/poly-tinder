@@ -3,8 +3,8 @@
 </ng-container>
 
 <ng-container *ngIf="(state | async) === 'ready'">
-    <div class="app-container">
-        <div class="app-nav">
+    <div class="app-container" [ngClass]="{ 'app-container--no-nav': shouldHideNav }">
+        <div class="app-nav" *ngIf="!shouldHideNav">
             <app-navigation></app-navigation>
         </div>
         <div class="app-content">

@@ -1,4 +1,8 @@
+@import '../../styles/utils';
+
 .status-page {
+    @include no-select;
+    
     height: 100%;
     width: 100%;
     padding: 24px;

@@ -6,10 +6,12 @@ import { SwipingPageComponent } from './pages/swiping-page/swiping-page.componen
 import { UiModule } from '../ui/ui.module';
 import { MatchListComponent } from './components/match-list/match-list.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [MatchesPageComponent, SwipingPageComponent, MatchListComponent],
-    imports: [CommonModule, AppRoutingModule, UserProfileModule, UiModule],
-    exports: [MatchesPageComponent],
+    declarations: [MatchesPageComponent, SwipingPageComponent, MatchListComponent, MatchedUserPageComponent],
+    imports: [CommonModule, AppRoutingModule, ReactiveFormsModule, UserProfileModule, UiModule],
+    exports: [MatchesPageComponent, MatchedUserPageComponent],
 })
 export class MatchingModule {}

@@ -1,0 +1,294 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/utils';
+
+.matched-user-page {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: 100%;
+
+    &__header,
+    &__footer {
+        background-color: var(--theme-background);
+        padding: 24px;
+        display: grid;
+        align-items: center;
+        gap: 24px;
+    }
+
+    &__header {
+        @include no-select;
+
+        border-bottom: solid 1px rgb(240, 240, 240);
+        grid-template-columns: auto 1fr auto;
+
+        &__back {
+            height: 36px;
+            width: 36px;
+            background-color: var(--theme-background);
+            border: solid 1px rgb(240, 240, 240);
+            border-radius: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3em;
+            color: var(--theme-background-contrast);
+            text-decoration: none;
+
+            i {
+                margin-left: -2px;
+            }
+        }
+
+        &__title {
+            font-size: 1.5em;
+            font-weight: 500;
+            color: var(--theme-background-contrast);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+
+            &__avatar {
+                height: 36px;
+                width: 36px;
+                background-color: rgb(240, 240, 240);
+                border-radius: 6px;
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+
+        &__messages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 24px;
+
+            &__system-message {
+                @include no-select;
+
+                width: 100%;
+                background-color: rgb(240, 240, 240);
+                max-width: 600px;
+                align-self: center;
+                padding: 24px;
+                border-radius: 6px;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.55);
+                box-sizing: border-box;
+                margin-bottom: 12px;
+            }
+
+            &__question {
+                max-width: 600px;
+                align-self: center;
+                margin-bottom: 12px;
+                text-align: center;
+
+                &__description {
+                    @include no-select;
+                    opacity: 0.55;
+                    font-style: italic;
+                }
+
+                &__question {
+                    font-size: 1.65em;
+                    font-weight: 500;
+                    margin: 24px 0;
+                    line-height: 1.2em;
+                }
+
+                &__actions {
+                    @include no-select;
+                    display: flex;
+                    gap: 24px;
+                    justify-content: center;
+
+                    &__action {
+                        border: solid 1px rgb(240, 240, 240);
+                        padding: 6px 12px;
+                        border-radius: 6px;
+
+                        i {
+                            margin-right: 6px;
+                        }
+                    }
+                }
+            }
+
+            &__group {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+
+                &__time {
+                    @include no-select;
+
+                    opacity: 0.55;
+                    font-weight: 500;
+                    align-self: center;
+                    font-size: 0.85em;
+                }
+
+                &__content {
+                    display: flex;
+                    align-items: flex-end;
+                    gap: 6px;
+
+                    &__sender {
+                        &__avatar {
+                            height: 10px;
+                            width: 10px;
+                            background-color: rgb(220, 220, 220);
+                            border-radius: 10px;
+                        }
+                    }
+
+                    &__messages {
+                        display: flex;
+                        gap: 3px;
+                        flex-direction: column;
+
+                        &__message {
+                            background-color: rgb(220, 220, 220);
+                            padding: 6px 12px;
+                            border-radius: 3px;
+                            max-width: 80%;
+                        }
+                    }
+                }
+
+                &--self {
+                    .matched-user-page__content__messages__group__content {
+                        flex-direction: row-reverse;
+
+                        &__messages {
+                            align-items: flex-end;
+
+                            &__message {
+                                background-color: var(--theme-main);
+                                color: var(--theme-main-contrast);
+                                border-top-left-radius: 12px;
+                                border-bottom-left-radius: 12px;
+
+                                &:first-child {
+                                    border-top-right-radius: 12px;
+                                }
+                                &:last-child {
+                                    border-bottom-right-radius: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &--other {
+                    .matched-user-page__content__messages__group__content {
+                        &__messages {
+                            align-items: flex-start;
+
+                            &__message {
+                                border-top-right-radius: 12px;
+                                border-bottom-right-radius: 12px;
+
+                                &:first-child {
+                                    border-top-left-radius: 12px;
+                                }
+                                &:last-child {
+                                    border-bottom-left-radius: 12px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__footer {
+        $item-size: 40px;
+
+        border-top: solid 1px rgb(240, 240, 240);
+        grid-template-columns: 1fr auto;
+
+        &__control {
+            height: $item-size;
+            appearance: none;
+            background-color: rgb(250, 250, 250);
+            border: solid 1px rgb(240, 240, 240);
+            font: inherit;
+            outline: none;
+            border-radius: $item-size;
+            padding: 0 24px;
+            box-sizing: border-box;
+        }
+
+        &__button {
+            @include no-select;
+
+            height: $item-size;
+            width: $item-size;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1em;
+            border: solid 1px rgb(240, 240, 240);
+            border-radius: $item-size;
+            background-color: var(--theme-background);
+            flex-grow: 0;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        &__header,
+        &__footer {
+            padding: 12px;
+            gap: 12px;
+        }
+
+        &__header {
+            &__back {
+                height: 32px;
+                width: 32px;
+                font-size: 1.1em;
+
+                i {
+                    margin-left: -1px;
+                }
+            }
+
+            &__title {
+                font-size: 1.2em;
+    
+                &__avatar {
+                    height: 32px;
+                    width: 32px;
+                }
+            }
+        }
+
+        &__footer {
+            $item-size: 32px;
+
+            &__control {
+                padding: 0 12px;
+                height: $item-size;
+            }
+
+            &__button {
+                height: $item-size;
+                width: $item-size;
+                font-size: 1em;
+            }
+        }
+    }
+}

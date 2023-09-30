@@ -41,7 +41,34 @@ export class PublicProfileService {
                         (user) => new PublicUserResultClass(user, this.http),
                     );
                 }),
-                tap((users) => this.matches$.next(users)),
+                tap((users) => this.haveMatchesChanged(users) ? this.matches$.next(users) : undefined),
             );
+    }
+
+    fetchMatchesIfNotLoaded(): Observable<PublicUserResultClass[]> {
+        if (this.matches$.getValue().length === 0) {
+            return this.fetchMatches();
+        }
+
+        return this.matches;
+    }
+
+    private haveMatchesChanged(matches: PublicUserResultClass[]): boolean {
+        const currentMatches = this.matches$.getValue();
+        if (currentMatches.length !== matches.length) {
+            return true;
+        }
+
+        return matches.some((match) => {
+            const currentMatch = currentMatches.find(
+                (currentMatch) => currentMatch.getId() === match.getId(),
+            );
+
+            if (!currentMatch) {
+                return true;
+            }
+
+            return currentMatch.currentValue.userId !== match.getId();
+        });
     }
 }
