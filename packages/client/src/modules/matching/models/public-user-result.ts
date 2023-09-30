@@ -3,7 +3,7 @@ import {
     NotLoadedPublicUserResult,
     PublicUserResult,
 } from 'common/models/user';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 
 export interface NotLoadedPublicUserResultClass {
     get value(): NotLoadedPublicUserResult;
@@ -44,12 +44,32 @@ export class PublicUserResultClass {
         return this.loaded$.asObservable();
     }
 
-    get loadedValue() {
+    get currentValue() {
+        return this.value$.value;
+    }
+
+    get currentLoadedValue() {
         if (!this.loaded$.value) {
             throw new Error('Cannot get loaded value when not loaded');
         }
 
         return this.value$.value;
+    }
+
+    tryGetLoadedValue(): Observable<PublicUserResult | null> {
+        return combineLatest([this.value, this.loaded]).pipe(
+            map(([value, loaded]) => {
+                return loaded ? (value as PublicUserResult) : null;
+            })
+        );
+    }
+
+    getNotLoadedValue(): Observable<NotLoadedPublicUserResult | null> {
+        return combineLatest([this.value, this.loaded]).pipe(
+            map(([value, loaded]) => {
+                return loaded ? null : value;
+            })
+        );
     }
 
     private fetch() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PublicUserResultClass } from 'src/modules/matching/models/public-user-result';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 
@@ -9,17 +9,10 @@ import { PublicProfileService } from 'src/modules/matching/services/public-profi
     styleUrls: ['./matches-page.component.scss'],
 })
 export class MatchesPageComponent {
-    matches: BehaviorSubject<PublicUserResultClass[]> = new BehaviorSubject<
-        PublicUserResultClass[]
-    >([]);
+    matches: Observable<PublicUserResultClass[]>;
 
     constructor(private readonly publicProfileService: PublicProfileService) {
-        this.fetch();
-    }
-
-    fetch() {
-        this.publicProfileService.getMatches().subscribe((users) => {
-            this.matches.next([...this.matches.value, ...users]);
-        });
+        this.matches = this.publicProfileService.matches;
+        this.publicProfileService.fetchMatches().subscribe();
     }
 }

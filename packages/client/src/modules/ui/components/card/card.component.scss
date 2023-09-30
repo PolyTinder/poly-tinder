@@ -27,8 +27,16 @@
         }
     }
 
+    &--no-padding {
+        padding: 0;
+    }
+
     @media screen and (max-width: $mobile-breakpoint) {
         padding: 12px;
         gap: 12px;
+
+        &--no-padding {
+            padding: 0;
+        }
     }
 }

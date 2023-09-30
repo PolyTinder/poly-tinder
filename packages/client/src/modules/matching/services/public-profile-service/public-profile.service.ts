@@ -1,14 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NotLoadedPublicUserResult } from 'common/models/user';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { PublicUserResultClass } from '../../models/public-user-result';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PublicProfileService {
+    private matches$: BehaviorSubject<PublicUserResultClass[]> = new BehaviorSubject<PublicUserResultClass[]>([]);
+
     constructor(private readonly http: HttpClient) {}
+
+    get matches() {
+        return this.matches$.asObservable();
+    }
+
+    getMatch(id: string) {
+        return this.matches.pipe(map((matches) => matches.find((match) => match.getId() === id || match.currentValue.userAliasId === id)));
+    }
 
     getAvailableUsers(): Observable<PublicUserResultClass[]> {
         return this.http
@@ -22,7 +32,7 @@ export class PublicProfileService {
             );
     }
 
-    getMatches(): Observable<PublicUserResultClass[]> {
+    fetchMatches(): Observable<PublicUserResultClass[]> {
         return this.http
             .get<NotLoadedPublicUserResult[]>('/public-profile/matches')
             .pipe(
@@ -31,21 +41,7 @@ export class PublicProfileService {
                         (user) => new PublicUserResultClass(user, this.http),
                     );
                 }),
+                tap((users) => this.matches$.next(users)),
             );
-        // const subject = new Subject<(PublicUserResult | NotLoadedPublicUserResult)[]>();
-
-        // this.http.get<NotLoadedPublicUserResult[]>('/public-profile/matches').pipe(map((users) => {
-        //     let usersWithLoadedValues: (PublicUserResult | NotLoadedPublicUserResult)[] = users;
-        //     subject.next(usersWithLoadedValues);
-
-        //     users.map((user, index) => {
-        //         this.http.get<PublicUserResult>(`/public-profile/find/${user.userAliasId}`).subscribe((user) => {
-        //             usersWithLoadedValues[index] = user;
-        //             subject.next(usersWithLoadedValues);
-        //         });
-        //     });
-        // }));
-
-        // return subject.pipe(debounceTime(1));
     }
 }

@@ -28,12 +28,12 @@ export class SwipingPageComponent {
 
     likeUser(user: PublicUserResultClass) {
         this.removeUser(user);
-        this.matchingService.likeUser(user.loadedValue.userAliasId).subscribe();
+        this.matchingService.likeUser(user.currentLoadedValue.userAliasId).subscribe();
     }
 
     dislikeUser(user: PublicUserResultClass) {
         this.removeUser(user);
-        this.matchingService.likeUser(user.loadedValue.userAliasId).subscribe();
+        this.matchingService.likeUser(user.currentLoadedValue.userAliasId).subscribe();
     }
 
     private removeUser(user: PublicUserResultClass) {

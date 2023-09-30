@@ -10,6 +10,7 @@ export class CardComponent {
     @Input() icon: string | undefined;
     @Input() title: string | undefined;
     @Input() anchor: string | undefined;
+    @Input() noPadding: boolean = false;
 
     constructor(private readonly router: Router) {}
 
