@@ -1,0 +1,12 @@
+:root {
+    --theme-main-rgb: 0, 168, 120;
+    --theme-main: rgb(var(--theme-main-rgb));
+    --theme-main-contrast-rgb: 255, 255, 255;
+    --theme-main-contrast: rgb(var(--theme-main-contrast-rgb));
+    --theme-background-rgb: 255, 255, 255;
+    --theme-background: rgb(var(--theme-background-rgb));
+    --theme-background-contrast-rgb: 0, 0, 0;
+    --theme-background-contrast: rgb(var(--theme-background-contrast-rgb));
+    --theme-background-secondary-rgb: 250, 250, 250;
+    --theme-background-secondary: rgb(var(--theme-background-secondary-rgb));
+}

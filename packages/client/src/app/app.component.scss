@@ -1,0 +1,10 @@
+.app-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    height: 100%;
+
+    .app-content {
+        background-color: var(--theme-background-secondary);
+    }
+}

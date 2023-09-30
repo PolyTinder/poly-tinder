@@ -1,11 +1,46 @@
-<nav>
-    <p><b>{{(user | async)?.email}}</b></p>
+<nav [ngClass]="{ collapsed }">
+    <!-- <p><b>{{(user | async)?.email}}</b></p>
 
     <p><a routerLink="/">Home</a></p>
     <p><a routerLink="/profile">Profile</a></p>
     <p><a routerLink="/matches">Matches</a></p>
 
-    <p><button (click)="logout">Logout</button></p>
-</nav>
+    <p><button (click)="logout">Logout</button></p> -->
 
-<hr>
+    <div class="top-nav">
+        <button class="collapse-btn" (click)="toggleCollapsed()"><i class="far fa-bars"></i></button>
+    
+        <ul class="main-nav">
+            <li *ngFor="let item of navigation" class="nav-item">
+                <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href)}">
+                    <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
+                    <span class="nav-item__link__content">{{item.text}}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a [routerLink]="isActiveLink('/profile') ? undefined : '/profile'" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink('/profile'), 'nav-item__link---not-active': !isActiveLink('/profile')}">
+                    <ng-container *ngIf="avatar | async; let avatar">
+                        <img [src]="avatar" class="nav-item__link__avatar">
+                    </ng-container>
+                    <ng-container *ngIf="!(avatar | async)">
+                        <i class="fas fa-user nav-item__link__icon"></i>
+                    </ng-container>
+                    <span class="nav-item__link__content">{{name | async}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="bottom-nav">
+        <ul>
+            <li class="nav-item"><a routerLink="/settings" class="nav-item__link"><i class="fas fa-cog"></i></a></li>
+            <li class="nav-item"><a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a></li>
+        </ul>
+
+        <ul>
+            <li class="nav-item"><a (click)="logout()" class="nav-item__link"><i class="fas fa-sign-out"></i></a></li>
+        </ul>
+    </div>
+</nav>

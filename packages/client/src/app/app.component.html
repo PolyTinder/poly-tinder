@@ -3,6 +3,12 @@
 </ng-container>
 
 <ng-container *ngIf="(state | async) === 'ready'">
-  <app-navigation></app-navigation>
-  <router-outlet></router-outlet>
+    <div class="app-container">
+        <div class="app-nav">
+            <app-navigation></app-navigation>
+        </div>
+        <div class="app-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </ng-container>
