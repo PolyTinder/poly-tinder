@@ -6,7 +6,7 @@ import { State } from 'src/constants/states';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { StateService } from 'src/services/state-service/state.service';
 
-export const privateRouteGuard: CanActivateFn = () => {
+export const privateRouteGuard: CanActivateFn = (route, state) => {
     const router = inject(Router);
     const sessionService = inject(SessionService);
     const stateService = inject(StateService);

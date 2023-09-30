@@ -14,6 +14,7 @@ import { MatchingModule } from './modules/matching/matching.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { AboutModule } from './modules/about/about.module';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent],
@@ -23,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
         AuthenticationModule,
         UserProfileModule,
         MatchingModule,
+        AboutModule,
         BrowserAnimationsModule,
         MatTooltipModule,
         MatMenuModule,

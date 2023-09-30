@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {
     HOME_ROUTE,
     LOGIN_ROUTE,
+    PUBLICLY_ACCESSIBLE_ROUTES_PATH,
     PUBLIC_ROUTES_PATH,
 } from 'src/constants/routes';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
@@ -34,7 +35,9 @@ export class InitializerService {
                         this.router.navigate([HOME_ROUTE]);
                     }
                 } else {
-                    this.router.navigate([LOGIN_ROUTE]);
+                    if (!PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((route) => this.router.url.startsWith(route))) {
+                        this.router.navigate([LOGIN_ROUTE]);
+                    }
                 }
                 this.stateService.state$.next(State.READY);
             });
