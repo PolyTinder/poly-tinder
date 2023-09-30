@@ -18,6 +18,12 @@
     flex-direction: column;
     gap: $spacing;
     box-sizing: border-box;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+    }
 
     &__separator {
         height: 1px;
@@ -76,7 +82,13 @@
             &--multiple {
                 display: flex;
                 overflow-y: auto;
-                gap: 24px;
+                gap: 36px;
+                -ms-overflow-style: none;  /* Internet Explorer 10+ */
+                scrollbar-width: none;  /* Firefox */
+
+                &::-webkit-scrollbar {
+                    display: none;  /* Safari and Chrome */
+                }
 
                 .user-profile__table__entry__item {
                     flex-shrink: 0;

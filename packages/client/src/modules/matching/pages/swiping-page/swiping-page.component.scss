@@ -7,8 +7,9 @@
     box-sizing: border-box;
 
     .profile-content {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 1fr);
         gap: 24px;
         height: 100%;
         width: 100%;
