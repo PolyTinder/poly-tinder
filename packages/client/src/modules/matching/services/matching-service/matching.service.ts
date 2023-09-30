@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { WsServer } from 'common/models/ws';
 import { WsService } from 'src/services/ws-service/ws.service';
 import { MatchedModalComponent } from '../../components/matched-modal/matched-modal.component';
+import { PublicUserResult } from 'common/models/user';
+import { PublicProfileService } from '../public-profile-service/public-profile.service';
 
 @Injectable({
     providedIn: 'root',
@@ -13,6 +15,7 @@ export class MatchingService {
         private readonly http: HttpClient,
         private readonly wsService: WsService,
         private readonly dialog: MatDialog,
+        private readonly publicProfileService: PublicProfileService,
     ) {
         this.instantiate();
     }
@@ -30,8 +33,20 @@ export class MatchingService {
     }
 
     private handleMatch({ matchedUserId }: WsServer['match']) {
-        this.dialog.open(MatchedModalComponent, {
-            data: { matchedUserId },
+        this.publicProfileService.fetchMatches().subscribe((result) => {
+            const user = result.find((user) => user.getId() === matchedUserId);
+
+            if (!user) {
+                console.error('Could not find user');
+                return;
+            }
+
+            user.loaded.subscribe((loaded) => {
+                if(loaded) this.dialog.open<MatchedModalComponent, PublicUserResult>(MatchedModalComponent, {
+                    data: user.currentLoadedValue,
+                });
+            });
         });
+
     }
 }

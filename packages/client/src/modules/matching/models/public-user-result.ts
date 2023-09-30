@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import {
     NotLoadedPublicUserResult,
     PublicUserResult,
+    UserProfile,
 } from 'common/models/user';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 
@@ -48,7 +49,7 @@ export class PublicUserResultClass {
         return this.value$.value;
     }
 
-    get currentLoadedValue() {
+    get currentLoadedValue(): UserProfile {
         if (!this.loaded$.value) {
             throw new Error('Cannot get loaded value when not loaded');
         }
