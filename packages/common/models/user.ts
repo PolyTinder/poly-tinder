@@ -5,8 +5,8 @@ export interface User {
     salt: string;
 }
 
-export type GenderCategory = 'men' | 'women' | 'other';
-export type GenderPreference = 'men' | 'women' | 'all';
+export type GenderCategory = 'man' | 'woman' | 'other';
+export type GenderPreference = 'man' | 'woman' | 'all';
 
 export interface UserProfile {
     userId: number;
@@ -60,3 +60,11 @@ export interface UserValidation {
     suspensionReason?: string;
     banned: boolean;
 }
+
+export interface UserAlias {
+    userAliasId: string;
+    userId: number;
+    expiration: Date;
+}
+
+export type PublicUserResult = Omit<UserProfile, 'userId'> & { userAliasId: string };

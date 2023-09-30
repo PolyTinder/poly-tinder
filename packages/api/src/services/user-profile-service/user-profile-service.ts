@@ -137,7 +137,9 @@ export class UserProfileService {
             (userProfile.name ?? '').length > 2 &&
             (userProfile.age ?? 0) > 0 &&
             (userProfile.bio ?? '').length > 5 &&
-            (userProfile.pictures ?? []).length > 0
+            (userProfile.pictures ?? []).length > 0 &&
+            (userProfile.genderCategory ?? '').length > 0 &&
+            (userProfile.genderPreference ?? '').length > 0
         );
     }
 }
