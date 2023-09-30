@@ -1,4 +1,5 @@
 @import '../../../../styles/utils';
+@import '../../../../styles/variables';
 
 .user-profile {
     @include no-select;
@@ -18,6 +19,7 @@
     flex-direction: column;
     gap: $spacing;
     box-sizing: border-box;
+    box-shadow: $default-shadow;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
 
@@ -173,5 +175,26 @@
 
     p {
         margin: 0;
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        $spacing: 12px;
+
+
+        padding: $spacing;
+        gap: $spacing;
+
+        &__section {
+            gap: $spacing;
+            padding: $spacing;
+        }
+
+        &__main {
+            gap: $spacing;
+
+            &__info {
+                gap: $spacing;
+            }
+        }
     }
 }

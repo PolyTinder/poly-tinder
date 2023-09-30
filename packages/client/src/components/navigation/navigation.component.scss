@@ -89,6 +89,7 @@ nav {
                 &--active {
                     background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
                     color: var(--theme-main-contrast);
+                    box-shadow: $default-shadow;
 
                     .nav-item__link__icon {
                         opacity: 1;
@@ -226,6 +227,7 @@ nav {
                     &--active {
                         background: none;
                         color: var(--theme-main);
+                        box-shadow: none;
                     }
                 }
 

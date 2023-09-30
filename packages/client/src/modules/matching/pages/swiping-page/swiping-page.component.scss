@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .profile-container {
     height: 100%;
     display: flex;
@@ -44,6 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: $default-shadow;
 
         &--like {
             color: var(--theme-main);
@@ -54,6 +57,14 @@
 
         &--dislike {
             color: tomato;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        padding: 12px;
+
+        .profile-content {
+            gap: 12px;
         }
     }
 }
