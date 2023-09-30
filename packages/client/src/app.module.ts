@@ -11,6 +11,7 @@ import { AuthenticationInterceptor } from './middlewares/auth';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { MatchingModule } from './modules/matching/matching.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent],
@@ -20,6 +21,7 @@ import { MatchingModule } from './modules/matching/matching.module';
         AuthenticationModule,
         UserProfileModule,
         MatchingModule,
+        BrowserAnimationsModule,
     ],
     providers: [
         InitializerService,
