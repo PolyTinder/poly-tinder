@@ -1,0 +1,33 @@
+.interactable {
+    &:not(:disabled):not(.disabled) {
+        transition: ease-in scale 0.1s;
+        cursor: pointer;
+
+        @media (hover: hover) {
+            &:hover {
+                scale: 1.05;
+            }
+        }
+
+        &:active {
+            scale: 0.95;
+        }
+    }
+}
+
+.interactable--large {
+    &:not(:disabled):not(.disabled) {
+        transition: ease-in scale 0.1s;
+        cursor: pointer;
+
+        @media (hover: hover) {
+            &:hover {
+                scale: 1.1;
+            }
+        }
+
+        &:active {
+            scale: 0.925;
+        }
+    }
+}

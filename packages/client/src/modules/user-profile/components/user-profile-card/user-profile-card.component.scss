@@ -1,0 +1,142 @@
+.user-profile {
+    $spacing: 18px;
+    $inner-radius: 10px;
+
+    height: 100%;
+    width: 100%;
+    background-color: var(--theme-background);
+    border: solid 1px rgb(240, 240, 240);
+    border-radius: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: $spacing;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing;
+    box-sizing: border-box;
+
+    &__separator {
+        height: 1px;
+        width: 100%;
+        background-color: rgb(240, 240, 240);
+        border: none;
+        display: block;
+        margin: 0;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing;
+        padding: $spacing;
+        border: solid 1px rgb(240, 240, 240);
+        border-radius: $inner-radius;
+    }
+
+    &__section-title {
+        font-size: 0.9em;
+        font-weight: 800;
+        opacity: 0.45;
+        display: flex;
+        gap: 6px;
+        align-items: center;
+
+        i {
+            font-size: 0.8em;
+        }
+    }
+
+    &__picture {
+        width: 100%;
+        aspect-ratio: 3/4;
+        background-color: rgb(240, 240, 240);
+        border-radius: $inner-radius;
+    }
+
+    &__table {
+        border: solid 1px rgb(240, 240, 240);
+        border-radius: $inner-radius;
+
+        &__entry {
+            padding: 12px 18px;
+
+            &:not(:last-child) {
+                border-bottom: solid 1px rgb(240, 240, 240);
+            }
+
+            i {
+                width: 18px;
+                margin-right: 8px;
+            }
+
+            &--multiple {
+                display: flex;
+                overflow-y: auto;
+                gap: 24px;
+
+                .user-profile__table__entry__item {
+                    flex-shrink: 0;
+
+                    i {
+                        width: 18px;
+                        margin-right: 2px;
+                    }
+
+                    &:not(:last-child) {
+                        &::after {
+                            content: '';
+                            position: relative;
+                            height: 100%;
+                            width: 1px;
+                            background-color: red;
+                        }
+                    }
+                }
+            }
+        }
+
+        &:empty {
+            display: none;
+            margin-bottom: -$spacing;
+        }
+    }
+
+    &__main {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        height: 100%;
+        gap: $spacing;
+        flex-shrink: 0;
+
+        &__picture {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            border-radius: $inner-radius;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: column;
+            gap: $spacing / 1.5;
+
+            &__name {
+                font-size: 2.4em;
+                font-weight: 800;
+                margin: 0;
+            }
+
+            &__subtitle {
+                margin: 0;
+                font-size: 1.3em;
+                font-weight: 800;
+                opacity: 0.55;
+            }
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+}

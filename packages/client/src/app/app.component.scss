@@ -6,5 +6,6 @@
 
     .app-content {
         background-color: var(--theme-background-secondary);
+        overflow-y: auto;
     }
 }

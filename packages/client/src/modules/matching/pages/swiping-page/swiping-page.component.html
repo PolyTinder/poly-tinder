@@ -1,14 +1,20 @@
-<h1>Swiping</h1>
-
 <ng-container *ngIf="availableUsers | async; let availableUsers">
-    <ng-container *ngFor="let user of availableUsers">
-        <ng-container *ngIf="user.value| async; let user">
-            <app-user-profile-card [userProfile]="user"></app-user-profile-card>
-        </ng-container>
-
-        <button (click)="dislikeUser(user)">Dislike</button>
-        <button (click)="likeUser(user)">Like</button>
-
-        <br><br>
+    <ng-container *ngFor="let user of availableUsers; let index = index">
+        <div class="profile-container" *ngIf="index == 0">
+            <div class="profile-content">
+                <ng-container *ngIf="user.value| async; let user">
+                    <app-user-profile-card [userProfile]="user"></app-user-profile-card>
+                </ng-container>
+        
+                <div class="profile-container__swipe-btn-container">
+                    <button class="profile-container__swipe-btn profile-container__swipe-btn--dislike interactable--large" (click)="dislikeUser(user)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button class="profile-container__swipe-btn profile-container__swipe-btn--like interactable--large" (click)="likeUser(user)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </ng-container>
 </ng-container>

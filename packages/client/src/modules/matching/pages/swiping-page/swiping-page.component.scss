@@ -1,0 +1,58 @@
+.profile-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: 100%;
+        width: 100%;
+        max-width: 400px;
+        align-items: center;
+        justify-content: center;
+
+        app-user-profile-card {
+            flex-grow: 1;
+            width: 100%;
+            max-height: 600px;
+            height: 100%;
+        }
+    }
+
+    &__swipe-btn-container {
+        display: flex;
+        justify-content: space-around;
+        gap: 24px;
+        width: 100%;
+    }
+    
+    &__swipe-btn {
+        appearance: none;
+        background: var(--theme-background);
+        border: solid 1px rgb(240, 240, 240);
+        font-size: 2em;
+        height: 56px;
+        width: 56px;
+        border-radius: 48px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--like {
+            color: var(--theme-main);
+            i {
+                padding-top: 5px;
+            }
+        }
+
+        &--dislike {
+            color: tomato;
+        }
+    }
+}

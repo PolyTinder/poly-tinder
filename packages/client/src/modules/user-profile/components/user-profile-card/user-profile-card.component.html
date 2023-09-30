@@ -1,7 +1,108 @@
 
 <ng-container *ngIf="userProfile">
-    <div>
-        <p><b>{{userProfile.name}}</b>, {{userProfile.age}}</p>
-        <p>{{userProfile.bio}}</p>
+    <div class="user-profile">
+        <div class="user-profile__main">
+            <div class="user-profile__main__picture" [style.background-image]="'url(' + userProfile.pictures?.[0] + ')'"></div>
+            <div class="user-profile__main__info">
+                <p class="user-profile__main__info__name">{{userProfile.name}}</p>
+                <p class="user-profile__main__info__subtitle">
+                    <span class="user-profile__main__info__subtitle__age">{{userProfile.age}}</span>
+                    <span class="user-profile__main__info__subtitle__program" *ngIf="userProfile.program">, {{userProfile.program}}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="user-profile__bio user-profile__section">
+            <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-pen"></i> À propos de moi</p>
+            <p>{{userProfile.bio}}</p>
+        </div>
+
+        <div 
+            class="user-profile__picture"
+            *ngIf="userProfile.pictures?.[1]"
+            [style.background-image]="'url(' + userProfile.pictures?.[1] + ')'"
+        >
+        </div>
+
+        <div class="user-profile__table">
+            <div class="user-profile__table__entry user-profile__table__entry--multiple">
+                <div class="user-profile__table__entry__item" *ngIf="userProfile.workout">
+                    <i class="fas fa-running"></i> {{userProfile.workout}}
+                </div>
+                <div class="user-profile__table__entry__item" *ngIf="userProfile.drinking">
+                    <i class="fas fa-wine-glass-alt"></i> {{userProfile.drinking}}
+                </div>
+                <div class="user-profile__table__entry__item" *ngIf="userProfile.smoking">
+                    <i class="fas fa-smoking"></i> {{userProfile.smoking}}
+                </div>
+                <div class="user-profile__table__entry__item" *ngIf="userProfile.drugs">
+                    <i class="fas fa-cannabis"></i> {{userProfile.drugs}}
+                </div>
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.jobTitle">
+                <i class="fas fa-suitcase"></i> {{userProfile.jobTitle}} <span *ngIf="userProfile.jobCompany">chez {{userProfile.jobCompany}}</span>
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.zodiacSign">
+                <i class="fas fa-star-shooting"></i> {{userProfile.zodiacSign}}
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.livingIn">
+                <i class="fas fa-city"></i> {{userProfile.livingIn}}
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.sexualOrientation">
+                <i class="fas fa-flag"></i> {{userProfile.sexualOrientation}}
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.relationshipType">
+                <i class="fas fa-user-friends"></i> {{userProfile.relationshipType}}
+            </div>
+            <div class="user-profile__table__entry" *ngIf="userProfile.gender">
+                <i class="fas fa-transgender"></i> {{userProfile.gender}}
+            </div>
+        </div>
+
+        <div 
+            class="user-profile__picture"
+            *ngIf="userProfile.pictures?.[2]"
+            [style.background-image]="'url(' + userProfile.pictures?.[2] + ')'"
+        >
+        </div>
+
+        <div class="user-profile__interests user-profile__section" *ngIf="interests">
+            <p class="user-profile__section-title user-profile__interests__title"><i class="fas fa-heart"></i> Mes intérêts</p>
+            <div class="user-profile__interests__list">
+                <div class="user-profile__interests__list__item" *ngFor="let interest of interests">
+                    {{interest}}
+                </div>
+            </div>
+        </div>
+
+        <div 
+            class="user-profile__picture"
+            *ngIf="userProfile.pictures?.[3]"
+            [style.background-image]="'url(' + userProfile.pictures?.[3] + ')'"
+        >
+        </div>
+
+        <div class="user-profile__associations user-profile__section" *ngIf="associations">
+            <p class="user-profile__section-title user-profile__associations__title"><i class="fas fa-users"></i> Mes associations</p>
+            <div class="user-profile__associations__list">
+                <div class="user-profile__associations__list__item" *ngFor="let association of associations">
+                    {{association}}
+                </div>
+            </div>
+        </div>
+
+        <div 
+            class="user-profile__picture"
+            *ngIf="userProfile.pictures?.[4]"
+            [style.background-image]="'url(' + userProfile.pictures?.[4] + ')'"
+        >
+        </div>
+
+        <div 
+            class="user-profile__picture"
+            *ngIf="userProfile.pictures?.[5]"
+            [style.background-image]="'url(' + userProfile.pictures?.[5] + ')'"
+        >
+        </div>
     </div>
 </ng-container>

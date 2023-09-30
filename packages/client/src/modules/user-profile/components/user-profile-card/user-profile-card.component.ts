@@ -9,4 +9,16 @@ import { PublicUserResult, UserProfile } from 'common/models/user';
 export class UserProfileCardComponent {
     @Input() userProfile: UserProfile | PublicUserResult | undefined | null =
         null;
+
+    get interests(): string[] | undefined {
+        const interests = this.userProfile?.interests?.filter((interest) => interest.length > 0);
+
+        return (interests?.length ?? 0) > 0 ? interests : undefined;
+    }
+
+    get associations(): string[] | undefined {
+        const associations = this.userProfile?.associations?.filter((association) => association.length > 0);
+
+        return (associations?.length ?? 0) > 0 ? associations : undefined;
+    }
 }
