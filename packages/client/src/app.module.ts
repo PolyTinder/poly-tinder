@@ -12,7 +12,6 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { MatchingModule } from './modules/matching/matching.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent],
@@ -23,8 +22,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
         UserProfileModule,
         MatchingModule,
         BrowserAnimationsModule,
-
-        MatSidenavModule,
     ],
     providers: [
         InitializerService,
