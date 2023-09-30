@@ -1,4 +1,9 @@
+@import '../../styles/utils';
+@import '../../styles/variables';
+
 nav {
+    @include no-select;
+
     border-right: solid 1px rgb(240, 240, 240);
     height: 100%;
     overflow-y: auto;
@@ -8,7 +13,7 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     max-width: 350px;
-    min-width: 200px;
+    min-width: 250px;
     width: 33vw;
     gap: 24px;
 
@@ -82,7 +87,7 @@ nav {
                 }
 
                 &--active {
-                    background-color: var(--theme-main);
+                    background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
                     color: var(--theme-main-contrast);
 
                     .nav-item__link__icon {
@@ -113,6 +118,7 @@ nav {
     .bottom-nav {
         display: flex;
         justify-content: space-between;
+        gap: 12px;
 
         ul {
             display: flex;
@@ -168,9 +174,69 @@ nav {
             }
         }
 
-        ul.secondary-nav {
+        .bottom-nav {
             flex-direction: column;
             align-items: center;
+
+            ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        height: auto;
+        width: 100%;
+        max-width: none;
+        min-width: none;
+        border: none;
+        padding: 8px;
+        border-top: solid 1px rgb(240, 240, 240);
+        
+        .collapse-btn,
+        .bottom-nav {
+            display: none !important;
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+        }
+
+        ul.main-nav {
+            flex-direction: row;
+            justify-content: space-around;
+
+            .nav-item {
+                &__link {
+                    flex-direction: column;
+                    padding: 8px 16px;
+                    gap: 2px;
+                    font-size: 0.75em;
+                    color: rgba(var(--theme-background-contrast-rgb), 0.55);
+
+                    &__icon {
+                        font-size: 1.8em;
+                        opacity: 1;
+                    }
+
+                    &__content {
+                        display: none;
+                    }
+
+                    &--active {
+                        background: none;
+                        color: var(--theme-main);
+                    }
+                }
+
+                @media (hover: hover) {
+                    &:hover {
+                        .nav-item__link---not-active {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -11,4 +11,9 @@ export const NAVIGATION = [
         href: MATCHES_ROUTE,
         icon: 'comment'
     },
+    {
+        text: 'Mon profil',
+        href: PROFILE_ROUTE,
+        icon: 'user',
+    }
 ]
