@@ -25,7 +25,7 @@ export class UserProfileController extends AbstractController {
             }
         });
 
-        router.post(
+        router.patch(
             '/',
             auth,
             async (

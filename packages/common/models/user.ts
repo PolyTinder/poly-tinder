@@ -67,4 +67,6 @@ export interface UserAlias {
     expiration: Date;
 }
 
+export type NotLoadedPublicUserResult = Pick<UserProfile, 'name'> & { userAliasId: string };
+
 export type PublicUserResult = Omit<UserProfile, 'userId'> & { userAliasId: string };

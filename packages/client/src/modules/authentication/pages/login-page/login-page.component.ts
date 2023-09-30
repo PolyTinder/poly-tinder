@@ -15,7 +15,7 @@ export class LoginPageComponent {
     showErrors = new BehaviorSubject<boolean>(false);
     loginForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.minLength(1)]),
-        password: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        password: new FormControl('', []),
     });
     
     constructor(private readonly authenticationService: AuthenticationService, private readonly router: Router) {}

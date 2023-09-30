@@ -1,0 +1,120 @@
+<form [formGroup]="userProfileForm" (submit)="onSubmit()">
+    <ng-container *ngFor="let picture of pictures; let index = index">
+        <p>
+            <label for="picture">Picture {{index}}</label>
+            <app-image-control [value]="picture" crop="9:16"></app-image-control>
+        </p>
+    </ng-container>
+    
+    <p>
+        <label for="name">Nom: </label>
+        <input type="text" name="name" id="name" formControlName="name">
+    </p>
+    <p>
+        <label for="age">Age: </label>
+        <input type="number" name="age" id="age" formControlName="age">
+    </p>
+    <p>
+        <label for="bio">Bio: </label>
+        <textarea name="bio" id="bio" formControlName="bio" cols="30" rows="10"></textarea>
+    </p>
+    <p>
+        <label for="program">Programme d'étude: </label>
+        <select name="program" id="program" formControlName="program">
+            <option value="">No spécifié</option>
+            <option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="age">Taille (cm): </label>
+        <input type="number" name="height" id="height" formControlName="height">
+    </p>
+    <p>
+        <label for="lookingFor">Ouvert à: </label>
+        <select name="lookingFor" id="lookingFor" formControlName="lookingFor">
+            <option value="">No spécifié</option>
+            <option *ngFor="let item of lookingFor" [value]="item.id">{{ item.emoji }} {{ item.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="relationshipType">Type de relation: </label>
+        <select name="relationshipType" id="relationshipType" formControlName="relationshipType">
+            <option value="">No spécifié</option>
+            <option *ngFor="let relationshipType of relationshipTypes" [value]="relationshipType.id">{{ relationshipType.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="zodiacSign">Zodiac: </label>
+        <select name="zodiacSign" id="zodiacSign" formControlName="zodiacSign">
+            <option value="">No spécifié</option>
+            <option *ngFor="let zodiacSign of zodiacSigns" [value]="zodiacSign.id">{{ zodiacSign.emoji }} {{ zodiacSign.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="drinking">Alcool: </label>
+        <select name="drinking" id="drinking" formControlName="drinking">
+            <option value="">No spécifié</option>
+            <option *ngFor="let drinkingHabit of drinkingHabits" [value]="drinkingHabit.id">{{ drinkingHabit.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="smoking">Cigarette: </label>
+        <select name="smoking" id="smoking" formControlName="smoking">
+            <option value="">No spécifié</option>
+            <option *ngFor="let smokingHabit of smokingHabits" [value]="smokingHabit.id">{{ smokingHabit.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="drugs">Drogues: </label>
+        <select name="drugs" id="drugs" formControlName="drugs">
+            <option value="">No spécifié</option>
+            <option *ngFor="let drugHabit of drugHabits" [value]="drugHabit.id">{{ drugHabit.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="workout">Sports: </label>
+        <select name="workout" id="workout" formControlName="workout">
+            <option value="">No spécifié</option>
+            <option *ngFor="let workoutHabit of workoutHabits" [value]="workoutHabit.id">{{ workoutHabit.emoji }} {{ workoutHabit.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="name">Emploi: </label>
+        <input type="text" name="jobTitle" id="jobTitle" formControlName="jobTitle">
+    </p>
+    <p>
+        <label for="name">Compagnie: </label>
+        <input type="text" name="jobCompany" id="jobCompany" formControlName="jobCompany">
+    </p>
+    <p>
+        <label for="name">Ma ville: </label>
+        <input type="text" name="livingIn" id="livingIn" formControlName="livingIn">
+    </p>
+    <p>
+        <label for="genderCategory">Genre: </label>
+        <select name="genderCategory" id="genderCategory" formControlName="genderCategory">
+            <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="name">Genre (public): </label>
+        <input type="text" name="gender" id="gender" formControlName="gender">
+    </p>
+    <p>
+        <label for="genderPreference">A la recherche de: </label>
+        <select name="genderPreference" id="genderPreference" formControlName="genderPreference">
+            <option *ngFor="let genderPreference of genderPreferences" [value]="genderPreference.id">{{ genderPreference.name }}</option>
+        </select>
+    </p>
+    <p>
+        <label for="sexualOrientation">Orientation sexuelle et sexualité: </label>
+        <select name="sexualOrientation" id="sexualOrientation" formControlName="sexualOrientation">
+            <option value="">No spécifié</option>
+            <option *ngFor="let sexuality of sexualities" [value]="sexuality.id">{{ sexuality.name }}</option>
+        </select>
+    </p>
+
+    <p *ngIf="userProfileForm.invalid">Invalid</p>
+
+    <input type="submit" value="Save" [disabled]="userProfileForm.invalid">
+</form>

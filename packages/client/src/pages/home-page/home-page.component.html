@@ -1,3 +1,20 @@
-<p>home-page works!</p>
+<h1>Home</h1>
+
+<p>Connected as <b>{{(user | async)?.email}}</b></p>
 
 <button (click)="logout()">Logout</button>
+
+<hr>
+
+<ng-container *ngIf="availableUsers | async; let availableUsers">
+    <ng-container *ngFor="let user of availableUsers">
+        <ng-container *ngIf="user.value| async; let user">
+            <app-user-profile-card [userProfile]="user"></app-user-profile-card>
+        </ng-container>
+
+        <button (click)="dislikeUser(user)">Dislike</button>
+        <button (click)="likeUser(user)">Like</button>
+
+        <br><br>
+    </ng-container>
+</ng-container>

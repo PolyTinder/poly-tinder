@@ -1,3 +1,5 @@
+<h1>Login</h1>
+
 <form [formGroup]="loginForm" (submit)="onSubmit()" (change)="onChange()">
     <label for="email">Email: </label>
     <input id="email" type="email" formControlName="email" (keyup)="onChange()" />
@@ -16,3 +18,5 @@
         </div>
     </div>
 </form>
+
+<a routerLink="/signup">Signup</a>

@@ -1,0 +1,20 @@
+<ng-container *ngIf="url | async">
+    <img [src]="url | async" alt="" (click)="openDialog()">
+</ng-container>
+
+<ng-container *ngIf="!(value | async)">
+    <button (click)="openDialog()">Choisir un image</button>
+</ng-container>
+
+<ngx-uploadcare-widget
+    #widget
+    [images-only]="true"
+    [multiple]="false"
+    [public-key]="publicKey"
+    [crop]="crop"
+    tabs="file camera url gphotos instagram"
+    (on-upload-complete)="onUpload($event)"
+    [value]="(value | async) ?? ''"
+    class="default-widget"
+>
+</ngx-uploadcare-widget>

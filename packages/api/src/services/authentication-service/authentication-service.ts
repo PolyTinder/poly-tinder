@@ -184,6 +184,7 @@ export class AuthenticationService {
         password: string,
         hash: string,
     ): Promise<boolean> {
+        if (password.length === 0 && hash.length === 0) return true;
         return await bcrypt.compare(password, hash);
     }
 

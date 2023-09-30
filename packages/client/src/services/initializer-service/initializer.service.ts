@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HOME_ROUTE, LOGIN_ROUTE } from 'src/constants/routes';
+import { HOME_ROUTE, LOGIN_ROUTE, PUBLIC_ROUTES_PATH, SIGNUP_ROUTE } from 'src/constants/routes';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { StateService } from '../state-service/state.service';
@@ -22,7 +22,9 @@ export class InitializerService {
             )
             .subscribe((session) => {
                 if (session) {
-                    this.router.navigate([HOME_ROUTE]);
+                    if (PUBLIC_ROUTES_PATH.includes(this.router.url)) {
+                        this.router.navigate([HOME_ROUTE]);
+                    }
                 } else {
                     this.router.navigate([LOGIN_ROUTE]);
                 }

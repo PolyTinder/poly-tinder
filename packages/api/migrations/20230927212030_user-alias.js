@@ -4,7 +4,7 @@
  */
 exports.up = async function (knex) {
     await knex.schema.createTable('userAliases', function (table) {
-        table.string('userAliasId', 36).notNullable();
+        table.string('userAliasId', 50).notNullable();
         table.integer('userId').unsigned().notNullable();
         table.dateTime('expiration').notNullable();
 

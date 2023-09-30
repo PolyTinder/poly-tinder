@@ -1,0 +1,10 @@
+<h1>Matches</h1>
+
+<ng-container *ngIf="matches | async; let matches">
+    <ng-container *ngFor="let user of matches">
+        <ng-container *ngIf="user.value| async; let user">
+            <app-user-profile-card [userProfile]="user"></app-user-profile-card>
+        </ng-container>
+        <br><br>
+    </ng-container>
+</ng-container>

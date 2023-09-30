@@ -49,10 +49,10 @@ export class MatchingService {
         }
     }
 
-    private async matchUsers(userId1: number, userId2: number): Promise<void> {
+    private async matchUsers(user1Id: number, user2Id: number): Promise<void> {
         await this.matches.insert({
-            userId1,
-            userId2,
+            user1Id,
+            user2Id,
         });
     }
 
@@ -64,12 +64,12 @@ export class MatchingService {
                 unmatchedTime: new Date(),
             })
             .where({
-                userId1: userId,
-                userId2: unmatchedUserId,
+                user1Id: userId,
+                user2Id: unmatchedUserId,
             })
             .orWhere({
-                userId1: unmatchedUserId,
-                userId2: userId,
+                user1Id: unmatchedUserId,
+                user2Id: userId,
             });
     }
 }

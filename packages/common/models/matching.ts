@@ -6,8 +6,8 @@ export interface Swipe {
 }
 
 export interface Match {
-    userId1: number;
-    userId2: number;
+    user1Id: number;
+    user2Id: number;
     matchTime: Date;
     unmatched: boolean;
     unmatchedUserId?: number;

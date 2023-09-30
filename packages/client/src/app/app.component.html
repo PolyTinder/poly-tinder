@@ -3,5 +3,6 @@
 </ng-container>
 
 <ng-container *ngIf="(state | async) === 'ready'">
+  <app-navigation></app-navigation>
   <router-outlet></router-outlet>
 </ng-container>

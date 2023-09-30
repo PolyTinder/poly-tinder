@@ -1,0 +1,26 @@
+<h1>Sign up</h1>
+
+<form [formGroup]="signupForm" (submit)="onSubmit()" (change)="onChange()">
+    <label for="email">Email: </label>
+    <input id="email" type="email" formControlName="email" (keyup)="onChange()" />
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password" (keyup)="onChange()" />
+
+    <button type="submit">Signup</button>
+
+    <div *ngIf="signupForm.invalid && (showErrors | async)">
+        <div *ngIf="signupForm.controls.email.invalid">
+            Email is required
+        </div>
+        <div *ngIf="signupForm.controls.password.invalid">
+            Password is required
+        </div>
+
+        <div *ngIf="signupForm.errors?.['validation']">
+            Form errors: {{ signupForm.errors?.['validation'] }}
+        </div>
+    </div>
+</form>
+
+<a routerLink="/login">Login</a>

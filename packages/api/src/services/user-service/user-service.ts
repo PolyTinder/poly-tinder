@@ -10,7 +10,7 @@ export class UserService {
     constructor(private readonly databaseService: DatabaseService) {}
 
     private get userValidations(): Knex.QueryBuilder<UserValidation> {
-        return this.databaseService.database<UserValidation>('users');
+        return this.databaseService.database<UserValidation>('userValidations');
     }
 
     async getUser(userId: number): Promise<User> {
