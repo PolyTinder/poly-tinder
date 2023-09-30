@@ -1,4 +1,10 @@
 <ng-container *ngIf="availableUsers | async; let availableUsers">
+    <ng-container *ngIf="availableUsers.length == 0">
+        <div class="no-profiles">
+            <p>Aucun profil disponible pour le moment. Revenez bientôt !</p>
+        </div>
+    </ng-container>
+
     <ng-container *ngFor="let user of availableUsers; let index = index">
         <div class="profile-container" *ngIf="index == 0">
             <div class="profile-content">

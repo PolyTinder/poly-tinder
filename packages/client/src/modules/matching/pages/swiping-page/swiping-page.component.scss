@@ -68,3 +68,20 @@
         }
     }
 }
+
+.no-profiles {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+
+    p {
+        text-align: center;
+        font-style: italic;
+        font-size: 1.15em;
+        font-weight: 500;
+        opacity: 0.55;
+    }
+}
