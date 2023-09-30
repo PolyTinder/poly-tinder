@@ -4,19 +4,9 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { UiModule } from '../ui/ui.module';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    AboutPageComponent
-  ],
-  imports: [
-    CommonModule,
-    UiModule,
-    AppRoutingModule,
-  ],
-  exports: [
-    AboutPageComponent,
-  ]
+    declarations: [AboutPageComponent],
+    imports: [CommonModule, UiModule, AppRoutingModule],
+    exports: [AboutPageComponent],
 })
-export class AboutModule { }
+export class AboutModule {}

@@ -22,7 +22,11 @@ export class NavigationComponent {
     ) {}
 
     get navigation() {
-        return this.isLoggedIn.pipe(map((isLoggedIn) => isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN));
+        return this.isLoggedIn.pipe(
+            map((isLoggedIn) =>
+                isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN,
+            ),
+        );
     }
 
     get isLoggedIn() {

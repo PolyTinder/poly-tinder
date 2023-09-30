@@ -9,7 +9,11 @@ import { MatchedModalComponent } from '../../components/matched-modal/matched-mo
     providedIn: 'root',
 })
 export class MatchingService {
-    constructor(private readonly http: HttpClient, private readonly wsService: WsService, private readonly dialog: MatDialog) {
+    constructor(
+        private readonly http: HttpClient,
+        private readonly wsService: WsService,
+        private readonly dialog: MatDialog,
+    ) {
         this.instantiate();
     }
 
@@ -26,6 +30,8 @@ export class MatchingService {
     }
 
     private handleMatch({ matchedUserId }: WsServer['match']) {
-        this.dialog.open(MatchedModalComponent, {});
+        this.dialog.open(MatchedModalComponent, {
+            data: { matchedUserId },
+        });
     }
 }

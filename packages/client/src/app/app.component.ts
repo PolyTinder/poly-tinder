@@ -10,7 +10,10 @@ import { StateService } from 'src/services/state-service/state.service';
 export class AppComponent {
     title = 'client';
 
-    constructor(private readonly stateService: StateService, private readonly router: Router) {}
+    constructor(
+        private readonly stateService: StateService,
+        private readonly router: Router,
+    ) {}
 
     get state() {
         return this.stateService.state$;

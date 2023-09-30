@@ -1,4 +1,4 @@
-import { Message, MessageGroup } from "common/models/message";
+import { Message, MessageGroup } from 'common/models/message';
 
 export const groupMessages = (messages: Message[]): MessageGroup[] => {
     const groupedMessages: MessageGroup[] = [];
@@ -21,8 +21,11 @@ export const groupMessages = (messages: Message[]): MessageGroup[] => {
     }
 
     return groupedMessages;
-}
+};
 
 const isSameGroup = (message: Message, previousMessage: Message): boolean => {
-    return message.senderId === previousMessage.senderId && message.date.getTime() - previousMessage.date.getTime() < 5 * 60 * 1000;
-}
+    return (
+        message.senderId === previousMessage.senderId &&
+        message.date.getTime() - previousMessage.date.getTime() < 5 * 60 * 1000
+    );
+};

@@ -4,7 +4,10 @@ import { Observable, Subject, combineLatest, map, of, switchMap } from 'rxjs';
 import { PublicProfileService } from '../../services/public-profile-service/public-profile.service';
 import { PublicUserResultClass } from '../../models/public-user-result';
 import { UserProfile } from 'common/models/user';
-import { DisplayMessageGroup, Message, MessageGroup } from 'common/models/message';
+import {
+    DisplayMessageGroup,
+    Message,
+} from 'common/models/message';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { groupMessages } from '../../utils/messages';
 import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
@@ -51,22 +54,29 @@ const MESSAGES: Message[] = [
     //     senderId: 37,
     //     date: new Date(2023, 1, 1, 1, 10, 1),
     // },
-]
+];
 
 @Component({
     selector: 'app-matched-user-page',
     templateUrl: './matched-user-page.component.html',
-    styleUrls: ['./matched-user-page.component.scss']
+    styleUrls: ['./matched-user-page.component.scss'],
 })
 export class MatchedUserPageComponent {
     userProfile: Observable<PublicUserResultClass | undefined>;
     messages: Observable<DisplayMessageGroup[]> = new Subject();
     form = new FormGroup({
-        message: new FormControl('', [Validators.minLength(1), Validators.maxLength(255)]),
+        message: new FormControl('', [
+            Validators.minLength(1),
+            Validators.maxLength(255),
+        ]),
     });
     question: string;
 
-    constructor(private readonly route: ActivatedRoute, private readonly publicProfileService: PublicProfileService, private readonly userProfileService: UserProfileService) {
+    constructor(
+        private readonly route: ActivatedRoute,
+        private readonly publicProfileService: PublicProfileService,
+        private readonly userProfileService: UserProfileService,
+    ) {
         this.userProfile = this.route.params.pipe(
             map((params) => {
                 if (!params['id']) {
@@ -74,15 +84,21 @@ export class MatchedUserPageComponent {
                 }
 
                 return Number(params['id']);
-            }
-            ), 
-            switchMap((userId) => this.publicProfileService.getMatch(userId))
+            }),
+            switchMap((userId) => this.publicProfileService.getMatch(userId)),
         );
-        this.messages = combineLatest([of(MESSAGES), this.userProfileService.getUserProfile(), this.userProfile]).pipe(
+        this.messages = combineLatest([
+            of(MESSAGES),
+            this.userProfileService.getUserProfile(),
+            this.userProfile,
+        ]).pipe(
             map(([messages, userProfile, matchedUser]) => {
                 if (!userProfile || !matchedUser) return [];
                 return groupMessages(messages).map((messageGroup) => {
-                    const sender: UserProfile = messageGroup.senderId === matchedUser.getId() ? matchedUser.currentValue : userProfile;
+                    const sender: UserProfile =
+                        messageGroup.senderId === matchedUser.getId()
+                            ? matchedUser.currentValue
+                            : userProfile;
                     return {
                         date: messageGroup.date,
                         sender: {
@@ -98,19 +114,21 @@ export class MatchedUserPageComponent {
                                     name: sender.name ?? '',
                                     picture: sender.pictures?.[0] ?? '',
                                 },
-                            }
+                            };
                         }),
-                    }
+                    };
                 });
             }),
-        )
+        );
 
         this.publicProfileService.fetchMatchesIfNotLoaded().subscribe();
         this.question = this.getQuestion();
     }
 
     get userProfileValue(): Observable<UserProfile | undefined> {
-        return this.userProfile.pipe(switchMap((user) => user ? user.value : of(undefined)));
+        return this.userProfile.pipe(
+            switchMap((user) => (user ? user.value : of(undefined))),
+        );
     }
 
     onSubmit() {

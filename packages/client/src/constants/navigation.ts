@@ -25,7 +25,7 @@ export const NAVIGATION_NOT_LOGGED_IN = [
         icon: 'sign-in',
     },
     {
-        text: 'S\'inscrire',
+        text: "S'inscrire",
         href: '/signup',
         icon: 'user-plus',
     },
@@ -33,5 +33,5 @@ export const NAVIGATION_NOT_LOGGED_IN = [
         text: 'À propos',
         href: '/about',
         icon: 'info-circle',
-    }
+    },
 ];

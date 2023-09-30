@@ -3,19 +3,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatchedModalComponent } from './matched-modal.component';
 
 describe('MatchedModalComponent', () => {
-  let component: MatchedModalComponent;
-  let fixture: ComponentFixture<MatchedModalComponent>;
+    let component: MatchedModalComponent;
+    let fixture: ComponentFixture<MatchedModalComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [MatchedModalComponent]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [MatchedModalComponent],
+        });
+        fixture = TestBed.createComponent(MatchedModalComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
     });
-    fixture = TestBed.createComponent(MatchedModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

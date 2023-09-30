@@ -51,7 +51,11 @@ const routes: Routes = [
         ...privateRoute,
     },
     { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },
-    { path: MATCHED_USER_ROUTE, component: MatchedUserPageComponent, ...privateRoute },
+    {
+        path: MATCHED_USER_ROUTE,
+        component: MatchedUserPageComponent,
+        ...privateRoute,
+    },
     { path: ABOUT_ROUTE, component: AboutPageComponent },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },

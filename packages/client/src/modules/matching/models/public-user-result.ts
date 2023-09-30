@@ -60,7 +60,7 @@ export class PublicUserResultClass {
         return combineLatest([this.value, this.loaded]).pipe(
             map(([value, loaded]) => {
                 return loaded ? (value as PublicUserResult) : null;
-            })
+            }),
         );
     }
 
@@ -68,7 +68,7 @@ export class PublicUserResultClass {
         return combineLatest([this.value, this.loaded]).pipe(
             map(([value, loaded]) => {
                 return loaded ? null : value;
-            })
+            }),
         );
     }
 

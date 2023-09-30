@@ -2,13 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserPublicSession } from 'common/models/authentication';
 import { UserProfile } from 'common/models/user';
-import {
-    BehaviorSubject,
-    Observable,
-    of,
-    switchMap,
-    tap,
-} from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 
 @Injectable({

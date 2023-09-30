@@ -43,21 +43,28 @@ export class InitializerService {
                         next: () => {
                             this.stateService.state$.next(State.READY);
                         },
-                        error: (error) => {
+                        error: () => {
                             this.stateService.state$.next(State.ERROR);
                         },
                     });
                 } else {
-                    if (!PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((route) => this.router.url.startsWith(route))) {
+                    if (
+                        !PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((route) =>
+                            this.router.url.startsWith(route),
+                        )
+                    ) {
                         this.router.navigate([LOGIN_ROUTE]);
                     }
                     this.stateService.state$.next(State.READY);
                 }
-
             });
-        
+
         this.wsService.ws.subscribe((ws) => {
-            if (!ws && this.stateService.state$.value === State.READY && this.sessionService.isCurrentlyLoggedIn()) {
+            if (
+                !ws &&
+                this.stateService.state$.value === State.READY &&
+                this.sessionService.isCurrentlyLoggedIn()
+            ) {
                 this.stateService.state$.next(State.ERROR);
             }
         });

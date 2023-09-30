@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PublicUserResultClass } from 'src/modules/matching/models/public-user-result';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 

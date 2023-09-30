@@ -23,7 +23,8 @@ export class AuthenticationService {
 
     login(user: AuthenticationUser): Observable<UserPublicSession> {
         return this.http.post<UserPublicSession>('/auth/login', user).pipe(
-            switchMap((session) => this.wsService.connect(session.token).pipe(
+            switchMap((session) =>
+                this.wsService.connect(session.token).pipe(
                     catchError((error, caugth) => {
                         this.sessionService.session$.next(undefined);
                         this.router.navigate([LOGIN_ROUTE]);
@@ -32,24 +33,25 @@ export class AuthenticationService {
                     }),
                     tap(() => this.sessionService.session$.next(session)),
                     map(() => session),
-                )
+                ),
             ),
         );
     }
 
     signup(user: AuthenticationUser): Observable<UserPublicSession> {
         return this.http.post<UserPublicSession>('/auth/signup', user).pipe(
-            switchMap((session) => this.wsService.connect(session.token).pipe(
-                catchError((error, caugth) => {
-                    this.sessionService.session$.next(undefined);
-                    this.router.navigate([LOGIN_ROUTE]);
+            switchMap((session) =>
+                this.wsService.connect(session.token).pipe(
+                    catchError((error, caugth) => {
+                        this.sessionService.session$.next(undefined);
+                        this.router.navigate([LOGIN_ROUTE]);
 
-                    return caugth;
-                }),
-                tap(() => this.sessionService.session$.next(session)),
-                map(() => session),
-            )
-        ),
+                        return caugth;
+                    }),
+                    tap(() => this.sessionService.session$.next(session)),
+                    map(() => session),
+                ),
+            ),
         );
     }
 

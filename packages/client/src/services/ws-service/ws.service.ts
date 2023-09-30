@@ -5,10 +5,11 @@ import { WsClient, WsServer } from 'common/models/ws';
 import { BehaviorSubject, map, Observable, Subject, switchMap } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class WsService {
-    private ws$: BehaviorSubject<Socket<WsServer, WsClient> | undefined> = new BehaviorSubject<Socket<WsServer, WsClient> | undefined>(undefined);
+    private ws$: BehaviorSubject<Socket<WsServer, WsClient> | undefined> =
+        new BehaviorSubject<Socket<WsServer, WsClient> | undefined>(undefined);
 
     constructor() {}
 
@@ -53,15 +54,17 @@ export class WsService {
     }
 
     listen<T extends keyof WsServer>(event: T): Observable<WsServer[T]> {
-        return this.ws$.pipe(switchMap((ws) => {
-            const subject = new Subject<WsServer[T]>();
-            
-            ws?.on(event as any, (data: WsServer[T]) => {
-                subject.next(data);
-            });
+        return this.ws$.pipe(
+            switchMap((ws) => {
+                const subject = new Subject<WsServer[T]>();
 
-            return subject.asObservable();
-        }))
+                ws?.on(event as any, (data: WsServer[T]) => {
+                    subject.next(data);
+                });
+
+                return subject.asObservable();
+            }),
+        );
     }
 
     next<T extends keyof WsClient>(event: T, data: WsClient[T]) {

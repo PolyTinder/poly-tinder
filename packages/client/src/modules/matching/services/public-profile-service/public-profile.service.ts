@@ -8,7 +8,8 @@ import { PublicUserResultClass } from '../../models/public-user-result';
     providedIn: 'root',
 })
 export class PublicProfileService {
-    private matches$: BehaviorSubject<PublicUserResultClass[]> = new BehaviorSubject<PublicUserResultClass[]>([]);
+    private matches$: BehaviorSubject<PublicUserResultClass[]> =
+        new BehaviorSubject<PublicUserResultClass[]>([]);
 
     constructor(private readonly http: HttpClient) {}
 
@@ -17,7 +18,9 @@ export class PublicProfileService {
     }
 
     getMatch(id: number) {
-        return this.matches.pipe(map((matches) => matches.find((match) => match.getId() === id)));
+        return this.matches.pipe(
+            map((matches) => matches.find((match) => match.getId() === id)),
+        );
     }
 
     getAvailableUsers(): Observable<PublicUserResultClass[]> {
@@ -41,7 +44,11 @@ export class PublicProfileService {
                         (user) => new PublicUserResultClass(user, this.http),
                     );
                 }),
-                tap((users) => this.haveMatchesChanged(users) ? this.matches$.next(users) : undefined),
+                tap((users) =>
+                    this.haveMatchesChanged(users)
+                        ? this.matches$.next(users)
+                        : undefined,
+                ),
             );
     }
 
