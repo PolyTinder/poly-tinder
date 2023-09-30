@@ -8,7 +8,7 @@
         </div>
     
         <ul class="main-nav">
-            <li *ngFor="let item of navigation" class="nav-item">
+            <li *ngFor="let item of (navigation | async)" class="nav-item">
                 <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href), 'interactable--small': !isActiveLink(item.href)}">
                     <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
                     <span class="nav-item__link__content">{{item.text}}</span>
@@ -20,16 +20,16 @@
 
     <div class="bottom-nav">
         <ul>
-            <li class="nav-item interactable" matTooltip="Préférences">
+            <li class="nav-item interactable" matTooltip="Préférences" *ngIf="isLoggedIn | async">
                 <a routerLink="/settings" class="nav-item__link"><i class="fas fa-cog"></i></a>
             </li>
-            <li class="nav-item interactable" matTooltip="À propos">
+            <li class="nav-item interactable" matTooltip="À propos" *ngIf="isLoggedIn | async">
                 <a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a>
             </li>
         </ul>
 
         <ul>
-            <li class="nav-item interactable" matTooltip="Se déconnecter">
+            <li class="nav-item interactable" matTooltip="Se déconnecter" *ngIf="isLoggedIn | async">
                 <a class="nav-item__link" [matMenuTriggerFor]="logoutMenu"><i class="fas fa-sign-out"></i></a>
 
                 <mat-menu #logoutMenu="matMenu">

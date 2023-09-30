@@ -1,5 +1,5 @@
-<div class="layout">
-    <div class="layout__head" *ngIf="backLink || title">
+<div class="layout" [ngClass]="{'layout--no-header': !hasHeader}">
+    <div class="layout__head" *ngIf="hasHeader">
         <a
             [routerLink]="backLink"
             *ngIf="backLink"

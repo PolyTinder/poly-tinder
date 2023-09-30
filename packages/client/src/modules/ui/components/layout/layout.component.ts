@@ -8,4 +8,8 @@ import { Component, Input } from '@angular/core';
 export class LayoutComponent {
     @Input() backLink: string | undefined;
     @Input() title: string | undefined;
+
+    get hasHeader() {
+        return this.backLink || this.title;
+    }
 }

@@ -9,6 +9,10 @@
     display: grid;
     grid-template-rows: auto minmax(0, 1fr);
     position: relative;
+
+    &--no-header {
+        grid-template-rows: minmax(0, 1fr);
+    }
     
     &__head {
         @include no-select;

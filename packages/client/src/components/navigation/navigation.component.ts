@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
-import { NAVIGATION } from 'src/constants/navigation';
+import { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
@@ -12,7 +12,6 @@ import { UserProfileService } from 'src/modules/user-profile/services/user-profi
     styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-    navigation = NAVIGATION;
     collapsed = false;
 
     constructor(
@@ -21,6 +20,14 @@ export class NavigationComponent {
         private readonly userProfileService: UserProfileService,
         private readonly router: Router,
     ) {}
+
+    get navigation() {
+        return this.isLoggedIn.pipe(map((isLoggedIn) => isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN));
+    }
+
+    get isLoggedIn() {
+        return this.sessionService.isLoggedIn();
+    }
 
     get user() {
         return this.sessionService.session$.pipe(

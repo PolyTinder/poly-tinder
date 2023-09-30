@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { UiModule } from '../ui/ui.module';
 
 @NgModule({
     declarations: [LoginPageComponent, SignupPageComponent],
@@ -13,6 +16,9 @@ import { AppRoutingModule } from '../app-routing.module';
         HttpClientModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        UiModule,
     ],
     exports: [LoginPageComponent, SignupPageComponent],
 })

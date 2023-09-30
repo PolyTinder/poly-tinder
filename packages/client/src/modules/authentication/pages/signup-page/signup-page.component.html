@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+<!-- <h1>Sign up</h1>
 
 <form [formGroup]="signupForm" (submit)="onSubmit()" (change)="onChange()">
     <label for="email">Email: </label>
@@ -23,4 +23,33 @@
     </div>
 </form>
 
-<a routerLink="/login">Login</a>
+<a routerLink="/login">Login</a> -->
+
+<app-layout>
+    <main>
+        <section>
+            <p class="tagline">Rejoignez-nous pour élargir votre cercle social ou trouver l'amour sur le campus.</p>
+
+            <form [formGroup]="signupForm" (submit)="onSubmit()" (change)="onChange()">
+                <mat-form-field>
+                    <mat-label><i class="fas fa-envelope"></i> Email</mat-label>
+                    <input formControlName="email" (keyup)="onChange()" matInput>
+                    <mat-error *ngIf="signupForm.controls.email.invalid">Le email est requis</mat-error>
+                </mat-form-field>
+            
+                <mat-form-field>
+                    <mat-label><i class="fas fa-key"></i> Password</mat-label>
+                    <input formControlName="password" type="password" (keyup)="onChange()" matInput>
+                    <mat-error *ngIf="signupForm.controls.password.invalid">Le mot de passe est requis</mat-error>
+                </mat-form-field>
+            
+                <button type="submit">Créer mon compte</button>
+            </form>
+        </section>
+
+        <section>
+            <p class="link-text">Vous avez déjà un compte ? <a routerLink="/login">Connectez vous</a> !</p>
+        </section>
+    </main>
+    
+</app-layout>

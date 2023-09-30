@@ -1,22 +1,28 @@
-<h1>Login</h1>
+<app-layout>
+    <main>
+        <section>
+            <p class="tagline">Connectez-vous pour découvrir des rencontres authentiques au sein de Polytechnique.</p>
 
-<form [formGroup]="loginForm" (submit)="onSubmit()" (change)="onChange()">
-    <label for="email">Email: </label>
-    <input id="email" type="email" formControlName="email" (keyup)="onChange()" />
+            <form [formGroup]="loginForm" (submit)="onSubmit()" (change)="onChange()">
+                <mat-form-field>
+                    <mat-label><i class="fas fa-envelope"></i> Email</mat-label>
+                    <input formControlName="email" (keyup)="onChange()" matInput>
+                    <mat-error *ngIf="loginForm.controls.email.invalid">Le email est requis</mat-error>
+                </mat-form-field>
+            
+                <mat-form-field>
+                    <mat-label><i class="fas fa-key"></i> Password</mat-label>
+                    <input formControlName="password" type="password" (keyup)="onChange()" matInput>
+                    <mat-error *ngIf="loginForm.controls.password.invalid">Le mot de passe est requis</mat-error>
+                </mat-form-field>
+            
+                <button type="submit">Me connecter</button>
+            </form>
+        </section>
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" formControlName="password" (keyup)="onChange()" />
-
-    <button type="submit">Login</button>
-
-    <div *ngIf="loginForm.invalid && (showErrors | async)">
-        <div *ngIf="loginForm.controls.email.invalid">
-            Email is required
-        </div>
-        <div *ngIf="loginForm.controls.password.invalid">
-            Password is required
-        </div>
-    </div>
-</form>
-
-<a routerLink="/signup">Signup</a>
+        <section>
+            <p class="link-text">Vous n'avez pas de compte ? <a routerLink="/signup">Créez en un</a> !</p>
+        </section>
+    </main>
+    
+</app-layout>
