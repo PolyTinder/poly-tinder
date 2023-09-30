@@ -20,6 +20,10 @@ export class SessionService {
             .pipe(map((session) => session !== undefined));
     }
 
+    isCurrentlyLoggedIn(): boolean {
+        return this.session$.value !== undefined;
+    }
+
     private handleSession(session: UserPublicSession | undefined): void {
         if (session) {
             this.setLocalToken(session.token);

@@ -8,10 +8,12 @@ import { MatchListComponent } from './components/match-list/match-list.component
 import { AppRoutingModule } from '../app-routing.module';
 import { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatchedModalComponent } from './components/matched-modal/matched-modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-    declarations: [MatchesPageComponent, SwipingPageComponent, MatchListComponent, MatchedUserPageComponent],
-    imports: [CommonModule, AppRoutingModule, ReactiveFormsModule, UserProfileModule, UiModule],
+    declarations: [MatchesPageComponent, SwipingPageComponent, MatchListComponent, MatchedUserPageComponent, MatchedModalComponent],
+    imports: [CommonModule, AppRoutingModule, MatDialogModule, ReactiveFormsModule, UserProfileModule, UiModule],
     exports: [MatchesPageComponent, MatchedUserPageComponent],
 })
 export class MatchingModule {}

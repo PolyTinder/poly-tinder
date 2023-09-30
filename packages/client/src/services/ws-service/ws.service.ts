@@ -39,6 +39,11 @@ export class WsService {
         return subject;
     }
 
+    disconnect() {
+        this.ws$.value?.disconnect();
+        this.ws$.next(undefined);
+    }
+
     get ws() {
         return this.ws$.asObservable();
     }
@@ -47,7 +52,7 @@ export class WsService {
         return this.ws.pipe(map((ws) => !!ws));
     }
 
-    subscribe<T extends keyof WsServer>(event: T): Observable<WsServer[T]> {
+    listen<T extends keyof WsServer>(event: T): Observable<WsServer[T]> {
         return this.ws$.pipe(switchMap((ws) => {
             const subject = new Subject<WsServer[T]>();
             
@@ -59,7 +64,7 @@ export class WsService {
         }))
     }
 
-    next<T extends keyof WsClient>(event: T, ...data: Parameters<WsClient[T]>) {
+    next<T extends keyof WsClient>(event: T, data: WsClient[T]) {
         if (!this.ws$.value) throw new Error('WS not connected');
         this.ws$.value.emit(event as any, data);
     }

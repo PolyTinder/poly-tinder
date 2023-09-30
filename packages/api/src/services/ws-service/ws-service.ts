@@ -1,7 +1,7 @@
 import { singleton } from 'tsyringe';
 import http from 'http';
 import { Server } from 'socket.io';
-import { WsClient, WsServer } from 'common/models/ws';
+import { WsClientFun, WsServer, WsServerFun } from 'common/models/ws';
 import { TwoWayMap } from '../../utils/two-way-map';
 import { TypeOfId } from 'common/types/id';
 import { User } from 'common/models/user';
@@ -9,7 +9,7 @@ import { AuthenticationService } from '../authentication-service/authentication-
 
 @singleton()
 export class WsService {
-    private ws: Server<WsClient, WsServer> | undefined;
+    private ws: Server<WsClientFun, WsServerFun> | undefined;
     private clients: TwoWayMap<TypeOfId<User>, string> = new TwoWayMap();
 
     constructor(
@@ -49,17 +49,21 @@ export class WsService {
         return this.ws;
     }
 
-    emit<T extends keyof WsServer>(event: T, ...data: Parameters<WsServer[T]>) {
-        this.server.emit(event, ...data);
+    emit<T extends keyof WsServer>(event: T, data: WsServer[T]) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (this.server.emit as any)(event, data);
     }
 
     emitToUser<T extends keyof WsServer>(
         userId: TypeOfId<User>,
         event: T,
-        ...data: Parameters<WsServer[T]>
+        data: WsServer[T],
     ) {
         const socketId = this.clients.getLeft(userId);
-        if (!socketId) throw new Error('User not connected');
-        this.server.to(socketId).emit(event, ...data);
+        if (!socketId) {
+            throw new Error('User not connected');
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (this.server.to(socketId).emit as any)(event, data);
     }
 }

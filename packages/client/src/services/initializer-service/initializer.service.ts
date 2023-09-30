@@ -11,6 +11,7 @@ import { StateService } from '../state-service/state.service';
 import { State } from 'src/constants/states';
 import { catchError, of } from 'rxjs';
 import { WsService } from '../ws-service/ws.service';
+import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,7 @@ export class InitializerService {
     constructor(
         private readonly stateService: StateService,
         private readonly authenticationService: AuthenticationService,
+        private readonly sessionService: SessionService,
         private readonly router: Router,
         private readonly wsService: WsService,
     ) {}
@@ -55,7 +57,7 @@ export class InitializerService {
             });
         
         this.wsService.ws.subscribe((ws) => {
-            if (!ws && this.stateService.state$.value === State.READY) {
+            if (!ws && this.stateService.state$.value === State.READY && this.sessionService.isCurrentlyLoggedIn()) {
                 this.stateService.state$.next(State.ERROR);
             }
         });

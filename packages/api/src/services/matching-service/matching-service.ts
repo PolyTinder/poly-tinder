@@ -3,12 +3,14 @@ import { singleton } from 'tsyringe';
 import { DatabaseService } from '../database-service/database-service';
 import { Match, Swipe } from 'common/models/matching';
 import { UserAliasService } from '../user-alias-service/user-alias-service';
+import { WsService } from '../ws-service/ws-service';
 
 @singleton()
 export class MatchingService {
     constructor(
         private readonly databaseService: DatabaseService,
         private readonly userAliasService: UserAliasService,
+        private readonly wsService: WsService,
     ) {}
 
     private get matches(): Knex.QueryBuilder<Match> {
@@ -54,6 +56,8 @@ export class MatchingService {
             user1Id,
             user2Id,
         });
+
+        this.wsService.emitToUser(user1Id, 'match', { matchedUserId: user2Id });
     }
 
     async unmatchUser(userId: number, unmatchedUserId: number): Promise<void> {
