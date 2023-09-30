@@ -21,12 +21,12 @@ export class MatchingService {
 
     async swipeUser(
         activeUserId: number,
-        targetUserAliasId: string,
+        targetUserId: number,
         liked: boolean,
     ): Promise<void> {
-        const targetUserId = await this.userAliasService.getUserId(
-            targetUserAliasId,
-        );
+        // const targetUserId = await this.userAliasService.getUserId(
+        //     targetUserAliasId,
+        // );
 
         await this.swipes.insert({
             activeUserId,

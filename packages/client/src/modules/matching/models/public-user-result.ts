@@ -14,7 +14,7 @@ export interface LoadedPublicUserResultClass {
 }
 
 export class PublicUserResultClass {
-    private id: string;
+    private id: number;
     private value$: BehaviorSubject<
         NotLoadedPublicUserResult | PublicUserResult
     >;
@@ -24,7 +24,7 @@ export class PublicUserResultClass {
         notLoadedValue: NotLoadedPublicUserResult,
         private readonly http: HttpClient,
     ) {
-        this.id = notLoadedValue.userAliasId;
+        this.id = notLoadedValue.userId;
         this.value$ = new BehaviorSubject<
             NotLoadedPublicUserResult | PublicUserResult
         >(notLoadedValue);
@@ -32,7 +32,7 @@ export class PublicUserResultClass {
         this.fetch();
     }
 
-    getId(): string {
+    getId(): number {
         return this.id;
     }
 

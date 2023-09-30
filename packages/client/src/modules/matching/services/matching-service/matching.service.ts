@@ -7,11 +7,11 @@ import { Injectable } from '@angular/core';
 export class MatchingService {
     constructor(private readonly http: HttpClient) {}
 
-    likeUser(userAliasId: string) {
-        return this.http.post(`/matching/like/${userAliasId}`, {});
+    likeUser(userId: number) {
+        return this.http.post(`/matching/like/${userId}`, {});
     }
 
-    dislikeUser(userAliasId: string) {
-        return this.http.post(`/matching/dislike/${userAliasId}`, {});
+    dislikeUser(userId: number) {
+        return this.http.post(`/matching/dislike/${userId}`, {});
     }
 }

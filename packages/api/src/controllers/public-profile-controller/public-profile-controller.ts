@@ -47,7 +47,9 @@ export class PublicProfileController extends AbstractController {
             async (req: UserRequest<{ id: string }>, res: Response, next) => {
                 try {
                     res.status(StatusCodes.OK).json(
-                        await this.publicProfileService.findUser(req.params.id),
+                        await this.publicProfileService.findUser(
+                            Number(req.params.id),
+                        ),
                     );
                 } catch (error) {
                     next(error);

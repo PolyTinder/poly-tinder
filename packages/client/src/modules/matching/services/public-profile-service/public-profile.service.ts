@@ -16,8 +16,8 @@ export class PublicProfileService {
         return this.matches$.asObservable();
     }
 
-    getMatch(id: string) {
-        return this.matches.pipe(map((matches) => matches.find((match) => match.getId() === id || match.currentValue.userAliasId === id)));
+    getMatch(id: number) {
+        return this.matches.pipe(map((matches) => matches.find((match) => match.getId() === id)));
     }
 
     getAvailableUsers(): Observable<PublicUserResultClass[]> {

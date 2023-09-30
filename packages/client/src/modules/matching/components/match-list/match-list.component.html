@@ -2,7 +2,7 @@
     <div class="match-list">
         <ng-container *ngFor="let match of matches">
             <ng-container *ngIf="match.tryGetLoadedValue() | async; let value">
-                <a [routerLink]="'/matches/' + value.userAliasId">
+                <a [routerLink]="'/matches/' + value.userId">
                     <div class="match-list__item interactable">
                         <div class="match-list__item__image" [style.background-image]="'url(' + value.pictures?.[0] + ')'" alt=""></div>
                         <span class="match-list__item__name">{{value.name}}</span>
@@ -11,7 +11,7 @@
             </ng-container>
 
             <ng-container *ngIf="match.getNotLoadedValue() | async; let value">
-                <a [routerLink]="'/matches/' + value.userAliasId">
+                <a [routerLink]="'/matches/' + value.userId">
                     <div class="match-list__item interactable">
                         <div class="match-list__item__image match-list__item__image--not-loaded"></div>
                         <span class="match-list__item__name">{{value.name}}</span>

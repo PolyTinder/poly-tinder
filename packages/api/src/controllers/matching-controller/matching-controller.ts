@@ -24,7 +24,7 @@ export class MatchingController extends AbstractController {
                 try {
                     await this.matchingService.swipeUser(
                         req.body.session.user.userId,
-                        req.params.userId,
+                        Number(req.params.userId),
                         true,
                     );
                     res.status(StatusCodes.NO_CONTENT).send();
@@ -45,7 +45,7 @@ export class MatchingController extends AbstractController {
                 try {
                     await this.matchingService.swipeUser(
                         req.body.session.user.userId,
-                        req.params.userId,
+                        Number(req.params.userId),
                         false,
                     );
                     res.status(StatusCodes.NO_CONTENT).send();

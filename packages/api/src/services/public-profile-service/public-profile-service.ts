@@ -29,14 +29,14 @@ export class PublicProfileService {
         return this.databaseService.database<Match>('matches');
     }
 
-    async findUser(userAliasId: string): Promise<PublicUserResult> {
-        const userId = await this.userAliasService.getUserId(userAliasId);
+    async findUser(userId: TypeOfId<User>): Promise<PublicUserResult> {
+        // const userId = await this.userAliasService.getUserId(userAliasId);
         const userProfile = await this.userProfileService.getUserProfile(
             userId,
         );
-        const newUserAliasId = await this.userAliasService.createAlias(userId);
+        // const newUserAliasId = await this.userAliasService.createAlias(userId);
 
-        return { userAliasId: newUserAliasId, ...userProfile };
+        return { ...userProfile, userId };
     }
 
     async getAvailableUsers(
@@ -110,14 +110,16 @@ export class PublicProfileService {
             results.push(popRandom(availableUsers));
         }
 
-        return Promise.all(
-            results.map<Promise<NotLoadedPublicUserResult>>(async (user) => ({
-                userAliasId: await this.userAliasService.createAlias(
-                    user.userId,
-                ),
-                name: user.name,
-            })),
-        );
+        return results;
+
+        // return Promise.all(
+        //     results.map<Promise<NotLoadedPublicUserResult>>(async (user) => ({
+        //         userAliasId: await this.userAliasService.createAlias(
+        //             user.userId,
+        //         ),
+        //         name: user.name,
+        //     })),
+        // );
     }
 
     async getMatches(
@@ -144,27 +146,29 @@ export class PublicProfileService {
                 unmatched: false,
             });
 
-        const results: { id: number; name: string }[] = [];
+        const results: { userId: number; name: string }[] = [];
 
         for (const match of matches) {
             results.push(
                 match.user1Id === userId
                     ? {
-                          id: match.user2Id,
+                          userId: match.user2Id,
                           name: match.name2 ?? '',
                       }
                     : {
-                          id: match.user1Id,
+                          userId: match.user1Id,
                           name: match.name1 ?? '',
                       },
             );
         }
 
-        return Promise.all(
-            results.map(async (user) => ({
-                userAliasId: await this.userAliasService.createAlias(user.id),
-                name: user.name,
-            })),
-        );
+        return results;
+
+        // return Promise.all(
+        //     results.map(async (user) => ({
+        //         userAliasId: await this.userAliasService.createAlias(user.id),
+        //         name: user.name,
+        //     })),
+        // );
     }
 }
