@@ -1,0 +1,10 @@
+<div class="card" [id]="anchor">
+    <div class="card__header" *ngIf="hasHeader">
+        <h2 class="card__title">
+            <a [href]="anchor ? this.currentUrl + '#' + anchor : undefined"><i [class]="icon" *ngIf="icon"></i><span *ngIf="title">{{title}}</span></a>
+        </h2>
+    </div>
+    <div class="card__body">
+        <ng-content></ng-content>
+    </div>
+</div>

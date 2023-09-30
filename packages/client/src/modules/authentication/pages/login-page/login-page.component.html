@@ -1,6 +1,6 @@
 <app-layout>
     <main>
-        <section>
+        <app-card>
             <p class="tagline">Connectez-vous pour découvrir des rencontres authentiques au sein de Polytechnique.</p>
 
             <form [formGroup]="loginForm" (submit)="onSubmit()" (change)="onChange()">
@@ -18,11 +18,11 @@
             
                 <button type="submit">Me connecter</button>
             </form>
-        </section>
+        </app-card>
 
-        <section>
+        <app-card>
             <p class="link-text">Vous n'avez pas de compte ? <a routerLink="/signup">Créez en un</a> !</p>
-        </section>
+        </app-card>
     </main>
     
 </app-layout>

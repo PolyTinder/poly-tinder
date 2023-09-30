@@ -1,22 +1,19 @@
 <app-layout title="À propos">
     <main>
-        <section class="section">
-            <h2 class="section__title"><i class="fas fa-list"></i> Sur cette page</h2>
+        <app-card title="Sur cette page" icon="fas fa-list" anchor="table-of-content">
             <ul class="table-of-content">
                 <li><a href="/about#application">À propos de l'application</a></li>
                 <li><a href="/about#rules">Règlements</a></li>
                 <li><a href="/about#genre-and-sexuality">L'identité de genre et la sexualité</a></li>
                 <li><a href="/about#contact">Nous joindre</a></li>
             </ul>
-        </section>
-        <section class="section" id="application">
-            <h2 class="section__title"><a href="/about#application"><i class="fas fa-mobile"></i> À propos de l'application</a></h2>
-    
-            <p>L'application PolyTinder est l'outil idéal pour élargir votre cercle social. Vous pourrez aisément rencontrer de nouvelles personnes au sein de votre campus, que ce soit pour trouver l'amour ou simplement établir de nouvelles amitiés. Notre plateforme facilite les rencontres au sein de votre communauté académique, vous permettant ainsi de créer des connexions significatives avec des personnes partageant vos intérêts et votre parcours universitaire. Rejoignez-nous dès maintenant pour commencer à tisser des liens qui pourraient changer votre vie!</p>
-        </section>
-        <section class="section" id="rules">
-            <h2 class="section__title"><a href="/about#rules"><i class="fas fa-gavel"></i> Règlements</a></h2>
+        </app-card>
 
+        <app-card title="À propos de l'application" icon="fas fa-mobile" anchor="application">
+            <p>L'application PolyTinder est l'outil idéal pour élargir votre cercle social. Vous pourrez aisément rencontrer de nouvelles personnes au sein de votre campus, que ce soit pour trouver l'amour ou simplement établir de nouvelles amitiés. Notre plateforme facilite les rencontres au sein de votre communauté académique, vous permettant ainsi de créer des connexions significatives avec des personnes partageant vos intérêts et votre parcours universitaire. Rejoignez-nous dès maintenant pour commencer à tisser des liens qui pourraient changer votre vie!</p>
+        </app-card>
+
+        <app-card title="Règlements" icon="fas fa-gavel" anchor="rules">
             <ol>
                 <li>Respectez la vie privée: Ne partagez pas d'informations personnelles sensibles, telles que votre adresse, votre numéro de téléphone ou vos données bancaires. Protégez votre vie privée et celle des autres.</li>
                 <li>Soyez respectueux: Traitez tous les utilisateurs avec gentillesse et respect, quel que soit leur genre, leur orientation sexuelle, leur origine ethnique, ou leur apparence. Les commentaires offensants ou discriminatoires ne sont pas tolérés.</li>
@@ -27,10 +24,9 @@
                 <li>Respectez les lois locales: Assurez-vous de respecter les lois locales en matière de rencontres en ligne et de comportement sur Internet.</li>
                 <li>En respectant ces règles, vous contribuerez à créer une expérience positive et respectueuse pour tous les utilisateurs de notre application.</li>
             </ol>
-        </section>
-        <section class="section" id="genre-and-sexuality">
-            <h2 class="section__title"><a href="/about#genre-and-sexuality"><i class="fas fa-transgender"></i> L'identité de genre et la sexualité</a></h2>
-    
+        </app-card>
+
+        <app-card title="L'identité de genre et la sexualité" icon="fas fa-transgender" anchor="genre-and-sexuality">
             <p>Notre objectif est de favoriser des rencontres respectueuses et enrichissantes qui célèbrent la diversité de l'amour et de l'amitié.. Nous célébrons la diversité des identités de genre et des orientations sexuelles.</p>
             <p>Nous vous offrons la possibilité d'exprimer votre identité de genre de manière authentique et de spécifier vos préférences de genre et votre sexualité, tout en préservant votre confidentialité. Voici comment ces éléments sont gérés dans notre application.</p>
 
@@ -44,12 +40,10 @@
 
             <h3>Sexualité</h3>
             <p>L'application propose également un champ où vous pouvez indiquer votre sexualité, bien que cette information n'impacte pas la visibilité de votre compte. Elle est destinée uniquement à titre indicatif pour faciliter des connexions significatives. Nous encourageons les utilisateurs à être ouverts et respectueux envers toutes les orientations sexuelles.</p>
+        </app-card>
 
-        </section>
-        <section class="section" id="contact">
-            <h2 class="section__title"><a href="/about#contact"><i class="fas fa-phone"></i> Nous joindre</a></h2>
-    
+        <app-card title="Nous joindre" icon="fas fa-phone" anchor="contact">
             <p>Email: <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a></p>
-        </section>
+        </app-card>
     </main>
 </app-layout>

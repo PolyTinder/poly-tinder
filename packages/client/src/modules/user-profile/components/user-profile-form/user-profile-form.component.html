@@ -1,7 +1,5 @@
 <form [formGroup]="userProfileForm" (submit)="onSubmit()" class="form">
-    <section>
-        <p class="form__title"><i class="fas fa-camera-retro"></i> Mes photos</p>
-    
+    <app-card title="Mes photos" icon="fas fa-camera-retro">
         <div class="form__pictures">
             <app-image-control
                 *ngFor="let picture of pictures; let index = index"
@@ -10,11 +8,9 @@
                 crop="9:16"
             ></app-image-control>
         </div>
-    </section>
+    </app-card>
 
-    <section>
-        <p class="form__title"><i class="fas fa-user"></i> Mon profil</p>
-
+    <app-card title="Mon profil" icon="fas fa-user">
         <mat-form-field>
             <mat-label><i class="fas fa-signature"></i> Nom</mat-label>
             <input formControlName="name" matInput>
@@ -39,11 +35,9 @@
             <mat-label><i class="fas fa-city"></i> Ville</mat-label>
             <input formControlName="livingIn" matInput>
         </mat-form-field>
-    </section>
+    </app-card>
 
-    <section>
-        <p class="form__title"><i class="fas fa-heart"></i> Ma vie amoureuse</p>
-
+    <app-card title="Ma vie amoureuse" icon="fas fa-heart">
         <mat-form-field>
             <mat-label><i class="fas fa-heart"></i> Ouvert à</mat-label>
             <mat-select formControlName="lookingFor">
@@ -90,11 +84,9 @@
         </mat-form-field>
 
         <a href="/about#genre-and-sexuality" target="__BLANK"><i class="fas fa-info-circle"></i> En savoir plus sur les genres et la sexualité</a>
-    </section>
+    </app-card>
 
-    <section>
-        <p class="form__title"><i class="fas fa-school"></i> Ma vie à Poly</p>
-
+    <app-card title="Ma vie à Poly" icon="fas fa-school">
         <mat-form-field>
             <mat-label><i class="fas fa-graduation-cap"></i> Programme d'étude</mat-label>
             <mat-select formControlName="program">
@@ -114,11 +106,9 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-    </section>
+    </app-card>
 
-    <section>
-        <p class="form__title"><i class="fas fa-leaf"></i> Mon mode de vie</p>
-
+    <app-card title="Mon mode de vi" icon="fas fa-leaf">
         <mat-form-field>
             <mat-label><i class="fas fa-star-shooting"></i> Signe zodiac</mat-label>
             <mat-select formControlName="zodiacSign">
@@ -170,11 +160,9 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-    </section>
+    </app-card>
 
-    <section>
-        <p class="form__title"><i class="fas fa-briefcase"></i> Ma vie profesionnelle</p>
-
+    <app-card title="Ma vie profesionnelle" icon="fas fa-briefcase">
         <mat-form-field>
             <mat-label><i class="fas fa-briefcase"></i> Emploi</mat-label>
             <input formControlName="jobTitle" matInput>
@@ -184,7 +172,7 @@
             <mat-label><i class="fas fa-briefcase"></i> Compagnie</mat-label>
             <input formControlName="jobCompany" matInput>
         </mat-form-field>
-    </section>
+    </app-card>
 
     <p *ngIf="userProfileForm.invalid">Invalid</p>
 

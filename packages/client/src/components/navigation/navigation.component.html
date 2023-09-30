@@ -26,6 +26,9 @@
             <li class="nav-item interactable" matTooltip="À propos" *ngIf="isLoggedIn | async">
                 <a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a>
             </li>
+            <li class="nav-item interactable" matTooltip="Github" *ngIf="isLoggedIn | async">
+                <a href="https://github.com/PolyTinder/poly-tinder" target="_blank" class="nav-item__link"><i class="fab fa-github"></i></a>
+            </li>
         </ul>
 
         <ul>

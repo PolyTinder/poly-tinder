@@ -1,0 +1,34 @@
+@import '../../../../styles/variables';
+
+.card {
+    background-color: var(--theme-background);
+    color: var(--theme-background-contrast);
+    border: solid 1px rgb(240, 240, 240);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+
+    &__title {
+        font-size: 1.1em;
+        font-weight: 600;
+        opacity: 0.65;
+        margin: 0;
+
+        i {
+            margin-right: 12px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        padding: 12px;
+        gap: 12px;
+    }
+}

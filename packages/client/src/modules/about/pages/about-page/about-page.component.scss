@@ -7,29 +7,6 @@ main {
     gap: 24px;
     margin: 0 auto;
 
-    .section {
-        background-color: var(--theme-background);
-        color: var(--theme-background-contrast);
-        border: solid 1px rgb(240, 240, 240);
-        border-radius: 12px;
-        padding: 24px;
-
-        &__title {
-            font-size: 1.1em;
-            font-weight: 600;
-            opacity: 0.75;
-
-            i {
-                margin-right: 6px;
-            }
-
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
-        }
-    }
-
     .table-of-content {
         li {
             font-weight: 500;
