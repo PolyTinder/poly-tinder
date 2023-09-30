@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .container {
     display: grid;
     grid-template-rows: minmax(0, 1fr);
@@ -8,11 +10,17 @@
     justify-content: center;
     align-items: center;
     margin: auto;
+    padding: 24px;
+    box-sizing: border-box;
 
     app-user-profile-card {
         flex-grow: 1;
         width: 100%;
         max-height: 600px;
         height: 100%;
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        padding: 12px;
     }
 }
