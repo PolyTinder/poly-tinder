@@ -1,0 +1,18 @@
+.container {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    app-user-profile-card {
+        flex-grow: 1;
+        width: 100%;
+        max-height: 600px;
+        height: 100%;
+    }
+}

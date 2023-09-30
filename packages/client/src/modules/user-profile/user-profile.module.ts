@@ -16,6 +16,7 @@ import {
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserProfilePreviewComponent } from './pages/user-profile-preview/user-profile-preview.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         UserProfileFormComponent,
         UserProfileCardComponent,
         UserProfileEditPageComponent,
+        UserProfilePreviewComponent,
     ],
     imports: [
         CommonModule,
@@ -40,6 +42,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         UserProfilePageComponent,
         UserProfileEditPageComponent,
         UserProfileCardComponent,
+        UserProfilePreviewComponent,
     ],
     providers: [
         {
