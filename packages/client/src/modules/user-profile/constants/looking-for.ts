@@ -29,4 +29,4 @@ export const LOOKING_FOR = [
         name: 'Je sais pas',
         emoji: '🤷‍♀️',
     },
-]
+];

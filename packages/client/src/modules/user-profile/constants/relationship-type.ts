@@ -13,6 +13,6 @@ export const RELATIONSHIP_TYPES = [
     },
     {
         id: 'exp',
-        name: 'Ouvert à l\'expérience',
+        name: "Ouvert à l'expérience",
     },
 ];

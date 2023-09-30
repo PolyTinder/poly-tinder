@@ -30,12 +30,15 @@ export const PROGRAMS = {
     other_cert_micro: 'Certificats et microprogrammes de 1e cycle',
     other_form_cont: 'Formation continue',
     other_dd_hec: 'Double diplôme HEC Montréal (Baccalauréat)',
-}
+};
 
-export const PROGRAMS_ARRAY = Object.entries(PROGRAMS).map(([id, name]) => ({ id, name }));
+export const PROGRAMS_ARRAY = Object.entries(PROGRAMS).map(([id, name]) => ({
+    id,
+    name,
+}));
 
 export const PROGRAMS_CATEGORY = {
     bacc: 'Baccalauréat',
     mat: 'Maîtrise',
     other: 'Autres',
-}
+};

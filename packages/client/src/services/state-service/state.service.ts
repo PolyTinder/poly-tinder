@@ -3,10 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 import { State } from 'src/constants/states';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class StateService {
-  state$ = new BehaviorSubject<State>(State.LOADING);
+    state$ = new BehaviorSubject<State>(State.LOADING);
 
-  constructor() { }
+    constructor() {}
 }

@@ -4,19 +4,9 @@ import { MatchesPageComponent } from './pages/matches-page/matches-page.componen
 import { UserProfileModule } from '../user-profile/user-profile.module';
 import { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';
 
-
-
 @NgModule({
-  declarations: [
-    MatchesPageComponent,
-    SwipingPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    UserProfileModule,
-  ],
-  exports: [
-    MatchesPageComponent,
-  ]
+    declarations: [MatchesPageComponent, SwipingPageComponent],
+    imports: [CommonModule, UserProfileModule],
+    exports: [MatchesPageComponent],
 })
-export class MatchingModule { }
+export class MatchingModule {}

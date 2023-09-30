@@ -6,22 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    LoginPageComponent,
-    SignupPageComponent
-  ],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-  ],
-  exports: [
-    LoginPageComponent,
-    SignupPageComponent,
-  ]
+    declarations: [LoginPageComponent, SignupPageComponent],
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+    ],
+    exports: [LoginPageComponent, SignupPageComponent],
 })
-export class AuthenticationModule { }
+export class AuthenticationModule {}

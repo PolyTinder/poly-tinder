@@ -3,19 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ImageControlComponent } from './components/image-control/image-control.component';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 
-
-
 @NgModule({
-  declarations: [
-    ImageControlComponent,
-  ],
-  imports: [
-    CommonModule,
-    UcWidgetModule,
-  ],
-  exports: [
-    ImageControlComponent,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [ImageControlComponent],
+    imports: [CommonModule, UcWidgetModule],
+    exports: [ImageControlComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ImageModule { }
+export class ImageModule {}

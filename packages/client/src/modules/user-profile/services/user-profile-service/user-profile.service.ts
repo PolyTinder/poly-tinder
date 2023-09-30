@@ -1,21 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserPublicSession } from 'common/models/authentication';
-import { User, UserProfile } from 'common/models/user';
-import { BehaviorSubject, Observable, map, throwIfEmpty } from 'rxjs';
+import { UserProfile } from 'common/models/user';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserProfileService {
-    private userProfile$ = new BehaviorSubject<UserProfile | undefined>(undefined);
+    private userProfile$ = new BehaviorSubject<UserProfile | undefined>(
+        undefined,
+    );
     userProfileDirty$ = new BehaviorSubject<boolean>(false);
 
-    constructor(private readonly sessionService: SessionService, private readonly http: HttpClient) {
-        this.sessionService.session$.subscribe((session) => this.handleSession(session));
+    constructor(
+        private readonly sessionService: SessionService,
+        private readonly http: HttpClient,
+    ) {
+        this.sessionService.session$.subscribe((session) =>
+            this.handleSession(session),
+        );
     }
-
 
     getUserProfile(): Observable<UserProfile | undefined> {
         return this.userProfile$.asObservable();
@@ -33,17 +39,21 @@ export class UserProfileService {
             throw new Error('User profile not found');
         }
 
-        this.userProfile$.next({ ...currentProfile, ...userProfile, userId: currentProfile.userId });
+        this.userProfile$.next({
+            ...currentProfile,
+            ...userProfile,
+            userId: currentProfile.userId,
+        });
         this.userProfileDirty$.next(true);
     }
 
     applyUserProfileChanges() {
         if (!this.userProfileDirty$.value) {
-            console.log('not dirty')
             return;
         }
 
-        this.http.patch('/user/profile', { userProfile: this.userProfile$.value })
+        this.http
+            .patch('/user/profile', { userProfile: this.userProfile$.value })
             .subscribe(() => {
                 this.userProfileDirty$.next(false);
             });

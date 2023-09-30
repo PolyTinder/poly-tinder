@@ -1,7 +1,9 @@
-import { HttpClient } from "@angular/common/http";
-import { inject } from "@angular/core";
-import { NotLoadedPublicUserResult, PublicUserResult } from "common/models/user";
-import { BehaviorSubject, map } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import {
+    NotLoadedPublicUserResult,
+    PublicUserResult,
+} from 'common/models/user';
+import { BehaviorSubject } from 'rxjs';
 
 export interface NotLoadedPublicUserResultClass {
     get value(): NotLoadedPublicUserResult;
@@ -13,12 +15,19 @@ export interface LoadedPublicUserResultClass {
 
 export class PublicUserResultClass {
     private id: string;
-    private value$: BehaviorSubject<NotLoadedPublicUserResult | PublicUserResult>;
+    private value$: BehaviorSubject<
+        NotLoadedPublicUserResult | PublicUserResult
+    >;
     private loaded$: BehaviorSubject<boolean>;
 
-    constructor(notLoadedValue: NotLoadedPublicUserResult, private readonly http: HttpClient) {
+    constructor(
+        notLoadedValue: NotLoadedPublicUserResult,
+        private readonly http: HttpClient,
+    ) {
         this.id = notLoadedValue.userAliasId;
-        this.value$ = new BehaviorSubject<NotLoadedPublicUserResult | PublicUserResult>(notLoadedValue);
+        this.value$ = new BehaviorSubject<
+            NotLoadedPublicUserResult | PublicUserResult
+        >(notLoadedValue);
         this.loaded$ = new BehaviorSubject<boolean>(false);
         this.fetch();
     }
@@ -44,9 +53,11 @@ export class PublicUserResultClass {
     }
 
     private fetch() {
-        this.http.get<PublicUserResult>(`/public-profile/find/${this.id}`).subscribe((user) => {
-            this.value$.next(user);
-            this.loaded$.next(true);
-        });
+        this.http
+            .get<PublicUserResult>(`/public-profile/find/${this.id}`)
+            .subscribe((user) => {
+                this.value$.next(user);
+                this.loaded$.next(true);
+            });
     }
 }

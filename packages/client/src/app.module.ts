@@ -13,28 +13,30 @@ import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { MatchingModule } from './modules/matching/matching.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AuthenticationModule,
-    UserProfileModule,
-    MatchingModule,
-  ],
-  providers: [
-    InitializerService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (initializer: InitializerService) => async () => await initializer.initialize(),
-      deps: [InitializerService],
-      multi: true,
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, NavigationComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AuthenticationModule,
+        UserProfileModule,
+        MatchingModule,
+    ],
+    providers: [
+        InitializerService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (initializer: InitializerService) => async () =>
+                await initializer.initialize(),
+            deps: [InitializerService],
+            multi: true,
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthenticationInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

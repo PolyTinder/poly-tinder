@@ -4,19 +4,20 @@ import { UserPublicSession } from 'common/models/authentication';
 import { SESSION_TOKEN_KEY } from '../../constants/local-storage';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SessionService {
-    session$: BehaviorSubject<UserPublicSession | undefined> = new BehaviorSubject<UserPublicSession | undefined>(undefined);
+    session$: BehaviorSubject<UserPublicSession | undefined> =
+        new BehaviorSubject<UserPublicSession | undefined>(undefined);
 
     constructor() {
         this.session$.subscribe((session) => this.handleSession(session));
     }
 
     isLoggedIn(): Observable<boolean> {
-        return this.session$.asObservable().pipe(
-            map((session) => session !== undefined),
-        );
+        return this.session$
+            .asObservable()
+            .pipe(map((session) => session !== undefined));
     }
 
     private handleSession(session: UserPublicSession | undefined): void {

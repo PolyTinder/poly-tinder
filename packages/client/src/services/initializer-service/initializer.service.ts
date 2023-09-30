@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HOME_ROUTE, LOGIN_ROUTE, PUBLIC_ROUTES_PATH, SIGNUP_ROUTE } from 'src/constants/routes';
+import {
+    HOME_ROUTE,
+    LOGIN_ROUTE,
+    PUBLIC_ROUTES_PATH,
+} from 'src/constants/routes';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
-import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { StateService } from '../state-service/state.service';
 import { State } from 'src/constants/states';
 import { catchError, of } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class InitializerService {
-    constructor(private readonly sessionService: SessionService, private readonly stateService: StateService, private readonly authenticationService: AuthenticationService, private readonly router: Router) {}
+    constructor(
+        private readonly stateService: StateService,
+        private readonly authenticationService: AuthenticationService,
+        private readonly router: Router,
+    ) {}
 
     async initialize(): Promise<void> {
-        this.authenticationService.loadSession()
+        this.authenticationService
+            .loadSession()
             .pipe(
-                catchError((err, caugth) => {
+                catchError(() => {
                     return of(undefined);
                 }),
             )

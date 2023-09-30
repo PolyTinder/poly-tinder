@@ -10,7 +10,7 @@ export const GENDERS = [
     {
         id: 'other',
         name: 'Autre',
-    }
+    },
 ];
 
 export const GENDER_PREFERENCES = [
@@ -69,4 +69,4 @@ export const SEXUAL_ORIENTATIONS = [
         id: 'other',
         name: 'Autre',
     },
-]
+];

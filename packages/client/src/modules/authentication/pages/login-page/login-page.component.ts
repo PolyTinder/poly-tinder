@@ -9,16 +9,22 @@ import { HOME_ROUTE } from 'src/constants/routes';
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.scss']
+    styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
     showErrors = new BehaviorSubject<boolean>(false);
     loginForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+        ]),
         password: new FormControl('', []),
     });
-    
-    constructor(private readonly authenticationService: AuthenticationService, private readonly router: Router) {}
+
+    constructor(
+        private readonly authenticationService: AuthenticationService,
+        private readonly router: Router,
+    ) {}
 
     onChange() {
         this.showErrors.next(false);

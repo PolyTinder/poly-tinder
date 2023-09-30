@@ -6,7 +6,7 @@ import { State } from 'src/constants/states';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { StateService } from 'src/services/state-service/state.service';
 
-export const publicRouteGuard: CanActivateFn = (route, state) => {
+export const publicRouteGuard: CanActivateFn = () => {
     const router = inject(Router);
     const sessionService = inject(SessionService);
     const stateService = inject(StateService);
@@ -25,6 +25,6 @@ export const publicRouteGuard: CanActivateFn = (route, state) => {
             }
 
             return !isLoggedIn;
-        })
+        }),
     );
 };

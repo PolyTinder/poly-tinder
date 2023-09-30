@@ -24,7 +24,7 @@ export const SMOKING_HABITS = [
     },
     {
         id: 'quitting',
-        name: 'En train d\'arrêter',
+        name: "En train d'arrêter",
     },
     {
         id: 'socially',

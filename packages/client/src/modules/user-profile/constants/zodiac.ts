@@ -58,5 +58,5 @@ export const ZODIAC_SIGNS = [
         id: 'sagittarius',
         name: 'Sagittaire',
         emoji: '♐',
-    }
-]
+    },
+];

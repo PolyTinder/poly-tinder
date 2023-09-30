@@ -4,7 +4,7 @@ import { UserProfileService } from '../../services/user-profile-service/user-pro
 @Component({
     selector: 'app-user-profile-page',
     templateUrl: './user-profile-page.component.html',
-    styleUrls: ['./user-profile-page.component.scss']
+    styleUrls: ['./user-profile-page.component.scss'],
 })
 export class UserProfilePageComponent {
     constructor(private readonly userProfileService: UserProfileService) {}

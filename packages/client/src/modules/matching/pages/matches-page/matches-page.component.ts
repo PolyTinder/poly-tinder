@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { PublicUserResult } from 'common/models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { PublicUserResultClass } from 'src/modules/matching/models/public-user-result';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 
 @Component({
     selector: 'app-matches-page',
     templateUrl: './matches-page.component.html',
-    styleUrls: ['./matches-page.component.scss']
+    styleUrls: ['./matches-page.component.scss'],
 })
 export class MatchesPageComponent {
-    matches: BehaviorSubject<PublicUserResultClass[]> = new BehaviorSubject<PublicUserResultClass[]>([]);
+    matches: BehaviorSubject<PublicUserResultClass[]> = new BehaviorSubject<
+        PublicUserResultClass[]
+    >([]);
 
     constructor(private readonly publicProfileService: PublicProfileService) {
         this.fetch();
