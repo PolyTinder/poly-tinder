@@ -10,6 +10,7 @@ import { AuthenticationService } from 'src/modules/authentication/services/authe
 import { StateService } from '../state-service/state.service';
 import { State } from 'src/constants/states';
 import { catchError, of } from 'rxjs';
+import { WsService } from '../ws-service/ws.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,7 @@ export class InitializerService {
         private readonly stateService: StateService,
         private readonly authenticationService: AuthenticationService,
         private readonly router: Router,
+        private readonly wsService: WsService,
     ) {}
 
     async initialize(): Promise<void> {
@@ -34,12 +36,28 @@ export class InitializerService {
                     if (PUBLIC_ROUTES_PATH.includes(this.router.url)) {
                         this.router.navigate([HOME_ROUTE]);
                     }
+
+                    this.wsService.connect(session.token).subscribe({
+                        next: () => {
+                            this.stateService.state$.next(State.READY);
+                        },
+                        error: (error) => {
+                            this.stateService.state$.next(State.ERROR);
+                        },
+                    });
                 } else {
                     if (!PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((route) => this.router.url.startsWith(route))) {
                         this.router.navigate([LOGIN_ROUTE]);
                     }
+                    this.stateService.state$.next(State.READY);
                 }
-                this.stateService.state$.next(State.READY);
+
             });
+        
+        this.wsService.ws.subscribe((ws) => {
+            if (!ws && this.stateService.state$.value === State.READY) {
+                this.stateService.state$.next(State.ERROR);
+            }
+        });
     }
 }

@@ -2,6 +2,10 @@
   <app-status-page message="Chargement..."></app-status-page>
 </ng-container>
 
+<ng-container *ngIf="(state | async) === 'error'">
+    <app-status-page message="Erreur" [isLoading]="false" [isError]="true"></app-status-page>
+  </ng-container>
+
 <ng-container *ngIf="(state | async) === 'ready'">
     <div class="app-container" [ngClass]="{ 'app-container--no-nav': shouldHideNav }">
         <div class="app-nav" *ngIf="!shouldHideNav">

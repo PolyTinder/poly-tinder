@@ -9,29 +9,35 @@ import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
 import cors from 'cors';
 import hpp from 'hpp';
+import http from 'http';
 import { env } from './utils/environment';
 import { resolve } from 'path';
 import { logger } from './utils/logger';
 import helmet from 'helmet';
 import { DatabaseService } from './services/database-service/database-service';
+import { WsService } from './services/ws-service/ws-service';
 
 @singleton()
 export class Application {
     private app: express.Application;
+    private server: http.Server;
 
     constructor(
         @injectAll(SYMBOLS.controller)
         private readonly controllers: AbstractController[],
         private readonly databaseService: DatabaseService,
+        private readonly wsService: WsService,
     ) {
         this.app = express();
+        this.server = http.createServer(this.app);
+        this.wsService.instantiate(this.server);
 
         this.configureMiddlewares();
         this.configureRoutes();
     }
 
     listen(port: number | string) {
-        this.app.listen(port, () => {
+        this.server.listen(port, () => {
             logger.info(`🏔️ Enviroment : ${env.NODE_ENV}`);
             logger.info(
                 `🚀 Server up on port ${port} (http://localhost:${port})`,
