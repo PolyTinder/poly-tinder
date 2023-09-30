@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  api:
+    image: node:20
+    command: npm run dev
+    working_dir: /src/www/app
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_DATABASE: db
+    volumes:
+      - ./packages/api:/src/www/app
+      - ./packages/common:/src/www/common
+    ports:
+      - 3000:3000
+    
+  db:
+    image: mysql:8.1
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  db:

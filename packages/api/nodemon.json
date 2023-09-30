@@ -1,0 +1,4 @@
+{
+    "ignore": ["configs", "logs", "public"],
+    "watch": ["../common", "."]
+}
