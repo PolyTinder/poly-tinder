@@ -51,3 +51,12 @@ export interface UserProfileDB extends Omit<UserProfile, UnsafeUserProfileAttrib
 }
 
 export type PublicUser = Omit<User, 'hash' | 'salt'>;
+
+export interface UserValidation {
+    userId: number;
+    emailValidated: boolean;
+    userProfileReady: boolean;
+    suspended: boolean;
+    suspensionReason?: string;
+    banned: boolean;
+}
