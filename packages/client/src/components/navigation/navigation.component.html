@@ -27,12 +27,22 @@
 
     <div class="bottom-nav">
         <ul>
-            <li class="nav-item interactable"><a routerLink="/settings" class="nav-item__link"><i class="fas fa-cog"></i></a></li>
-            <li class="nav-item interactable"><a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a></li>
+            <li class="nav-item interactable" matTooltip="Préférences">
+                <a routerLink="/settings" class="nav-item__link"><i class="fas fa-cog"></i></a>
+            </li>
+            <li class="nav-item interactable" matTooltip="À propos">
+                <a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a>
+            </li>
         </ul>
 
         <ul>
-            <li class="nav-item interactable"><a (click)="logout()" class="nav-item__link"><i class="fas fa-sign-out"></i></a></li>
+            <li class="nav-item interactable" matTooltip="Se déconnecter">
+                <a class="nav-item__link" [matMenuTriggerFor]="logoutMenu"><i class="fas fa-sign-out"></i></a>
+
+                <mat-menu #logoutMenu="matMenu">
+                    <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>
+                </mat-menu>
+            </li>
         </ul>
     </div>
 </nav>

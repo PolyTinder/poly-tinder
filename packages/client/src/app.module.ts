@@ -12,6 +12,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { MatchingModule } from './modules/matching/matching.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent],
@@ -22,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         UserProfileModule,
         MatchingModule,
         BrowserAnimationsModule,
+        MatTooltipModule,
+        MatMenuModule,
     ],
     providers: [
         InitializerService,
