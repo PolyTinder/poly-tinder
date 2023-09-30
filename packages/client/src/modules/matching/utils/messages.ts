@@ -8,7 +8,7 @@ export const groupMessages = (messages: Message[]): MessageGroup[] => {
     for (const message of messages) {
         if (!previousMessage || !isSameGroup(message, previousMessage)) {
             currentGroup = {
-                date: message.date,
+                timestamp: message.timestamp,
                 senderId: message.senderId,
                 messages: [],
             };
@@ -26,6 +26,6 @@ export const groupMessages = (messages: Message[]): MessageGroup[] => {
 const isSameGroup = (message: Message, previousMessage: Message): boolean => {
     return (
         message.senderId === previousMessage.senderId &&
-        message.date.getTime() - previousMessage.date.getTime() < 5 * 60 * 1000
+        message.timestamp.getTime() - previousMessage.timestamp.getTime() < 5 * 60 * 1000
     );
 };

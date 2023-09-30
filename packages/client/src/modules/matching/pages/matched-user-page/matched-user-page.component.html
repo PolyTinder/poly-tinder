@@ -24,7 +24,7 @@
             </app-card>
 
             <div class="matched-user-page__content__messages__group" [ngClass]="{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}" *ngFor="let messageGroup of messages | async">
-                <span class="matched-user-page__content__messages__group__time">{{messageGroup.date | date: 'MMM d, h:mm'}}</span>
+                <span class="matched-user-page__content__messages__group__time">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>
                 <div class="matched-user-page__content__messages__group__content">
                     <div class="matched-user-page__content__messages__group__content__sender" *ngIf="!messageGroup.isSelf">
                         <div class="matched-user-page__content__messages__group__content__sender__avatar"></div>

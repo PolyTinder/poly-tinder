@@ -51,15 +51,6 @@ export class MatchingService {
         }
     }
 
-    private async matchUsers(user1Id: number, user2Id: number): Promise<void> {
-        await this.matches.insert({
-            user1Id,
-            user2Id,
-        });
-
-        this.wsService.emitToUser(user1Id, 'match', { matchedUserId: user2Id });
-    }
-
     async unmatchUser(userId: number, unmatchedUserId: number): Promise<void> {
         await this.matches
             .update({
@@ -75,5 +66,30 @@ export class MatchingService {
                 user1Id: unmatchedUserId,
                 user2Id: userId,
             });
+    }
+
+    async areMatched(userId: number, targetUserId: number): Promise<boolean> {
+        return !!(await this.matches
+            .select()
+            .where({
+                user1Id: userId,
+                user2Id: targetUserId,
+                unmatched: false,
+            })
+            .orWhere({
+                user1Id: targetUserId,
+                user2Id: userId,
+                unmatched: false,
+            })
+            .first());
+    }
+
+    private async matchUsers(user1Id: number, user2Id: number): Promise<void> {
+        await this.matches.insert({
+            user1Id,
+            user2Id,
+        });
+
+        this.wsService.emitToUser(user1Id, 'match', { matchedUserId: user2Id });
     }
 }

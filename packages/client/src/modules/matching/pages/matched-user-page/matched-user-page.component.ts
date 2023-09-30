@@ -100,7 +100,7 @@ export class MatchedUserPageComponent {
                             ? matchedUser.currentValue
                             : userProfile;
                     return {
-                        date: messageGroup.date,
+                        timestamp: messageGroup.timestamp,
                         sender: {
                             name: sender.name ?? '',
                             picture: sender.pictures?.[0] ?? '',
@@ -109,7 +109,7 @@ export class MatchedUserPageComponent {
                         messages: messageGroup.messages.map((message) => {
                             return {
                                 content: message.content,
-                                date: message.date,
+                                timestamp: message.timestamp,
                                 sender: {
                                     name: sender.name ?? '',
                                     picture: sender.pictures?.[0] ?? '',

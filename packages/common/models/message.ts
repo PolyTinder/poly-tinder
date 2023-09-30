@@ -2,21 +2,22 @@ import { PublicUserResult } from "./user";
 
 export interface Message {
     content: string;
-    date: Date;
+    timestamp: Date;
     senderId: number;
+    recipientId: number;
 }
 
 export interface MessageGroup {
-    date: Date;
+    timestamp: Date;
     senderId: number;
     messages: Message[];
 }
 
-export type DisplayMessage = Pick<Omit<Message, 'senderId'>, 'content' | 'date'> & {
+export type DisplayMessage = Pick<Omit<Message, 'senderId'>, 'content' | 'timestamp'> & {
     sender: Pick<PublicUserResult, 'name' | 'pictures'>;
 }
 
-export type DisplayMessageGroup = Pick<MessageGroup, 'date'> & {
+export type DisplayMessageGroup = Pick<MessageGroup, 'timestamp'> & {
     sender: Pick<PublicUserResult, 'name'> & { picture: string; };
     messages: DisplayMessage[];
     isSelf: boolean;
