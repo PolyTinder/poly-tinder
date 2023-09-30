@@ -113,6 +113,34 @@
             <option *ngFor="let sexuality of sexualities" [value]="sexuality.id">{{ sexuality.name }}</option>
         </select>
     </p>
+    <p>
+        <label for="interests">Intérets</label>
+        <span *ngFor="let interest of interests">
+            <input 
+                type="checkbox"
+                name="interests"
+                [id]="interest"
+                [value]="interest"
+                [checked]="userProfileForm.value.interests?.includes(interest)"
+                (change)="onInterestChange(interest, $event)"
+            >
+            <label [for]="interest">{{interest}}</label>
+        </span>
+    </p>
+    <p>
+        <label for="associations">Comités et Associations</label>
+        <span *ngFor="let association of associations">
+            <input 
+                type="checkbox"
+                name="associations"
+                [id]="association"
+                [value]="association"
+                [checked]="userProfileForm.value.associations?.includes(association)"
+                (change)="onAssociationChange(association, $event)"
+            >
+            <label [for]="association">{{association}}</label>
+        </span>
+    </p>
 
     <p *ngIf="userProfileForm.invalid">Invalid</p>
 

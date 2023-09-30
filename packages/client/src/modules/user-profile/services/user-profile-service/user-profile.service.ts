@@ -56,6 +56,9 @@ export class UserProfileService {
             .patch('/user/profile', { userProfile: this.userProfile$.value })
             .subscribe(() => {
                 this.userProfileDirty$.next(false);
+                this.fetchUserProfile().subscribe((userProfile) => {
+                    this.userProfile$.next(userProfile);
+                });
             });
     }
 

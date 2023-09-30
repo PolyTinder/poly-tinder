@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PROGRAMS_ARRAY } from '../../constants/programs';
 import { LOOKING_FOR } from '../../constants/looking-for';
 import { RELATIONSHIP_TYPES } from '../../constants/relationship-type';
@@ -18,6 +18,8 @@ import {
 import { UserProfileService } from '../../services/user-profile-service/user-profile.service';
 import { UserProfile } from 'common/models/user';
 import { BehaviorSubject, combineLatest, debounceTime } from 'rxjs';
+import { INTERESTS } from '../../constants/interets';
+import { ASSOCIATIONS } from '../../constants/associations';
 
 @Component({
     selector: 'app-user-profile-form',
@@ -44,6 +46,8 @@ export class UserProfileFormComponent {
         ]),
         program: new FormControl('', []),
         height: new FormControl(0, [Validators.min(0), Validators.max(300)]),
+        interests: new FormControl<string[]>([], []),
+        associations: new FormControl<string[]>([], []),
         lookingFor: new FormControl('', []),
         relationshipType: new FormControl('', []),
         zodiacSign: new FormControl('', []),
@@ -70,6 +74,8 @@ export class UserProfileFormComponent {
     genders = GENDERS;
     genderPreferences = GENDER_PREFERENCES;
     sexualities = SEXUAL_ORIENTATIONS;
+    interests = INTERESTS;
+    associations = ASSOCIATIONS;
 
     pictures = [
         new BehaviorSubject<string | undefined>(undefined),
@@ -117,5 +123,43 @@ export class UserProfileFormComponent {
 
         this.userProfileService.updateUserProfile(res);
         this.userProfileService.applyUserProfileChanges();
+    }
+
+    onInterestChange(interest: string, event: Event) {
+        const target = event.currentTarget as HTMLInputElement;
+        if(!target) throw new Error('Target not found');
+
+        const currentValue = this.userProfileForm.value.interests ?? [];
+
+        if (target.checked) {
+            if (!currentValue.includes(interest)) {
+                currentValue.push(interest);
+            }
+        } else {
+            if (currentValue.includes(interest)) {
+                currentValue.splice(currentValue.indexOf(interest), 1);
+            }
+        }
+
+        this.userProfileForm.patchValue({ interests: currentValue.filter((interest) => interest.length > 0) });
+    }
+
+    onAssociationChange(association: string, event: Event) {
+        const target = event.currentTarget as HTMLInputElement;
+        if(!target) throw new Error('Target not found');
+
+        const currentValue = this.userProfileForm.value.associations ?? [];
+
+        if (target.checked) {
+            if (!currentValue.includes(association)) {
+                currentValue.push(association);
+            }
+        } else {
+            if (currentValue.includes(association)) {
+                currentValue.splice(currentValue.indexOf(association), 1);
+            }
+        }
+
+        this.userProfileForm.patchValue({ associations: currentValue.filter((association) => association.length > 0) });
     }
 }
