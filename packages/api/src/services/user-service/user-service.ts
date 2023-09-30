@@ -27,4 +27,13 @@ export class UserService {
             !userValidation.banned
         );
     }
+
+    async setUserProfileReady(
+        userId: number,
+        userProfileReady: boolean,
+    ): Promise<void> {
+        await this.userValidations
+            .update({ userProfileReady })
+            .where({ userId });
+    }
 }

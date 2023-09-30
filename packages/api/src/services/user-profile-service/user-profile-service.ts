@@ -1,15 +1,30 @@
 import { Knex } from 'knex';
 import { singleton } from 'tsyringe';
 import { DatabaseService } from '../database-service/database-service';
-import { User, UserProfile, UserProfileDB } from 'common/models/user';
+import {
+    User,
+    UserProfile,
+    UserProfileDB,
+    UserValidation,
+} from 'common/models/user';
 import { NoId, TypeOfId } from 'common/types/id';
+import { UserService } from '../user-service/user-service';
 
 @singleton()
 export class UserProfileService {
-    constructor(private readonly databaserService: DatabaseService) {}
+    constructor(
+        private readonly databaserService: DatabaseService,
+        private readonly userService: UserService,
+    ) {}
 
     private get userProfiles(): Knex.QueryBuilder<UserProfileDB> {
         return this.databaserService.database<UserProfileDB>('userProfiles');
+    }
+
+    private get userValidations(): Knex.QueryBuilder<UserValidation> {
+        return this.databaserService.database<UserValidation>(
+            'userValidations',
+        );
     }
 
     async getUserProfile(userId: TypeOfId<User>): Promise<NoId<UserProfile>> {
@@ -69,60 +84,11 @@ export class UserProfileService {
                 userId,
             });
         }
-    }
 
-    private async setUserProfilePictures(
-        userId: TypeOfId<User>,
-        pictures: string[],
-    ): Promise<void> {
-        await this.userProfiles
-            .update({
-                picture1: pictures[0],
-                picture2: pictures[1],
-                picture3: pictures[2],
-                picture4: pictures[3],
-                picture5: pictures[4],
-                picture6: pictures[5],
-            })
-            .where({ userId });
-    }
-
-    private async setUserProfileInterests(
-        userId: TypeOfId<User>,
-        interests: string[],
-    ): Promise<void> {
-        await this.userProfiles
-            .update({
-                interests:
-                    interests.length > 0 ? interests.join(',') : undefined,
-            })
-            .where({ userId });
-    }
-
-    private async setUserProfileAssociations(
-        userId: TypeOfId<User>,
-        associations: string[],
-    ): Promise<void> {
-        await this.userProfiles
-            .update({
-                associations:
-                    associations.length > 0
-                        ? associations.join(',')
-                        : undefined,
-            })
-            .where({ userId });
-    }
-
-    private async setUserProfileLanguages(
-        userId: TypeOfId<User>,
-        languages: string[],
-    ): Promise<void> {
-        await this.userProfiles
-            .update({
-                languages:
-                    languages.length > 0 ? languages.join(',') : undefined,
-            })
-            .where({ userId });
+        await this.userService.setUserProfileReady(
+            userId,
+            this.isUserProfileReady(userProfile),
+        );
     }
 
     private toUserProfileDB(userProfile: UserProfile): UserProfileDB {
@@ -164,5 +130,14 @@ export class UserProfileService {
         delete res.picture6;
 
         return res;
+    }
+
+    private isUserProfileReady(userProfile: UserProfile): boolean {
+        return (
+            (userProfile.name ?? '').length > 2 &&
+            (userProfile.age ?? 0) > 0 &&
+            (userProfile.bio ?? '').length > 5 &&
+            (userProfile.pictures ?? []).length > 0
+        );
     }
 }
