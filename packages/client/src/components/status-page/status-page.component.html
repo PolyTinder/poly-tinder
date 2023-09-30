@@ -1,0 +1,8 @@
+<div class="status-page" [ngClass]="{ 'status-page--loading': isLoading, 'status-page--error': isError }">
+    <div class="status-page__content">
+        <img class="status-page__content__logo" src="assets/logo.svg" alt="Logo">
+        <div class="status-page__content__message">
+            <p>{{message}}</p>
+        </div>
+    </div>
+</div>

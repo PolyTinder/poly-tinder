@@ -1,5 +1,5 @@
 <ng-container *ngIf="(state | async) === 'loading'">
-  Loading...
+  <app-status-page message="Chargement..."></app-status-page>
 </ng-container>
 
 <ng-container *ngIf="(state | async) === 'ready'">

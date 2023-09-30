@@ -15,9 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { AboutModule } from './modules/about/about.module';
+import { StatusPageComponent } from './components/status-page/status-page.component';
 
 @NgModule({
-    declarations: [AppComponent, NavigationComponent],
+    declarations: [AppComponent, NavigationComponent, StatusPageComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
