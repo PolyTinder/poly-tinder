@@ -44,7 +44,7 @@
 
     &__pictures {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 24px;
 
         &__control {
@@ -77,6 +77,29 @@
 
         i {
             margin-right: 6px;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        gap: 12px;
+        padding: 12px;
+        padding-bottom: 72px;
+
+        section {
+            padding: 12px;
+        }
+
+        &__pictures {
+            gap: 12px;
+        }
+
+        &__submit {
+            bottom: 61px;
+            left: 50%;
+            translate: -50% 0;
+            margin-bottom: 12px;
+            width: calc(100% - 24px);
+            max-width: 225px;
         }
     }
 }
