@@ -9,10 +9,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UserProfileEditPageComponent } from './pages/user-profile-edit-page/user-profile-edit-page.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { UiModule } from '../ui/ui.module';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
+import {
+    MAT_FORM_FIELD_DEFAULT_OPTIONS,
+    MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -21,10 +24,28 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         UserProfileCardComponent,
         UserProfileEditPageComponent,
     ],
-    imports: [CommonModule, AppRoutingModule, ReactiveFormsModule, UiModule, ImageModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule],
-    exports: [UserProfilePageComponent, UserProfileEditPageComponent, UserProfileCardComponent],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        UiModule,
+        ImageModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSnackBarModule,
+    ],
+    exports: [
+        UserProfilePageComponent,
+        UserProfileEditPageComponent,
+        UserProfileCardComponent,
+    ],
     providers: [
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-    ]
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: { appearance: 'outline' },
+        },
+    ],
 })
 export class UserProfileModule {}

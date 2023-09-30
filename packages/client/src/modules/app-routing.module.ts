@@ -34,7 +34,11 @@ const routes: Routes = [
         component: UserProfilePageComponent,
         ...privateRoute,
     },
-    { path: PROFILE_EDIT_ROUTE, component: UserProfileEditPageComponent, ...privateRoute },
+    {
+        path: PROFILE_EDIT_ROUTE,
+        component: UserProfileEditPageComponent,
+        ...privateRoute,
+    },
     { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },

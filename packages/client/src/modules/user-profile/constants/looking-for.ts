@@ -3,7 +3,7 @@ export const LOOKING_FOR = [
         id: 'lt',
         name: 'Long terme',
         emoji: '💕',
-        color: '234, 46, 172'
+        color: '234, 46, 172',
     },
     {
         id: 'ltst',
@@ -15,7 +15,7 @@ export const LOOKING_FOR = [
         id: 'stlt',
         name: 'Court terme, ouvert à du long terme',
         emoji: '🍻',
-        color: '253, 223, 131'
+        color: '253, 223, 131',
     },
     {
         id: 'fun',

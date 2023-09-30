@@ -27,23 +27,29 @@ export class NavigationComponent {
             map((session) => session?.user),
         );
     }
-    
+
     get userProfile() {
         return this.userProfileService.getUserProfile();
     }
 
     get name() {
-        return combineLatest([this.user, this.userProfile]).pipe(map(([user, userProfile]) => {
-            return userProfile?.name ?? user?.email ?? '';
-        }));
+        return combineLatest([this.user, this.userProfile]).pipe(
+            map(([user, userProfile]) => {
+                return userProfile?.name ?? user?.email ?? '';
+            }),
+        );
     }
 
     get avatar() {
-        return this.userProfile.pipe(map((userProfile) => {
-            const avatar = userProfile?.pictures?.[0] ?? undefined;
+        return this.userProfile.pipe(
+            map((userProfile) => {
+                const avatar = userProfile?.pictures?.[0] ?? undefined;
 
-            return avatar ? `${avatar}-/scale_crop/100x100/center/` : undefined;
-        }));
+                return avatar
+                    ? `${avatar}-/scale_crop/100x100/center/`
+                    : undefined;
+            }),
+        );
     }
 
     logout() {

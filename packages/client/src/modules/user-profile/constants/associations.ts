@@ -17,12 +17,12 @@ export const ASSOCIATIONS = [
     'Association des étudiants musulmans (AEMUDM)',
     'Bannière de Polytechnique',
     'CCGP - Comité de consultation en gestion de Polytechnique',
-    'CCIP - Comité des Compétitions d\'Ingénierie de Polytechnique',
-    'Chapitre étudiant de l\'OSA-SPIE',
+    "CCIP - Comité des Compétitions d'Ingénierie de Polytechnique",
+    "Chapitre étudiant de l'OSA-SPIE",
     'CLÉE - Comité de Liaison Étudiants/Entreprises de Polytechnique',
     'Club Poly Énergies',
     'Comic',
-    'Comité à l\'éducation pour l\'année préparatoire',
+    "Comité à l'éducation pour l'année préparatoire",
     'Comité international de projets outre-mer (CIPO)',
     'Foire aux livres',
     'Houblonneries',
@@ -59,4 +59,4 @@ export const ASSOCIATIONS = [
     'Promo 146',
     'Station Polytechnique',
     'STEP',
-]
+];

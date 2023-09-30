@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PROGRAMS_ARRAY } from '../../constants/programs';
 import { LOOKING_FOR } from '../../constants/looking-for';
 import { RELATIONSHIP_TYPES } from '../../constants/relationship-type';
@@ -89,7 +89,10 @@ export class UserProfileFormComponent {
         new BehaviorSubject<string | undefined>(undefined),
     ];
 
-    constructor(private readonly userProfileService: UserProfileService, private readonly snackBar: MatSnackBar) {
+    constructor(
+        private readonly userProfileService: UserProfileService,
+        private readonly snackBar: MatSnackBar,
+    ) {
         this.userProfileService.getUserProfile().subscribe((userProfile) => {
             if (userProfile) {
                 this.userProfileForm.patchValue(userProfile);
@@ -128,19 +131,29 @@ export class UserProfileFormComponent {
 
         this.userProfileForm.markAsPending();
         this.userProfileService.updateUserProfile(res);
-        this.userProfileService.applyUserProfileChanges()
-            .pipe(catchError((err) => {
-                this.snackBar.open('Erreur lors de la mise à jour du profil', undefined, { duration: 2000, politeness: 'assertive' });
-                return err;
-            }))
+        this.userProfileService
+            .applyUserProfileChanges()
+            .pipe(
+                catchError((err) => {
+                    this.snackBar.open(
+                        'Erreur lors de la mise à jour du profil',
+                        undefined,
+                        { duration: 2000, politeness: 'assertive' },
+                    );
+                    return err;
+                }),
+            )
             .subscribe(() => {
-                this.snackBar.open('Profil mis à jour', undefined, { duration: 2000, politeness: 'polite' });
+                this.snackBar.open('Profil mis à jour', undefined, {
+                    duration: 2000,
+                    politeness: 'polite',
+                });
             });
     }
 
     onInterestChange(interest: string, event: Event) {
         const target = event.currentTarget as HTMLInputElement;
-        if(!target) throw new Error('Target not found');
+        if (!target) throw new Error('Target not found');
 
         const currentValue = this.userProfileForm.value.interests ?? [];
 
@@ -154,12 +167,14 @@ export class UserProfileFormComponent {
             }
         }
 
-        this.userProfileForm.patchValue({ interests: currentValue.filter((interest) => interest.length > 0) });
+        this.userProfileForm.patchValue({
+            interests: currentValue.filter((interest) => interest.length > 0),
+        });
     }
 
     onAssociationChange(association: string, event: Event) {
         const target = event.currentTarget as HTMLInputElement;
-        if(!target) throw new Error('Target not found');
+        if (!target) throw new Error('Target not found');
 
         const currentValue = this.userProfileForm.value.associations ?? [];
 
@@ -173,6 +188,10 @@ export class UserProfileFormComponent {
             }
         }
 
-        this.userProfileForm.patchValue({ associations: currentValue.filter((association) => association.length > 0) });
+        this.userProfileForm.patchValue({
+            associations: currentValue.filter(
+                (association) => association.length > 0,
+            ),
+        });
     }
 }

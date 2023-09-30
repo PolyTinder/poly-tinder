@@ -8,7 +8,10 @@ import { AuthenticationService } from 'src/modules/authentication/services/authe
     styleUrls: ['./user-profile-page.component.scss'],
 })
 export class UserProfilePageComponent {
-    constructor(private readonly userProfileService: UserProfileService, private readonly authenticationService: AuthenticationService) {}
+    constructor(
+        private readonly userProfileService: UserProfileService,
+        private readonly authenticationService: AuthenticationService,
+    ) {}
 
     get userProfile() {
         return this.userProfileService.getUserProfile();
