@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()" (change)="onChange()">
+    <label for="email">Email: </label>
+    <input id="email" type="email" formControlName="email" (keyup)="onChange()" />
+
+    <label for="password">Password: </label>
+    <input id="password" type="password" formControlName="password" (keyup)="onChange()" />
+
+    <button type="submit">Login</button>
+
+    <div *ngIf="loginForm.invalid && (showErrors | async)">
+        <div *ngIf="loginForm.controls.email.invalid">
+            Email is required
+        </div>
+        <div *ngIf="loginForm.controls.password.invalid">
+            Password is required
+        </div>
+    </div>
+</form>

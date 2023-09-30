@@ -53,7 +53,7 @@ export class AuthenticationController extends AbstractController {
         );
 
         router.post('/load', auth, async (req: UserRequest, res: Response) => {
-            res.status(StatusCodes.NO_CONTENT).send();
+            res.status(StatusCodes.OK).send(req.body.session);
         });
 
         router.post(

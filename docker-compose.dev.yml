@@ -1,6 +1,16 @@
 version: "3.3"
 
 services:
+  client:
+    image: node:20
+    command: npm start -- --host 0.0.0.0
+    working_dir: /src/www/app
+    volumes:
+      - ./packages/client:/src/www/app
+      - ./packages/common:/src/www/common
+    ports:
+      - 4200:4200
+
   api:
     image: node:20
     command: npm run dev

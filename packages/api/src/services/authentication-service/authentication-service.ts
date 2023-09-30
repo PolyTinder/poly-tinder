@@ -115,12 +115,14 @@ export class AuthenticationService {
             );
         }
 
+        const newToken = this.generateToken(user.userId, session.sessionId);
+
         return {
             user: {
                 userId: user.userId,
                 email: user.email,
             },
-            token,
+            token: newToken,
         };
     }
 
