@@ -1,6 +1,11 @@
 <nav [ngClass]="{ collapsed }">
     <div class="top-nav">
         <button class="collapse-btn" (click)="toggleCollapsed()"><i class="far fa-bars"></i></button>
+
+        <div class="brand">
+            <img class="brand__logo" src="/assets/logo.svg" alt="Logo">
+            <span class="brand__name">PolyTinder</span>
+        </div>
     
         <ul class="main-nav">
             <li *ngFor="let item of navigation" class="nav-item">
@@ -9,18 +14,6 @@
                     <span class="nav-item__link__content">{{item.text}}</span>
                 </a>
             </li>
-
-            <!-- <li class="nav-item">
-                <a [routerLink]="isActiveLink('/profile') ? undefined : '/profile'" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink('/profile'), 'nav-item__link---not-active': !isActiveLink('/profile')}">
-                    <ng-container *ngIf="avatar | async; let avatar">
-                        <img [src]="avatar" class="nav-item__link__avatar">
-                    </ng-container>
-                    <ng-container *ngIf="!(avatar | async)">
-                        <i class="fas fa-user nav-item__link__icon"></i>
-                    </ng-container>
-                    <span class="nav-item__link__content">{{name | async}}</span>
-                </a>
-            </li> -->
         </ul>
     </div>
 
