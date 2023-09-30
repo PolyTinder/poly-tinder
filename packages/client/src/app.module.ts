@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -6,29 +6,23 @@ import { AppComponent } from './app/app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from 'src/middlewares/api';
 import { InitializerService } from 'src/services/initializer-service/initializer.service';
-import { HomePageComponent } from 'src/pages/home-page/home-page.component';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { AuthenticationInterceptor } from './middlewares/auth';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
-import { UserModule } from './modules/user/user.module';
-import { MatchesPageComponent } from './pages/matches-page/matches-page.component';
+import { MatchingModule } from './modules/matching/matching.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
     NavigationComponent,
-    ProfilePageComponent,
-    MatchesPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthenticationModule,
-    UserModule,
     UserProfileModule,
+    MatchingModule,
   ],
   providers: [
     InitializerService,

@@ -1,10 +1,4 @@
-<h1>Home</h1>
-
-<p>Connected as <b>{{(user | async)?.email}}</b></p>
-
-<button (click)="logout()">Logout</button>
-
-<hr>
+<h1>Swiping</h1>
 
 <ng-container *ngIf="availableUsers | async; let availableUsers">
     <ng-container *ngFor="let user of availableUsers">

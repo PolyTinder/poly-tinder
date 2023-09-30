@@ -1,5 +1,11 @@
 <nav>
+    <p><b>{{(user | async)?.email}}</b></p>
+
     <p><a routerLink="/">Home</a></p>
     <p><a routerLink="/profile">Profile</a></p>
     <p><a routerLink="/matches">Matches</a></p>
+
+    <p><button (click)="logout">Logout</button></p>
 </nav>
+
+<hr>
