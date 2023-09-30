@@ -31,3 +31,21 @@
         }
     }
 }
+
+
+.interactable--small {
+    &:not(:disabled):not(.disabled) {
+        transition: ease-in scale 0.1s;
+        cursor: pointer;
+
+        @media (hover: hover) {
+            &:hover {
+                scale: 1.035;
+            }
+        }
+
+        &:active {
+            scale: 0.975;
+        }
+    }
+}

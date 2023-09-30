@@ -1,0 +1,52 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/utils';
+
+.layout {
+    $head-size: 70px;
+
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    position: relative;
+    
+    &__head {
+        @include no-select;
+
+        height: $head-size;
+
+        &__back {
+            $size: 36px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--theme-background);
+            border-radius: $size;
+            width: $size;
+            height: $size;
+            text-decoration: none;
+            color: var(--theme-background--contrast);
+            border: solid 1px rgb(240, 240, 240);
+            position: fixed;
+            top: $head-size / 2;
+            margin-left: $head-size / 2;
+            translate: -50% -50%;
+            box-shadow: $default-shadow;
+
+            i {
+                margin-left: -2px;
+            }
+        }
+
+        &__title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: $head-size;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--theme-background--contrast);
+        }
+    }
+}

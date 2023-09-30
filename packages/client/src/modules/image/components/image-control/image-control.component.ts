@@ -37,7 +37,18 @@ export class ImageControlComponent {
         return this.value.pipe(
             map((value) => {
                 if (value) {
-                    return `${value}-/resize/100x/`;
+                    return `${value}-/resize/200x/`;
+                }
+                return undefined;
+            }),
+        );
+    }
+
+    get urlRetina(): Observable<string | undefined> {
+        return this.value.pipe(
+            map((value) => {
+                if (value) {
+                    return `${value}-/resize/400x/`;
                 }
                 return undefined;
             }),

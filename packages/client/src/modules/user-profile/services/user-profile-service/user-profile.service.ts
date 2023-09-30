@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserPublicSession } from 'common/models/authentication';
 import { UserProfile } from 'common/models/user';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, switchAll, switchMap, tap } from 'rxjs';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 
 @Injectable({
@@ -47,19 +47,21 @@ export class UserProfileService {
         this.userProfileDirty$.next(true);
     }
 
-    applyUserProfileChanges() {
+    applyUserProfileChanges(): Observable<UserProfile | undefined> {
         if (!this.userProfileDirty$.value) {
-            return;
+            return of(this.userProfile$.value);
         }
 
-        this.http
+        return this.http
             .patch('/user/profile', { userProfile: this.userProfile$.value })
-            .subscribe(() => {
-                this.userProfileDirty$.next(false);
-                this.fetchUserProfile().subscribe((userProfile) => {
+            .pipe(
+                tap(() => {
+                    this.userProfileDirty$.next(false);
+                }),
+                switchMap(() => this.fetchUserProfile().pipe(tap((userProfile) => {
                     this.userProfile$.next(userProfile);
-                });
-            });
+                }))),
+            );
     }
 
     private handleSession(session: UserPublicSession | undefined) {

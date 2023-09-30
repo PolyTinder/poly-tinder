@@ -1,0 +1,14 @@
+<div class="layout">
+    <div class="layout__head" *ngIf="backLink || title">
+        <a
+            [routerLink]="backLink"
+            *ngIf="backLink"
+            class="layout__head__back interactable"
+        ><i class="fas fa-chevron-left"></i></a>
+
+        <p class="layout__head__title" *ngIf="title">{{title}}</p>
+    </div>
+    <div class="layout__content">
+        <ng-content></ng-content>
+    </div>
+</div>

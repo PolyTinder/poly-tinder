@@ -6,3 +6,32 @@
     visibility: hidden;
     opacity: 0;
 }
+
+.control-view {
+    display: flex;
+    border-radius: 6px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    
+    &--no-image {
+        border: dashed 2px var(--theme-main);
+        color: var(--theme-main);
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        transition: ease-in 0.1s background-color;
+
+        @media (hover: hover) {
+            &:hover {
+                background-color: rgba(var(--theme-main-rgb), 0.1);
+                transition: ease-in 0.05s background-color;
+            }
+        }
+    }
+
+    &--image {
+        background-color: rgba(var(--theme-main-rgb), 0.25);
+    }
+}

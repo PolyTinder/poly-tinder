@@ -1,7 +1,36 @@
-<h1>User profile</h1>
-
-<!-- <app-user-profile-card [userProfile]="userProfile | async"></app-user-profile-card> -->
-
-<hr>
-
-<app-user-profile-form></app-user-profile-form>
+<app-layout>
+    <div class="user-profile" *ngIf="userProfile | async; let userProfile">
+        <div class="user-profile__info">
+            <img 
+                class="user-profile__info__avatar"
+                [src]="userProfile.pictures?.[0]"
+                [alt]="'Photo de profile de ' + userProfile.name"
+            >
+            <p class="user-profile__info__name">{{userProfile.name}}, {{userProfile.age}}</p>
+        </div>
+    
+        <div class="user-profile__actions">
+            <a routerLink="/profile-edit" class="user-profile__actions__btn interactable--small">
+                <i class="fas fa-user-edit"></i>
+                Modifier mon profil
+            </a>
+            <button class="user-profile__actions__btn interactable--small">
+                <i class="fas fa-cog"></i>
+                Préférences
+            </button>
+            <button class="user-profile__actions__btn interactable--small" [matMenuTriggerFor]="logoutMenu">
+                <i class="fas fa-sign-out"></i>
+                Se déconnecter
+    
+            </button>
+            <mat-menu #logoutMenu="matMenu">
+                <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>
+            </mat-menu>
+            <hr>
+            <button class="user-profile__actions__btn interactable--small">
+                <i class="fas fa-info-circle"></i>
+                À propos
+            </button>
+        </div>
+    </div>
+</app-layout>

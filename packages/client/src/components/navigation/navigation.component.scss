@@ -69,7 +69,7 @@ nav {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
-                transition: ease-in 0.025s background-color;
+                transition: ease-in 0.025s background-color, ease-in scale 0.1s;
 
                 &__icon {
                     opacity: 0.45;
@@ -109,7 +109,7 @@ nav {
                 &:hover {
                     .nav-item__link---not-active {
                         background-color: rgba(var(--theme-main-rgb), 0.1);
-                        transition: ease-in 0.05s background-color;
+                        transition: ease-in 0.05s background-color, ease-in scale 0.1s;
                     }
                 }
             }

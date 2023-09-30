@@ -12,14 +12,16 @@ import {
 } from '../../constants/lifestyle';
 import {
     GENDERS,
+    GENDER_IDENTITIES,
     GENDER_PREFERENCES,
     SEXUAL_ORIENTATIONS,
 } from '../../constants/gender';
 import { UserProfileService } from '../../services/user-profile-service/user-profile.service';
 import { UserProfile } from 'common/models/user';
-import { BehaviorSubject, combineLatest, debounceTime } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';
 import { INTERESTS } from '../../constants/interets';
 import { ASSOCIATIONS } from '../../constants/associations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-user-profile-form',
@@ -72,6 +74,7 @@ export class UserProfileFormComponent {
     drugHabits = DRUGS_HABITS;
     workoutHabits = WORKOUT_HABITS;
     genders = GENDERS;
+    genderIdentities = GENDER_IDENTITIES;
     genderPreferences = GENDER_PREFERENCES;
     sexualities = SEXUAL_ORIENTATIONS;
     interests = INTERESTS;
@@ -86,7 +89,7 @@ export class UserProfileFormComponent {
         new BehaviorSubject<string | undefined>(undefined),
     ];
 
-    constructor(private readonly userProfileService: UserProfileService) {
+    constructor(private readonly userProfileService: UserProfileService, private readonly snackBar: MatSnackBar) {
         this.userProfileService.getUserProfile().subscribe((userProfile) => {
             if (userProfile) {
                 this.userProfileForm.patchValue(userProfile);
@@ -96,6 +99,8 @@ export class UserProfileFormComponent {
                         this.pictures[i].next(userProfile.pictures[i]);
                     }
                 }
+
+                this.userProfileForm.markAsPristine();
             }
         });
 
@@ -121,8 +126,16 @@ export class UserProfileFormComponent {
             (res as any)[k] = v ?? undefined;
         }
 
+        this.userProfileForm.markAsPending();
         this.userProfileService.updateUserProfile(res);
-        this.userProfileService.applyUserProfileChanges();
+        this.userProfileService.applyUserProfileChanges()
+            .pipe(catchError((err) => {
+                this.snackBar.open('Erreur lors de la mise à jour du profil', undefined, { duration: 2000, politeness: 'assertive' });
+                return err;
+            }))
+            .subscribe(() => {
+                this.snackBar.open('Profil mis à jour', undefined, { duration: 2000, politeness: 'polite' });
+            });
     }
 
     onInterestChange(interest: string, event: Event) {

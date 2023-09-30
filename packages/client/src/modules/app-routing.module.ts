@@ -6,6 +6,7 @@ import { LoginPageComponent } from './authentication/pages/login-page/login-page
 import {
     LOGIN_ROUTE,
     MATCHES_ROUTE,
+    PROFILE_EDIT_ROUTE,
     PROFILE_ROUTE,
     SIGNUP_ROUTE,
     SWIPING_ROUTE,
@@ -14,6 +15,7 @@ import { SignupPageComponent } from './authentication/pages/signup-page/signup-p
 import { UserProfilePageComponent } from './user-profile/pages/user-profile-page/user-profile-page.component';
 import { MatchesPageComponent } from './matching/pages/matches-page/matches-page.component';
 import { SwipingPageComponent } from './matching/pages/swiping-page/swiping-page.component';
+import { UserProfileEditPageComponent } from './user-profile/pages/user-profile-edit-page/user-profile-edit-page.component';
 
 const privateRoute: Route = {
     canActivate: [privateRouteGuard],
@@ -32,6 +34,7 @@ const routes: Routes = [
         component: UserProfilePageComponent,
         ...privateRoute,
     },
+    { path: PROFILE_EDIT_ROUTE, component: UserProfileEditPageComponent, ...privateRoute },
     { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },

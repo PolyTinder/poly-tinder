@@ -1,9 +1,17 @@
 <ng-container *ngIf="url | async">
-    <img [src]="url | async" alt="" (click)="openDialog()">
+    <img
+        [src]="url | async"
+        [srcset]="(url | async) + ' 1x, ' + (urlRetina | async) + ' 2x'"
+        alt=""
+        (click)="openDialog()"
+        class="control-view control-view--image"
+    >
 </ng-container>
 
 <ng-container *ngIf="!(value | async)">
-    <button (click)="openDialog()">Choisir un image</button>
+    <div (click)="openDialog()" class="control-view control-view--no-image">
+        <i class="far fa-plus"></i>
+    </div>
 </ng-container>
 
 <ngx-uploadcare-widget

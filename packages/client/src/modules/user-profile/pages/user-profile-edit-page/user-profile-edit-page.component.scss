@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    app-user-profile-form {
+        max-width: 600px;
+    }
+}

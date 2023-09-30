@@ -1,148 +1,194 @@
-<form [formGroup]="userProfileForm" (submit)="onSubmit()">
-    <ng-container *ngFor="let picture of pictures; let index = index">
-        <p>
-            <label for="picture">Picture {{index}}</label>
-            <app-image-control [value]="picture" crop="9:16"></app-image-control>
-        </p>
-    </ng-container>
+<form [formGroup]="userProfileForm" (submit)="onSubmit()" class="form">
+    <section>
+        <p class="form__title"><i class="fas fa-camera-retro"></i> Mes photos</p>
     
-    <p>
-        <label for="name">Nom: </label>
-        <input type="text" name="name" id="name" formControlName="name">
-    </p>
-    <p>
-        <label for="age">Age: </label>
-        <input type="number" name="age" id="age" formControlName="age">
-    </p>
-    <p>
-        <label for="bio">Bio: </label>
-        <textarea name="bio" id="bio" formControlName="bio" cols="30" rows="10"></textarea>
-    </p>
-    <p>
-        <label for="program">Programme d'étude: </label>
-        <select name="program" id="program" formControlName="program">
-            <option value="">No spécifié</option>
-            <option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="age">Taille (cm): </label>
-        <input type="number" name="height" id="height" formControlName="height">
-    </p>
-    <p>
-        <label for="lookingFor">Ouvert à: </label>
-        <select name="lookingFor" id="lookingFor" formControlName="lookingFor">
-            <option value="">No spécifié</option>
-            <option *ngFor="let item of lookingFor" [value]="item.id">{{ item.emoji }} {{ item.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="relationshipType">Type de relation: </label>
-        <select name="relationshipType" id="relationshipType" formControlName="relationshipType">
-            <option value="">No spécifié</option>
-            <option *ngFor="let relationshipType of relationshipTypes" [value]="relationshipType.id">{{ relationshipType.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="zodiacSign">Zodiac: </label>
-        <select name="zodiacSign" id="zodiacSign" formControlName="zodiacSign">
-            <option value="">No spécifié</option>
-            <option *ngFor="let zodiacSign of zodiacSigns" [value]="zodiacSign.id">{{ zodiacSign.emoji }} {{ zodiacSign.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="drinking">Alcool: </label>
-        <select name="drinking" id="drinking" formControlName="drinking">
-            <option value="">No spécifié</option>
-            <option *ngFor="let drinkingHabit of drinkingHabits" [value]="drinkingHabit.id">{{ drinkingHabit.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="smoking">Cigarette: </label>
-        <select name="smoking" id="smoking" formControlName="smoking">
-            <option value="">No spécifié</option>
-            <option *ngFor="let smokingHabit of smokingHabits" [value]="smokingHabit.id">{{ smokingHabit.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="drugs">Drogues: </label>
-        <select name="drugs" id="drugs" formControlName="drugs">
-            <option value="">No spécifié</option>
-            <option *ngFor="let drugHabit of drugHabits" [value]="drugHabit.id">{{ drugHabit.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="workout">Sports: </label>
-        <select name="workout" id="workout" formControlName="workout">
-            <option value="">No spécifié</option>
-            <option *ngFor="let workoutHabit of workoutHabits" [value]="workoutHabit.id">{{ workoutHabit.emoji }} {{ workoutHabit.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="name">Emploi: </label>
-        <input type="text" name="jobTitle" id="jobTitle" formControlName="jobTitle">
-    </p>
-    <p>
-        <label for="name">Compagnie: </label>
-        <input type="text" name="jobCompany" id="jobCompany" formControlName="jobCompany">
-    </p>
-    <p>
-        <label for="name">Ma ville: </label>
-        <input type="text" name="livingIn" id="livingIn" formControlName="livingIn">
-    </p>
-    <p>
-        <label for="genderCategory">Genre: </label>
-        <select name="genderCategory" id="genderCategory" formControlName="genderCategory">
-            <option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="name">Genre (public): </label>
-        <input type="text" name="gender" id="gender" formControlName="gender">
-    </p>
-    <p>
-        <label for="genderPreference">A la recherche de: </label>
-        <select name="genderPreference" id="genderPreference" formControlName="genderPreference">
-            <option *ngFor="let genderPreference of genderPreferences" [value]="genderPreference.id">{{ genderPreference.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="sexualOrientation">Orientation sexuelle et sexualité: </label>
-        <select name="sexualOrientation" id="sexualOrientation" formControlName="sexualOrientation">
-            <option value="">No spécifié</option>
-            <option *ngFor="let sexuality of sexualities" [value]="sexuality.id">{{ sexuality.name }}</option>
-        </select>
-    </p>
-    <p>
-        <label for="interests">Intérets</label>
-        <span *ngFor="let interest of interests">
-            <input 
-                type="checkbox"
-                name="interests"
-                [id]="interest"
-                [value]="interest"
-                [checked]="userProfileForm.value.interests?.includes(interest)"
-                (change)="onInterestChange(interest, $event)"
-            >
-            <label [for]="interest">{{interest}}</label>
-        </span>
-    </p>
-    <p>
-        <label for="associations">Comités et Associations</label>
-        <span *ngFor="let association of associations">
-            <input 
-                type="checkbox"
-                name="associations"
-                [id]="association"
-                [value]="association"
-                [checked]="userProfileForm.value.associations?.includes(association)"
-                (change)="onAssociationChange(association, $event)"
-            >
-            <label [for]="association">{{association}}</label>
-        </span>
-    </p>
+        <div class="form__pictures">
+            <app-image-control
+                *ngFor="let picture of pictures; let index = index"
+                class="form__pictures__control"
+                [value]="picture"
+                crop="9:16"
+            ></app-image-control>
+        </div>
+    </section>
+
+    <section>
+        <p class="form__title"><i class="fas fa-user"></i> Mon profil</p>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-signature"></i> Nom</mat-label>
+            <input formControlName="name" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-calendar"></i> Age</mat-label>
+            <input formControlName="age" matInput type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-book"></i> À propos de moi</mat-label>
+            <textarea formControlName="bio" rows="5" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-ruler"></i> Taille</mat-label>
+            <input formControlName="height" matInput type="number">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-city"></i> Ville</mat-label>
+            <input formControlName="livingIn" matInput>
+        </mat-form-field>
+    </section>
+
+    <section>
+        <p class="form__title"><i class="fas fa-heart"></i> Ma vie amoureuse</p>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-heart"></i> Ouvert à</mat-label>
+            <mat-select formControlName="lookingFor">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let lookingFor of lookingFor" [value]="lookingFor.id">{{ lookingFor.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-user-friends"></i> Type de relation</mat-label>
+            <mat-select formControlName="relationshipType">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let relationshipType of relationshipTypes" [value]="relationshipType.id">{{ relationshipType.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-transgender"></i> Catégorie de genre</mat-label>
+            <mat-select formControlName="genderCategory">
+                <mat-option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-transgender"></i> Identitée de genre</mat-label>
+            <mat-select formControlName="gender">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let gender of genderIdentities" [value]="gender">{{ gender }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-transgender"></i> À la recherche de</mat-label>
+            <mat-select formControlName="genderPreference">
+                <mat-option *ngFor="let gender of genderPreferences" [value]="gender.id">{{ gender.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-flag"></i> Sexualité</mat-label>
+            <mat-select formControlName="sexualOrientation">
+                <mat-option *ngFor="let sexuality of sexualities" [value]="sexuality.id">{{ sexuality.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <a><i class="fas fa-info-circle"></i> En savoir plus sur les genres et la sexualité</a>
+    </section>
+
+    <section>
+        <p class="form__title"><i class="fas fa-school"></i> Ma vie à Poly</p>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-graduation-cap"></i> Programme d'étude</mat-label>
+            <mat-select formControlName="program">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-graduation-cap"></i> Comités et Associations</mat-label>
+            <mat-select formControlName="associations" multiple>
+                <mat-option 
+                    *ngFor="let association of associations"
+                    [value]="association"
+                >
+                    {{association}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </section>
+
+    <section>
+        <p class="form__title"><i class="fas fa-leaf"></i> Mon mode de vie</p>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-star-shooting"></i> Signe zodiac</mat-label>
+            <mat-select formControlName="zodiacSign">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let zodiacSign of zodiacSigns" [value]="zodiacSign.id">{{ zodiacSign.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-glass-martini"></i> Alcool</mat-label>
+            <mat-select formControlName="drinking">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let drinkingHabit of drinkingHabits" [value]="drinkingHabit.id">{{ drinkingHabit.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-smoking"></i> Cigarette</mat-label>
+            <mat-select formControlName="smoking">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let smokingHabit of smokingHabits" [value]="smokingHabit.id">{{ smokingHabit.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-cannabis"></i> Drogues</mat-label>
+            <mat-select formControlName="drugs">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let drugHabit of drugHabits" [value]="drugHabit.id">{{ drugHabit.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-dumbbell"></i> Sports</mat-label>
+            <mat-select formControlName="workout">
+                <mat-option value="">No spécifié</mat-option>
+                <mat-option *ngFor="let workoutHabit of workoutHabits" [value]="workoutHabit.id">{{ workoutHabit.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-graduation-cap"></i> Intérets et passes-temps</mat-label>
+            <mat-select formControlName="interests" multiple>
+                <mat-option 
+                    *ngFor="let interests of interests"
+                    [value]="interests"
+                >
+                    {{interests}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </section>
+
+    <section>
+        <p class="form__title"><i class="fas fa-briefcase"></i> Ma vie profesionnelle</p>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-briefcase"></i> Emploi</mat-label>
+            <input formControlName="jobTitle" matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label><i class="fas fa-briefcase"></i> Compagnie</mat-label>
+            <input formControlName="jobCompany" matInput>
+        </mat-form-field>
+    </section>
 
     <p *ngIf="userProfileForm.invalid">Invalid</p>
 
-    <input type="submit" value="Save" [disabled]="userProfileForm.invalid">
+    <button class="form__submit interactable" type="submit" [disabled]="!userProfileForm.dirty || userProfileForm.invalid">
+        <i class="fas fa-save"></i> Enregistrer
+    </button>
 </form>

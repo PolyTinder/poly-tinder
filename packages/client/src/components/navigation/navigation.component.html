@@ -4,7 +4,7 @@
     
         <ul class="main-nav">
             <li *ngFor="let item of navigation" class="nav-item">
-                <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href)}">
+                <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href), 'interactable--small': !isActiveLink(item.href)}">
                     <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
                     <span class="nav-item__link__content">{{item.text}}</span>
                 </a>
