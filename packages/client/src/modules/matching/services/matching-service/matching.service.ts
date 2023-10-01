@@ -34,7 +34,7 @@ export class MatchingService {
 
     private handleMatch({ matchedUserId }: WsServer['match']) {
         this.publicProfileService.fetchMatches().subscribe((result) => {
-            const user = result.find((user) => user.getId() === matchedUserId);
+            const user = result.find((user) => user.id === matchedUserId);
 
             if (!user) {
                 console.error('Could not find user');
@@ -42,11 +42,14 @@ export class MatchingService {
             }
 
             user.loaded.subscribe((loaded) => {
-                if(loaded) this.dialog.open<MatchedModalComponent, PublicUserResult>(MatchedModalComponent, {
-                    data: user.currentLoadedValue,
-                });
+                if (loaded)
+                    this.dialog.open<MatchedModalComponent, PublicUserResult>(
+                        MatchedModalComponent,
+                        {
+                            data: user.currentValue,
+                        },
+                    );
             });
         });
-
     }
 }

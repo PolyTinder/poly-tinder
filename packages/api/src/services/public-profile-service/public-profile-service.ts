@@ -11,7 +11,14 @@ import { UserProfileService } from '../user-profile-service/user-profile-service
 import { DatabaseService } from '../database-service/database-service';
 import { Knex } from 'knex';
 import { UserAliasService } from '../user-alias-service/user-alias-service';
-import { Match } from 'common/models/matching';
+import {
+    Match,
+    MatchListItem,
+    MatchQueryInfo,
+    MatchQueryItem,
+    PartialMatchQueryItem,
+} from 'common/models/matching';
+import { Message } from 'common/models/message';
 
 @singleton()
 export class PublicProfileService {
@@ -125,10 +132,7 @@ export class PublicProfileService {
     async getMatches(
         userId: TypeOfId<User>,
     ): Promise<NotLoadedPublicUserResult[]> {
-        const matches: (Pick<Match, 'user1Id' | 'user2Id'> & {
-            name1?: string;
-            name2?: string;
-        })[] = await this.matches
+        const matches: PartialMatchQueryItem[] = await this.matches
             .select(
                 'user1Id',
                 'user2Id',
@@ -146,11 +150,18 @@ export class PublicProfileService {
                 unmatched: false,
             });
 
-        const results: { userId: number; name: string }[] = [];
+        const completedMatches: MatchQueryItem[] = await Promise.all(
+            matches.map(async (match) => ({
+                ...match,
+                ...(await this.fetchMatchQueryInfo(match, userId)),
+            })),
+        );
 
-        for (const match of matches) {
-            results.push(
-                match.user1Id === userId
+        const results: MatchListItem[] = [];
+
+        for (const match of completedMatches) {
+            results.push({
+                ...(match.user1Id === userId
                     ? {
                           userId: match.user2Id,
                           name: match.name2 ?? '',
@@ -158,17 +169,67 @@ export class PublicProfileService {
                     : {
                           userId: match.user1Id,
                           name: match.name1 ?? '',
-                      },
-            );
+                      }),
+                messagesCount: match.messagesCount,
+                unreadMessagesCount: match.unreadMessagesCount,
+                lastMessage: match.lastMessage,
+                lastMessageAuthorId: match.lastMessageAuthorId,
+            });
         }
 
         return results;
+    }
 
-        // return Promise.all(
-        //     results.map(async (user) => ({
-        //         userAliasId: await this.userAliasService.createAlias(user.id),
-        //         name: user.name,
-        //     })),
-        // );
+    private async fetchMatchQueryInfo(
+        match: PartialMatchQueryItem,
+        currentUserId: number,
+    ): Promise<MatchQueryInfo> {
+        return this.databaseService.database
+            .select(
+                this.databaseService
+                    .database<Message>('messages')
+                    .count()
+                    .where(this.whereMessagesFromMatch(match))
+                    .as('messagesCount'),
+                this.databaseService
+                    .database<Message>('messages')
+                    .count()
+                    .where({ read: false, recipientId: currentUserId })
+                    .andWhere(this.whereMessagesFromMatch(match))
+                    .as('unreadMessagesCount'),
+                this.databaseService
+                    .database<Message>('messages')
+                    .select('content')
+                    .where(this.whereMessagesFromMatch(match))
+                    .orderBy('timestamp', 'desc')
+                    .limit(1)
+                    .as('lastMessage'),
+                this.databaseService
+                    .database<Message>('messages')
+                    .select('senderId')
+                    .where(this.whereMessagesFromMatch(match))
+                    .orderBy('timestamp', 'desc')
+                    .limit(1)
+                    .as('lastMessageAuthorId'),
+            )
+            .first();
+    }
+
+    private whereMessagesFromMatch(match: PartialMatchQueryItem) {
+        return function (this: Knex.QueryBuilder<Message>) {
+            this.where(function () {
+                this.where({
+                    senderId: match.user1Id,
+                }).andWhere({
+                    recipientId: match.user2Id,
+                });
+            }).orWhere(function () {
+                this.where({
+                    senderId: match.user2Id,
+                }).andWhere({
+                    recipientId: match.user1Id,
+                });
+            });
+        };
     }
 }

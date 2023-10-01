@@ -4,6 +4,7 @@ import { combineLatest, map } from 'rxjs';
 import { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
+import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class NavigationComponent {
         private readonly sessionService: SessionService,
         private readonly userProfileService: UserProfileService,
         private readonly router: Router,
+        private readonly publicProfileService: PublicProfileService,
     ) {}
 
     get navigation() {
@@ -61,6 +63,10 @@ export class NavigationComponent {
                     : undefined;
             }),
         );
+    }
+
+    get unreadConversationCount() {
+        return this.publicProfileService.unreadConversationCount;
     }
 
     logout() {

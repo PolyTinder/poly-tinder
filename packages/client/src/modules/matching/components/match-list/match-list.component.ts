@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PublicUserResultClass } from '../../models/public-user-result';
+import { MatchListItemClass } from '../../models/match-list-item';
 
 @Component({
     selector: 'app-match-list',
@@ -7,5 +7,5 @@ import { PublicUserResultClass } from '../../models/public-user-result';
     styleUrls: ['./match-list.component.scss'],
 })
 export class MatchListComponent {
-    @Input() matches: PublicUserResultClass[] | null = [];
+    @Input() matches: MatchListItemClass[] | null = [];
 }

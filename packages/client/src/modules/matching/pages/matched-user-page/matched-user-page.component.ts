@@ -60,7 +60,7 @@ export class MatchedUserPageComponent {
                 if (!userProfile || !matchedUser) return of([]);
 
                 return this.messagesService
-                    .getMessages(matchedUser.getId())
+                    .getMessages(matchedUser.id)
                     .pipe(
                         map((messages) =>
                             this.groupMessages(
@@ -77,9 +77,7 @@ export class MatchedUserPageComponent {
             ([, userProfile]) => {
                 if (!userProfile) return;
 
-                this.messagesService
-                    .markAsRead(userProfile.getId())
-                    .subscribe();
+                this.messagesService.markAsRead(userProfile.id).subscribe();
             },
         );
 
@@ -108,7 +106,7 @@ export class MatchedUserPageComponent {
         return this.userProfile.pipe(first()).pipe(
             switchMap((user) => {
                 if (!user) throw new Error('No user found');
-                return this.messagesService.sendMessage(user.getId(), message);
+                return this.messagesService.sendMessage(user.id, message);
             }),
         );
     }
@@ -124,7 +122,7 @@ export class MatchedUserPageComponent {
     ) {
         return groupMessages(messages).map((messageGroup) => {
             const sender: UserProfile =
-                messageGroup.senderId === matchedUser.getId()
+                messageGroup.senderId === matchedUser.id
                     ? matchedUser.currentValue
                     : userProfile;
             return {

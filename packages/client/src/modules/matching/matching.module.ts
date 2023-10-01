@@ -10,6 +10,7 @@ import { MatchedUserPageComponent } from './pages/matched-user-page/matched-user
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatchedModalComponent } from './components/matched-modal/matched-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatchListComponent,
         MatchedUserPageComponent,
         MatchedModalComponent,
+        ConversationListComponent,
     ],
     imports: [
         CommonModule,

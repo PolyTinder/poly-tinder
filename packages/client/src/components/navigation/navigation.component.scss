@@ -107,13 +107,28 @@ nav {
                     border-radius: 36px;
                 }
 
+                &__pill {
+                    background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+                    color: var(--theme-main-contrast);
+                    font-size: 0.9em;
+                    padding: 2px 12px;
+                    border-radius: 20px;
+                }
+
                 &--active {
                     background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
                     color: var(--theme-main-contrast);
                     box-shadow: $default-shadow;
 
-                    .nav-item__link__icon {
-                        opacity: 1;
+                    .nav-item__link {
+                        &__icon {
+                            opacity: 1;
+                        }
+
+                        &__pill {
+                            background: var(--theme-main-contrast);
+                            color: var(--theme-main);
+                        }
                     }
                 }
 
@@ -196,9 +211,20 @@ nav {
                     align-items: center;
                     justify-content: center;
                     box-sizing: border-box;
+                    position: relative;
+                    overflow: visible;
 
                     &__content {
                         display: none;
+                    }
+
+                    &__pill {
+                        position: absolute;
+                        top: -3px;
+                        right: -3px;
+                        font-size: 0.6em;
+                        padding: 0 8px;
+                        box-shadow: $default-shadow;
                     }
                 }
             }
@@ -243,6 +269,8 @@ nav {
                     gap: 2px;
                     font-size: 0.75em;
                     color: rgba(var(--theme-background-contrast-rgb), 0.55);
+                    position: relative;
+                    overflow: visible;
 
                     &__icon {
                         font-size: 1.8em;
@@ -253,10 +281,26 @@ nav {
                         display: none;
                     }
 
+                    &__pill {
+                        position: absolute;
+                        top: -3px;
+                        right: -3px;
+                        font-size: 0.9em;
+                        padding: 0 8px;
+                        box-shadow: $default-shadow;
+                    }
+
                     &--active {
                         background: none;
                         color: var(--theme-main);
                         box-shadow: none;
+
+                        .nav-item__link {
+                            &__pill {
+                                background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+                                color: var(--theme-main-contrast);
+                            }
+                        }
                     }
                 }
 

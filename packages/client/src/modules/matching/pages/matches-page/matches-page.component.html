@@ -1,5 +1,6 @@
 <app-layout title="Mes matchs">
     <main>
-        <app-match-list [matches]="matches | async"></app-match-list>
+        <app-match-list *ngIf="hasMatches | async" [matches]="matches | async"></app-match-list>
+        <app-conversation-list *ngIf="hasConversations | async" [conversations]="conversations | async"></app-conversation-list>
     </main>
 </app-layout>

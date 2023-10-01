@@ -12,6 +12,7 @@
                 <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href), 'interactable--small': !isActiveLink(item.href)}">
                     <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
                     <span class="nav-item__link__content">{{item.text}}</span>
+                    <span class="nav-item__link__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
                 </a>
             </li>
         </ul>

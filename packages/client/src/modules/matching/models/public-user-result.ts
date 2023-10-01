@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import {
     NotLoadedPublicUserResult,
     PublicUserResult,
-    UserProfile,
 } from 'common/models/user';
-import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 export interface NotLoadedPublicUserResultClass {
     get value(): NotLoadedPublicUserResult;
@@ -15,70 +14,47 @@ export interface LoadedPublicUserResultClass {
 }
 
 export class PublicUserResultClass {
-    private id: number;
-    private value$: BehaviorSubject<
-        NotLoadedPublicUserResult | PublicUserResult
-    >;
+    private value$: BehaviorSubject<PublicUserResult>;
     private loaded$: BehaviorSubject<boolean>;
 
     constructor(
-        notLoadedValue: NotLoadedPublicUserResult,
+        initialValue: NotLoadedPublicUserResult,
         private readonly http: HttpClient,
     ) {
-        this.id = notLoadedValue.userId;
-        this.value$ = new BehaviorSubject<
-            NotLoadedPublicUserResult | PublicUserResult
-        >(notLoadedValue);
+        this.value$ = new BehaviorSubject<PublicUserResult>(initialValue);
         this.loaded$ = new BehaviorSubject<boolean>(false);
-        this.fetch();
+
+        this.fetch().subscribe();
     }
 
-    getId(): number {
-        return this.id;
+    get id(): number {
+        return this.value$.value.userId;
     }
 
-    get value() {
+    get currentValue(): PublicUserResult {
+        return this.value$.value;
+    }
+
+    get currentlyLoaded(): boolean {
+        return this.loaded$.value;
+    }
+
+    get value(): Observable<PublicUserResult> {
         return this.value$.asObservable();
     }
 
-    get loaded() {
+    get loaded(): Observable<boolean> {
         return this.loaded$.asObservable();
     }
 
-    get currentValue() {
-        return this.value$.value;
-    }
-
-    get currentLoadedValue(): UserProfile {
-        if (!this.loaded$.value) {
-            throw new Error('Cannot get loaded value when not loaded');
-        }
-
-        return this.value$.value;
-    }
-
-    tryGetLoadedValue(): Observable<PublicUserResult | null> {
-        return combineLatest([this.value, this.loaded]).pipe(
-            map(([value, loaded]) => {
-                return loaded ? (value as PublicUserResult) : null;
-            }),
-        );
-    }
-
-    getNotLoadedValue(): Observable<NotLoadedPublicUserResult | null> {
-        return combineLatest([this.value, this.loaded]).pipe(
-            map(([value, loaded]) => {
-                return loaded ? null : value;
-            }),
-        );
-    }
-
-    private fetch() {
-        this.http
+    private fetch(): Observable<PublicUserResult> {
+        return this.http
             .get<PublicUserResult>(`/public-profile/find/${this.id}`)
-            .subscribe((user) => {
-                this.value$.next(user);
-                this.loaded$.next(true);
-            });
+            .pipe(
+                tap((user) => {
+                    this.value$.next(user);
+                    this.loaded$.next(true);
+                }),
+            );
     }
 }

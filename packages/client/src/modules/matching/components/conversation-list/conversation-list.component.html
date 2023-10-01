@@ -1,0 +1,22 @@
+<app-card title="Mes conversations" icon="fas fa-comment" anchor="conversations">
+    <div class="conversation-list">
+        <ng-container *ngFor="let conversation of conversations">
+            <ng-container *ngIf="conversation.value | async; let value">
+                <a [routerLink]="'/matches/' + value.userId">
+                    <div class="conversation-list__item" [ngClass]="{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}">
+                        <div *ngIf="value.pictures?.[0]" class="conversation-list__item__image interactable" [style.background-image]="'url(' + value.pictures?.[0] + ')'" alt=""></div>
+                        <div *ngIf="!value.pictures?.[0]" class="conversation-list__item__image conversation-list__item__image--not-loaded interactable"></div>
+
+                        <div class="conversation-list__item__info">
+                            <span class="conversation-list__item__info__name">{{value.name}} <span *ngIf="conversation.queryInfo.unreadMessagesCount" class="conversation-list__item__info__non-read-count">{{conversation.queryInfo.unreadMessagesCount}}</span></span>
+                            <span class="conversation-list__item__info__message">
+                                <b *ngIf="conversation.queryInfo.lastMessageAuthorId != value.userId">Vous :</b>
+                                {{conversation.queryInfo.lastMessage}}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </ng-container>
+    </div>
+</app-card>
