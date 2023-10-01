@@ -1,1 +1,1 @@
-export const MATCHING_BATCH_SIZE = 10;
+export const MATCHING_BATCH_SIZE = 100; // TODO: Pagination

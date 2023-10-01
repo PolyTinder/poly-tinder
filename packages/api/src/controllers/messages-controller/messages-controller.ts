@@ -27,7 +27,7 @@ export class MessagesController extends AbstractController {
                         await this.messagesService.getMessages(
                             req.body.session.user.userId,
                             parseInt(req.params.recipiendId, 10),
-                            20,
+                            500, // TODO: pagination
                             0,
                         ),
                     );
