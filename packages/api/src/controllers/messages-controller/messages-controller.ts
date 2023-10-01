@@ -60,5 +60,25 @@ export class MessagesController extends AbstractController {
                 }
             },
         );
+
+        router.post(
+            '/read/:senderId',
+            auth,
+            async (
+                req: UserRequest<{ senderId: string }>,
+                res: Response,
+                next,
+            ) => {
+                try {
+                    await this.messagesService.markAsRead(
+                        req.body.session.user.userId,
+                        parseInt(req.params.senderId, 10),
+                    );
+                    res.status(StatusCodes.NO_CONTENT).send();
+                } catch (e) {
+                    next(e);
+                }
+            },
+        );
     }
 }

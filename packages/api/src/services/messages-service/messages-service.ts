@@ -31,6 +31,7 @@ export class MessagesService {
             recipientId,
             content,
             timestamp: new Date(),
+            read: false,
         };
 
         await this.messages.insert(message);
@@ -74,5 +75,15 @@ export class MessagesService {
             .offset(offset)) as unknown as Message[];
 
         return messages.reverse();
+    }
+
+    async markAsRead(userId: number, otherUserId: number): Promise<void> {
+        if (!(await this.matchingService.areMatched(userId, otherUserId))) {
+            throw new Error('Cannot mark messages as read with unmatched user');
+        }
+
+        await this.messages
+            .update({ read: true })
+            .where({ senderId: otherUserId, recipientId: userId });
     }
 }

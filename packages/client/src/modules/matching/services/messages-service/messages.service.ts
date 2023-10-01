@@ -49,6 +49,7 @@ export class MessagesService {
                     senderId:
                         this.sessionService.getCurrentSession().user.userId,
                     timestamp: new Date(),
+                    read: false,
                 },
             ]),
         );
@@ -57,6 +58,10 @@ export class MessagesService {
             recipientId: userId,
             content,
         });
+    }
+
+    markAsRead(userId: TypeOfId<User>): Observable<void> {
+        return this.http.post<void>(`/messages/read/${userId}`, {});
     }
 
     private fetchMessages(userId: TypeOfId<User>): Observable<Message[]> {

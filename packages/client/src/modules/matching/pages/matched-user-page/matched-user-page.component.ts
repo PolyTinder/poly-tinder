@@ -58,6 +58,7 @@ export class MatchedUserPageComponent {
         ]).pipe(
             switchMap(([userProfile, matchedUser]) => {
                 if (!userProfile || !matchedUser) return of([]);
+
                 return this.messagesService
                     .getMessages(matchedUser.getId())
                     .pipe(
@@ -70,6 +71,16 @@ export class MatchedUserPageComponent {
                         ),
                     );
             }),
+        );
+
+        combineLatest([this.messages, this.userProfile]).subscribe(
+            ([, userProfile]) => {
+                if (!userProfile) return;
+
+                this.messagesService
+                    .markAsRead(userProfile.getId())
+                    .subscribe();
+            },
         );
 
         this.publicProfileService.fetchMatchesIfNotLoaded().subscribe();
@@ -132,6 +143,7 @@ export class MatchedUserPageComponent {
                             picture: sender.pictures?.[0] ?? '',
                         },
                         onlyEmoji: onlyHasEmoji(message.content),
+                        read: message.read,
                     };
                 }),
             };

@@ -5,6 +5,7 @@ export interface Message {
     timestamp: Date;
     senderId: number;
     recipientId: number;
+    read: boolean;
 }
 
 export interface MessageGroup {
