@@ -19,7 +19,7 @@
                 <div class="matched-user-page__content__messages__question__question">{{question}}</div>
                 <div class="matched-user-page__content__messages__question__actions">
                     <a class="matched-user-page__content__messages__question__actions__action interactable" (click)="updateQuestion()"><i class="fas fa-sync"></i> Nouvelle question</a>
-                    <a class="matched-user-page__content__messages__question__actions__action interactable" (click)="sendMessage(question)"><i class="fas fa-paper-plane"></i> Envoyer</a>
+                    <a class="matched-user-page__content__messages__question__actions__action interactable" (click)="sendMessage(question).subscribe()"><i class="fas fa-paper-plane"></i> Envoyer</a>
                 </div>
             </app-card>
 

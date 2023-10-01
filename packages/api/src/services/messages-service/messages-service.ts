@@ -35,7 +35,15 @@ export class MessagesService {
 
         await this.messages.insert(message);
 
-        await this.wsService.emitToUser(recipientId, 'message:new', message);
+        try {
+            await this.wsService.emitToUser(
+                recipientId,
+                'message:new',
+                message,
+            );
+        } catch {
+            // Ignore
+        }
     }
 
     async getMessages(
