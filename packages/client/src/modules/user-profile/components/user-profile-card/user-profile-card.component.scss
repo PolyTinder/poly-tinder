@@ -63,6 +63,8 @@
         aspect-ratio: 3/4;
         background-color: rgb(240, 240, 240);
         border-radius: $inner-radius;
+        background-size: cover;
+        background-position: center;
     }
 
     &__table {
