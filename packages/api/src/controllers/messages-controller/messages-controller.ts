@@ -23,13 +23,14 @@ export class MessagesController extends AbstractController {
                 next,
             ) => {
                 try {
-                    const messages = await this.messagesService.getMessages(
-                        req.body.session.user.userId,
-                        parseInt(req.params.recipiendId, 10),
-                        20,
-                        0,
+                    res.status(StatusCodes.OK).json(
+                        await this.messagesService.getMessages(
+                            req.body.session.user.userId,
+                            parseInt(req.params.recipiendId, 10),
+                            20,
+                            0,
+                        ),
                     );
-                    res.status(StatusCodes.OK).json(messages);
                 } catch (e) {
                     next(e);
                 }
@@ -48,15 +49,15 @@ export class MessagesController extends AbstractController {
                 next,
             ) => {
                 try {
-                    this.messagesService.sendMessage(
+                    await this.messagesService.sendMessage(
                         req.body.session.user.userId,
                         req.body.recipientId,
                         req.body.content,
                     );
+                    res.status(StatusCodes.NO_CONTENT).send();
                 } catch (e) {
                     next(e);
                 }
-                res.status(StatusCodes.OK).json({ hello: 'world!' });
             },
         );
     }

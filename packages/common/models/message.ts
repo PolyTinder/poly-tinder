@@ -15,6 +15,7 @@ export interface MessageGroup {
 
 export type DisplayMessage = Pick<Omit<Message, 'senderId'>, 'content' | 'timestamp'> & {
     sender: Pick<PublicUserResult, 'name' | 'pictures'>;
+    onlyEmoji: boolean;
 }
 
 export type DisplayMessageGroup = Pick<MessageGroup, 'timestamp'> & {

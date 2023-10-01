@@ -6,6 +6,8 @@ export const groupMessages = (messages: Message[]): MessageGroup[] => {
     let previousMessage: Message | undefined = undefined;
 
     for (const message of messages) {
+        message.timestamp = new Date(message.timestamp);
+
         if (!previousMessage || !isSameGroup(message, previousMessage)) {
             currentGroup = {
                 timestamp: message.timestamp,

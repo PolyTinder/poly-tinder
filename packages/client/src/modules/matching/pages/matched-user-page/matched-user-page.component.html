@@ -30,7 +30,7 @@
                         <div class="matched-user-page__content__messages__group__content__sender__avatar"></div>
                     </div>
                     <div class="matched-user-page__content__messages__group__content__messages">
-                        <div class="matched-user-page__content__messages__group__content__messages__message" *ngFor="let message of messageGroup.messages">
+                        <div class="matched-user-page__content__messages__group__content__messages__message" [ngClass]="{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}" *ngFor="let message of messageGroup.messages">
                             {{message.content}}
                         </div>
                     </div>
@@ -43,6 +43,6 @@
     <form class="matched-user-page__footer" (submit)="onSubmit()" [formGroup]="form">
         <input class="matched-user-page__footer__control" placeholder="Aa" type="text" formControlName="message">
         <button class="matched-user-page__footer__button interactable" type="submit" *ngIf="(form.value.message?.length ?? 0) > 0"><i class="fas fa-paper-plane"></i></button>
-        <a class="matched-user-page__footer__button interactable" (click)="sendMessage('👍')" *ngIf="(form.value.message?.length ?? 0) === 0"><span class="emoji">👍</span></a>
+        <a class="matched-user-page__footer__button interactable" (click)="sendMessage('👍').subscribe()" *ngIf="(form.value.message?.length ?? 0) === 0"><span class="emoji">👍</span></a>
     </form>
 </div>

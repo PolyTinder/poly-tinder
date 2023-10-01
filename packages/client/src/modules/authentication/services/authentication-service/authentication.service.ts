@@ -4,7 +4,7 @@ import {
     AuthenticationUser,
     UserPublicSession,
 } from 'common/models/authentication';
-import { Observable, catchError, map, switchMap, tap } from 'rxjs';
+import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { SessionService } from '../session-service/session.service';
 import { Router } from '@angular/router';
 import { LOGIN_ROUTE } from 'src/constants/routes';
@@ -65,11 +65,11 @@ export class AuthenticationService {
         );
     }
 
-    loadSession(): Observable<UserPublicSession> {
+    loadSession(): Observable<UserPublicSession | undefined> {
         const token = this.sessionService.getLocalToken();
 
         if (!token) {
-            return new Observable<UserPublicSession>();
+            return of(undefined);
         }
 
         return this.http.post<UserPublicSession>('/auth/load', { token }).pipe(

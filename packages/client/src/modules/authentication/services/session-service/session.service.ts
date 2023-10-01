@@ -24,6 +24,13 @@ export class SessionService {
         return this.session$.value !== undefined;
     }
 
+    getCurrentSession(): UserPublicSession {
+        if (!this.session$.value) {
+            throw new Error('No session is currently logged in');
+        }
+        return this.session$.value;
+    }
+
     private handleSession(session: UserPublicSession | undefined): void {
         if (session) {
             this.setLocalToken(session.token);

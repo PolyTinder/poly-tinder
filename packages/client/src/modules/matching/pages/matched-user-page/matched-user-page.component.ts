@@ -1,60 +1,24 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subject, combineLatest, map, of, switchMap } from 'rxjs';
+import {
+    Observable,
+    Subject,
+    combineLatest,
+    first,
+    map,
+    of,
+    switchMap,
+} from 'rxjs';
 import { PublicProfileService } from '../../services/public-profile-service/public-profile.service';
 import { PublicUserResultClass } from '../../models/public-user-result';
 import { UserProfile } from 'common/models/user';
-import {
-    DisplayMessageGroup,
-    Message,
-} from 'common/models/message';
+import { DisplayMessageGroup, Message } from 'common/models/message';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { groupMessages } from '../../utils/messages';
 import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
 import { QUESTIONS } from '../../constants/questions';
-
-const MESSAGES: Message[] = [
-    // {
-    //     content: 'Hey!',
-    //     senderId: 1,
-    //     date: new Date(2023, 1, 1, 1, 1, 1),
-    // },
-    // {
-    //     content: 'Ca va?',
-    //     senderId: 1,
-    //     date: new Date(2023, 1, 1, 1, 2, 1),
-    // },
-    // {
-    //     content: 'Hello?',
-    //     senderId: 1,
-    //     date: new Date(2023, 1, 1, 1, 8, 1),
-    // },
-    // {
-    //     content: 'Oui, ca va!',
-    //     senderId: 37,
-    //     date: new Date(2023, 1, 1, 1, 9, 1),
-    // },
-    // {
-    //     content: 'Et toi?',
-    //     senderId: 37,
-    //     date: new Date(2023, 1, 1, 1, 9, 1),
-    // },
-    // {
-    //     content: 'Very very long message gfdhjgb h jdfsg fdhg jdfbhjg bfdhjgb hjsdfbg jadfhgh yjdfgh hjsdfbgh jdfhjgb jadfhgh yjuasdfhghjk dfhjhg bdfhjkgh hjdfgh jhdfb gy hfdjygb fdhyjagh hjkadfbgh kudashfgjkasdhgy ujhasdi ufghdasuh gasduh fhjkasdb fhjkasdb gfjukasdfgh jkh dsuig fduisgh fuidsb fghjkdsag fhyjuasdfbgjkhbdf ajkh gdasujgh fhjukdg iudfh gkufdhg yuih dfiy ughdfuiy ghyuisdfh ',
-    //     senderId: 1,
-    //     date: new Date(2023, 1, 1, 1, 10, 1),
-    // },
-    // {
-    //     content: 'Very very long message gfdhjgb h jdfsg fdhg jdfbhjg bfdhjgb hjsdfbg jadfhgh yjdfgh hjsdfbgh jdfhjgb jadfhgh yjuasdfhghjk dfhjhg bdfhjkgh hjdfgh jhdfb gy hfdjygb fdhyjagh hjkadfbgh kudashfgjkasdhgy ujhasdi ufghdasuh gasduh fhjkasdb fhjkasdb gfjukasdfgh jkh dsuig fduisgh fuidsb fghjkdsag fhyjuasdfbgjkhbdf ajkh gdasujgh fhjukdg iudfh gkufdhg yuih dfiy ughdfuiy ghyuisdfh ',
-    //     senderId: 1,
-    //     date: new Date(2023, 1, 1, 1, 10, 1),
-    // },
-    // {
-    //     content: 'Very very long message gfdhjgb h jdfsg fdhg jdfbhjg bfdhjgb hjsdfbg jadfhgh yjdfgh hjsdfbgh jdfhjgb jadfhgh yjuasdfhghjk dfhjhg bdfhjkgh hjdfgh jhdfb gy hfdjygb fdhyjagh hjkadfbgh kudashfgjkasdhgy ujhasdi ufghdasuh gasduh fhjkasdb fhjkasdb gfjukasdfgh jkh dsuig fduisgh fuidsb fghjkdsag fhyjuasdfbgjkhbdf ajkh gdasujgh fhjukdg iudfh gkufdhg yuih dfiy ughdfuiy ghyuisdfh ',
-    //     senderId: 37,
-    //     date: new Date(2023, 1, 1, 1, 10, 1),
-    // },
-];
+import { MessagesService } from '../../services/messages-service/messages.service';
+import { onlyHasEmoji } from '../../utils/utils';
 
 @Component({
     selector: 'app-matched-user-page',
@@ -76,6 +40,7 @@ export class MatchedUserPageComponent {
         private readonly route: ActivatedRoute,
         private readonly publicProfileService: PublicProfileService,
         private readonly userProfileService: UserProfileService,
+        private readonly messagesService: MessagesService,
     ) {
         this.userProfile = this.route.params.pipe(
             map((params) => {
@@ -88,36 +53,22 @@ export class MatchedUserPageComponent {
             switchMap((userId) => this.publicProfileService.getMatch(userId)),
         );
         this.messages = combineLatest([
-            of(MESSAGES),
             this.userProfileService.getUserProfile(),
             this.userProfile,
         ]).pipe(
-            map(([messages, userProfile, matchedUser]) => {
-                if (!userProfile || !matchedUser) return [];
-                return groupMessages(messages).map((messageGroup) => {
-                    const sender: UserProfile =
-                        messageGroup.senderId === matchedUser.getId()
-                            ? matchedUser.currentValue
-                            : userProfile;
-                    return {
-                        timestamp: messageGroup.timestamp,
-                        sender: {
-                            name: sender.name ?? '',
-                            picture: sender.pictures?.[0] ?? '',
-                        },
-                        isSelf: sender === userProfile,
-                        messages: messageGroup.messages.map((message) => {
-                            return {
-                                content: message.content,
-                                timestamp: message.timestamp,
-                                sender: {
-                                    name: sender.name ?? '',
-                                    picture: sender.pictures?.[0] ?? '',
-                                },
-                            };
-                        }),
-                    };
-                });
+            switchMap(([userProfile, matchedUser]) => {
+                if (!userProfile || !matchedUser) return of([]);
+                return this.messagesService
+                    .getMessages(matchedUser.getId())
+                    .pipe(
+                        map((messages) =>
+                            this.groupMessages(
+                                messages,
+                                userProfile,
+                                matchedUser,
+                            ),
+                        ),
+                    );
             }),
         );
 
@@ -133,7 +84,7 @@ export class MatchedUserPageComponent {
 
     onSubmit() {
         if (this.form.valid) {
-            this.sendMessage(this.form.value.message ?? '');
+            this.sendMessage(this.form.value.message ?? '').subscribe();
             this.form.reset();
         }
     }
@@ -143,11 +94,48 @@ export class MatchedUserPageComponent {
             throw new Error('Invalid message length');
         }
 
-        console.log('Send', message);
+        return this.userProfile.pipe(first()).pipe(
+            switchMap((user) => {
+                if (!user) throw new Error('No user found');
+                return this.messagesService.sendMessage(user.getId(), message);
+            }),
+        );
     }
 
     updateQuestion() {
         this.question = this.getQuestion();
+    }
+
+    private groupMessages(
+        messages: Message[],
+        userProfile: UserProfile,
+        matchedUser: PublicUserResultClass,
+    ) {
+        return groupMessages(messages).map((messageGroup) => {
+            const sender: UserProfile =
+                messageGroup.senderId === matchedUser.getId()
+                    ? matchedUser.currentValue
+                    : userProfile;
+            return {
+                timestamp: messageGroup.timestamp,
+                sender: {
+                    name: sender.name ?? '',
+                    picture: sender.pictures?.[0] ?? '',
+                },
+                isSelf: sender === userProfile,
+                messages: messageGroup.messages.map((message) => {
+                    return {
+                        content: message.content,
+                        timestamp: message.timestamp,
+                        sender: {
+                            name: sender.name ?? '',
+                            picture: sender.pictures?.[0] ?? '',
+                        },
+                        onlyEmoji: onlyHasEmoji(message.content),
+                    };
+                }),
+            };
+        });
     }
 
     private getQuestion(): string {

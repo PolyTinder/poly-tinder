@@ -1,9 +1,12 @@
+import { Message } from "./message";
+
 export interface WsClient {
     a: {};
 }
 
 export interface WsServer {
     match: { matchedUserId: number };
+    'message:new': Message;
 }
 
 

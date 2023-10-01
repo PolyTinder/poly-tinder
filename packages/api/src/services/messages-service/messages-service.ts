@@ -3,12 +3,14 @@ import { DatabaseService } from '../database-service/database-service';
 import { Knex } from 'knex';
 import { Message } from 'common/models/message';
 import { MatchingService } from '../matching-service/matching-service';
+import { WsService } from '../ws-service/ws-service';
 
 @singleton()
 export class MessagesService {
     constructor(
         private readonly databaseService: DatabaseService,
         private readonly matchingService: MatchingService,
+        private readonly wsService: WsService,
     ) {}
 
     private get messages(): Knex.QueryBuilder<Message> {
@@ -24,11 +26,16 @@ export class MessagesService {
             throw new Error('Cannot send message to unmatched user');
         }
 
-        this.messages.insert({
+        const message: Message = {
             senderId,
             recipientId,
             content,
-        });
+            timestamp: new Date(),
+        };
+
+        await this.messages.insert(message);
+
+        await this.wsService.emitToUser(recipientId, 'message:new', message);
     }
 
     async getMessages(
@@ -41,8 +48,8 @@ export class MessagesService {
             throw new Error('Cannot get messages with unmatched user');
         }
 
-        return this.messages
-            .select()
+        const messages: Message[] = (await this.messages
+            .select('*')
             .where((builder) =>
                 builder
                     .where({
@@ -56,6 +63,8 @@ export class MessagesService {
             )
             .orderBy('timestamp', 'desc')
             .limit(limit)
-            .offset(offset);
+            .offset(offset)) as unknown as Message[];
+
+        return messages.reverse();
     }
 }
