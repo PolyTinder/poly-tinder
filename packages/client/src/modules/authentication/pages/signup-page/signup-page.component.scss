@@ -1,4 +1,8 @@
+@import '../../../../styles/utils';
+
 main {
+    @include no-select;
+    
     display: flex;
     flex-direction: column;
     align-items: stretch;
