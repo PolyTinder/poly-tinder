@@ -1,0 +1,50 @@
+@import '../../../../styles/variables';
+
+.layout-action {
+    $size: 42px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme-background);
+    border-radius: $size;
+    height: $size;
+    text-decoration: none;
+    color: var(--theme-background--contrast);
+    border: solid 1px rgb(240, 240, 240);
+    font-size: 1.3em;
+    box-sizing: border-box;
+    gap: 12px;
+
+    &__content {
+        white-space: nowrap;
+    }
+
+    &--icon-only {
+        width: $size;
+    }
+
+    &--not-icon-only {
+        padding: 0 24px;
+
+        .layout-action__icon {
+            font-size: 0.9em;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        $size: 36px;
+
+        border-radius: $size;
+        height: $size;
+        font-size: 1.2em;
+
+        &--icon-only {
+            width: $size;
+        }
+
+        &--not-icon-only {
+            padding: 0 12px;
+        }
+    }
+}

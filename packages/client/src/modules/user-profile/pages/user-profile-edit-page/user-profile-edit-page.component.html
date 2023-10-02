@@ -1,4 +1,8 @@
-<app-layout backLink="/profile" title="Modifier mon profil">
+<app-layout headerType="transparent">
+    <app-layout-action layout-action-left icon="fas fa-chevron-left" link="/profile" [iconAdjustH]="-1"></app-layout-action>
+
+    <span layout-title>Modifier mon profil</span>
+
     <div class="container">
         <app-user-profile-form></app-user-profile-form>
     </div>

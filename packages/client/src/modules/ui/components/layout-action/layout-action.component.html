@@ -1,0 +1,14 @@
+<button
+    class="layout-action"
+    [ngClass]="{ 'interactable': !disabled && (link || action), 'layout-action--icon-only': !content, 'layout-action--not-icon-only': !!content }"
+    (click)="disabled ? undefined : handleClick()"
+>
+    <div class="layout-action__icon" *ngIf="icon">
+        <i
+            [class]="icon"
+            [style.margin-top.px]="iconAdjustV"
+            [style.margin-left.px]="iconAdjustH"
+        ></i>
+    </div>
+    <div class="layout-action__content" *ngIf="content">{{content}}</div>
+</button>

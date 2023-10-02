@@ -1,4 +1,8 @@
-<app-layout backLink="/profile" title="Prévisualiser mon profil">
+<app-layout headerType="transparent">
+    <app-layout-action layout-action-left icon="fas fa-chevron-left" link="/profile"></app-layout-action>
+
+    <span layout-title>Visualiser mon profil</span>
+
     <div class="container">
         <app-user-profile-card [userProfile]="userProfile | async" [disableModeration]="true"></app-user-profile-card>
     </div>

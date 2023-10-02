@@ -6,10 +6,5 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
-    @Input() backLink: string | undefined;
-    @Input() title: string | undefined;
-
-    get hasHeader() {
-        return this.backLink || this.title;
-    }
+    @Input() headerType: 'default' | 'transparent' | 'hidden' = 'default';
 }

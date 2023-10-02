@@ -1,13 +1,16 @@
-<div class="layout" [ngClass]="{'layout--no-header': !hasHeader}">
-    <div class="layout__head" *ngIf="hasHeader">
-        <a
-            [routerLink]="backLink"
-            *ngIf="backLink"
-            class="layout__head__back interactable"
-        ><i class="fas fa-chevron-left"></i></a>
-
-        <p class="layout__head__title" *ngIf="title">{{title}}</p>
+<div [class]="'layout layout--type--' + headerType">
+    <div class="layout__head" *ngIf="headerType != 'hidden'">
+        <div class="layout__head__left">
+            <ng-content select="[layout-action-left]"></ng-content>
+        </div>
+        <div class="layout__head__center">
+            <ng-content select="[layout-title]"></ng-content>
+        </div>
+        <div class="layout__head__right">
+            <ng-content select="[layout-action-right]"></ng-content>
+        </div>
     </div>
+
     <div class="layout__content">
         <ng-content></ng-content>
     </div>
