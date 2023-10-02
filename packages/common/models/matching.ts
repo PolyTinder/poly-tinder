@@ -21,6 +21,7 @@ export interface MatchQueryInfo {
     unreadMessagesCount: number;
     lastMessage: string;
     lastMessageAuthorId: number;
+    lastMessageTimestamp: Date;
 }
 
 export type PartialMatchQueryItem = Pick<Match, 'user1Id' | 'user2Id'> & {

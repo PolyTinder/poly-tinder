@@ -16,7 +16,7 @@
     &__item {
         width: 100%;
         display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-columns: auto minmax(0, 1fr) auto;
         align-items: center;
         gap: 24px;
 
@@ -52,6 +52,43 @@
 
             &__message {
                 opacity: 0.55;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &__right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            &__date {
+                opacity: 0.55;
+            }
+
+            &__actions {
+                appearance: none;
+                height: 22px;
+                width: 22px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 6px;
+                font-size: 1.2em;
+                border-radius: 100px;
+                text-decoration: none;
+                color: rgba(var(--theme-background-contrast-rgb), 0.75);
+                background-color: var(--theme-background);
+                border: none;
+                transition: ease-in 0.05s background-color;
+
+                @media (hover: hover) {
+                    &:hover {
+                        background-color: rgba(var(--theme-background-contrast-rgb), 0.05);
+                    transition: ease-in 0.05s background-color;
+                    }
+                }
             }
         }
 

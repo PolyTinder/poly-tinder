@@ -174,6 +174,7 @@ export class PublicProfileService {
                 unreadMessagesCount: match.unreadMessagesCount,
                 lastMessage: match.lastMessage,
                 lastMessageAuthorId: match.lastMessageAuthorId,
+                lastMessageTimestamp: match.lastMessageTimestamp,
             });
         }
 
@@ -211,6 +212,13 @@ export class PublicProfileService {
                     .orderBy('timestamp', 'desc')
                     .limit(1)
                     .as('lastMessageAuthorId'),
+                this.databaseService
+                    .database<Message>('messages')
+                    .select('timestamp')
+                    .where(this.whereMessagesFromMatch(match))
+                    .orderBy('timestamp', 'desc')
+                    .limit(1)
+                    .as('lastMessageTimestamp'),
             )
             .first();
     }

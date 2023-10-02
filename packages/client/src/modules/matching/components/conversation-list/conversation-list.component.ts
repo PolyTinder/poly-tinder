@@ -9,4 +9,8 @@ import { UserProfileService } from 'src/modules/user-profile/services/user-profi
 })
 export class ConversationListComponent {
     @Input() conversations: MatchListItemClass[] | null = [];
+
+    onActionsClick(event: MouseEvent) {
+        event.stopPropagation();
+    }
 }

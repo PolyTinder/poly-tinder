@@ -26,6 +26,8 @@ export class PublicProfileService {
 
             if (match) {
                 match.queryInfo.lastMessage = message.content;
+                match.queryInfo.lastMessageAuthorId = message.senderId;
+                match.queryInfo.lastMessageTimestamp = message.timestamp;
                 match.queryInfo.messagesCount += 1;
                 match.queryInfo.unreadMessagesCount += 1;
             }

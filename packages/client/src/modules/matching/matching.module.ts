@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatchedModalComponent } from './components/matched-modal/matched-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { ConversationListComponent } from './components/conversation-list/conver
         ReactiveFormsModule,
         UserProfileModule,
         UiModule,
+        MatMenuModule,
     ],
     exports: [MatchesPageComponent, MatchedUserPageComponent],
 })
