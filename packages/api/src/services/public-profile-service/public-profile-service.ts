@@ -216,7 +216,7 @@ export class PublicProfileService {
                     unmatched: false,
                 });
             })
-            .andWhere('blocks.blockedUserId', '!=', userId);
+            .andWhere('blocks.blockedUserId', 'is', null);
 
         const completedMatches: MatchQueryItem[] = await Promise.all(
             matches.map(async (match) => ({
