@@ -32,7 +32,7 @@ export class PublicProfileService {
                     (match.queryInfo.messagesCount ?? 0) + 1;
                 match.queryInfo.unreadMessagesCount =
                     (match.queryInfo.unreadMessagesCount ?? 0) + 1;
-                    
+
                 this.matches$.next(matches);
             }
         });

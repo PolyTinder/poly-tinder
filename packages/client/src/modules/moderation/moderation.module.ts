@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReportUserModalComponent } from './components/report-user-modal/report-user-modal.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [ReportUserModalComponent],
@@ -16,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
         MatInputModule,
         MatSelectModule,
         ReactiveFormsModule,
+        MatSnackBarModule,
     ],
 })
 export class ModerationModule {}

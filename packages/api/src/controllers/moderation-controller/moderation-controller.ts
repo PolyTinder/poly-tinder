@@ -52,6 +52,7 @@ export class ModerationController extends AbstractController {
                         reportType: req.body.reportType,
                         description: req.body.description,
                     });
+                    res.status(StatusCodes.NO_CONTENT).send();
                 } catch (e) {
                     next(e);
                 }

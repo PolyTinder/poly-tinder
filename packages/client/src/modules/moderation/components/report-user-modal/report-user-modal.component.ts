@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { REPORT_REASONS } from '../../../modals/constants/reports';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ModerationService } from '../../services/moderation.service';
 
 @Component({
     selector: 'app-report-user-modal',
@@ -23,12 +24,20 @@ export class ReportUserModalComponent {
         private readonly dialogRef: DialogRef<ReportUserModalComponent>,
         @Inject(MAT_DIALOG_DATA)
         public readonly data: { userId: number; userName: string },
+        private readonly moderationService: ModerationService,
     ) {}
 
     onSubmit() {
         if (this.form.valid) {
-            console.log('report', this.form.value, this.data);
-            this.dialogRef.close(this.form.value);
+            this.moderationService
+                .sendReport(
+                    this.data.userId,
+                    this.form.value.reason,
+                    this.form.value.description,
+                )
+                .subscribe(() => {
+                    this.dialogRef.close();
+                });
         }
     }
 }

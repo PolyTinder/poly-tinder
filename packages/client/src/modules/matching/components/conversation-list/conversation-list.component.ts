@@ -57,7 +57,14 @@ export class ConversationListComponent {
     }
 
     reportUser(user: MatchListItemClass) {
-        this.moderationService.reportUser(
+        this.moderationService.openReportUserModal(
+            user.id,
+            user.currentValue.name ?? '',
+        );
+    }
+
+    blockUser(user: MatchListItemClass) {
+        this.moderationService.openBlockUserModal(
             user.id,
             user.currentValue.name ?? '',
         );
