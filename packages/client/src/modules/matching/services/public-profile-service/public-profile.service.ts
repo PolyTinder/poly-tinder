@@ -6,6 +6,7 @@ import { PublicUserResultClass } from '../../models/public-user-result';
 import { MatchListItem } from 'common/models/matching';
 import { MatchListItemClass } from '../../models/match-list-item';
 import { WsService } from 'src/services/ws-service/ws.service';
+import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,6 +18,7 @@ export class PublicProfileService {
     constructor(
         private readonly http: HttpClient,
         private readonly wsService: WsService,
+        private readonly sessionService: SessionService,
     ) {
         this.wsService.listen('message:new').subscribe((message) => {
             const matches = this.matches$.getValue();
@@ -38,6 +40,10 @@ export class PublicProfileService {
         });
         this.wsService.listen('match:update-list').subscribe(() => {
             this.fetchMatches().subscribe();
+        });
+
+        this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
+            if (!isLoggedIn) this.matches$.next([]);
         });
 
         this.fetchMatches().subscribe();
