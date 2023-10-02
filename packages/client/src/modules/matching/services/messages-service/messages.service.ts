@@ -27,6 +27,10 @@ export class MessagesService {
                 ]),
             );
         });
+
+        this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
+            if (!isLoggedIn) this.messages$.next(new Map());
+        });
     }
 
     getMessages(userId: TypeOfId<User>): Observable<Message[]> {
