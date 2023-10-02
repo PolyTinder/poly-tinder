@@ -54,6 +54,10 @@
         }
     }
 
+    &--no-gap {
+        gap: 0px !important;
+    }
+
     @media screen and (max-width: $mobile-breakpoint) {
         gap: 12px;
         

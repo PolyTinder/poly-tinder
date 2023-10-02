@@ -1,4 +1,4 @@
-<div [class]="'layout layout--type--' + headerType">
+<div [class]="'layout layout--type--' + headerType" [ngClass]="{ 'layout--no-gap': noGap }">
     <div class="layout__head" *ngIf="headerType != 'hidden'">
         <div class="layout__head__left">
             <ng-content select="[layout-action-left]"></ng-content>
