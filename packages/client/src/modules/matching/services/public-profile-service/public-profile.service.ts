@@ -51,7 +51,7 @@ export class PublicProfileService {
         return this.matches.pipe(
             map((matches) => {
                 return matches.reduce((acc, match) => {
-                    return acc + match.queryInfo.unreadMessagesCount;
+                    return acc + match.queryInfo.unreadMessagesCount ? 1 : 0;
                 }, 0);
             }),
             map((count) => (count > 9 ? '+' : `${count}`)),
