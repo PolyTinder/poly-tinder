@@ -6,6 +6,7 @@ import { UserProfileController } from '../controllers/user-profile-controller/us
 import { PublicProfileController } from '../controllers/public-profile-controller/public-profile-controller';
 import { MatchingController } from '../controllers/matching-controller/matching-controller';
 import { MessagesController } from '../controllers/messages-controller/messages-controller';
+import { ModerationController } from '../controllers/moderation-controller/default-controller';
 
 @registry([
     { token: SYMBOLS.controller, useClass: DefaultController },
@@ -14,5 +15,6 @@ import { MessagesController } from '../controllers/messages-controller/messages-
     { token: SYMBOLS.controller, useClass: PublicProfileController },
     { token: SYMBOLS.controller, useClass: MatchingController },
     { token: SYMBOLS.controller, useClass: MessagesController },
+    { token: SYMBOLS.controller, useClass: ModerationController },
 ])
 export class Registry {}

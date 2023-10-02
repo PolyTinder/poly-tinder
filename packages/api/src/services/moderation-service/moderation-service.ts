@@ -18,11 +18,18 @@ export class ModerationService {
         return this.databaseService.database<Block>('blocks');
     }
 
-    async reportUser(report: Report): Promise<void> {
+    async reportUser(
+        report: Pick<
+            Report,
+            'userId' | 'reportedUserId' | 'reportType' | 'description'
+        >,
+    ): Promise<void> {
         await this.reports.insert(report);
     }
 
-    async blockUser(block: Block): Promise<void> {
+    async blockUser(
+        block: Pick<Block, 'userId' | 'blockedUserId'>,
+    ): Promise<void> {
         await this.blocks.insert(block);
         this.wsService.emitToUserIfConnected(
             block.blockedUserId,
