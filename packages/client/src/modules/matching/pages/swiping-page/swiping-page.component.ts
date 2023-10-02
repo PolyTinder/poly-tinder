@@ -36,6 +36,10 @@ export class SwipingPageComponent {
         this.matchingService.likeUser(user.currentValue.userId).subscribe();
     }
 
+    onExcludeUser(user: PublicUserResultClass) {
+        this.removeUser(user);
+    }
+
     private removeUser(user: PublicUserResultClass) {
         this.availableUsers.next(
             this.availableUsers.value.filter((u) => u !== user),

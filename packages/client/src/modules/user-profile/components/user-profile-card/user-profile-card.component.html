@@ -112,5 +112,12 @@
             [style.background-image]="'url(' + userProfile.pictures?.[5] + ')'"
         >
         </div>
+
+        <hr>
+
+        <div class="user-profile__actions">
+            <button *ngIf="!disableModeration" class="user-profile__actions__item interactable" (click)="reportUser()"><i class="fas fa-flag"></i> Signaler</button>
+            <button *ngIf="!disableModeration" class="user-profile__actions__item interactable" (click)="blockUser()"><i class="fas fa-times"></i> Bloquer</button>
+        </div>
     </div>
 </ng-container>

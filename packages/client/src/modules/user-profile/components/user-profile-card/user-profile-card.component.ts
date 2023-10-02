@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PublicUserResult, UserProfile } from 'common/models/user';
 import { ZODIAC_SIGNS } from '../../constants/zodiac';
 import { SEXUAL_ORIENTATIONS } from '../../constants/gender';
 import { RELATIONSHIP_TYPES } from '../../constants/relationship-type';
 import { PROGRAMS } from '../../constants/programs';
 import { LOOKING_FOR } from '../../constants/looking-for';
+import { ModerationService } from 'src/modules/moderation/services/moderation.service';
 
 @Component({
     selector: 'app-user-profile-card',
@@ -14,6 +15,10 @@ import { LOOKING_FOR } from '../../constants/looking-for';
 export class UserProfileCardComponent {
     @Input() userProfile: UserProfile | PublicUserResult | undefined | null =
         null;
+    @Input() disableModeration: boolean = false;
+    @Output() excludeUser: EventEmitter<void> = new EventEmitter();
+
+    constructor(private readonly moderationService: ModerationService) {}
 
     get program() {
         return this.userProfile?.program
@@ -72,5 +77,27 @@ export class UserProfileCardComponent {
         const heightInches = Math.round((heightCm % 30.48) / 2.54);
 
         return `${heightCm} cm / ${heightFeet}'${heightInches}"`;
+    }
+
+    reportUser() {
+        if (!this.userProfile) throw new Error('User profile is undefined');
+
+        this.moderationService.openReportUserModal(
+            this.userProfile.userId,
+            this.userProfile.name ?? '',
+        );
+    }
+
+    blockUser() {
+        if (!this.userProfile) throw new Error('User profile is undefined');
+
+        this.moderationService
+            .openBlockUserModal(
+                this.userProfile.userId,
+                this.userProfile.name ?? '',
+            )
+            .subscribe(() => {
+                this.excludeUser.emit();
+            });
     }
 }

@@ -1,5 +1,5 @@
 <app-layout backLink="/profile" title="Prévisualiser mon profil">
     <div class="container">
-        <app-user-profile-card [userProfile]="userProfile | async"></app-user-profile-card>
+        <app-user-profile-card [userProfile]="userProfile | async" [disableModeration]="true"></app-user-profile-card>
     </div>
 </app-layout>

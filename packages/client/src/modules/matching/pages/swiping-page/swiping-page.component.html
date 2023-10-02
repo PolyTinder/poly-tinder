@@ -8,8 +8,8 @@
     <ng-container *ngFor="let user of availableUsers; let index = index">
         <div class="profile-container" *ngIf="index == 0">
             <div class="profile-content">
-                <ng-container *ngIf="user.value| async; let user">
-                    <app-user-profile-card [userProfile]="user"></app-user-profile-card>
+                <ng-container *ngIf="user.value| async; let userValue">
+                    <app-user-profile-card [userProfile]="userValue" (excludeUser)="onExcludeUser(user)"></app-user-profile-card>
                 </ng-container>
         
                 <div class="profile-container__swipe-btn-container">

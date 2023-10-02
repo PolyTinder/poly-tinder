@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportUserModalComponent } from '../components/report-user-modal/report-user-modal.component';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalService } from 'src/modules/modals/services/modal.service';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
@@ -25,7 +25,8 @@ export class ModerationService {
         });
     }
 
-    openBlockUserModal(userId: number, userName: string) {
+    openBlockUserModal(userId: number, userName: string): Observable<void> {
+        const subject = new Subject<void>();
         this.modalService.open({
             title: 'Bloquer un utilisateur',
             content: `Êtes-vous sûr de vouloir bloquer ${userName} ?`,
@@ -33,14 +34,22 @@ export class ModerationService {
                 {
                     content: 'Annuler',
                     closeDialog: true,
+                    action: () => {
+                        subject.error('Canceled by user');
+                    },
                 },
                 {
                     content: 'Bloquer',
-                    action: () => this.blockUser(userId).subscribe(),
+                    action: () => {
+                        this.blockUser(userId).subscribe(() => {
+                            subject.next();
+                        });
+                    },
                     color: true,
                 },
             ],
         });
+        return subject;
     }
 
     sendReport(

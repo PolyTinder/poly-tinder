@@ -175,6 +175,30 @@
         }
     }
 
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        &__item {
+            display: block;
+            appearance: none;
+            background-color: var(--theme-background);
+            border: solid 1px rgb(240, 240, 240);
+            font-size: inherit;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--theme-background-contrast);
+            box-shadow: $default-shadow;
+
+            i {
+                margin-right: 6px;
+            }
+        }
+    }
+
     p {
         margin: 0;
     }
