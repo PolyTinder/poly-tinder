@@ -138,7 +138,11 @@ export class UserProfileFormComponent {
                     this.snackBar.open(
                         'Erreur lors de la mise à jour du profil',
                         undefined,
-                        { duration: 2000, politeness: 'assertive' },
+                        {
+                            duration: 2000,
+                            politeness: 'assertive',
+                            verticalPosition: 'top',
+                        },
                     );
                     return err;
                 }),
@@ -147,6 +151,7 @@ export class UserProfileFormComponent {
                 this.snackBar.open('Profil mis à jour', undefined, {
                     duration: 2000,
                     politeness: 'polite',
+                    verticalPosition: 'top',
                 });
             });
     }

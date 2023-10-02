@@ -108,7 +108,7 @@ export class MatchingService {
                         this.snackBar.open(
                             `Nouveau match avec ${user.currentValue.name} !`,
                             undefined,
-                            { duration: 2000 },
+                            { duration: 2000, verticalPosition: 'top' },
                         );
                     }
                 }

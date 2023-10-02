@@ -69,6 +69,7 @@ export class ModerationService {
                         undefined,
                         {
                             duration: 2000,
+                            verticalPosition: 'top',
                         },
                     );
                 }),
@@ -83,6 +84,7 @@ export class ModerationService {
                     undefined,
                     {
                         duration: 2000,
+                        verticalPosition: 'top',
                     },
                 );
                 this.publicProfileService.fetchMatches().subscribe();
