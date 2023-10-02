@@ -37,23 +37,7 @@ export class ConversationListComponent {
     }
 
     unmatchUser(user: MatchListItemClass) {
-        this.modalService.open({
-            title: `Supprimer ${user.currentValue.name} de vos matchs ?`,
-            content: `Vous ne pourrez plus lui envoyer de messages.`,
-            buttons: [
-                {
-                    content: 'Annuler',
-                    closeDialog: true,
-                },
-                {
-                    content: 'Supprimer',
-                    closeDialog: true,
-                    color: true,
-                    action: () =>
-                        this.matchingService.unmatchedUser(user.id).subscribe(),
-                },
-            ],
-        });
+        this.matchingService.askUnmatchUser(user);
     }
 
     reportUser(user: MatchListItemClass) {

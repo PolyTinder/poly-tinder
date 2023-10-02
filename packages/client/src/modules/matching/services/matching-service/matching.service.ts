@@ -7,6 +7,7 @@ import { PublicProfileService } from '../public-profile-service/public-profile.s
 import { map, switchMap } from 'rxjs';
 import { ModalService } from 'src/modules/modals/services/modal.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PublicUserResultClass } from '../../models/public-user-result';
 
 @Injectable({
     providedIn: 'root',
@@ -42,6 +43,25 @@ export class MatchingService {
             switchMap(() => this.publicProfileService.fetchMatches()),
             map(() => {}),
         );
+    }
+
+    askUnmatchUser(user: PublicUserResultClass) {
+        this.modalService.open({
+            title: `Supprimer ${user.currentValue.name} de vos matchs ?`,
+            content: `Vous ne pourrez plus lui envoyer de messages.`,
+            buttons: [
+                {
+                    content: 'Annuler',
+                    closeDialog: true,
+                },
+                {
+                    content: 'Supprimer',
+                    closeDialog: true,
+                    color: true,
+                    action: () => this.unmatchedUser(user.id).subscribe(),
+                },
+            ],
+        });
     }
 
     private instantiate() {

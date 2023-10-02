@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     Observable,
     Subject,
@@ -19,6 +19,8 @@ import { UserProfileService } from 'src/modules/user-profile/services/user-profi
 import { QUESTIONS } from '../../constants/questions';
 import { MessagesService } from '../../services/messages-service/messages.service';
 import { onlyHasEmoji } from '../../utils/utils';
+import { ModerationService } from 'src/modules/moderation/services/moderation.service';
+import { MatchingService } from '../../services/matching-service/matching.service';
 
 @Component({
     selector: 'app-matched-user-page',
@@ -41,6 +43,9 @@ export class MatchedUserPageComponent {
         private readonly publicProfileService: PublicProfileService,
         private readonly userProfileService: UserProfileService,
         private readonly messagesService: MessagesService,
+        private readonly moderationService: ModerationService,
+        private readonly matchingService: MatchingService,
+        private readonly router: Router,
     ) {
         this.userProfile = this.route.params.pipe(
             map((params) => {
@@ -113,6 +118,37 @@ export class MatchedUserPageComponent {
 
     updateQuestion() {
         this.question = this.getQuestion();
+    }
+
+    unmatchUser() {
+        this.userProfile.pipe(first()).subscribe((user) => {
+            if (!user) throw new Error('User profile is undefined');
+            this.matchingService.askUnmatchUser(user);
+            this.router.navigate(['/matches']);
+        });
+    }
+
+    reportUser() {
+        this.userProfile.pipe(first()).subscribe((user) => {
+            if (!user) throw new Error('User profile is undefined');
+            this.moderationService.openReportUserModal(
+                user.id,
+                user.currentValue.name ?? '',
+            );
+        });
+    }
+
+    blockUser() {
+        if (!this.userProfile) throw new Error('User profile is undefined');
+
+        this.userProfile.pipe(first()).subscribe((user) => {
+            if (!user) throw new Error('User profile is undefined');
+            this.moderationService
+                .openBlockUserModal(user.id, user.currentValue.name ?? '')
+                .subscribe(() => {
+                    this.router.navigate(['/matches']);
+                });
+        });
     }
 
     private groupMessages(

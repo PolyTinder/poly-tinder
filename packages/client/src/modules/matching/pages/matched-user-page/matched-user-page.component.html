@@ -7,6 +7,14 @@
             <span class="matched-user-page__header__title__content">{{userProfile.name}}</span>
         </ng-container>
     </div>
+
+    <app-layout-action layout-action-right classNames="interactable" icon="fas fa-ellipsis-v" [matMenuTriggerFor]="actionsMenu"></app-layout-action>
+
+    <mat-menu #actionsMenu="matMenu">
+        <button mat-menu-item (click)="unmatchUser()"><i class="fas fa-trash"></i> Supprimer</button>
+        <button mat-menu-item (click)="reportUser()"><i class="fas fa-flag"></i> Signaler</button>
+        <button mat-menu-item (click)="blockUser()"><i class="fas fa-times"></i> Bloquer</button>
+    </mat-menu>
     
     <div class="matched-user-page__container">
         <div class="matched-user-page__content">
