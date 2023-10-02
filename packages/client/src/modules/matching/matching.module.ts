@@ -12,6 +12,8 @@ import { MatchedModalComponent } from './components/matched-modal/matched-modal.
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { ModalsModule } from '../modals/modals.module';
+import { ModerationModule } from '../moderation/moderation.module';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import { MatMenuModule } from '@angular/material/menu';
         UserProfileModule,
         UiModule,
         MatMenuModule,
+        ModalsModule,
+        ModerationModule,
     ],
     exports: [MatchesPageComponent, MatchedUserPageComponent],
 })

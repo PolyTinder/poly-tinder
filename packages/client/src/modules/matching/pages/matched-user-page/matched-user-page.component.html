@@ -1,3 +1,11 @@
+<div class="matched-user-page" *ngIf="!(userProfileValue | async)">
+    <div class="matched-user-page__header">
+        <div class="matched-user-page__header__actions">
+            <a routerLink="/matches" class="matched-user-page__header__back interactable"><i class="fas fa-chevron-left"></i></a>
+        </div>
+    </div>
+</div>
+
 <div class="matched-user-page" *ngIf="userProfileValue | async; let userProfile">
     <div class="matched-user-page__header">
         <div class="matched-user-page__header__actions">

@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Signaler un utilisateur</h2>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <mat-dialog-content>
+        <p class="description">Signaler {{ data.userName }} ? Notre équipe de modération se chargera de réviser la situation.</p>
+        
+        <mat-form-field>
+            <mat-label><i class="fas fa-flag"></i> Raison du signalement</mat-label>
+            <mat-select formControlName="reason">
+                <mat-option value="" disabled>Choisir une raison</mat-option>
+                <mat-option *ngFor="let reason of reasons" [value]="reason">{{ reason }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label><i class="fas fa-flag"></i> Description du signalement</mat-label>
+            <textarea formControlName="description" rows="5" formControlName="description" matInput></textarea>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <a 
+            mat-dialog-close
+            class="modal-button interactable--large"
+        >Annuler</a>
+        <button 
+            type="submit"
+            class="modal-button modal-button--color interactable--large"
+        >Signaler</button>
+    </mat-dialog-actions>
+</form>

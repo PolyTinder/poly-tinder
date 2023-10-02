@@ -4,12 +4,14 @@ import { Knex } from 'knex';
 import { Message } from 'common/models/message';
 import { MatchingService } from '../matching-service/matching-service';
 import { WsService } from '../ws-service/ws-service';
+import { ModerationService } from '../moderation-service/moderation-service';
 
 @singleton()
 export class MessagesService {
     constructor(
         private readonly databaseService: DatabaseService,
         private readonly matchingService: MatchingService,
+        private readonly moderationService: ModerationService,
         private readonly wsService: WsService,
     ) {}
 
@@ -24,6 +26,9 @@ export class MessagesService {
     ): Promise<void> {
         if (!(await this.matchingService.areMatched(senderId, recipientId))) {
             throw new Error('Cannot send message to unmatched user');
+        }
+        if (await this.moderationService.isBlocked(senderId, recipientId)) {
+            throw new Error('Cannot send message');
         }
 
         const message: Message = {

@@ -19,6 +19,10 @@ import {
     PartialMatchQueryItem,
 } from 'common/models/matching';
 import { Message } from 'common/models/message';
+import { ModerationService } from '../moderation-service/moderation-service';
+import { HttpException } from '../../models/http-exception';
+import { StatusCodes } from 'http-status-codes';
+import { create as createRandom } from 'random-seed';
 
 @singleton()
 export class PublicProfileService {
@@ -26,6 +30,7 @@ export class PublicProfileService {
         private readonly databaseService: DatabaseService,
         private readonly userProfileService: UserProfileService,
         private readonly userAliasService: UserAliasService,
+        private readonly moderationService: ModerationService,
     ) {}
 
     private get users(): Knex.QueryBuilder<User> {
@@ -36,7 +41,17 @@ export class PublicProfileService {
         return this.databaseService.database<Match>('matches');
     }
 
-    async findUser(userId: TypeOfId<User>): Promise<PublicUserResult> {
+    async findUser(
+        userId: TypeOfId<User>,
+        requestingUserId: TypeOfId<User>,
+    ): Promise<PublicUserResult> {
+        if (await this.moderationService.isBlocked(requestingUserId, userId)) {
+            throw new HttpException(
+                'User profile not found',
+                StatusCodes.NOT_FOUND,
+            );
+        }
+
         // const userId = await this.userAliasService.getUserId(userAliasId);
         const userProfile = await this.userProfileService.getUserProfile(
             userId,
@@ -49,72 +64,108 @@ export class PublicProfileService {
     async getAvailableUsers(
         userId: TypeOfId<User>,
     ): Promise<NotLoadedPublicUserResult[]> {
-        const userProfile = await this.userProfileService.getUserProfile(
-            userId,
-        );
+        const db = this.databaseService.database;
 
-        const availableUsers: { userId: number; name: string }[] =
-            await this.users
-                .select(
-                    'users.userId',
-                    'userProfiles.name',
+        const availableUsers: { userId: number; name: string }[] = await db
+            .select(['targetUser.userId', 'targetUserProfile.name'])
+            .fromRaw('(`users` as `targetUser`, `users` as `activeUser`)')
+            .leftJoin('swipes', function () {
+                this.on('targetUser.userId', '=', 'swipes.targetUserId').andOn(
+                    'activeUser.userId',
+                    '=',
                     'swipes.activeUserId',
-                )
-                .leftJoin('swipes', 'users.userId', '=', 'swipes.targetUserId')
-                .innerJoin(
-                    'userValidations',
-                    'users.userId',
-                    '=',
-                    'userValidations.userId',
-                )
-                .innerJoin(
-                    'userProfiles',
-                    'users.userId',
-                    '=',
-                    'userProfiles.userId',
-                )
-                .where('users.userId', '!=', userId)
-                .whereNotIn(
-                    'users.userId',
-                    this.users
-                        .select('userId')
-                        .leftJoin(
-                            'swipes',
-                            'users.userId',
+                );
+            })
+            .innerJoin(
+                'userValidations',
+                'targetUser.userId',
+                '=',
+                'userValidations.userId',
+            )
+            .innerJoin(
+                'userProfiles as targetUserProfile',
+                'targetUser.userId',
+                '=',
+                'targetUserProfile.userId',
+            )
+            .innerJoin(
+                'userProfiles as activeUserProfile',
+                'activeUser.userId',
+                '=',
+                'activeUserProfile.userId',
+            )
+            .leftJoin('blocks', function () {
+                this.on(function () {
+                    this.on(
+                        'blocks.blockedUserId',
+                        '=',
+                        'targetUser.userId',
+                    ).andOn('blocks.userId', '=', 'activeUser.userId');
+                }).orOn(function () {
+                    this.on(
+                        'blocks.blockedUserId',
+                        '=',
+                        'activeUser.userId',
+                    ).andOn('blocks.userId', '=', 'targetUser.userId');
+                });
+            })
+            .where('targetUser.userId', '!=', userId)
+            .andWhere('activeUser.userId', '=', userId)
+            .andWhere('swipes.targetUserId', 'is', null)
+            .andWhere('userValidations.userProfileReady', '=', true)
+            .andWhere('userValidations.suspended', '=', false)
+            .andWhere('userValidations.banned', '=', false)
+            .andWhere('blocks.blockedUserId', 'is', null)
+            .andWhere(function () {
+                this.where('activeUserProfile.genderPreference', '=', 'all')
+                    .orWhere('targetUserProfile.genderCategory', '=', 'other')
+                    .orWhere(function () {
+                        this.where(
+                            'activeUserProfile.genderCategory',
                             '=',
-                            'swipes.targetUserId',
-                        )
-                        .where('swipes.activeUserId', '=', userId),
-                )
-                .andWhere('userValidations.userProfileReady', '=', true)
-                .andWhere('userValidations.suspended', '=', false)
-                .andWhere('userValidations.banned', '=', false)
-                .andWhere(function () {
-                    if (userProfile.genderPreference === 'all') return;
-
-                    this.where(
-                        'userProfiles.genderCategory',
-                        '=',
-                        userProfile.genderPreference ?? '',
-                    ).orWhere('userProfiles.genderCategory', '=', 'other');
-                })
-                .andWhere(function () {
-                    if (userProfile.genderCategory === 'other') return;
-
-                    this.where(
-                        'userProfiles.genderPreference',
-                        '=',
-                        userProfile.genderCategory ?? '',
-                    ).orWhere('userProfiles.genderPreference', '=', 'all');
-                })
-                .limit(1000);
+                            db.ref('targetUserProfile.genderPreference'),
+                        ).andWhere(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            db.ref('activeUserProfile.genderPreference'),
+                        );
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            db.ref('activeUserProfile.genderPreference'),
+                        ).andWhere(
+                            'activeUserProfile.genderCategory',
+                            '=',
+                            'other',
+                        );
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            db.ref('activeUserProfile.genderPreference'),
+                        ).andWhere(
+                            'activeUserProfile.genderPreference',
+                            '=',
+                            'all',
+                        );
+                    });
+            })
+            .limit(1000);
 
         const size = availableUsers.length;
 
         const results: { userId: number; name: string }[] = [];
 
+        const date = new Date();
+        const rand = createRandom(
+            `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+        );
+
         for (let i = 0; i < Math.min(MATCHING_BATCH_SIZE, size); ++i) {
-            results.push(popRandom(availableUsers));
+            results.push(popRandom(availableUsers, rand));
         }
 
         return results;
@@ -141,14 +192,31 @@ export class PublicProfileService {
             )
             .leftJoin('userProfiles as up1', 'user1Id', '=', 'up1.userId')
             .leftJoin('userProfiles as up2', 'user2Id', '=', 'up2.userId')
-            .where({
-                user1Id: userId,
-                unmatched: false,
+            .leftJoin('blocks', function () {
+                this.on(function () {
+                    this.on('blocks.blockedUserId', '=', 'user1Id').andOn(
+                        'blocks.userId',
+                        '=',
+                        'user2Id',
+                    );
+                }).orOn(function () {
+                    this.on('blocks.blockedUserId', '=', 'user2Id').andOn(
+                        'blocks.userId',
+                        '=',
+                        'user1Id',
+                    );
+                });
             })
-            .orWhere({
-                user2Id: userId,
-                unmatched: false,
-            });
+            .where(function () {
+                this.where({
+                    user1Id: userId,
+                    unmatched: false,
+                }).orWhere({
+                    user2Id: userId,
+                    unmatched: false,
+                });
+            })
+            .andWhere('blocks.blockedUserId', '!=', userId);
 
         const completedMatches: MatchQueryItem[] = await Promise.all(
             matches.map(async (match) => ({

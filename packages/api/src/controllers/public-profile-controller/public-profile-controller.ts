@@ -49,6 +49,7 @@ export class PublicProfileController extends AbstractController {
                     res.status(StatusCodes.OK).json(
                         await this.publicProfileService.findUser(
                             Number(req.params.id),
+                            req.body.session.user.userId,
                         ),
                     );
                 } catch (error) {

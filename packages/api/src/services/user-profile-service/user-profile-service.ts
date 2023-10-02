@@ -9,6 +9,8 @@ import {
 } from 'common/models/user';
 import { NoId, TypeOfId } from 'common/types/id';
 import { UserService } from '../user-service/user-service';
+import { HttpException } from '../../models/http-exception';
+import { StatusCodes } from 'http-status-codes';
 
 @singleton()
 export class UserProfileService {
@@ -28,8 +30,15 @@ export class UserProfileService {
     }
 
     async getUserProfile(userId: TypeOfId<User>): Promise<NoId<UserProfile>> {
-        const res =
-            (await this.userProfiles.select().where({ userId }).first()) ?? {};
+        const res = await this.userProfiles.select().where({ userId }).first();
+
+        if (!res) {
+            throw new HttpException(
+                'User profile not found',
+                StatusCodes.NOT_FOUND,
+            );
+        }
+
         delete res.userId;
 
         return this.fromUserProfileDB(res);

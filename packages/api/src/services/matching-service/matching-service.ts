@@ -66,6 +66,12 @@ export class MatchingService {
                 user1Id: unmatchedUserId,
                 user2Id: userId,
             });
+
+        this.wsService.emitToUserIfConnected(
+            unmatchedUserId,
+            'match:update-list',
+            {},
+        );
     }
 
     async areMatched(userId: number, targetUserId: number): Promise<boolean> {
@@ -84,12 +90,21 @@ export class MatchingService {
             .first());
     }
 
-    private async matchUsers(user1Id: number, user2Id: number): Promise<void> {
+    private async matchUsers(
+        activeUserId: number,
+        targetUserId: number,
+    ): Promise<void> {
         await this.matches.insert({
-            user1Id,
-            user2Id,
+            user1Id: activeUserId,
+            user2Id: targetUserId,
         });
 
-        this.wsService.emitToUser(user1Id, 'match', { matchedUserId: user2Id });
+        this.wsService.emitToUser(activeUserId, 'match:matched-active', {
+            matchedUserId: targetUserId,
+        });
+        this.wsService.emitToUser(targetUserId, 'match:matched-passive', {
+            matchedUserId: activeUserId,
+        });
+        this.wsService.emitToUser(targetUserId, 'match:update-list', {});
     }
 }

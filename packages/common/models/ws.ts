@@ -5,8 +5,10 @@ export interface WsClient {
 }
 
 export interface WsServer {
-    match: { matchedUserId: number };
+    'match:matched-active': { matchedUserId: number };
+    'match:matched-passive': { matchedUserId: number };
     'message:new': Message;
+    'match:update-list': {};
 }
 
 

@@ -1,0 +1,33 @@
+@import '../../../../styles/variables';
+
+mat-dialog-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 0 24px 20px 24px;
+
+    .modal-button {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        appearance: none;
+        background: none;
+        border: solid 1px rgb(240, 240, 240);
+        font: inherit;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 1.2em;
+        font-weight: 500;
+        box-sizing: border-box;
+
+        i {
+            font-size: 0.9em;
+        }
+
+        &--color {
+            background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+            color: var(--theme-main-contrast);
+            border: none;
+        }
+    }
+}

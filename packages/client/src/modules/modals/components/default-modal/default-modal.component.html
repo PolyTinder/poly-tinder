@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content *ngIf="content">{{ content }}</mat-dialog-content>
+<mat-dialog-actions *ngIf="buttons.length">
+    <button 
+        *ngFor="let button of buttons"
+        class="modal-button interactable--large"
+        [ngClass]="{ 'modal-button--color': button.color}"
+        [mat-dialog-close]="button.closeDialog"
+        (click)="handleButton(button)"
+    >
+        <i [class]="button.icon" *ngIf="button.icon"></i>
+        {{ button.content }}
+    </button>
+</mat-dialog-actions>

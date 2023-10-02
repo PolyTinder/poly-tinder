@@ -21,24 +21,30 @@ export class WsService {
             cors: { origin: '*', methods: ['GET', 'POST'] },
         });
 
-        this.ws.on('connection', (socket) => {
+        this.ws.on('connection', async (socket) => {
             const token: string | undefined = socket.handshake.auth.token;
 
             if (!token) {
                 return socket.disconnect();
             }
 
-            this.authenticationService.loadSession(token).then((session) => {
-                if (!session) {
-                    return socket.disconnect();
-                }
+            try {
+                await this.authenticationService
+                    .loadSession(token)
+                    .then((session) => {
+                        if (!session) {
+                            return socket.disconnect();
+                        }
 
-                this.clients.set(session.user.userId, socket.id);
+                        this.clients.set(session.user.userId, socket.id);
 
-                socket.on('disconnect', () => {
-                    this.clients.removeRight(socket.id);
-                });
-            });
+                        socket.on('disconnect', () => {
+                            this.clients.removeRight(socket.id);
+                        });
+                    });
+            } catch {
+                return socket.disconnect();
+            }
         });
     }
 
@@ -62,6 +68,19 @@ export class WsService {
         const socketId = this.clients.getLeft(userId);
         if (!socketId) {
             throw new Error('User not connected');
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (this.server.to(socketId).emit as any)(event, data);
+    }
+
+    emitToUserIfConnected<T extends keyof WsServer>(
+        userId: TypeOfId<User>,
+        event: T,
+        data: WsServer[T],
+    ) {
+        const socketId = this.clients.getLeft(userId);
+        if (!socketId) {
+            return;
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (this.server.to(socketId).emit as any)(event, data);

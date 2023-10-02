@@ -28,9 +28,16 @@ export class PublicProfileService {
                 match.queryInfo.lastMessage = message.content;
                 match.queryInfo.lastMessageAuthorId = message.senderId;
                 match.queryInfo.lastMessageTimestamp = message.timestamp;
-                match.queryInfo.messagesCount += 1;
-                match.queryInfo.unreadMessagesCount += 1;
+                match.queryInfo.messagesCount =
+                    (match.queryInfo.messagesCount ?? 0) + 1;
+                match.queryInfo.unreadMessagesCount =
+                    (match.queryInfo.unreadMessagesCount ?? 0) + 1;
+                    
+                this.matches$.next(matches);
             }
+        });
+        this.wsService.listen('match:update-list').subscribe(() => {
+            this.fetchMatches().subscribe();
         });
 
         this.fetchMatches().subscribe();

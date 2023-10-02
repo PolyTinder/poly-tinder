@@ -103,6 +103,7 @@ const PEOPLE = [
  */
 exports.seed = async function (knex) {
     // Deletes ALL existing entries
+    await knex('messages').del();
     await knex('userAliases').del();
     await knex('userValidations').del();
     await knex('userProfiles').del();

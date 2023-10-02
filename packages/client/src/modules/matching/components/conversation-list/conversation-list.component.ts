@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatchListItemClass } from '../../models/match-list-item';
+import { MatchingService } from '../../services/matching-service/matching.service';
+import { ModalService } from 'src/modules/modals/services/modal.service';
+import { ModerationService } from 'src/modules/moderation/services/moderation.service';
 
 @Component({
     selector: 'app-conversation-list',
@@ -9,6 +12,12 @@ import { MatchListItemClass } from '../../models/match-list-item';
 export class ConversationListComponent {
     @Input() conversations: MatchListItemClass[] | null = [];
 
+    constructor(
+        private readonly matchingService: MatchingService,
+        private readonly modalService: ModalService,
+        private readonly moderationService: ModerationService,
+    ) {}
+
     onActionsClick(event: MouseEvent) {
         event.stopPropagation();
     }
@@ -17,11 +26,40 @@ export class ConversationListComponent {
         const now = new Date();
         date = new Date(date);
         const dateStr = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-        const timeStr = `${date.getHours()}:${date.getMinutes()}`;
+        const timeStr = `${date.getHours()}:${
+            (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
+        }`;
 
         return dateStr ===
             `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`
             ? timeStr
             : dateStr;
+    }
+
+    unmatchUser(user: MatchListItemClass) {
+        this.modalService.open({
+            title: `Supprimer ${user.currentValue.name} de vos matchs ?`,
+            content: `Vous ne pourrez plus lui envoyer de messages.`,
+            buttons: [
+                {
+                    content: 'Annuler',
+                    closeDialog: true,
+                },
+                {
+                    content: 'Supprimer',
+                    closeDialog: true,
+                    color: true,
+                    action: () =>
+                        this.matchingService.unmatchedUser(user.id).subscribe(),
+                },
+            ],
+        });
+    }
+
+    reportUser(user: MatchListItemClass) {
+        this.moderationService.reportUser(
+            user.id,
+            user.currentValue.name ?? '',
+        );
     }
 }

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WsServer } from 'common/models/ws';
 import { WsService } from 'src/services/ws-service/ws.service';
-import { MatchedModalComponent } from '../../components/matched-modal/matched-modal.component';
-import { PublicUserResult } from 'common/models/user';
 import { PublicProfileService } from '../public-profile-service/public-profile.service';
+import { map, switchMap } from 'rxjs';
+import { ModalService } from 'src/modules/modals/services/modal.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root',
@@ -16,39 +17,81 @@ export class MatchingService {
         private readonly wsService: WsService,
         private readonly dialog: MatDialog,
         private readonly publicProfileService: PublicProfileService,
+        private readonly modalService: ModalService,
+        private readonly snackBar: MatSnackBar,
     ) {
         this.instantiate();
     }
 
     likeUser(userId: number) {
-        return this.http.post(`/matching/like/${userId}`, {});
+        return this.http.post(`/matching/like/${userId}`, {}).pipe(
+            switchMap(() => this.publicProfileService.fetchMatches()),
+            map(() => {}),
+        );
     }
 
     dislikeUser(userId: number) {
-        return this.http.post(`/matching/dislike/${userId}`, {});
+        return this.http.post(`/matching/dislike/${userId}`, {}).pipe(
+            switchMap(() => this.publicProfileService.fetchMatches()),
+            map(() => {}),
+        );
+    }
+
+    unmatchedUser(userId: number) {
+        return this.http.post(`/matching/unmatch/${userId}`, {}).pipe(
+            switchMap(() => this.publicProfileService.fetchMatches()),
+            map(() => {}),
+        );
     }
 
     private instantiate() {
-        this.wsService.listen('match').subscribe(this.handleMatch.bind(this));
+        this.wsService
+            .listen('match:matched-active')
+            .subscribe((data) => this.handleMatch(data, true));
+        this.wsService
+            .listen('match:matched-passive')
+            .subscribe((data) => this.handleMatch(data, false));
     }
 
-    private handleMatch({ matchedUserId }: WsServer['match']) {
+    private handleMatch(
+        {
+            matchedUserId,
+        }: WsServer['match:matched-active' | 'match:matched-passive'],
+        active: boolean,
+    ) {
         this.publicProfileService.fetchMatches().subscribe((result) => {
             const user = result.find((user) => user.id === matchedUserId);
 
             if (!user) {
-                console.error('Could not find user');
-                return;
+                throw new Error('User not found');
             }
 
             user.loaded.subscribe((loaded) => {
-                if (loaded)
-                    this.dialog.open<MatchedModalComponent, PublicUserResult>(
-                        MatchedModalComponent,
-                        {
-                            data: user.currentValue,
-                        },
-                    );
+                if (loaded) {
+                    if (active) {
+                        this.modalService.open({
+                            title: "C'est un match !",
+                            content: `Vous avez matché avec ${user.currentValue.name} !`,
+                            buttons: [
+                                {
+                                    content: 'Plus tard',
+                                    closeDialog: true,
+                                },
+                                {
+                                    content: 'Discuter',
+                                    redirect: `/matches/${user.id}`,
+                                    color: true,
+                                },
+                            ],
+                        });
+                    } else {
+                        this.snackBar.open(
+                            `Nouveau match avec ${user.currentValue.name} !`,
+                            undefined,
+                            { duration: 2000 },
+                        );
+                    }
+                }
             });
         });
     }

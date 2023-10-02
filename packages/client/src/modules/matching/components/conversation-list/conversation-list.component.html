@@ -26,8 +26,8 @@
                                 <i class="fas fa-ellipsis-h"></i>
                             </a>
                             <mat-menu #actionsMenu="matMenu">
-                                <button mat-menu-item><i class="fas fa-trash"></i> Supprimer</button>
-                                <button mat-menu-item><i class="fas fa-flag"></i> Signaler</button>
+                                <button mat-menu-item (click)="unmatchUser(conversation)"><i class="fas fa-trash"></i> Supprimer</button>
+                                <button mat-menu-item (click)="reportUser(conversation)"><i class="fas fa-flag"></i> Signaler</button>
                                 <button mat-menu-item><i class="fas fa-times"></i> Bloquer</button>
                             </mat-menu>
                         </div>
