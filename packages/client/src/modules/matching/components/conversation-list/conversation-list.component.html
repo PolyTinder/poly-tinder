@@ -9,16 +9,19 @@
 
                         <div class="conversation-list__item__info">
                             <span class="conversation-list__item__info__name">{{value.name}} <span *ngIf="conversation.queryInfo.unreadMessagesCount" class="conversation-list__item__info__non-read-count">{{conversation.queryInfo.unreadMessagesCount}}</span></span>
-                            <span class="conversation-list__item__info__message">
-                                <b *ngIf="conversation.queryInfo.lastMessageAuthorId != value.userId">Vous :</b>
-                                {{conversation.queryInfo.lastMessage}}
+                            <span class="conversation-list__item__info__subtitle">
+                                <span class="conversation-list__item__info__subtitle__message">
+                                    <b *ngIf="conversation.queryInfo.lastMessageAuthorId != value.userId">Vous :</b>
+                                    {{conversation.queryInfo.lastMessage}}
+                                </span>
+                                <span class="conversation-list__item__info__subtitle__separator">•</span>
+                                <span class="conversation-list__item__info__subtitle__date">
+                                    {{formatDate(conversation.queryInfo.lastMessageTimestamp)}}
+                                </span>
                             </span>
                         </div>
 
                         <div class="conversation-list__item__right">
-                            <span class="conversation-list__item__right__date">
-                                {{conversation.queryInfo.lastMessageTimestamp | date:'dd/MM/yyyy h:mm'}}
-                            </span>
                             <a routerLink="/matches" class="conversation-list__item__right__actions interactable" (click)="onActionsClick($event)" [matMenuTriggerFor]="actionsMenu">
                                 <i class="fas fa-ellipsis-h"></i>
                             </a>

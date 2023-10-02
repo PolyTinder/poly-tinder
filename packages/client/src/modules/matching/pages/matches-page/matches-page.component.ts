@@ -15,7 +15,7 @@ export class MatchesPageComponent {
     hasConversations: Observable<boolean>;
 
     constructor(private readonly publicProfileService: PublicProfileService) {
-        this.publicProfileService.matches.subscribe(console.log)
+        this.publicProfileService.matches.subscribe(console.log);
         this.matches = this.publicProfileService.matches.pipe(
             map((matches) =>
                 matches.filter((match) => match.queryInfo.messagesCount === 0),
@@ -23,7 +23,14 @@ export class MatchesPageComponent {
         );
         this.conversations = this.publicProfileService.matches.pipe(
             map((matches) =>
-                matches.filter((match) => match.queryInfo.messagesCount > 0),
+                matches
+                    .filter((match) => match.queryInfo.messagesCount > 0)
+                    .sort((a, b) =>
+                        new Date(a.queryInfo.lastMessageTimestamp) >
+                        new Date(b.queryInfo.lastMessageTimestamp)
+                            ? -1
+                            : 1,
+                    ),
             ),
         );
         this.hasMatches = this.matches.pipe(

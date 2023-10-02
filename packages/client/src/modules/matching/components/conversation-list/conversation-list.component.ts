@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MatchListItemClass } from '../../models/match-list-item';
-import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
 
 @Component({
     selector: 'app-conversation-list',
@@ -12,5 +11,17 @@ export class ConversationListComponent {
 
     onActionsClick(event: MouseEvent) {
         event.stopPropagation();
+    }
+
+    formatDate(date: Date): string {
+        const now = new Date();
+        date = new Date(date);
+        const dateStr = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+        const timeStr = `${date.getHours()}:${date.getMinutes()}`;
+
+        return dateStr ===
+            `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`
+            ? timeStr
+            : dateStr;
     }
 }
