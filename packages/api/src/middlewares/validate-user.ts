@@ -1,9 +1,9 @@
 import { NextFunction, Response } from 'express';
 import { UserRequest } from '../types/requests';
 import { container } from 'tsyringe';
-import { UserService } from '../services/user-service/user-service';
 import { HttpException } from '../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
+import { UserValidationService } from '../services/user-validation-service/user-validation-service';
 
 export const validateUser = async (
     req: UserRequest,
@@ -12,7 +12,7 @@ export const validateUser = async (
 ) => {
     if (
         !(await container
-            .resolve(UserService)
+            .resolve(UserValidationService)
             .isUserValid(req.body.session.user.userId))
     ) {
         return next(
