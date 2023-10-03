@@ -16,29 +16,6 @@
     }
 
     &__header {
-        // @include no-select;
-
-        // border-bottom: solid 1px rgb(240, 240, 240);
-        // grid-template-columns: auto 1fr auto;
-
-        // &__back {
-        //     height: 36px;
-        //     width: 36px;
-        //     background-color: var(--theme-background);
-        //     border: solid 1px rgb(240, 240, 240);
-        //     border-radius: 36px;
-        //     display: flex;
-        //     justify-content: center;
-        //     align-items: center;
-        //     font-size: 1.3em;
-        //     color: var(--theme-background-contrast);
-        //     text-decoration: none;
-
-        //     i {
-        //         margin-left: -2px;
-        //     }
-        // }
-
         &__title {
             font-size: 1.5em;
             font-weight: 500;

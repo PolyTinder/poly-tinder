@@ -9,7 +9,8 @@ const env = cleanEnv(process.env, {
     CORS: str({ default: '*' }),
     LOG_DIR: str({ default: './logs' }),
 
-    DB_HOST: str(),
+    DB_HOST: str({ default: undefined }),
+    DB_SOCKET_PATH: str({ default: undefined }),
     DB_PORT: num(),
     DB_USER: str(),
     DB_PASSWORD: str(),

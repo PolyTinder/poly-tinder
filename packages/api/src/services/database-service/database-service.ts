@@ -17,13 +17,7 @@ export class DatabaseService {
     async instantiate(): Promise<void> {
         this.db = knex({
             client: 'mysql2',
-            connection: {
-                host: env.DB_HOST,
-                port: env.DB_PORT,
-                user: env.DB_USER,
-                password: env.DB_PASSWORD,
-                database: env.DB_DATABASE,
-            },
+            connection: this.getConnectionConfig(),
         });
 
         await this.db.migrate.latest();
@@ -31,5 +25,31 @@ export class DatabaseService {
 
     isConnected(): boolean {
         return !!this.db;
+    }
+
+    private getConnectionConfig():
+        | Knex.StaticConnectionConfig
+        | Knex.ConnectionConfigProvider {
+        if (env.DB_HOST) {
+            return {
+                host: env.DB_HOST,
+                port: env.DB_PORT,
+                user: env.DB_USER,
+                password: env.DB_PASSWORD,
+                database: env.DB_DATABASE,
+            };
+        }
+        if (env.DB_SOCKET_PATH) {
+            return {
+                socketPath: env.DB_SOCKET_PATH,
+                user: env.DB_USER,
+                password: env.DB_PASSWORD,
+                database: env.DB_DATABASE,
+            };
+        }
+
+        throw new Error(
+            'Invalid database configuration: Environment variables must contain either DB_HOST or DB_SOCKET_PATH',
+        );
     }
 }

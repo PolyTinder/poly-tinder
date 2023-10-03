@@ -1,11 +1,11 @@
 export const environment = {
-    production: false,
+    production: true,
     ws: {
-        url: 'ws://localhost:3000',
+        url: 'ws://polytinder-prod-api-ekgtj5fpsq-nn.a.run.app',
         reconnectInterval: 5000,
         reconnectAttempts: 5,
     },
     api: {
-        url: 'http://localhost:3000',
+        url: 'https://polytinder-prod-api-ekgtj5fpsq-nn.a.run.app',
     },
 };
