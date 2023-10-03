@@ -5,8 +5,13 @@
                 class="user-profile__info__avatar"
                 [src]="userProfile.pictures?.[0]"
                 [alt]="'Photo de profile de ' + userProfile.name"
+                *ngIf="userProfile.pictures?.[0]"
             >
-            <p class="user-profile__info__name">{{userProfile.name}}, {{userProfile.age}}</p>
+            <div 
+                class="user-profile__info__avatar"
+                *ngIf="!userProfile.pictures?.[0]"
+            ></div>
+            <p class="user-profile__info__name">{{userProfile.name ?? 'Sans nom'}}<span *ngIf="userProfile.age">, {{userProfile.age}}</span></p>
         </div>
     
         <div class="user-profile__actions">

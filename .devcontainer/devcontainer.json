@@ -7,6 +7,13 @@
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Angular.ng-template"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
