@@ -1,7 +1,8 @@
 @import './styles/helpers';
 
 :root {
-    --theme-main-rgb: 0, 168, 120;
+    --theme-main-rgb: 254, 148, 62;
+    // --theme-main-rgb: 0, 168, 120;
     --theme-main: rgb(var(--theme-main-rgb));
     --theme-main-contrast-rgb: 255, 255, 255;
     --theme-main-contrast: rgb(var(--theme-main-contrast-rgb));
