@@ -13,10 +13,16 @@ import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { env } from '../../utils/environment';
+import { UserProfileService } from '../user-profile-service/user-profile-service';
+import { UserValidationService } from '../user-validation-service/user-validation-service';
 
 @singleton()
 export class AuthenticationService {
-    constructor(private readonly databaserService: DatabaseService) {}
+    constructor(
+        private readonly databaserService: DatabaseService,
+        private readonly userProfileService: UserProfileService,
+        private readonly userValidationService: UserValidationService,
+    ) {}
 
     private get users(): Knex.QueryBuilder<User> {
         return this.databaserService.database<User>('users');
@@ -49,6 +55,11 @@ export class AuthenticationService {
                 StatusCodes.INTERNAL_SERVER_ERROR,
             );
         }
+
+        await this.userProfileService.initUserProfile(createdUser.userId);
+        await this.userValidationService.createUserValidation(
+            createdUser.userId,
+        );
 
         const session = await this.createSession(createdUser.userId);
         const token = this.generateToken(createdUser.userId, session.sessionId);

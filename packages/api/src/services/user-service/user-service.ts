@@ -25,30 +25,4 @@ export class UserService {
 
         return user;
     }
-
-    async isUserValid(userId: number): Promise<boolean> {
-        const userValidation = await this.userValidations
-            .select('*')
-            .where({ userId })
-            .first();
-
-        if (!userValidation) {
-            return false;
-        }
-
-        return (
-            userValidation.userProfileReady &&
-            !userValidation.suspended &&
-            !userValidation.banned
-        );
-    }
-
-    async setUserProfileReady(
-        userId: number,
-        userProfileReady: boolean,
-    ): Promise<void> {
-        await this.userValidations
-            .update({ userProfileReady })
-            .where({ userId });
-    }
 }

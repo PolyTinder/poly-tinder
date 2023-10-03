@@ -1,32 +1,25 @@
 import { Knex } from 'knex';
 import { singleton } from 'tsyringe';
 import { DatabaseService } from '../database-service/database-service';
-import {
-    User,
-    UserProfile,
-    UserProfileDB,
-    UserValidation,
-} from 'common/models/user';
+import { User, UserProfile, UserProfileDB } from 'common/models/user';
 import { NoId, TypeOfId } from 'common/types/id';
-import { UserService } from '../user-service/user-service';
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
+import { UserValidationService } from '../user-validation-service/user-validation-service';
 
 @singleton()
 export class UserProfileService {
     constructor(
         private readonly databaserService: DatabaseService,
-        private readonly userService: UserService,
+        private readonly userValidationService: UserValidationService,
     ) {}
 
     private get userProfiles(): Knex.QueryBuilder<UserProfileDB> {
         return this.databaserService.database<UserProfileDB>('userProfiles');
     }
 
-    private get userValidations(): Knex.QueryBuilder<UserValidation> {
-        return this.databaserService.database<UserValidation>(
-            'userValidations',
-        );
+    async initUserProfile(userId: TypeOfId<User>): Promise<void> {
+        await this.userProfiles.insert({ userId });
     }
 
     async getUserProfile(userId: TypeOfId<User>): Promise<NoId<UserProfile>> {
@@ -94,7 +87,7 @@ export class UserProfileService {
             });
         }
 
-        await this.userService.setUserProfileReady(
+        await this.userValidationService.setUserProfileReady(
             userId,
             this.isUserProfileReady(userProfile),
         );
