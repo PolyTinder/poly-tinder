@@ -53,6 +53,18 @@
             i {
                 margin-right: 6px;
             }
+
+            &__pill {
+                background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+                color: var(--theme-main-contrast);
+                font-size: 0.9em;
+                padding: 2px 12px;
+                border-radius: 20px;
+
+                &--error {
+                    background: tomato !important;
+                }
+            }
         }
     }
 }

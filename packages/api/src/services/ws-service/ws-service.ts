@@ -1,20 +1,18 @@
 import { singleton } from 'tsyringe';
 import http from 'http';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { WsClientFun, WsServer, WsServerFun } from 'common/models/ws';
 import { TwoWayMap } from '../../utils/two-way-map';
 import { TypeOfId } from 'common/types/id';
 import { User } from 'common/models/user';
-import { AuthenticationService } from '../authentication-service/authentication-service';
 
 @singleton()
 export class WsService {
     private ws: Server<WsClientFun, WsServerFun> | undefined;
     private clients: TwoWayMap<TypeOfId<User>, string> = new TwoWayMap();
-
-    constructor(
-        private readonly authenticationService: AuthenticationService,
-    ) {}
+    private authenticationValidation:
+        | ((token: string, socket: Socket) => Promise<void>)
+        | undefined;
 
     instantiate(server: http.Server) {
         this.ws = new Server(server, {
@@ -28,24 +26,30 @@ export class WsService {
                 return socket.disconnect();
             }
 
+            if (!this.authenticationValidation) {
+                throw new Error('Authentication validation not registered');
+            }
+
             try {
-                await this.authenticationService
-                    .loadSession(token)
-                    .then((session) => {
-                        if (!session) {
-                            return socket.disconnect();
-                        }
-
-                        this.clients.set(session.user.userId, socket.id);
-
-                        socket.on('disconnect', () => {
-                            this.clients.removeRight(socket.id);
-                        });
-                    });
+                await this.authenticationValidation(token, socket);
             } catch {
                 return socket.disconnect();
             }
         });
+    }
+
+    registerAuthenticationValidation(
+        validation: (token: string, socket: Socket) => Promise<void>,
+    ) {
+        this.authenticationValidation = validation;
+    }
+
+    connectClient(userId: number, socketId: string) {
+        this.clients.set(userId, socketId);
+    }
+
+    disconnectSocket(socketId: string) {
+        this.clients.removeRight(socketId);
     }
 
     get server() {

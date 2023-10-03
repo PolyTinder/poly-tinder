@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { PublicUserResultClass } from '../../models/public-user-result';
 import { PublicProfileService } from '../../services/public-profile-service/public-profile.service';
 import { MatchingService } from '../../services/matching-service/matching.service';
+import { ValidationService } from 'src/modules/validation/services/validation.service';
 
 @Component({
     selector: 'app-swiping-page',
@@ -16,8 +17,13 @@ export class SwipingPageComponent {
     constructor(
         private readonly publicProfileService: PublicProfileService,
         private readonly matchingService: MatchingService,
+        private readonly validationService: ValidationService,
     ) {
         this.fetchNext();
+    }
+
+    get userValid() {
+        return this.validationService.userValid;
     }
 
     fetchNext() {

@@ -18,6 +18,7 @@
             <a routerLink="/profile-edit" class="user-profile__actions__btn interactable--small">
                 <i class="fas fa-user-edit"></i>
                 Modifier mon profil
+                <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="!(userValid | async)">1</span>
             </a>
             <a routerLink="/profile-preview" class="user-profile__actions__btn interactable--small">
                 <i class="fas fa-user"></i>

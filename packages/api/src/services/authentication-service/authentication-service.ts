@@ -15,6 +15,8 @@ import jwt from 'jsonwebtoken';
 import { env } from '../../utils/environment';
 import { UserProfileService } from '../user-profile-service/user-profile-service';
 import { UserValidationService } from '../user-validation-service/user-validation-service';
+import { WsService } from '../ws-service/ws-service';
+import { Socket } from 'socket.io';
 
 @singleton()
 export class AuthenticationService {
@@ -22,7 +24,12 @@ export class AuthenticationService {
         private readonly databaserService: DatabaseService,
         private readonly userProfileService: UserProfileService,
         private readonly userValidationService: UserValidationService,
-    ) {}
+        private readonly wsService: WsService,
+    ) {
+        this.wsService.registerAuthenticationValidation(
+            this.validateSocket.bind(this),
+        );
+    }
 
     private get users(): Knex.QueryBuilder<User> {
         return this.databaserService.database<User>('users');
@@ -204,5 +211,19 @@ export class AuthenticationService {
         sessionId: TypeOfId<UserSavedSession>,
     ): string {
         return jwt.sign({ userId, sessionId }, env.JWT_SECRET);
+    }
+
+    private async validateSocket(token: string, socket: Socket): Promise<void> {
+        await this.loadSession(token).then((session) => {
+            if (!session) {
+                return socket.disconnect();
+            }
+
+            this.wsService.connectClient(session.user.userId, socket.id);
+
+            socket.on('disconnect', () => {
+                this.wsService.disconnectSocket(socket.id);
+            });
+        });
     }
 }

@@ -1,4 +1,5 @@
 import { Message } from "./message";
+import { UserValidationResponse } from "./user";
 
 export interface WsClient {
     a: {};
@@ -9,6 +10,7 @@ export interface WsServer {
     'match:matched-passive': { matchedUserId: number };
     'message:new': Message;
     'match:update-list': {};
+    'user-validation:update': UserValidationResponse,
 }
 
 

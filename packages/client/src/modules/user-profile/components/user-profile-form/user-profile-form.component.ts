@@ -43,7 +43,7 @@ export class UserProfileFormComponent {
         ]),
         bio: new FormControl('', [
             Validators.required,
-            Validators.minLength(3),
+            Validators.minLength(5),
             Validators.maxLength(255),
         ]),
         program: new FormControl('', []),
@@ -61,8 +61,8 @@ export class UserProfileFormComponent {
         jobCompany: new FormControl(''),
         livingIn: new FormControl(''),
         gender: new FormControl(''),
-        genderCategory: new FormControl(''),
-        genderPreference: new FormControl(''),
+        genderCategory: new FormControl('', [Validators.required]),
+        genderPreference: new FormControl('', [Validators.required]),
         sexualOrientation: new FormControl(''),
     });
     programs = PROGRAMS_ARRAY;

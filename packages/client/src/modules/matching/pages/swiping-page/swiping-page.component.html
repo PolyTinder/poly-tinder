@@ -1,5 +1,11 @@
 <ng-container *ngIf="availableUsers | async; let availableUsers">
-    <ng-container *ngIf="availableUsers.length == 0">
+    <ng-container *ngIf="!(userValid | async)">
+        <div class="no-profiles">
+            <p>Profil incomplet, <a routerLink="/profile-edit">complétez le</a> !</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="availableUsers.length == 0 && (userValid | async)">
         <div class="no-profiles">
             <p>Aucun profil disponible pour le moment. Revenez bientôt !</p>
         </div>

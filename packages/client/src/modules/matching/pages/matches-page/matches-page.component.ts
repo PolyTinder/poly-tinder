@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 import { MatchListItemClass } from '../../models/match-list-item';
+import { ValidationService } from 'src/modules/validation/services/validation.service';
 
 @Component({
     selector: 'app-matches-page',
@@ -14,7 +15,10 @@ export class MatchesPageComponent {
     hasMatches: Observable<boolean>;
     hasConversations: Observable<boolean>;
 
-    constructor(private readonly publicProfileService: PublicProfileService) {
+    constructor(
+        private readonly publicProfileService: PublicProfileService,
+        private readonly validationService: ValidationService,
+    ) {
         this.matches = this.publicProfileService.matches.pipe(
             map((matches) =>
                 matches.filter((match) => match.queryInfo.messagesCount === 0),
@@ -40,5 +44,9 @@ export class MatchesPageComponent {
         );
 
         this.publicProfileService.fetchMatches().subscribe();
+    }
+
+    get userValid() {
+        return this.validationService.userValid;
     }
 }

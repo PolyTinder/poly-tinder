@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/modules/authentication/services/authe
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
 import { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';
+import { ValidationService } from 'src/modules/validation/services/validation.service';
 
 @Component({
     selector: 'app-navigation',
@@ -21,6 +22,7 @@ export class NavigationComponent {
         private readonly userProfileService: UserProfileService,
         private readonly router: Router,
         private readonly publicProfileService: PublicProfileService,
+        private readonly validationService: ValidationService,
     ) {}
 
     get navigation() {
@@ -67,6 +69,10 @@ export class NavigationComponent {
 
     get unreadConversationCount() {
         return this.publicProfileService.unreadConversationCount;
+    }
+
+    get userValid() {
+        return this.validationService.userValid;
     }
 
     logout() {

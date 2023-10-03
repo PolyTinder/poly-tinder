@@ -61,6 +61,8 @@ export interface UserValidation {
     banned: boolean;
 }
 
+export type UserValidationResponse = Pick<UserValidation, 'userProfileReady'>;
+
 export interface UserAlias {
     userAliasId: string;
     userId: number;

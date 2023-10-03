@@ -113,6 +113,10 @@ nav {
                     font-size: 0.9em;
                     padding: 2px 12px;
                     border-radius: 20px;
+
+                    &--error {
+                        background: tomato !important;
+                    }
                 }
 
                 &--active {
@@ -128,6 +132,10 @@ nav {
                         &__pill {
                             background: var(--theme-main-contrast);
                             color: var(--theme-main);
+
+                            &--error {
+                                color: white !important;
+                            }
                         }
                     }
                 }

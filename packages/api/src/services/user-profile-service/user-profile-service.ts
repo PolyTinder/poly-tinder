@@ -87,6 +87,12 @@ export class UserProfileService {
             });
         }
 
+        console.log(
+            'VALIDATE',
+            userProfile,
+            this.isUserProfileReady(userProfile),
+        );
+
         await this.userValidationService.setUserProfileReady(
             userId,
             this.isUserProfileReady(userProfile),

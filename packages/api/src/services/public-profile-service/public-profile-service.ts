@@ -77,12 +77,6 @@ export class PublicProfileService {
                 );
             })
             .innerJoin(
-                'userValidations',
-                'targetUser.userId',
-                '=',
-                'userValidations.userId',
-            )
-            .innerJoin(
                 'userProfiles as targetUserProfile',
                 'targetUser.userId',
                 '=',
@@ -93,6 +87,18 @@ export class PublicProfileService {
                 'activeUser.userId',
                 '=',
                 'activeUserProfile.userId',
+            )
+            .innerJoin(
+                'userValidations as activeUserValidations',
+                'activeUser.userId',
+                '=',
+                'activeUserValidations.userId',
+            )
+            .innerJoin(
+                'userValidations as targetUserValidations',
+                'targetUser.userId',
+                '=',
+                'targetUserValidations.userId',
             )
             .leftJoin('blocks', function () {
                 this.on(function () {
@@ -111,10 +117,13 @@ export class PublicProfileService {
             })
             .where('targetUser.userId', '!=', userId)
             .andWhere('activeUser.userId', '=', userId)
+            .andWhere('activeUserValidations.userProfileReady', '=', true)
+            .andWhere('activeUserValidations.suspended', '=', false)
+            .andWhere('activeUserValidations.banned', '=', false)
+            .andWhere('targetUserValidations.userProfileReady', '=', true)
+            .andWhere('targetUserValidations.suspended', '=', false)
+            .andWhere('targetUserValidations.banned', '=', false)
             .andWhere('swipes.targetUserId', 'is', null)
-            .andWhere('userValidations.userProfileReady', '=', true)
-            .andWhere('userValidations.suspended', '=', false)
-            .andWhere('userValidations.banned', '=', false)
             .andWhere('blocks.blockedUserId', 'is', null)
             .andWhere(function () {
                 this.where('activeUserProfile.genderPreference', '=', 'all')
