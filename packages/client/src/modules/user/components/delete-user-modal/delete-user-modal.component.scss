@@ -1,0 +1,28 @@
+@import '../../../../styles/utils';
+
+.container {
+    @include no-select;
+    max-width: 500px
+}
+
+.subtitle {
+    margin-bottom: 24px;
+}
+
+form {
+    width: 100%;
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+}

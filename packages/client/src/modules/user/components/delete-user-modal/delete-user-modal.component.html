@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 mat-dialog-title>Supprimer mon compte</h2>
+
+    <mat-dialog-content>
+        <p class="subtitle">Supprimer votre compte supprimera votre compte, vos matchs et vos messages. Cet opération est irréversible.</p>
+        
+        <p class="subtitle">Veuillez confirmer votre mot de passe pour continuer.</p>
+        
+        <form [formGroup]="deleteUserForm" (submit)="onSubmit()">
+            <mat-form-field>
+                <mat-label><i class="fas fa-key"></i> Mot de passe</mat-label>
+                <input type="password" formControlName="password" matInput>
+            </mat-form-field>
+        
+            <div class="form-actions">
+                <app-button (btnClick)="onCancel($event)">Annuler</app-button>
+                <app-button icon="fas fa-trash" type="submit" color="danger" [isLoading]="loading | async">Supprimer mon compte</app-button>
+            </div>
+        </form>
+    </mat-dialog-content>
+</div>
