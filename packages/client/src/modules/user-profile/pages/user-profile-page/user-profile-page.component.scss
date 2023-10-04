@@ -38,22 +38,6 @@
         max-width: 450px;
 
         &__btn {
-            display: block;
-            appearance: none;
-            background-color: var(--theme-background);
-            border: solid 1px rgb(240, 240, 240);
-            font-size: inherit;
-            padding: 12px 24px;
-            border-radius: 6px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--theme-background-contrast);
-            box-shadow: $default-shadow;
-
-            i {
-                margin-right: 6px;
-            }
-
             &__pill {
                 background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
                 color: var(--theme-main-contrast);

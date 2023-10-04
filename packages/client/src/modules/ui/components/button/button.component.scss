@@ -1,0 +1,70 @@
+@import '../../../../styles/variables';
+
+.btn {
+    appearance: none;
+    background-color: var(--theme-background);
+    color: var(--theme-background-contrast);
+    font: inherit;
+    border: solid 1px rgb(240, 240, 240);
+    border-radius: 6px;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    display: block;
+    text-decoration: none;
+
+    &:disabled {
+        opacity: 0.55;
+    }
+
+    &__content {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        transition: ease-in 0.1s all;
+    }
+
+    &__loading {
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        translate: -50% -50%;
+        opacity: 0;
+        transition: ease-in 0.1s all;
+    }
+
+    &--loading {
+        .btn__content {
+            opacity: 0;
+            translate: -100%;
+            transition: ease-in 0.1s all;
+        }
+
+        .btn__loading {
+            left: 50%;
+            opacity: 1;
+            transition: ease-in 0.1s all;
+        }
+    }
+
+    &--style {
+        &--primary {
+            background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+            color: var(--theme-main-contrast);
+            border: none;
+        }
+
+        &--danger {
+            background-color: tomato;
+            color: white;
+            border: none;
+        }
+    }
+
+    &--shadow {
+        box-shadow: $default-shadow;
+    }
+}

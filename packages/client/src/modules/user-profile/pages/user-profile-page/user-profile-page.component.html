@@ -15,36 +15,24 @@
         </div>
     
         <div class="user-profile__actions">
-            <a routerLink="/profile-edit" class="user-profile__actions__btn interactable--small">
-                <i class="fas fa-user-edit"></i>
+            <app-button icon="fas fa-user-edit" link="/profile-edit" interactable="small" [shadow]="true">
                 Modifier mon profil
-                <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="!(userValid | async)">1</span>
-            </a>
-            <a routerLink="/profile-preview" class="user-profile__actions__btn interactable--small">
-                <i class="fas fa-user"></i>
-                Visualiser mon profil
-            </a>
+                <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="(userValid | async) === false">1</span>
+            </app-button>
+
+            <app-button icon="fas fa-user" link="/profile-preview" interactable="small" [shadow]="true">Visualiser mon profil</app-button>
             <!-- <button class="user-profile__actions__btn interactable--small">
                 <i class="fas fa-cog"></i>
                 Préférences
             </button> -->
-            <button class="user-profile__actions__btn interactable--small" [matMenuTriggerFor]="logoutMenu">
-                <i class="fas fa-sign-out"></i>
-                Se déconnecter
-    
-            </button>
+            <app-button icon="fas fa-sign-out" [shadow]="true" interactable="small" [matMenuTriggerFor]="logoutMenu">Se déconnecter</app-button>
             <mat-menu #logoutMenu="matMenu">
                 <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>
             </mat-menu>
+            
             <hr>
-            <a routerLink="/about" class="user-profile__actions__btn interactable--small">
-                <i class="fas fa-info-circle"></i>
-                À propos
-            </a>
-            <a href="https://github.com/PolyTinder/poly-tinder" target="_blank" class="user-profile__actions__btn interactable--small">
-                <i class="fab fa-github"></i>
-                Github
-            </a>
+            <app-button icon="fas fa-info-circle" link="/about" interactable="small" [shadow]="true">À propos</app-button>
+            <app-button icon="fab fa-github" link="https://github.com/PolyTinder/poly-tinder" interactable="small" [shadow]="true">Github</app-button>
         </div>
     </div>
 </app-layout>

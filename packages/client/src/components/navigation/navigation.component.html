@@ -13,7 +13,7 @@
                     <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
                     <span class="nav-item__link__content">{{item.text}}</span>
                     <span class="nav-item__link__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
-                    <span class="nav-item__link__pill nav-item__link__pill--error" *ngIf="item.href === '/profile' && !(userValid | async)">1</span>
+                    <span class="nav-item__link__pill nav-item__link__pill--error" *ngIf="item.href === '/profile' && (userValid | async) === false">1</span>
                 </a>
             </li>
         </ul>
