@@ -14,7 +14,7 @@ export class ApiInterceptor implements HttpInterceptor {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         req: HttpRequest<any>,
         next: HttpHandler,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): Observable<HttpEvent<any>> {
         return next.handle(
             req.url.startsWith('http')

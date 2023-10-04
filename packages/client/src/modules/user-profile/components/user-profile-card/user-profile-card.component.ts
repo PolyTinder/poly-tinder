@@ -22,8 +22,8 @@ export class UserProfileCardComponent {
 
     get program() {
         return this.userProfile?.program
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ? (PROGRAMS as any)[this.userProfile?.program]
+            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (PROGRAMS as any)[this.userProfile?.program]
             : undefined;
     }
 
