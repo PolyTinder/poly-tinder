@@ -29,6 +29,7 @@
             <mat-menu #logoutMenu="matMenu">
                 <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>
             </mat-menu>
+            <app-button icon="fas fa-trash" (btnClick)="askDeleteUser()">Supprimer mon compte</app-button>
             
             <hr>
             <app-button icon="fas fa-info-circle" link="/about" interactable="small" [shadow]="true">À propos</app-button>

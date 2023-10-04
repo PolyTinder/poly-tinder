@@ -14,7 +14,12 @@
         
             <div class="form-actions">
                 <app-button (btnClick)="onCancel($event)">Annuler</app-button>
-                <app-button icon="fas fa-trash" type="submit" color="danger" [isLoading]="loading | async">Supprimer mon compte</app-button>
+                <app-button
+                    icon="fas fa-trash"
+                    type="submit"
+                    color="danger"
+                    [isLoading]="loading | async"
+                >Supprimer mon compte</app-button>
             </div>
         </form>
     </mat-dialog-content>
