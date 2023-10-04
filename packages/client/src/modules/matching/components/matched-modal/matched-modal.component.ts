@@ -8,5 +8,8 @@ import { PublicUserResult } from 'common/models/user';
     styleUrls: ['./matched-modal.component.scss'],
 })
 export class MatchedModalComponent {
-    constructor(public dialogRef: MatDialogRef<MatchedModalComponent>, @Inject(MAT_DIALOG_DATA) public userProfile: PublicUserResult) {} 
+    constructor(
+        public dialogRef: MatDialogRef<MatchedModalComponent>,
+        @Inject(MAT_DIALOG_DATA) public userProfile: PublicUserResult,
+    ) {}
 }

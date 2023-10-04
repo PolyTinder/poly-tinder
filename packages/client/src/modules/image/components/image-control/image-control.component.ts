@@ -59,6 +59,7 @@ export class ImageControlComponent {
         this.widget.widget.openDialog();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onUpload(info: any) {
         this.value.next(info.cdnUrl);
         this.change.next(info.cdnUrl);

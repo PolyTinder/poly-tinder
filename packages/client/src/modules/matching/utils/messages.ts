@@ -28,6 +28,7 @@ export const groupMessages = (messages: Message[]): MessageGroup[] => {
 const isSameGroup = (message: Message, previousMessage: Message): boolean => {
     return (
         message.senderId === previousMessage.senderId &&
-        message.timestamp.getTime() - previousMessage.timestamp.getTime() < 5 * 60 * 1000
+        message.timestamp.getTime() - previousMessage.timestamp.getTime() <
+            5 * 60 * 1000
     );
 };

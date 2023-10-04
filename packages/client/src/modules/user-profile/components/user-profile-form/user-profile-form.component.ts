@@ -126,6 +126,7 @@ export class UserProfileFormComponent {
         const res: Omit<Partial<UserProfile>, 'userId'> = {};
 
         for (const [k, v] of Object.entries(this.userProfileForm.value)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (res as any)[k] = v ?? undefined;
         }
 

@@ -24,6 +24,6 @@ export class AppComponent {
     }
 
     get shouldHideNav() {
-        return !!this.router.url.match(/\/matches\/[a-zA-Z0-9\-]+/);
+        return !!this.router.url.match(/\/matches\/[a-zA-Z0-9-]+/);
     }
 }
