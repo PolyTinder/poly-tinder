@@ -42,8 +42,6 @@ export class InitializerService {
                 } else if (!session && !ws) {
                     this.stateService.setReady();
                 }
-
-                this.handleRedirect(session);
             },
             error: (error) => {
                 this.stateService.setError(error);
@@ -53,6 +51,7 @@ export class InitializerService {
         this.authenticationService.loadSession().subscribe((session) => {
             if (session) {
                 this.wsService.connect(session.token).subscribe();
+                this.handleRedirect(session);
             } else {
                 this.stateService.setReady();
             }

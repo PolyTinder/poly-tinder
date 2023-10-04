@@ -7,7 +7,7 @@ import {
 import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { SessionService } from '../session-service/session.service';
 import { Router } from '@angular/router';
-import { LOGIN_ROUTE } from 'src/constants/routes';
+import { HOME_ROUTE, LOGIN_ROUTE } from 'src/constants/routes';
 import { WsService } from 'src/services/ws-service/ws.service';
 
 @Injectable({
@@ -25,7 +25,10 @@ export class AuthenticationService {
         return this.http.post<UserPublicSession>('/auth/login', user).pipe(
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
-                    tap(() => this.sessionService.session$.next(session)),
+                    tap(() => {
+                        this.sessionService.session$.next(session);
+                        this.router.navigate([HOME_ROUTE]);
+                    }),
                     map(() => session),
                 ),
             ),
@@ -36,7 +39,10 @@ export class AuthenticationService {
         return this.http.post<UserPublicSession>('/auth/signup', user).pipe(
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
-                    tap(() => this.sessionService.session$.next(session)),
+                    tap(() => {
+                        this.sessionService.session$.next(session);
+                        this.router.navigate([HOME_ROUTE]);
+                    }),
                     map(() => session),
                 ),
             ),

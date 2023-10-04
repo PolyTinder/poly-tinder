@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule, Routes } from '@angular/router';
-import { privateRouteGuard } from 'src/guards/private-route/private-route.guard';
-import { publicRouteGuard } from 'src/guards/public-route/public-route.guard';
 import { LoginPageComponent } from './authentication/pages/login-page/login-page.component';
 import {
     ABOUT_ROUTE,
@@ -24,12 +22,12 @@ import { UserProfilePreviewComponent } from './user-profile/pages/user-profile-p
 import { MatchedUserPageComponent } from './matching/pages/matched-user-page/matched-user-page.component';
 
 const privateRoute: Route = {
-    canActivate: [privateRouteGuard],
+    // canActivate: [privateRouteGuard],
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
 };
 
 const publicRoute: Route = {
-    canActivate: [publicRouteGuard],
+    // canActivate: [publicRouteGuard],
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
 };
 
