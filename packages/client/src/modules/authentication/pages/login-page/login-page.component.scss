@@ -1,4 +1,5 @@
 @import '../../../../styles/utils';
+@import '../../../../styles/variables';
 
 main {
     @include no-select;
@@ -13,6 +14,28 @@ main {
     box-sizing: border-box;
     max-width: 600px;
     margin: auto;
+    
+    .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 24px;
+
+        &__logo {
+            width: 75px;
+            aspect-ratio: 1;
+        }
+
+        &__name {
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+
+        @media screen and (min-width: $mobile-breakpoint) {
+            display: none;
+        }
+    }
     
     .tagline {
         text-align: center;
