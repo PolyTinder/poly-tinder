@@ -5,6 +5,7 @@ import { AuthenticationUser } from 'common/models/authentication';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { HOME_ROUTE } from 'src/constants/routes';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-login-page',
@@ -20,6 +21,7 @@ export class LoginPageComponent {
         ]),
         password: new FormControl('', []),
     });
+    loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private readonly authenticationService: AuthenticationService,
@@ -39,11 +41,23 @@ export class LoginPageComponent {
         }
 
         this.loginForm.setErrors(null);
+        this.loading.next(true);
 
         this.authenticationService
             .login(this.loginForm.value as AuthenticationUser)
-            .subscribe(() => {
-                this.router.navigate([HOME_ROUTE]);
+            .subscribe({
+                next: () => {
+                    this.router.navigate([HOME_ROUTE]);
+                    this.loading.next(false);
+                },
+                error: (error: HttpErrorResponse) => {
+                    if (error.status === 406) {
+                        this.loginForm.setErrors({ invalidCredentials: true });
+                    } else {
+                        this.loginForm.setErrors({ unknownError: true });
+                    }
+                    this.loading.next(false);
+                },
             });
     }
 }

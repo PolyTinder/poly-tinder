@@ -45,6 +45,33 @@ main {
             font-weight: 500;
 
             border-radius: 40px;
+
+            &:disabled {
+                opacity: 0.55;
+            }
+
+            &:not(:disabled) {
+                cursor: pointer;
+            }
+        }
+
+        .form-messages {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 24px;
+            gap: 12px;
+
+            p {
+                margin: 0;
+
+                &.form-error {
+                    color: tomato;
+                    font-style: italic;
+                    font-weight: 500;
+                }
+            }
         }
     }
 }

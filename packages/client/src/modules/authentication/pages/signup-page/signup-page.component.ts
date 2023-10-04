@@ -24,6 +24,7 @@ export class SignupPageComponent {
             Validators.minLength(1),
         ]),
     });
+    loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private readonly authenticationService: AuthenticationService,
@@ -43,22 +44,25 @@ export class SignupPageComponent {
         }
 
         this.signupForm.setErrors(null);
+        this.loading.next(true);
 
         this.authenticationService
             .signup(this.signupForm.value as AuthenticationUser)
-            .pipe(
-                catchError((err: HttpErrorResponse) => {
-                    this.signupForm.setErrors({
-                        validation: err.error.message,
-                    });
-
-                    return of(undefined);
-                }),
-            )
-            .subscribe((session) => {
-                if (session) {
-                    this.router.navigate([HOME_ROUTE]);
-                }
+            .subscribe({
+                next: (session) => {
+                    if (session) {
+                        this.router.navigate([HOME_ROUTE]);
+                    }
+                    this.loading.next(false);
+                },
+                error: (error: HttpErrorResponse) => {
+                    if (error.status === 406) {
+                        this.signupForm.setErrors({ invalidCredentials: true });
+                    } else {
+                        this.signupForm.setErrors({ invalid: true });
+                    }
+                    this.loading.next(false);
+                },
             });
     }
 }
