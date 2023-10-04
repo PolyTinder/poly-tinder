@@ -7,6 +7,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UiModule } from '../ui/ui.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { UiModule } from '../ui/ui.module';
         AppRoutingModule,
         MatFormFieldModule,
         MatInputModule,
+        MatCheckboxModule,
         UiModule,
     ],
     exports: [LoginPageComponent, SignupPageComponent],

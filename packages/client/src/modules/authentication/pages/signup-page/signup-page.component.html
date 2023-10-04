@@ -21,9 +21,11 @@
                     <mat-error *ngIf="signupForm.controls.password.errors?.['required']">Le mot de passe est requis</mat-error>
                 </mat-form-field>
 
-                <mat-form-field>
-                    <input type="checkbox" formControlName="privacyPolicy" matInput />
-                </mat-form-field>
+                <mat-checkbox formControlName="privacyPolicy">
+                    En cliquant sur le bouton 'Créer mon compte', vous confirmez avoir lu et accepté nos <a href="/privacy-policy" target="_blank">Politiques de confidentialité</a>, nos <a href="/terms-and-conditions" target="_blank">Termes et conditions</a>, ainsi que notre <a href="/acceptable-use-policy" target="_blank">Politique d'utilisation acceptable</a>.
+                </mat-checkbox>
+                <br>
+                <mat-error *ngIf="signupForm.controls.privacyPolicy.errors?.['required']">Vous devez lire et accepter les politiques avant de continuer.</mat-error>
 
                 <div class="form-messages">
                     <p class="form-error" *ngIf="signupForm.errors?.['conflict']">Ce email est déjà utilisé</p>
