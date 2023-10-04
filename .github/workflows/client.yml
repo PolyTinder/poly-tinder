@@ -53,7 +53,7 @@ jobs:
       - name: Build
         run: |
           docker buildx build \
-            -f Dockerfile.api \
+            -f Dockerfile.client \
             --platform linux/amd64 \
             --target prod \
             -t $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE \
