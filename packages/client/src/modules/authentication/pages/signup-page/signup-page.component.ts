@@ -55,12 +55,8 @@ export class SignupPageComponent {
                     }
                     this.loading.next(false);
                 },
-                error: (error: HttpErrorResponse) => {
-                    if (error.status === 406) {
-                        this.signupForm.setErrors({ invalidCredentials: true });
-                    } else {
-                        this.signupForm.setErrors({ invalid: true });
-                    }
+                error: () => {
+                    this.signupForm.setErrors({ unknownError: true });
                     this.loading.next(false);
                 },
             });
