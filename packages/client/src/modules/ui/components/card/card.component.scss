@@ -39,6 +39,14 @@
         }
     }
 
+    &--color {
+        &--danger {
+            background-color: lighten(tomato, 30%);
+            border-color: tomato;
+            font-weight: 500;
+        }
+    }
+
     @media screen and (max-width: $mobile-breakpoint) {
         padding: 12px;
         gap: 12px;

@@ -11,6 +11,7 @@ export class CardComponent {
     @Input() title: string | undefined;
     @Input() anchor: string | undefined;
     @Input() noPadding: boolean = false;
+    @Input() color: 'default' | 'danger' = 'default';
 
     constructor(private readonly router: Router) {}
 

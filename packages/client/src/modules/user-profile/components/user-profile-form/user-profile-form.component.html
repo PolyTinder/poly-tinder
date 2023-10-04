@@ -1,4 +1,12 @@
+<ng-template #formInvalid>
+    <app-card *ngIf="userProfileForm.invalid" color="danger">
+        Assurez-vous d'avoir rempli tous les champs obligatoires (incluant au moins une image).
+    </app-card>
+</ng-template>
+
 <form [formGroup]="userProfileForm" (submit)="onSubmit()" class="form">
+    <ng-container *ngTemplateOutlet="formInvalid"></ng-container>
+
     <app-card title="Mes photos" icon="fas fa-camera-retro">
         <div class="form__pictures">
             <app-image-control
@@ -174,7 +182,7 @@
         </mat-form-field>
     </app-card>
 
-    <p *ngIf="userProfileForm.invalid">Invalid</p>
+    <ng-container *ngTemplateOutlet="formInvalid"></ng-container>
 
     <button class="form__submit interactable" type="submit" [disabled]="!userProfileForm.dirty || userProfileForm.invalid">
         <i class="fas fa-save"></i> Enregistrer
