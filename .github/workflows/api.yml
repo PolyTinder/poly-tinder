@@ -56,7 +56,7 @@ jobs:
             -f Dockerfile.api \
             --platform linux/amd64 \
             --target prod \
-            -t $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT-$SERVICE/$SERVICE \
+            -t $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE \
             .
       - name: Configure Docker
         run: gcloud auth configure-docker $REGION-docker.pkg.dev
