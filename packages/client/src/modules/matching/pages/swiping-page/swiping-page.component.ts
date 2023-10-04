@@ -23,7 +23,7 @@ export class SwipingPageComponent {
     }
 
     get userValid() {
-        return this.validationService.userValid;
+        return this.validationService.userProfileReady;
     }
 
     fetchNext() {

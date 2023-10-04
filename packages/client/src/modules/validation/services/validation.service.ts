@@ -9,7 +9,7 @@ import { WsService } from 'src/services/ws-service/ws.service';
     providedIn: 'root',
 })
 export class ValidationService {
-    private userValid$: BehaviorSubject<boolean | undefined> =
+    private userProfileReady$: BehaviorSubject<boolean | undefined> =
         new BehaviorSubject<boolean | undefined>(undefined);
 
     constructor(
@@ -20,26 +20,26 @@ export class ValidationService {
         this.wsService
             .listen('user-validation:update')
             .subscribe(({ userProfileReady }) => {
-                this.userValid$.next(userProfileReady);
+                this.userProfileReady$.next(userProfileReady);
             });
 
         this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
             if (isLoggedIn) {
                 this.fetchValidation().subscribe();
             } else {
-                this.userValid$.next(undefined);
+                this.userProfileReady$.next(undefined);
             }
         });
     }
 
-    get userValid(): Observable<boolean | undefined> {
-        return this.userValid$.asObservable();
+    get userProfileReady(): Observable<boolean | undefined> {
+        return this.userProfileReady$.asObservable();
     }
 
     private fetchValidation(): Observable<boolean> {
         return this.http.get<UserValidationResponse>('/user-validation').pipe(
             tap(({ userProfileReady }) =>
-                this.userValid$.next(Boolean(userProfileReady)),
+                this.userProfileReady$.next(Boolean(userProfileReady)),
             ),
             map(({ userProfileReady }) => userProfileReady),
         );

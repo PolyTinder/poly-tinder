@@ -22,7 +22,7 @@ export class UserProfilePageComponent {
     }
 
     get userValid() {
-        return this.validationService.userValid;
+        return this.validationService.userProfileReady;
     }
 
     logout() {
