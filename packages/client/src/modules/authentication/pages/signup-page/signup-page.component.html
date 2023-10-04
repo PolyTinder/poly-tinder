@@ -21,6 +21,10 @@
                     <mat-error *ngIf="signupForm.controls.password.errors?.['required']">Le mot de passe est requis</mat-error>
                 </mat-form-field>
 
+                <mat-form-field>
+                    <input type="checkbox" formControlName="privacyPolicy" matInput />
+                </mat-form-field>
+
                 <div class="form-messages">
                     <p class="form-error" *ngIf="signupForm.errors?.['conflict']">Ce email est déjà utilisé</p>
                     <p class="form-error" *ngIf="signupForm.errors?.['unknownError']">Un erreur est survenu</p>

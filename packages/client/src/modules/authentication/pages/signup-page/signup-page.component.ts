@@ -21,6 +21,7 @@ export class SignupPageComponent {
             Validators.required,
             Validators.minLength(1),
         ]),
+        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),
     });
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

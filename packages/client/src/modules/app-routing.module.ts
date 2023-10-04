@@ -3,6 +3,7 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './authentication/pages/login-page/login-page.component';
 import {
     ABOUT_ROUTE,
+    ACCEPTABLE_USE_POLICY_ROUTE,
     LOGIN_ROUTE,
     MATCHED_USER_ROUTE,
     MATCHES_ROUTE,
@@ -12,6 +13,7 @@ import {
     PROFILE_ROUTE,
     SIGNUP_ROUTE,
     SWIPING_ROUTE,
+    TERMS_AND_CONDITIONS_ROUTE,
 } from 'src/constants/routes';
 import { SignupPageComponent } from './authentication/pages/signup-page/signup-page.component';
 import { UserProfilePageComponent } from './user-profile/pages/user-profile-page/user-profile-page.component';
@@ -22,6 +24,8 @@ import { AboutPageComponent } from './about/pages/about-page/about-page.componen
 import { UserProfilePreviewComponent } from './user-profile/pages/user-profile-preview/user-profile-preview.component';
 import { MatchedUserPageComponent } from './matching/pages/matched-user-page/matched-user-page.component';
 import { PrivacyPolicyComponent } from './about/pages/privacy-policy/privacy-policy.component';
+import { TermsAndConditionsComponent } from './about/pages/terms-and-conditions/terms-and-conditions.component';
+import { AcceptableUsePolicyComponent } from './about/pages/acceptable-use-policy/acceptable-use-policy.component';
 
 const privateRoute: Route = {
     // canActivate: [privateRouteGuard],
@@ -58,6 +62,14 @@ const routes: Routes = [
     },
     { path: ABOUT_ROUTE, component: AboutPageComponent },
     { path: PRIVACY_POLICY_ROUTE, component: PrivacyPolicyComponent },
+    {
+        path: TERMS_AND_CONDITIONS_ROUTE,
+        component: TermsAndConditionsComponent,
+    },
+    {
+        path: ACCEPTABLE_USE_POLICY_ROUTE,
+        component: AcceptableUsePolicyComponent,
+    },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },
     { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },
