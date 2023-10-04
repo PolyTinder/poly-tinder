@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, tap } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -14,7 +14,7 @@ export class DeleteUserModalComponent {
         false,
     );
     deleteUserForm = new FormGroup({
-        password: new FormControl('', [Validators.required]),
+        password: new FormControl('', []),
     });
 
     constructor(
@@ -28,15 +28,12 @@ export class DeleteUserModalComponent {
 
     onSubmit() {
         if (this.deleteUserForm.invalid) {
-            return;
-        }
-        if (!this.deleteUserForm.value.password) {
-            return;
+            throw new Error('Invalid form');
         }
 
         this.loading$.next(true);
-        return this.userService
-            .deleteUser(this.deleteUserForm.value.password)
+        this.userService
+            .deleteUser(this.deleteUserForm.value.password ?? '')
             .pipe(
                 tap({
                     next: () => this.ref.close(),
@@ -44,7 +41,8 @@ export class DeleteUserModalComponent {
                         this.loading$.next(false);
                     },
                 }),
-            );
+            )
+            .subscribe();
     }
 
     onCancel(event: Event) {

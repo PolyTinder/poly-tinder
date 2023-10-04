@@ -43,10 +43,12 @@ export class PublicProfileService {
         });
 
         this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
-            if (!isLoggedIn) this.matches$.next([]);
+            if (isLoggedIn) {
+                this.fetchMatches().subscribe();
+            } else {
+                this.matches$.next([]);
+            }
         });
-
-        this.fetchMatches().subscribe();
     }
 
     get matches() {

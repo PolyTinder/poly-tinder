@@ -24,6 +24,10 @@ export class UserService {
             .delete<void>('/user', {
                 body: { password },
             })
-            .pipe(tap(() => this.authenticationService.logout()));
+            .pipe(
+                tap(() => {
+                    this.authenticationService.logout(true);
+                }),
+            );
     }
 }

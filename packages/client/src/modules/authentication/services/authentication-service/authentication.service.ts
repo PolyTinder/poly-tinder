@@ -55,14 +55,21 @@ export class AuthenticationService {
         );
     }
 
-    logout(): Observable<void> {
-        return this.http.post<void>('/auth/logout', {}).pipe(
-            tap(() => {
-                this.sessionService.session$.next(undefined);
-                this.router.navigate([LOGIN_ROUTE]);
-                this.wsService.disconnect();
-            }),
-        );
+    logout(ignoreApi: boolean = false): Observable<void> {
+        const onLogout = () => {
+            this.sessionService.session$.next(undefined);
+            this.router.navigate([LOGIN_ROUTE]);
+            this.wsService.disconnect();
+        };
+
+        if (ignoreApi) {
+            onLogout();
+            return of();
+        }
+
+        return this.http
+            .post<void>('/auth/logout', {})
+            .pipe(tap(() => onLogout()));
     }
 
     loadSession(): Observable<UserPublicSession | undefined> {

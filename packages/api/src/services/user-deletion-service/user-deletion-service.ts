@@ -14,6 +14,8 @@ import { AuthenticationService } from '../authentication-service/authentication-
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
 import { WsService } from '../ws-service/ws-service';
+import { Session } from 'inspector';
+import { UserSavedSession } from 'common/models/authentication';
 
 @singleton()
 export class UserDeletionService {
@@ -46,6 +48,10 @@ export class UserDeletionService {
 
     private get userValidations(): Knex.QueryBuilder<UserValidation> {
         return this.databaseService.database<UserValidation>('userValidations');
+    }
+
+    private get sessions(): Knex.QueryBuilder<UserSavedSession> {
+        return this.databaseService.database('sessions');
     }
 
     private get user(): Knex.QueryBuilder<User> {
@@ -86,6 +92,7 @@ export class UserDeletionService {
                 .del(),
             this.userAliases.where({ userId }).del(),
             this.userValidations.where({ userId }).del(),
+            this.sessions.where({ userId }).del(),
         ]);
 
         await this.user.where({ userId }).del();
