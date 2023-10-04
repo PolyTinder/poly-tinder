@@ -61,7 +61,7 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker $REGION-docker.pkg.dev
       - name: Push
-        run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT-$SERVICE/$SERVICE
+        run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE
 
   deploy:
     runs-on: ubuntu-latest
@@ -74,7 +74,7 @@ jobs:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - run: |
           gcloud run deploy $PROJECT-$SERVICE-prod \
-            --image=$REGION-docker.pkg.dev/$PROJECT/$APP/$SERVICE \
+            --image=$REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE \
             --region=$REGION \
             --project=$PROJECT
       - run: |
