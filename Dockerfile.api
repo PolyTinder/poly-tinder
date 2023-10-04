@@ -1,8 +1,8 @@
 FROM node:20 as builder
 WORKDIR /usr/src/app
 COPY packages/api/package*.json /usr/src/app/
-COPY packages/common /usr/src/common
 RUN npm ci
+COPY packages/common /usr/src/common
 COPY packages/api/ /usr/src/app/
 RUN npm run build
 
@@ -16,8 +16,8 @@ COPY packages/api/package*.json /usr/src/app/
 EXPOSE 3000
 ENV PORT 3000
 ENV NODE_ENV production
-COPY packages/common /usr/src/common
 RUN npm ci --production && npm cache clean --force
+COPY packages/common /usr/src/common
 COPY --from=builder /usr/src/app/dist /usr/src/app/dist
 COPY packages/api/public /usr/src/app/dist/public
 COPY packages/api/migrations /usr/src/app/migrations

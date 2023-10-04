@@ -1,8 +1,8 @@
 FROM node:20 as builder
 WORKDIR /usr/src/app
 COPY packages/client/package*.json /usr/src/app/
-COPY packages/common /usr/src/common
 RUN npm ci
+COPY packages/common /usr/src/common
 COPY packages/client/ /usr/src/app/
 RUN npm run build
 
