@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AuthenticationUser } from 'common/models/authentication';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
-import { HOME_ROUTE } from 'src/constants/routes';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -25,7 +23,6 @@ export class LoginPageComponent {
 
     constructor(
         private readonly authenticationService: AuthenticationService,
-        private readonly router: Router,
     ) {}
 
     onChange() {
@@ -47,7 +44,6 @@ export class LoginPageComponent {
             .login(this.loginForm.value as AuthenticationUser)
             .subscribe({
                 next: () => {
-                    this.router.navigate([HOME_ROUTE]);
                     this.loading.next(false);
                 },
                 error: (error: HttpErrorResponse) => {

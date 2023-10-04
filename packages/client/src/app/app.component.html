@@ -3,7 +3,7 @@
 </ng-container>
 
 <ng-container *ngIf="(state | async) === 'error'">
-    <app-status-page message="Erreur" [isLoading]="false" [isError]="true"></app-status-page>
+    <app-status-page [message]="(error | async) ?? 'Erreur'" [isLoading]="false" [isError]="true"></app-status-page>
   </ng-container>
 
 <ng-container *ngIf="(state | async) === 'ready'">

@@ -2,7 +2,7 @@
     <span layout-title>Mes matchs</span>
     
     <main>
-        <p class="error-message" *ngIf="!(userValid | async)">Profil incomplet, <a routerLink="/profile-edit">complétez le</a> !</p>
+        <p class="error-message" *ngIf="(userValid | async) === false">Profil incomplet, <a routerLink="/profile-edit">complétez le</a> !</p>
 
         <app-match-list *ngIf="hasMatches | async" [matches]="matches | async"></app-match-list>
         <app-conversation-list *ngIf="hasConversations | async" [conversations]="conversations | async"></app-conversation-list>

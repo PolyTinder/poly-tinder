@@ -13,31 +13,31 @@ export class WsService {
 
     constructor() {}
 
-    connect(token: string): Subject<Socket<WsServer, WsClient>> {
-        const subject = new Subject<Socket<WsServer, WsClient>>();
+    connect(token: string): Observable<Socket<WsServer, WsClient> | undefined> {
+        try {
+            const ws: Socket<WsServer, WsClient> = io(environment.api.url, {
+                transports: ['websocket'],
+                upgrade: false,
+                auth: { token },
+            });
 
-        const ws: Socket<WsServer, WsClient> = io(environment.api.url, {
-            transports: ['websocket'],
-            upgrade: false,
-            auth: { token },
-        });
+            ws.on('connect', () => {
+                this.ws$.next(ws);
+            });
 
-        ws.on('connect', () => {
-            subject.next(ws);
-            subject.complete();
-        });
+            ws.on('disconnect', () => {
+                this.ws$.next(undefined);
+            });
 
-        ws.on('disconnect', () => {
-            this.ws$.next(undefined);
-        });
+            ws.on('connect_error', (error) => {
+                // eslint-disable-next-line no-console
+                console.error('WebSocket error', error);
+            });
+        } catch (e) {
+            this.ws$.error(e);
+        }
 
-        ws.on('connect_error', (error) => {
-            subject.error(error);
-        });
-
-        this.ws$.next(ws);
-
-        return subject;
+        return this.ws$.asObservable();
     }
 
     disconnect() {
@@ -58,6 +58,7 @@ export class WsService {
             switchMap((ws) => {
                 const subject = new Subject<WsServer[T]>();
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ws?.on(event as any, (data: WsServer[T]) => {
                     subject.next(data);
                 });
@@ -69,6 +70,7 @@ export class WsService {
 
     next<T extends keyof WsClient>(event: T, data: WsClient[T]) {
         if (!this.ws$.value) throw new Error('WS not connected');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.ws$.value.emit(event as any, data);
     }
 }

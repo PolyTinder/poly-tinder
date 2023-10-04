@@ -22,6 +22,7 @@
                 </mat-form-field>
 
                 <div class="form-messages">
+                    <p class="form-error" *ngIf="signupForm.errors?.['conflict']">Ce email est déjà utilisé</p>
                     <p class="form-error" *ngIf="signupForm.errors?.['unknownError']">Un erreur est survenu</p>
                 </div>
             

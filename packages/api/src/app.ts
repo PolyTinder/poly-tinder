@@ -30,22 +30,22 @@ export class Application {
     ) {
         this.app = express();
         this.server = http.createServer(this.app);
-        this.wsService.instantiate(this.server);
 
         this.configureMiddlewares();
         this.configureRoutes();
     }
 
-    listen(port: number | string) {
+    start(port: number | string) {
         this.server.listen(port, () => {
             logger.info(`🏔️ Enviroment : ${env.NODE_ENV}`);
             logger.info(
                 `🚀 Server up on port ${port} (http://localhost:${port})`,
             );
         });
+        this.wsService.instantiate(this.server);
     }
 
-    async start() {
+    async init() {
         await this.databaseService.instantiate();
     }
 

@@ -39,7 +39,7 @@ export class ValidationService {
     private fetchValidation(): Observable<boolean> {
         return this.http.get<UserValidationResponse>('/user-validation').pipe(
             tap(({ userProfileReady }) =>
-                this.userValid$.next(userProfileReady),
+                this.userValid$.next(Boolean(userProfileReady)),
             ),
             map(({ userProfileReady }) => userProfileReady),
         );

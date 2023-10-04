@@ -8,7 +8,7 @@ import { env } from './utils/environment';
 (async () => {
     const application = container.resolve(Application);
 
-    await application.start();
+    await application.init();
 
-    application.listen(env.PORT);
+    application.start(env.PORT);
 })();

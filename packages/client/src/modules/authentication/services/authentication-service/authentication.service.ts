@@ -25,12 +25,6 @@ export class AuthenticationService {
         return this.http.post<UserPublicSession>('/auth/login', user).pipe(
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
-                    catchError((error, caugth) => {
-                        this.sessionService.session$.next(undefined);
-                        this.router.navigate([LOGIN_ROUTE]);
-
-                        return caugth;
-                    }),
                     tap(() => this.sessionService.session$.next(session)),
                     map(() => session),
                 ),
@@ -42,12 +36,6 @@ export class AuthenticationService {
         return this.http.post<UserPublicSession>('/auth/signup', user).pipe(
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
-                    catchError((error, caugth) => {
-                        this.sessionService.session$.next(undefined);
-                        this.router.navigate([LOGIN_ROUTE]);
-
-                        return caugth;
-                    }),
                     tap(() => this.sessionService.session$.next(session)),
                     map(() => session),
                 ),
@@ -57,9 +45,9 @@ export class AuthenticationService {
 
     logout(ignoreApi: boolean = false): Observable<void> {
         const onLogout = () => {
+            this.wsService.disconnect();
             this.sessionService.session$.next(undefined);
             this.router.navigate([LOGIN_ROUTE]);
-            this.wsService.disconnect();
         };
 
         if (ignoreApi) {
@@ -83,6 +71,7 @@ export class AuthenticationService {
             tap((session) => {
                 this.sessionService.session$.next(session);
             }),
+            catchError(() => of(undefined)),
         );
     }
 }

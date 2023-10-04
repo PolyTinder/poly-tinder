@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, catchError, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
-import { Router } from '@angular/router';
 import { AuthenticationUser } from 'common/models/authentication';
-import { HOME_ROUTE } from 'src/constants/routes';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
     selector: 'app-signup-page',
@@ -28,7 +26,6 @@ export class SignupPageComponent {
 
     constructor(
         private readonly authenticationService: AuthenticationService,
-        private readonly router: Router,
     ) {}
 
     onChange() {
@@ -49,14 +46,15 @@ export class SignupPageComponent {
         this.authenticationService
             .signup(this.signupForm.value as AuthenticationUser)
             .subscribe({
-                next: (session) => {
-                    if (session) {
-                        this.router.navigate([HOME_ROUTE]);
-                    }
+                next: () => {
                     this.loading.next(false);
                 },
-                error: () => {
-                    this.signupForm.setErrors({ unknownError: true });
+                error: (e: HttpErrorResponse) => {
+                    if (e.status === HttpStatusCode.Conflict) {
+                        this.signupForm.setErrors({ conflict: true });
+                    } else {
+                        this.signupForm.setErrors({ unknownError: true });
+                    }
                     this.loading.next(false);
                 },
             });

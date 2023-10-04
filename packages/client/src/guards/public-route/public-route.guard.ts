@@ -13,7 +13,7 @@ export const publicRouteGuard: CanActivateFn = () => {
 
     return combineLatest([
         sessionService.isLoggedIn(),
-        stateService.state$,
+        stateService.state,
     ]).pipe(
         map(([isLoggedIn, state]) => {
             if (state !== State.READY) {

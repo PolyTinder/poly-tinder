@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/modules/user/services/user.service';
 import { StateService } from 'src/services/state-service/state.service';
 
 @Component({
@@ -17,7 +16,11 @@ export class AppComponent {
     ) {}
 
     get state() {
-        return this.stateService.state$;
+        return this.stateService.state;
+    }
+
+    get error() {
+        return this.stateService.error;
     }
 
     get shouldHideNav() {

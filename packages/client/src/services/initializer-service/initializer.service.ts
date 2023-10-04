@@ -8,10 +8,11 @@ import {
 } from 'src/constants/routes';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { StateService } from '../state-service/state.service';
-import { State } from 'src/constants/states';
-import { catchError, of } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { WsService } from '../ws-service/ws.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
+import { UserPublicSession } from 'common/models/authentication';
+import { Location } from '@angular/common';
 
 @Injectable({
     providedIn: 'root',
@@ -22,51 +23,52 @@ export class InitializerService {
         private readonly authenticationService: AuthenticationService,
         private readonly sessionService: SessionService,
         private readonly router: Router,
+        private readonly location: Location,
         private readonly wsService: WsService,
     ) {}
 
     async initialize(): Promise<void> {
-        this.authenticationService
-            .loadSession()
-            .pipe(
-                catchError(() => {
-                    return of(undefined);
-                }),
-            )
-            .subscribe((session) => {
-                if (session) {
-                    if (PUBLIC_ROUTES_PATH.includes(this.router.url)) {
-                        this.router.navigate([HOME_ROUTE]);
-                    }
+        this.stateService.setLoading();
 
-                    this.wsService.connect(session.token).subscribe({
-                        next: () => {
-                            this.stateService.state$.next(State.READY);
-                        },
-                        error: () => {
-                            this.stateService.state$.next(State.ERROR);
-                        },
-                    });
-                } else {
-                    if (
-                        !PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((route) =>
-                            this.router.url.startsWith(route),
-                        )
-                    ) {
-                        this.router.navigate([LOGIN_ROUTE]);
-                    }
-                    this.stateService.state$.next(State.READY);
+        combineLatest([
+            this.sessionService.session$,
+            this.wsService.ws,
+        ]).subscribe({
+            next: ([session, ws]) => {
+                if (session && ws) {
+                    this.stateService.setReady();
+                } else if (session && !ws) {
+                    this.stateService.setLoading();
+                } else if (!session && !ws) {
+                    this.stateService.setReady();
                 }
-            });
 
-        this.wsService.ws.subscribe((ws) => {
-            if (
-                !ws &&
-                this.stateService.state$.value === State.READY &&
-                this.sessionService.isCurrentlyLoggedIn()
-            ) {
-                this.stateService.state$.next(State.ERROR);
+                this.handleRedirect(session);
+            },
+            error: (error) => {
+                this.stateService.setError(error);
+            },
+        });
+
+        this.authenticationService.loadSession().subscribe((session) => {
+            if (session) {
+                this.wsService.connect(session.token).subscribe();
+            } else {
+                this.stateService.setReady();
             }
         });
+    }
+
+    handleRedirect(session: UserPublicSession | undefined): void {
+        if (session && PUBLIC_ROUTES_PATH.includes(this.location.path())) {
+            this.router.navigate([HOME_ROUTE]);
+        }
+
+        if (
+            !session &&
+            !PUBLICLY_ACCESSIBLE_ROUTES_PATH.includes(this.location.path())
+        ) {
+            this.router.navigate([LOGIN_ROUTE]);
+        }
     }
 }
