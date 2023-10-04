@@ -1,0 +1,9 @@
+{
+    "theme_color" : "#fe943e",
+    "background_color" : "#ffffff",
+    "display" : "standalone",
+    "scope" : "/",
+    "start_url" : "/",
+    "name" : "PolyTinder",
+    "short_name" : "PolyTinder"
+}
