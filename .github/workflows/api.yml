@@ -52,7 +52,6 @@ jobs:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - name: Build
         run: |
-          cd packages/$SERVICE
           docker buildx build \
             -f Dockerfile.api \
             --platform linux/amd64 \
