@@ -2,11 +2,7 @@ import { Request, Response, Router } from 'express';
 import { AbstractController } from '../abstract-controller';
 import { StatusCodes } from 'http-status-codes';
 import { singleton } from 'tsyringe';
-import {
-    AuthenticationUser,
-    Token,
-    UserSavedSession,
-} from 'common/models/authentication';
+import { AuthenticationUser } from 'common/models/authentication';
 import { AuthenticationService } from '../../services/authentication-service/authentication-service';
 import { auth } from '../../middlewares/auth';
 import { UserRequest } from '../../types/requests';

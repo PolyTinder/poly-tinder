@@ -14,7 +14,6 @@ import { AuthenticationService } from '../authentication-service/authentication-
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
 import { WsService } from '../ws-service/ws-service';
-import { Session } from 'inspector';
 import { UserSavedSession } from 'common/models/authentication';
 
 @singleton()

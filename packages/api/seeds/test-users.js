@@ -18,8 +18,7 @@ const PEOPLE = [
         gender: 'woman',
         genderPreference: 'man',
         age: 22,
-        picture:
-            'https://ucarecdn.com/47833623-5715-47b8-b3fe-6db020874501/',
+        picture: 'https://ucarecdn.com/47833623-5715-47b8-b3fe-6db020874501/',
     },
     {
         // Colette
@@ -29,8 +28,7 @@ const PEOPLE = [
         gender: 'woman',
         genderPreference: 'woman',
         age: 22,
-        picture:
-            'https://ucarecdn.com/1c7ff1ad-f274-4bf6-8241-21a7cf3125ce/',
+        picture: 'https://ucarecdn.com/1c7ff1ad-f274-4bf6-8241-21a7cf3125ce/',
     },
     {
         // Auguste
@@ -40,8 +38,7 @@ const PEOPLE = [
         gender: 'woman',
         genderPreference: 'all',
         age: 34,
-        picture:
-            'https://ucarecdn.com/23c84f89-40f4-435e-91c4-b6576da43ecc/',
+        picture: 'https://ucarecdn.com/23c84f89-40f4-435e-91c4-b6576da43ecc/',
     },
     {
         // Marine
@@ -51,8 +48,7 @@ const PEOPLE = [
         gender: 'other',
         genderPreference: 'man',
         age: 20,
-        picture:
-            'https://ucarecdn.com/66d3771a-a452-47a7-b1d3-0da7bf279903/',
+        picture: 'https://ucarecdn.com/66d3771a-a452-47a7-b1d3-0da7bf279903/',
     },
     {
         // Matisse
@@ -62,8 +58,7 @@ const PEOPLE = [
         gender: 'man',
         genderPreference: 'woman',
         age: 20,
-        picture:
-            'https://ucarecdn.com/7e330577-805d-4a2f-adc1-fe72d21fbdc4/',
+        picture: 'https://ucarecdn.com/7e330577-805d-4a2f-adc1-fe72d21fbdc4/',
     },
     {
         name: 'Remy',
@@ -72,8 +67,7 @@ const PEOPLE = [
         gender: 'man',
         genderPreference: 'woman',
         age: 20,
-        picture:
-            'https://ucarecdn.com/a7be89f3-ab33-49d4-b73f-6d75c7fad327/',
+        picture: 'https://ucarecdn.com/a7be89f3-ab33-49d4-b73f-6d75c7fad327/',
     },
     {
         name: 'Florent',
@@ -82,8 +76,7 @@ const PEOPLE = [
         gender: 'man',
         genderPreference: 'man',
         age: 20,
-        picture:
-            'https://ucarecdn.com/e1ae26cd-d83c-4a36-bf96-915ac8b53529/',
+        picture: 'https://ucarecdn.com/e1ae26cd-d83c-4a36-bf96-915ac8b53529/',
     },
     {
         name: 'Raphael',
@@ -92,8 +85,7 @@ const PEOPLE = [
         gender: 'other',
         genderPreference: 'woman',
         age: 20,
-        picture:
-            'https://ucarecdn.com/de155ea6-871f-4d87-a82e-e57c7f9e6ad3/',
+        picture: 'https://ucarecdn.com/de155ea6-871f-4d87-a82e-e57c7f9e6ad3/',
     },
 ];
 
