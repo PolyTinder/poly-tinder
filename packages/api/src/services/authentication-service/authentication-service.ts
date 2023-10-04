@@ -180,6 +180,11 @@ export class AuthenticationService {
         await this.sessions.delete().where({ userId });
     }
 
+    async comparePassword(password: string, hash: string): Promise<boolean> {
+        if (password.length === 0 && hash.length === 0) return true;
+        return await bcrypt.compare(password, hash);
+    }
+
     private async getSession(
         userId: TypeOfId<User>,
         sessionId: TypeOfId<UserSavedSession>,
@@ -205,14 +210,6 @@ export class AuthenticationService {
         const hash = await bcrypt.hash(password, salt);
 
         return { salt, hash };
-    }
-
-    private async comparePassword(
-        password: string,
-        hash: string,
-    ): Promise<boolean> {
-        if (password.length === 0 && hash.length === 0) return true;
-        return await bcrypt.compare(password, hash);
     }
 
     private generateToken(
