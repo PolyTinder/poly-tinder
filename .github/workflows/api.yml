@@ -54,6 +54,7 @@ jobs:
         run: |
           cd packages/$SERVICE
           docker buildx build \
+            -f Dockerfile.api \
             --platform linux/amd64 \
             --target prod \
             -t $REGION-docker.pkg.dev/$PROJECT/$APP/$SERVICE \
