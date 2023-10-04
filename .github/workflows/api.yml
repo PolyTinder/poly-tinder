@@ -73,12 +73,12 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - run: |
-          gcloud run deploy $PROJECT-$SERVICE-prod \
+          gcloud run deploy $PROJECT-$ENVIRONMENT-$SERVICE \
             --image=$REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE \
             --region=$REGION \
             --project=$PROJECT
       - run: |
-          gcloud run services update-traffic $PROJECT-$SERVICE-prod \
+          gcloud run services update-traffic $PROJECT-$ENVIRONMENT-$SERVICE \
             --region=$REGION \
             --project=$PROJECT \
             --to-latest
