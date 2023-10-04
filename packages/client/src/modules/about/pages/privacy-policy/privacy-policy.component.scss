@@ -1,0 +1,25 @@
+@import '../../../../styles/variables';
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 600px;
+    padding: 0 24px 24px 24px;
+    gap: 24px;
+    margin: 0 auto;
+
+    .table-of-content {
+        li {
+            font-weight: 500;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        padding: 0 12px 12px 12px;
+    }
+}

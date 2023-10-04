@@ -6,6 +6,7 @@ import {
     LOGIN_ROUTE,
     MATCHED_USER_ROUTE,
     MATCHES_ROUTE,
+    PRIVACY_POLICY_ROUTE,
     PROFILE_EDIT_ROUTE,
     PROFILE_PREVIEW_ROUTE,
     PROFILE_ROUTE,
@@ -20,6 +21,7 @@ import { UserProfileEditPageComponent } from './user-profile/pages/user-profile-
 import { AboutPageComponent } from './about/pages/about-page/about-page.component';
 import { UserProfilePreviewComponent } from './user-profile/pages/user-profile-preview/user-profile-preview.component';
 import { MatchedUserPageComponent } from './matching/pages/matched-user-page/matched-user-page.component';
+import { PrivacyPolicyComponent } from './about/pages/privacy-policy/privacy-policy.component';
 
 const privateRoute: Route = {
     // canActivate: [privateRouteGuard],
@@ -55,6 +57,7 @@ const routes: Routes = [
         ...privateRoute,
     },
     { path: ABOUT_ROUTE, component: AboutPageComponent },
+    { path: PRIVACY_POLICY_ROUTE, component: PrivacyPolicyComponent },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },
     { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },
