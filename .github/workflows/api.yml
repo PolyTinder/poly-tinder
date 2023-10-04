@@ -17,7 +17,7 @@ env:
   SERVICE: api
   REGION: northamerica-northeast1
   PROJECT: polytinder
-  APP: polytinder-prod
+  ENVIRONMENT: prod
 
 jobs:
   lint:
@@ -56,12 +56,12 @@ jobs:
             -f Dockerfile.api \
             --platform linux/amd64 \
             --target prod \
-            -t $REGION-docker.pkg.dev/$PROJECT/$APP/$SERVICE \
+            -t $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT-$SERVICE/$SERVICE \
             .
       - name: Configure Docker
         run: gcloud auth configure-docker $REGION-docker.pkg.dev
       - name: Push
-        run: docker push $REGION-docker.pkg.dev/$PROJECT/$APP/$SERVICE
+        run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT-$SERVICE/$SERVICE
 
   deploy:
     runs-on: ubuntu-latest
