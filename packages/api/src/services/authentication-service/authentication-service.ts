@@ -17,6 +17,7 @@ import { UserProfileService } from '../user-profile-service/user-profile-service
 import { UserValidationService } from '../user-validation-service/user-validation-service';
 import { WsService } from '../ws-service/ws-service';
 import { Socket } from 'socket.io';
+import { ModerationService } from '../moderation-service/moderation-service';
 
 @singleton()
 export class AuthenticationService {
@@ -25,6 +26,7 @@ export class AuthenticationService {
         private readonly userProfileService: UserProfileService,
         private readonly userValidationService: UserValidationService,
         private readonly wsService: WsService,
+        private readonly moderationService: ModerationService,
     ) {
         this.wsService.registerAuthenticationValidation(
             this.validateSocket.bind(this),
@@ -44,6 +46,13 @@ export class AuthenticationService {
             throw new HttpException(
                 'User already exists',
                 StatusCodes.CONFLICT,
+            );
+        }
+
+        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+            throw new HttpException(
+                'Cannot create account',
+                StatusCodes.BAD_REQUEST,
             );
         }
 

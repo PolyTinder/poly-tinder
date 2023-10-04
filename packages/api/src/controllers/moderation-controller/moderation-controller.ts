@@ -24,7 +24,7 @@ export class ModerationController extends AbstractController {
             ) => {
                 try {
                     await this.moderationService.blockUser({
-                        userId: req.body.session.user.userId,
+                        blockingUserId: req.body.session.user.userId,
                         blockedUserId: Number(req.params.userId),
                     });
                     res.status(StatusCodes.NO_CONTENT).send();
@@ -47,7 +47,7 @@ export class ModerationController extends AbstractController {
             ) => {
                 try {
                     await this.moderationService.reportUser({
-                        userId: req.body.session.user.userId,
+                        reportingUserId: req.body.session.user.userId,
                         reportedUserId: Number(req.params.userId),
                         reportType: req.body.reportType,
                         description: req.body.description,

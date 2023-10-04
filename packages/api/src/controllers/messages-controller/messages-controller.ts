@@ -6,6 +6,7 @@ import { MessagesService } from '../../services/messages-service/messages-servic
 import { auth } from '../../middlewares/auth';
 import { UserRequest } from '../../types/requests';
 import { Message } from 'common/models/message';
+import { validateUser } from '../../middlewares/validate-user';
 
 @singleton()
 export class MessagesController extends AbstractController {
@@ -17,6 +18,7 @@ export class MessagesController extends AbstractController {
         router.get(
             '/:recipiendId',
             auth,
+            validateUser,
             async (
                 req: UserRequest<{ recipiendId: string }>,
                 res: Response,
@@ -40,6 +42,7 @@ export class MessagesController extends AbstractController {
         router.post(
             '/',
             auth,
+            validateUser,
             async (
                 req: UserRequest<
                     object,
@@ -64,6 +67,7 @@ export class MessagesController extends AbstractController {
         router.post(
             '/read/:senderId',
             auth,
+            validateUser,
             async (
                 req: UserRequest<{ senderId: string }>,
                 res: Response,

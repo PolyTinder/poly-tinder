@@ -56,9 +56,6 @@ export interface UserValidation {
     userId: number;
     emailValidated: boolean;
     userProfileReady: boolean;
-    suspended: boolean;
-    suspensionReason?: string;
-    banned: boolean;
 }
 
 export type UserValidationResponse = Pick<UserValidation, 'userProfileReady'>;

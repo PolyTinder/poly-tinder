@@ -103,28 +103,32 @@ export class PublicProfileService {
             .leftJoin('blocks', function () {
                 this.on(function () {
                     this.on(
-                        'blocks.blockedUserId',
+                        'blocks.blockedUserEmail',
                         '=',
-                        'targetUser.userId',
-                    ).andOn('blocks.userId', '=', 'activeUser.userId');
+                        'targetUser.email',
+                    ).andOn(
+                        'blocks.blockingUserEmail',
+                        '=',
+                        'activeUser.email',
+                    );
                 }).orOn(function () {
                     this.on(
-                        'blocks.blockedUserId',
+                        'blocks.blockedUserEmail',
                         '=',
-                        'activeUser.userId',
-                    ).andOn('blocks.userId', '=', 'targetUser.userId');
+                        'activeUser.email',
+                    ).andOn(
+                        'blocks.blockingUserEmail',
+                        '=',
+                        'targetUser.email',
+                    );
                 });
             })
             .where('targetUser.userId', '!=', userId)
             .andWhere('activeUser.userId', '=', userId)
             .andWhere('activeUserValidations.userProfileReady', '=', true)
-            .andWhere('activeUserValidations.suspended', '=', false)
-            .andWhere('activeUserValidations.banned', '=', false)
             .andWhere('targetUserValidations.userProfileReady', '=', true)
-            .andWhere('targetUserValidations.suspended', '=', false)
-            .andWhere('targetUserValidations.banned', '=', false)
             .andWhere('swipes.targetUserId', 'is', null)
-            .andWhere('blocks.blockedUserId', 'is', null)
+            .andWhere('blocks.blockId', 'is', null)
             .andWhere(function () {
                 this.where('activeUserProfile.genderPreference', '=', 'all')
                     .orWhere('targetUserProfile.genderCategory', '=', 'other')
@@ -201,18 +205,20 @@ export class PublicProfileService {
             )
             .leftJoin('userProfiles as up1', 'user1Id', '=', 'up1.userId')
             .leftJoin('userProfiles as up2', 'user2Id', '=', 'up2.userId')
+            .innerJoin('users as u1', 'user1Id', '=', 'u1.userId')
+            .innerJoin('users as u2', 'user2Id', '=', 'u2.userId')
             .leftJoin('blocks', function () {
                 this.on(function () {
-                    this.on('blocks.blockedUserId', '=', 'user1Id').andOn(
-                        'blocks.userId',
+                    this.on('blocks.blockedUserEmail', '=', 'u1.email').andOn(
+                        'blocks.blockingUserEmail',
                         '=',
-                        'user2Id',
+                        'u2.email',
                     );
                 }).orOn(function () {
-                    this.on('blocks.blockedUserId', '=', 'user2Id').andOn(
-                        'blocks.userId',
+                    this.on('blocks.blockedUserEmail', '=', 'u2.email').andOn(
+                        'blocks.blockingUserEmail',
                         '=',
-                        'user1Id',
+                        'u1.email',
                     );
                 });
             })
@@ -225,7 +231,7 @@ export class PublicProfileService {
                     unmatched: false,
                 });
             })
-            .andWhere('blocks.blockedUserId', 'is', null);
+            .andWhere('blocks.blockId', 'is', null);
 
         const completedMatches: MatchQueryItem[] = await Promise.all(
             matches.map(async (match) => ({

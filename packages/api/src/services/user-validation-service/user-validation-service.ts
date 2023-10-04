@@ -29,11 +29,7 @@ export class UserValidationService {
             return false;
         }
 
-        return (
-            userValidation.userProfileReady &&
-            !userValidation.suspended &&
-            !userValidation.banned
-        );
+        return userValidation.userProfileReady;
     }
 
     async setUserProfileReady(

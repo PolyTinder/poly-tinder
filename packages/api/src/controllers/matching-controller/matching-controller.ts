@@ -5,6 +5,7 @@ import { singleton } from 'tsyringe';
 import { auth } from '../../middlewares/auth';
 import { UserRequest } from '../../types/requests';
 import { MatchingService } from '../../services/matching-service/matching-service';
+import { validateUser } from '../../middlewares/validate-user';
 
 @singleton()
 export class MatchingController extends AbstractController {
@@ -16,6 +17,7 @@ export class MatchingController extends AbstractController {
         router.post(
             '/like/:userId',
             auth,
+            validateUser,
             async (
                 req: UserRequest<{ userId: string }>,
                 res: Response,
@@ -37,6 +39,7 @@ export class MatchingController extends AbstractController {
         router.post(
             '/dislike/:userId',
             auth,
+            validateUser,
             async (
                 req: UserRequest<{ userId: string }>,
                 res: Response,
@@ -58,6 +61,7 @@ export class MatchingController extends AbstractController {
         router.post(
             '/unmatch/:userId',
             auth,
+            validateUser,
             async (
                 req: UserRequest<{ userId: string }>,
                 res: Response,
