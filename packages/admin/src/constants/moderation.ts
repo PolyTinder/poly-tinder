@@ -1,0 +1,22 @@
+export const BAN_REASONS = [
+    "Harcèlement en ligne",
+    "Comportement offensant",
+    "Contenu inapproprié",
+    "Discours de haine",
+    "Faux profil",
+    "Propos vulgaires",
+    "Spam de messages",
+    "Comportement agressif",
+    "Photos trompeuses",
+    "Harcèlement sexuel",
+    "Menaces en ligne",
+    "Comportement discriminatoire",
+    "Comportement frauduleux",
+    "Non-respect des règles",
+    "Contenu offensant pour les mineurs",
+    "Partage d'informations personnelles",
+    "Incitation à la violence",
+    "Plagiat de photos",
+    "Comportement nuisible",
+    "Discrimination de genre"
+]

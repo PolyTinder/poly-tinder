@@ -1,0 +1,50 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Reports</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.reportId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reason">
+                <th mat-header-cell *matHeaderCellDef> Reason </th>
+                <td mat-cell *matCellDef="let element"> {{element.reportType}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reportingUserEmail">
+                <th mat-header-cell *matHeaderCellDef> Reporting user </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="!element.reportingUserId">{{element.reportingUserEmail}}</span>
+                    <a [routerLink]="'/users/' + element.reportingUserId" *ngIf="element.reportingUserId">{{element.reportingUserEmail}}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reportedUserEmail">
+                <th mat-header-cell *matHeaderCellDef> Reported user </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="!element.reportedUserId">{{element.reportedUserEmail}}</span>
+                    <a [routerLink]="'/users/' + element.reportedUserId" *ngIf="element.reportedUserId">{{element.reportedUserEmail}}</a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[25, 50, 100]"
+        showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+</mat-card>

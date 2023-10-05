@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AuthenticationUser } from 'common/models/authentication';
 import { BehaviorSubject } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 
 @Component({
     selector: 'app-login-page',
@@ -49,6 +49,8 @@ export class LoginPageComponent {
                 error: (error: HttpErrorResponse) => {
                     if (error.status === 406) {
                         this.loginForm.setErrors({ invalidCredentials: true });
+                    } else if (error.status === HttpStatusCode.Locked) {
+                        this.loginForm.setErrors({ accountLocked: true });
                     } else {
                         this.loginForm.setErrors({ unknownError: true });
                     }

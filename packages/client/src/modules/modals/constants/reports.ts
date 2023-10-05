@@ -3,4 +3,5 @@ export const REPORT_REASONS = [
     'La personne est mineure',
     'Nudité ou contenu explicite/innaproprié',
     'Comportement abusif ou harcèlement',
+    'Autre',
 ];

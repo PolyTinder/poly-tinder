@@ -5,6 +5,8 @@ import { Message } from 'common/models/message';
 import { MatchingService } from '../matching-service/matching-service';
 import { WsService } from '../ws-service/ws-service';
 import { ModerationService } from '../moderation-service/moderation-service';
+import { HttpException } from '../../models/http-exception';
+import { StatusCodes } from 'http-status-codes';
 
 @singleton()
 export class MessagesService {
@@ -30,7 +32,18 @@ export class MessagesService {
         if (await this.moderationService.isBlocked(senderId, recipientId)) {
             throw new Error('Cannot send message');
         }
-
+        if (await this.moderationService.isBannedOrSuspended(senderId)) {
+            throw new HttpException(
+                'You are banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
+        if (await this.moderationService.isBannedOrSuspended(recipientId)) {
+            throw new HttpException(
+                'You cannot interact with a user who is banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
         const message: Message = {
             senderId,
             recipientId,
@@ -60,6 +73,18 @@ export class MessagesService {
     ): Promise<Message[]> {
         if (!(await this.matchingService.areMatched(userId, otherUserId))) {
             throw new Error('Cannot get messages with unmatched user');
+        }
+        if (await this.moderationService.isBannedOrSuspended(userId)) {
+            throw new HttpException(
+                'You are banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
+        if (await this.moderationService.isBannedOrSuspended(otherUserId)) {
+            throw new HttpException(
+                'You cannot interact with a user who is banned or suspended',
+                StatusCodes.LOCKED,
+            );
         }
 
         const messages: Message[] = (await this.messages

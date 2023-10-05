@@ -34,6 +34,20 @@ docker tag api northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod
 docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api
 ```
 
+#### API Admin
+```bash
+# Build
+docker build -f Dockerfile.api-admin -t api-admin .
+# Build (for ARM based computer)
+docker buildx build --platform linux/amd64 -f Dockerfile.api-admin -t api-admin .
+
+# Tag
+docker tag api-admin northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api-admin
+
+# Push
+docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api-admin
+```
+
 #### Client
 ```bash
 # Build
@@ -46,4 +60,18 @@ docker tag client northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-p
 
 # Push
 docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/client
+```
+
+#### Admin
+```bash
+# Build
+docker build -f Dockerfile.admin -t admin .
+# Build (for ARM based computer)
+docker buildx build --platform linux/amd64 -f Dockerfile.admin -t admin .
+
+# Tag
+docker tag admin northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/admin
+
+# Push
+docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/admin
 ```

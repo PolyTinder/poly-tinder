@@ -11,6 +11,16 @@ services:
     ports:
       - 4200:4200
 
+  admin:
+    image: node:20
+    command: npm start -- --host 0.0.0.0 --port 4201
+    working_dir: /src/www/app
+    volumes:
+      - ./packages/admin:/src/www/app
+      - ./packages/common:/src/www/common
+    ports:
+      - 4201:4201
+
   api:
     image: node:20
     command: npm run dev
@@ -26,6 +36,23 @@ services:
       - ./packages/common:/src/www/common
     ports:
       - 3000:3000
+
+  api-admin:
+    image: node:20
+    command: npm run dev:admin
+    working_dir: /src/www/app
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_DATABASE: db
+      PORT: 3001
+    volumes:
+      - ./packages/api:/src/www/app
+      - ./packages/common:/src/www/common
+    ports:
+      - 3001:3001
     
   db:
     image: mysql:8.1

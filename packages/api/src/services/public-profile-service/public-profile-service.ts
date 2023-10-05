@@ -123,12 +123,22 @@ export class PublicProfileService {
                     );
                 });
             })
+            .leftJoin('banned', 'targetUser.email', '=', 'banned.email')
+            .leftJoin('suspend', 'targetUser.email', '=', 'suspend.email')
             .where('targetUser.userId', '!=', userId)
             .andWhere('activeUser.userId', '=', userId)
             .andWhere('activeUserValidations.userProfileReady', '=', true)
             .andWhere('targetUserValidations.userProfileReady', '=', true)
             .andWhere('swipes.targetUserId', 'is', null)
             .andWhere('blocks.blockId', 'is', null)
+            .andWhere('banned.email', 'is', null)
+            .andWhere(function () {
+                this.where('suspend.until', '<', db.raw('NOW()')).orWhere(
+                    'suspend.until',
+                    'is',
+                    null,
+                );
+            })
             .andWhere(function () {
                 this.where('activeUserProfile.genderPreference', '=', 'all')
                     .orWhere('targetUserProfile.genderCategory', '=', 'other')
@@ -166,6 +176,7 @@ export class PublicProfileService {
                         );
                     });
             })
+            .groupBy('targetUser.userId')
             .limit(1000);
 
         const size = availableUsers.length;

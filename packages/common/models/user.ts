@@ -3,6 +3,7 @@ export interface User {
     email: string;
     hash: string;
     salt: string;
+    lastLogin: Date;
 }
 
 export type GenderCategory = 'man' | 'woman' | 'other';
@@ -50,7 +51,7 @@ export interface UserProfileDB extends Omit<UserProfile, UnsafeUserProfileAttrib
     languages?: string;
 }
 
-export type PublicUser = Omit<User, 'hash' | 'salt'>;
+export type PublicUser = Pick<User, 'email' | 'userId'>;
 
 export interface UserValidation {
     userId: number;

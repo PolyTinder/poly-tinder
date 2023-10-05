@@ -5,7 +5,7 @@ export interface Report {
     reportedUserEmail: string;
     reportType: string;
     description?: string;
-    timestamp: Date;
+    created_at: Date;
     reviewed:boolean;
 }
 
