@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Users</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="userId">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"><a [routerLink]="'/users/' + element.userId">{{element.email}}</a></td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="age">
+                <th mat-header-cell *matHeaderCellDef> Age </th>
+                <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastLogin">
+                <th mat-header-cell *matHeaderCellDef> Last login </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastLogin}} </td>
+            </ng-container>
+            <ng-container matColumnDef="banReason">
+                <th mat-header-cell *matHeaderCellDef> Banned </th>
+                <td mat-cell *matCellDef="let element"> {{element.isBanned ? 'Banned' : ''}} </td>
+            </ng-container>
+            <ng-container matColumnDef="suspendReason">
+                <th mat-header-cell *matHeaderCellDef> Suspended </th>
+                <td mat-cell *matCellDef="let element"> {{element.isSuspended ? 'Suspended' : ''}}</td>
+            </ng-container>
+            <ng-container matColumnDef="suspensionCount">
+                <th mat-header-cell *matHeaderCellDef> Suspension count </th>
+                <td mat-cell *matCellDef="let element"> {{element.suspensionCount ? element.suspensionCount : ''}} </td>
+            </ng-container>
+            <ng-container matColumnDef="reportsCount">
+                <th mat-header-cell *matHeaderCellDef> Reports count </th>
+                <td mat-cell *matCellDef="let element"> {{element.reportCount ? element.reportCount : ''}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[25, 50, 100]"
+        showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+</mat-card>
