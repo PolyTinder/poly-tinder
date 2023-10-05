@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 19
           cache: 'npm'
-          cache-dependency-path: packages/${{env.SERVICE}}/package-lock.json
+          cache-dependency-path: packages/${{env.DIR}}/package-lock.json
       - name: Install dependencies
         run: |
           cd packages/$DIR
@@ -47,7 +47,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
-      - run: cd packages/$SERVICE
+      - run: cd packages/$DIR
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
