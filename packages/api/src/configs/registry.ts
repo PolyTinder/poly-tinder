@@ -10,6 +10,7 @@ import { ModerationController } from '../controllers/moderation-controller/moder
 import { UserValidationController } from '../controllers/user-validation-controller/user-validation-controller';
 import { UserController } from '../controllers/user-controller/user-controller';
 import { AdminUserController } from '../controllers/admin-user-controller/admin-user-controller';
+import { AdminModerationController } from '../controllers/admin-moderation-controller/admin-moderation-controller';
 
 @registry([
     { token: SYMBOLS.controller, useClass: DefaultController },
@@ -22,5 +23,6 @@ import { AdminUserController } from '../controllers/admin-user-controller/admin-
     { token: SYMBOLS.controller, useClass: UserValidationController },
     { token: SYMBOLS.controller, useClass: UserController },
     { token: SYMBOLS.adminController, useClass: AdminUserController },
+    { token: SYMBOLS.adminController, useClass: AdminModerationController },
 ])
 export class Registry {}
