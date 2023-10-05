@@ -53,6 +53,8 @@ export class SignupPageComponent {
                 error: (e: HttpErrorResponse) => {
                     if (e.status === HttpStatusCode.Conflict) {
                         this.signupForm.setErrors({ conflict: true });
+                    } else if (e.status === HttpStatusCode.Locked) {
+                        this.signupForm.setErrors({ accountLocked: true });
                     } else {
                         this.signupForm.setErrors({ unknownError: true });
                     }

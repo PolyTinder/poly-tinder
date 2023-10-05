@@ -54,7 +54,7 @@ export class AuthenticationService {
         if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
             throw new HttpException(
                 'Cannot create account',
-                StatusCodes.BAD_REQUEST,
+                StatusCodes.LOCKED,
             );
         }
 
@@ -105,6 +105,10 @@ export class AuthenticationService {
             );
         }
 
+        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+            throw new HttpException('Cannot login', StatusCodes.LOCKED);
+        }
+
         if (admin && !(await this.adminService.isAdmin(foundUser.userId))) {
             throw new HttpException(
                 'Email or password incorrect',
@@ -145,13 +149,14 @@ export class AuthenticationService {
         const session = await this.getSession(userId, sessionId);
 
         if (!session) {
-            throw new HttpException(
-                'Session not found',
-                StatusCodes.UNAUTHORIZED,
-            );
+            throw new HttpException('Session not found', StatusCodes.LOCKED);
         }
 
         const user = await this.users.select().where({ userId }).first();
+
+        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+            throw new HttpException('Cannot login', StatusCodes.BAD_REQUEST);
+        }
 
         if (!user) {
             throw new HttpException(

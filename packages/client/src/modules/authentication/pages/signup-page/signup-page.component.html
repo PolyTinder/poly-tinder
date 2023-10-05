@@ -29,6 +29,7 @@
 
                 <div class="form-messages">
                     <p class="form-error" *ngIf="signupForm.errors?.['conflict']">Ce email est déjà utilisé</p>
+                    <p class="form-error" *ngIf="signupForm.errors?.['accountLocked']">Le compte a été bloqué ou suspendu. Veuillez contacter <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a> si vous pensez que c'est un erreur.</p>
                     <p class="form-error" *ngIf="signupForm.errors?.['unknownError']">Un erreur est survenu</p>
                 </div>
             

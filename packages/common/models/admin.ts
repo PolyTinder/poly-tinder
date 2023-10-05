@@ -7,4 +7,6 @@ export interface Admin {
 
 export type UserListItem = Pick<User, 'userId' | 'email'> & Pick<UserProfile, 'name' | 'age'> & {
     lastLogin: Date;
+    isBanned?: boolean;
+    isSuspended?: boolean;
 };

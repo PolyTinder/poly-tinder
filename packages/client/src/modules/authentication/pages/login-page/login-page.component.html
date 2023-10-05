@@ -23,6 +23,7 @@
 
                 <div class="form-messages">
                     <p class="form-error" *ngIf="loginForm.errors?.['invalidCredentials']">Le email ou le mot de passe est invalide</p>
+                    <p class="form-error" *ngIf="loginForm.errors?.['accountLocked']">Le compte a été bloqué ou suspendu. Veuillez contacter <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a> si vous pensez que c'est un erreur.</p>
                     <p class="form-error" *ngIf="loginForm.errors?.['unknownError']">Un erreur est survenu</p>
                 </div>
             
