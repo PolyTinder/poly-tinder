@@ -4,6 +4,9 @@ import { DatabaseService } from '../database-service/database-service';
 import { Match, Swipe } from 'common/models/matching';
 import { UserAliasService } from '../user-alias-service/user-alias-service';
 import { WsService } from '../ws-service/ws-service';
+import { ModerationService } from '../moderation-service/moderation-service';
+import { HttpException } from '../../models/http-exception';
+import { StatusCodes } from 'http-status-codes';
 
 @singleton()
 export class MatchingService {
@@ -11,6 +14,7 @@ export class MatchingService {
         private readonly databaseService: DatabaseService,
         private readonly userAliasService: UserAliasService,
         private readonly wsService: WsService,
+        private readonly moderationService: ModerationService,
     ) {}
 
     private get matches(): Knex.QueryBuilder<Match> {
@@ -29,6 +33,18 @@ export class MatchingService {
         // const targetUserId = await this.userAliasService.getUserId(
         //     targetUserAliasId,
         // );
+        if (await this.moderationService.isBannedOrSuspended(activeUserId)) {
+            throw new HttpException(
+                'You are banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
+        if (await this.moderationService.isBannedOrSuspended(targetUserId)) {
+            throw new HttpException(
+                'You cannot interact with a user who is banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
 
         await this.swipes.insert({
             activeUserId,
@@ -94,6 +110,19 @@ export class MatchingService {
         activeUserId: number,
         targetUserId: number,
     ): Promise<void> {
+        if (await this.moderationService.isBannedOrSuspended(activeUserId)) {
+            throw new HttpException(
+                'You are banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
+        if (await this.moderationService.isBannedOrSuspended(targetUserId)) {
+            throw new HttpException(
+                'You cannot interact with a user who is banned or suspended',
+                StatusCodes.LOCKED,
+            );
+        }
+
         await this.matches.insert({
             user1Id: activeUserId,
             user2Id: targetUserId,

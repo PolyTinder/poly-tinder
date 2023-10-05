@@ -39,11 +39,13 @@ export class AdminUserService {
                 'users.lastLogin',
                 'userProfiles.name',
                 'userProfiles.age',
-                db.raw('COUNT(`banned`.`bannedId`) as `isBanned`'),
+                db.raw('COUNT(DISTINCT `banned`.`bannedId`) as `isBanned`'),
                 db.raw(
                     'CASE WHEN MAX(`suspend`.`until`) > NOW() THEN 1 ELSE NULL END as `isSuspended`',
                 ),
-                db.raw('COUNT(`suspend`.`until`) as `suspensionCount`'),
+                db.raw(
+                    'COUNT(DISTINCT `suspend`.`suspendId`) as `suspensionCount`',
+                ),
                 db.raw('COUNT(DISTINCT `reports`.`reportId`) as `reportCount`'),
             ])
             .leftJoin('userProfiles', 'users.userId', 'userProfiles.userId')
