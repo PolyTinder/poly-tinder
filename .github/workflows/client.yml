@@ -7,6 +7,8 @@ on:
       - packages/common/**
       - Dockerfile.client
       - .github/workflows/client.yml
+    branches:
+      - main
   workflow_dispatch:
 
 defaults:
