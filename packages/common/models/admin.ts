@@ -9,4 +9,5 @@ export type UserListItem = Pick<User, 'userId' | 'email'> & Pick<UserProfile, 'n
     lastLogin: Date;
     isBanned?: boolean;
     isSuspended?: boolean;
+    reportCount: number;
 };

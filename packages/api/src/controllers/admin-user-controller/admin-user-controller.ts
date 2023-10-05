@@ -120,6 +120,18 @@ export class AdminUserController extends AbstractController {
             }
         });
 
+        router.get('/reports/:userId', async (req, res, next) => {
+            try {
+                res.status(StatusCodes.OK).json(
+                    await this.adminUserService.getReports(
+                        Number(req.params.userId),
+                    ),
+                );
+            } catch (e) {
+                next(e);
+            }
+        });
+
         router.get(
             '/:userId',
             async (req: Request<{ userId: string }>, res, next) => {

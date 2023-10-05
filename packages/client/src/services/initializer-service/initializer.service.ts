@@ -51,10 +51,10 @@ export class InitializerService {
         this.authenticationService.loadSession().subscribe((session) => {
             if (session) {
                 this.wsService.connect(session.token).subscribe();
-                this.handleRedirect(session);
             } else {
                 this.stateService.setReady();
             }
+            this.handleRedirect(session);
         });
     }
 

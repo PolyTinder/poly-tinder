@@ -3,7 +3,7 @@ import { DatabaseService } from '../database-service/database-service';
 import { Knex } from 'knex';
 import { User } from 'common/models/user';
 import { UserListItem } from 'common/models/admin';
-import { Ban, Suspend } from 'common/models/moderation';
+import { Ban, Report, Suspend } from 'common/models/moderation';
 import { UserService } from '../user-service/user-service';
 
 @singleton()
@@ -25,6 +25,10 @@ export class AdminUserService {
         return this.databaseService.database('banned');
     }
 
+    private get reports(): Knex.QueryBuilder<Report> {
+        return this.databaseService.database('reports');
+    }
+
     async listUsers(): Promise<UserListItem[]> {
         const db = this.databaseService.database;
 
@@ -40,10 +44,12 @@ export class AdminUserService {
                     'CASE WHEN MAX(`suspend`.`until`) > NOW() THEN 1 ELSE NULL END as `isSuspended`',
                 ),
                 db.raw('COUNT(`suspend`.`until`) as `suspensionCount`'),
+                db.raw('COUNT(DISTINCT `reports`.`reportId`) as `reportCount`'),
             ])
             .leftJoin('userProfiles', 'users.userId', 'userProfiles.userId')
             .leftJoin('banned', 'users.email', 'banned.email')
             .leftJoin('suspend', 'users.email', 'suspend.email')
+            .leftJoin('reports', 'users.email', 'reports.reportedUserEmail')
             .groupBy('users.userId');
     }
 
@@ -91,5 +97,12 @@ export class AdminUserService {
     async unbanUser(userId: number): Promise<void> {
         const user = await this.userService.getUser(userId);
         await this.ban.where({ email: user.email }).delete();
+    }
+
+    async getReports(userId: number): Promise<Report[]> {
+        const user = await this.userService.getUser(userId);
+        return this.reports
+            .where({ reportedUserEmail: user.email })
+            .orderBy('created_at', 'desc');
     }
 }
