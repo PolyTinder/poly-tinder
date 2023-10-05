@@ -16,6 +16,7 @@ defaults:
     shell: bash
 
 env:
+  DIR: api
   SERVICE: api-admin
   REGION: northamerica-northeast1
   PROJECT: polytinder
@@ -33,11 +34,11 @@ jobs:
           cache-dependency-path: packages/${{env.SERVICE}}/package-lock.json
       - name: Install dependencies
         run: |
-          cd packages/$SERVICE
+          cd packages/$DIR
           npm ci
       - name: Lint
         run: |
-          cd packages/$SERVICE
+          cd packages/$DIR
           npm run lint
 
   build:
