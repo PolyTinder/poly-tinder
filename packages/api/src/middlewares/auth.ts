@@ -23,7 +23,7 @@ export const auth = async (
             ...req.body,
             session: await container
                 .resolve(AuthenticationService)
-                .loadSession(token),
+                .loadSession(token, Boolean(req.query.admin)),
         };
     } catch (e) {
         return next(e);

@@ -5,6 +5,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.ts",
+    "start:admin": "cross-env NODE_ENV=production node dist/src/index-admin.js",
+    "dev:admin": "cross-env NODE_ENV=development nodemon src/index-admin.ts",
     "build": "tsc",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",

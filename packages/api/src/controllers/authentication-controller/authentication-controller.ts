@@ -40,7 +40,10 @@ export class AuthenticationController extends AbstractController {
             ) => {
                 try {
                     res.status(StatusCodes.OK).json(
-                        await this.authenticationService.login(req.body),
+                        await this.authenticationService.login(
+                            req.body,
+                            Boolean(req.query.admin),
+                        ),
                     );
                 } catch (error) {
                     next(error);

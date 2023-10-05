@@ -18,6 +18,7 @@ import { UserValidationService } from '../user-validation-service/user-validatio
 import { WsService } from '../ws-service/ws-service';
 import { Socket } from 'socket.io';
 import { ModerationService } from '../moderation-service/moderation-service';
+import { AdminService } from '../admin-service/admin-service';
 
 @singleton()
 export class AuthenticationService {
@@ -27,6 +28,7 @@ export class AuthenticationService {
         private readonly userValidationService: UserValidationService,
         private readonly wsService: WsService,
         private readonly moderationService: ModerationService,
+        private readonly adminService: AdminService,
     ) {
         this.wsService.registerAuthenticationValidation(
             this.validateSocket.bind(this),
@@ -58,6 +60,7 @@ export class AuthenticationService {
 
         const newUser: NoId<User> = {
             email: user.email,
+            lastLogin: new Date(),
             ...(await this.hashPassword(user.password)),
         };
 
@@ -89,10 +92,20 @@ export class AuthenticationService {
         };
     }
 
-    async login(user: AuthenticationUser): Promise<UserPublicSession> {
+    async login(
+        user: AuthenticationUser,
+        admin = false,
+    ): Promise<UserPublicSession> {
         const foundUser = await this.getUserByEmail(user.email);
 
         if (!foundUser) {
+            throw new HttpException(
+                'Email or password incorrect',
+                StatusCodes.NOT_ACCEPTABLE,
+            );
+        }
+
+        if (admin && !(await this.adminService.isAdmin(foundUser.userId))) {
             throw new HttpException(
                 'Email or password incorrect',
                 StatusCodes.NOT_ACCEPTABLE,
@@ -109,6 +122,8 @@ export class AuthenticationService {
         const session = await this.createSession(foundUser.userId);
         const token = this.generateToken(foundUser.userId, session.sessionId);
 
+        await this.updateLastLogin(foundUser.userId);
+
         return {
             user: {
                 userId: foundUser.userId,
@@ -118,7 +133,10 @@ export class AuthenticationService {
         };
     }
 
-    async loadSession(token: string): Promise<UserPublicSession> {
+    async loadSession(
+        token: string,
+        admin = false,
+    ): Promise<UserPublicSession> {
         const { userId, sessionId } = jwt.verify(token, env.JWT_SECRET) as {
             userId: TypeOfId<User>;
             sessionId: TypeOfId<UserSavedSession>;
@@ -142,7 +160,13 @@ export class AuthenticationService {
             );
         }
 
+        if (admin && !(await this.adminService.isAdmin(user.userId))) {
+            throw new HttpException('Unauthorized', StatusCodes.UNAUTHORIZED);
+        }
+
         const newToken = this.generateToken(user.userId, session.sessionId);
+
+        await this.updateLastLogin(user.userId);
 
         return {
             user: {
@@ -190,6 +214,10 @@ export class AuthenticationService {
         sessionId: TypeOfId<UserSavedSession>,
     ): Promise<UserSavedSession | undefined> {
         return this.sessions.select().where({ userId, sessionId }).first();
+    }
+
+    private async updateLastLogin(userId: TypeOfId<User>): Promise<void> {
+        await this.users.update({ lastLogin: new Date() }).where({ userId });
     }
 
     private async createSession(
