@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, timeout } from 'rxjs';
 import { PublicUserResultClass } from '../../models/public-user-result';
 import { PublicProfileService } from '../../services/public-profile-service/public-profile.service';
 import { MatchingService } from '../../services/matching-service/matching.service';
@@ -13,6 +13,7 @@ import { ValidationService } from 'src/modules/validation/services/validation.se
 export class SwipingPageComponent {
     availableUsers: BehaviorSubject<PublicUserResultClass[]> =
         new BehaviorSubject<PublicUserResultClass[]>([]);
+    loading = new BehaviorSubject<boolean>(true);
 
     constructor(
         private readonly publicProfileService: PublicProfileService,
@@ -26,9 +27,14 @@ export class SwipingPageComponent {
         return this.validationService.userProfileReady;
     }
 
+    get availableUsersDelayed() {
+        return this.availableUsers.pipe(timeout(100));
+    }
+
     fetchNext() {
         this.publicProfileService.getAvailableUsers().subscribe((users) => {
             this.availableUsers.next([...this.availableUsers.value, ...users]);
+            this.loading.next(false);
         });
     }
 
