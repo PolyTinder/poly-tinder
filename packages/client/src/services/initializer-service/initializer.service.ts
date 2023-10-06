@@ -32,20 +32,24 @@ export class InitializerService {
 
         combineLatest([
             this.sessionService.session$,
-            this.wsService.ws,
+            this.wsService.disconnect$,
         ]).subscribe({
-            next: ([session, ws]) => {
-                if (session && ws) {
-                    this.stateService.setReady();
-                } else if (session && !ws) {
+            next: ([session]) => {
+                if (session) {
                     this.stateService.setLoading();
-                } else if (!session && !ws) {
+                } else {
                     this.stateService.setReady();
                 }
             },
             error: (error) => {
                 this.stateService.setError(error);
             },
+        });
+
+        this.wsService.ws.subscribe((ws) => {
+            if (ws) {
+                this.stateService.setReady();
+            }
         });
 
         this.authenticationService.loadSession().subscribe((session) => {

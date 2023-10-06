@@ -10,6 +10,7 @@ import { BehaviorSubject, map, Observable, Subject, switchMap } from 'rxjs';
 export class WsService {
     private ws$: BehaviorSubject<Socket<WsServer, WsClient> | undefined> =
         new BehaviorSubject<Socket<WsServer, WsClient> | undefined>(undefined);
+    readonly disconnect$ = new Subject<void>();
 
     constructor() {}
 
@@ -27,6 +28,7 @@ export class WsService {
 
             ws.on('disconnect', () => {
                 this.ws$.next(undefined);
+                this.disconnect$.next();
             });
 
             ws.on('connect_error', (error) => {
@@ -43,6 +45,7 @@ export class WsService {
     disconnect() {
         this.ws$.value?.disconnect();
         this.ws$.next(undefined);
+        this.disconnect$.next();
     }
 
     get ws() {
