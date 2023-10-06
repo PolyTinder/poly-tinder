@@ -1,8 +1,8 @@
-<img src="./assets/logo.svg" width="175" style="display: block; margin: auto;">
+<img src="./assets/logo.svg" width="175" align="center">
 
 <br>
 
-<h1 style="display: block; text-align: center; border: none;">PolyTinder</h1>
+<h1 style="border: none;" align="center">PolyTinder</h1>
 
 <hr>
 
