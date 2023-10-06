@@ -1,4 +1,6 @@
-<img src="./assets/logo.svg" width="175" align="center">
+<p align="center">
+    <img src="./assets/logo.svg" width="175">
+</p>
 
 <br>
 
