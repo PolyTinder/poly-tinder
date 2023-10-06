@@ -4,7 +4,7 @@
 
 <h1 style="border: none;" align="center">PolyTinder</h1>
 
-<p align="center">
+<!-- <p align="center">
     <img src="https://img.shields.io/github/last-commit/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/downloads/PolyTinder/poly-tinder/total.svg">
     <img src="https://img.shields.io/github/contributors/PolyTinder/poly-tinder.svg">
@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/github/issues-closed/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/issues-pr/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/issues-pr-closed/PolyTinder/poly-tinder.svg">
-</p>
+</p> -->
 
 <hr>
 
