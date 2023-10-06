@@ -11,15 +11,15 @@
 <p style="font-size: 18px" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
 
 <p align="center">
-    <a href="#📋-about">About</a>
+    <a href="#-about">About</a>
     <span>•</span>
-    <a href="#💪-how-to-contribute">How to contribute</a>
+    <a href="#-how-to-contribute">How to contribute</a>
     <span>•</span>
-    <a href="#🏗️-project-structure">Project structure</a>
+    <a href="#%EF%B8%8F-project-structure">Project structure</a>
     <span>•</span>
-    <a href="#🛠-installation">Installation</a>
+    <a href="#-installation">Installation</a>
     <span>•</span>
-    <a href="#📄-more-documentation">More documentation</a>
+    <a href="#-more-documentation">More documentation</a>
 </p>
 
 ![PolyTinder](./assets/preview.png)
