@@ -2,15 +2,13 @@
     <img src="./assets/logo.svg" width="175">
 </p>
 
-<br>
-
 <h1 style="border: none;" align="center">PolyTinder</h1>
 
 <hr>
 
-<p style="font-size: 1.75em; text-align: center; display: block;">Faites des rencontres de génies</p>
+<p style="font-size: 1.75em;" align="center">Faites des rencontres de génies</p>
 
-<p style="text-align: center; font-size: 1.15em;">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
+<p style="font-size: 1.15em;" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
 
 <p style="text-align: center;">
     <a href="#📋-about">About</a>
