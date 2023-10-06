@@ -6,11 +6,11 @@
 
 <hr>
 
-<p style="font-size: 1.75em;" align="center">Faites des rencontres de génies</p>
+<p style="font-size: 24px;" align="center">Faites des rencontres de génies</p>
 
-<p style="font-size: 1.15em;" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
+<p style="font-size: 18px" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
 
-<p style="text-align: center;">
+<p align="center">
     <a href="#📋-about">About</a>
     <span>•</span>
     <a href="#💪-how-to-contribute">How to contribute</a>
