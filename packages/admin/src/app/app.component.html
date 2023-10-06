@@ -1,7 +1,22 @@
 <mat-toolbar color="primary">
   <span>PolyTinder</span>
-  <button mat-button routerLink="/">Users</button>
-  <button mat-button routerLink="/reports">Reports</button>
+
+  <div class="actions">
+    <ng-container *ngIf="isLoggedIn | async">
+      <div class="actions__left">
+        <button mat-button routerLink="/">Users</button>
+        <button mat-button routerLink="/reports">Reports</button>
+      </div>
+      <div class="actions__right">
+        <button mat-button (click)="logout()">Logout</button>
+        <span>{{(user | async)?.email}}</span>
+      </div>
+    </ng-container>
+  
+    <ng-container *ngIf="!(isLoggedIn | async)">
+      <button mat-button routerLink="/login">Login</button>
+    </ng-container>
+  </div>
 </mat-toolbar>
 
 <div class="container">
