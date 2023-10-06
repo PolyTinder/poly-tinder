@@ -1,5 +1,5 @@
 export const environment = {
     api: {
-        url: 'http://localhost:3001',
+        url: 'https://api-admin-services.polytinder.com',
     },
 };
