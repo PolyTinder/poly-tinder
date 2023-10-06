@@ -1,77 +1,106 @@
-# PolyTinder
+<img src="./assets/logo.svg" width="175" style="display: block; margin: auto;">
 
-## Pushing images
+<br>
 
-### 1. Download and encode the key
+<h1 style="display: block; text-align: center; border: none;">PolyTinder</h1>
 
-On GCP, [download a Service Account key in JSON format](https://cloud.google.com/iam/docs/keys-create-delete), and save as in `.auth/auth.json`. Make sure the selected Service Account has the necessary permissions to push to the Artifact Registry.
+<hr>
 
-Run the following command to encode it:
+<p style="font-size: 1.75em; text-align: center; display: block;">Faites des rencontres de génies</p>
 
-```bash
-base64 .auth/auth.json > .auth/auth64.txt
-```
+<p style="text-align: center; font-size: 1.15em;">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
 
-### 2. Login into the registry
+<p style="text-align: center;">
+    <a href="#📋-about">About</a>
+    <span>•</span>
+    <a href="#💪-how-to-contribute">How to contribute</a>
+    <span>•</span>
+    <a href="#🏗️-project-structure">Project structure</a>
+    <span>•</span>
+    <a href="#🛠-installation">Installation</a>
+    <span>•</span>
+    <a href="#📄-more-documentation">More documentation</a>
+</p>
 
-```bash
-cat .auth/auth64.txt | docker login -u _json_key_base64 --password-stdin northamerica-northeast1-docker.pkg.dev
-```
+![PolyTinder](./assets/preview.png)
 
-### 3. Push the image
+## 📋 About
 
-#### API
-```bash
-# Build
-docker build -f Dockerfile.api -t api .
-# Build (for ARM based computer)
-docker buildx build --platform linux/amd64 -f Dockerfile.api -t api .
+Based on the original idea from [PolyGossip](https://www.instagram.com/poly_gossip/), the PolyTinder app aims to bring Polytechnique students closer together and create new relationships.
 
-# Tag
-docker tag api northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api
+The app is developed by Polytechnique students, for Polytechnique students.
 
-# Push
-docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api
-```
+## 💪 How to contribute
 
-#### API Admin
-```bash
-# Build
-docker build -f Dockerfile.api-admin -t api-admin .
-# Build (for ARM based computer)
-docker buildx build --platform linux/amd64 -f Dockerfile.api-admin -t api-admin .
+The PolyTinder project is never finished! We are always looking for new features to add, bugs to fix and new ideas to implement.
 
-# Tag
-docker tag api-admin northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api-admin
+You don't need to be a programmer to contribute. If you have ideas or find a bug, report it in the [Issues]() section of the project. If you are a programmer, you can contribute by making a [Pull Request]().
 
-# Push
-docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/api-admin
-```
+## 🏗️ Project structure
 
-#### Client
-```bash
-# Build
-docker build -f Dockerfile.client -t client .
-# Build (for ARM based computer)
-docker buildx build --platform linux/amd64 -f Dockerfile.client -t client .
+### Packages
 
-# Tag
-docker tag client northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/client
+The project is divided into several packages, each having a well defined role.
 
-# Push
-docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/client
-```
+- **[API](./packages/api)**: Public API of the application
+- **[API Admin](./packages/api)**: Private API for the admin (same package as API)
+- **[Client](./packages/client)**: Web client for the app
+- **[Admin](./packages/admin)**: Web client for the admin
+- **[Common](./packages/common)**: Common code shared between packages
 
-#### Admin
-```bash
-# Build
-docker build -f Dockerfile.admin -t admin .
-# Build (for ARM based computer)
-docker buildx build --platform linux/amd64 -f Dockerfile.admin -t admin .
+A detailed description of each package is available in the README of each.
 
-# Tag
-docker tag admin northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/admin
+## 🛠 Installation
 
-# Push
-docker push northamerica-northeast1-docker.pkg.dev/polytinder/polytinder-prod/admin
-```
+### Prerequisites
+
+- **[Docker](https://www.docker.com/)**: to run the development stack.
+- **[VSCode](https://code.visualstudio.com/)**: to develop.
+- **Extension [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)**: to create the development environment.
+
+### Local development
+
+In order to ensure that the correct development environment is used regardless of the machine, we use Docker for development. This way, dependencies (Angular CLI, for example) are installed in the container and not on the local machine. (For more information, see [Dev Containers](https://code.visualstudio.com/docs/remote/containers))
+
+Then, the application stack is launched with Docker Compose to launch all the necessary services.
+
+### Installation
+
+1. Clone the project
+
+    ```bash
+    git clone git@github.com:PolyTinder/poly-tinder.git
+    ```
+
+2. Open the project in VSCode
+
+    ```bash
+    cd poly-tinder
+    code .
+    ```
+
+3. Click on the `Reopen in Container` button in the lower left corner of the interface. (This step may take some time the first time)
+
+4. Install packages dependencies, from each packages, run:
+
+    ```bash
+    npm ci
+    ```
+
+4. Populate the database, from the API package, run:
+
+    ```bash
+    npx knex seed:run test-users
+    ```
+
+5. Launch the stack
+
+    ```bash
+    make
+    ```
+
+6. Open the app in your browser at [http://localhost:4200](http://localhost:4200). You can login with any user from the [seeds](./packages/api/seeds/test-users.js) file (but leaving the password blank).
+
+## 📄 More documentation
+
+- [Deploy](./docs/deploys.md)
