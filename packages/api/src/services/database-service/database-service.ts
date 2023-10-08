@@ -14,13 +14,13 @@ export class DatabaseService {
         return this.db;
     }
 
-    async instantiate(): Promise<void> {
+    async instantiate(migrate = true): Promise<void> {
         this.db = knex({
             client: 'mysql2',
             connection: this.getConnectionConfig(),
         });
 
-        await this.db.migrate.latest();
+        if (migrate) await this.db.migrate.latest();
     }
 
     isConnected(): boolean {

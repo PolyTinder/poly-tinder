@@ -50,7 +50,7 @@ export class ApplicationAdmin {
     }
 
     async init() {
-        await this.databaseService.instantiate();
+        await this.databaseService.instantiate(false);
     }
 
     private configureMiddlewares() {
