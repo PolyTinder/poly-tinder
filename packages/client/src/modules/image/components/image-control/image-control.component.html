@@ -1,16 +1,20 @@
 <ng-container *ngIf="url | async">
-    <img
-        [src]="url | async"
-        [srcset]="(url | async) + ' 1x, ' + (urlRetina | async) + ' 2x'"
-        alt=""
-        (click)="openDialog()"
-        class="control-view control-view--image"
-    >
+    <div class="control-view">
+        <img
+            [src]="url | async"
+            [srcset]="(url | async) + ' 1x, ' + (urlRetina | async) + ' 2x'"
+            alt=""
+            (click)="openDialog()"
+            class="control-view__image control-view--image"
+        >
+        <button *ngIf="canDelete" class="control-view__delete-btn interactable" (click)="deleteImage()"><i class="fas fa-trash"></i></button>
+    </div>
 </ng-container>
 
 <ng-container *ngIf="!(value | async)">
     <div (click)="openDialog()" class="control-view control-view--no-image">
-        <i class="far fa-plus"></i>
+        <i class="far fa-plus" *ngIf="!(loading$ | async)"></i>
+        <i class="far fa-spinner-third fa-spin" *ngIf="loading$ | async"></i>
     </div>
 </ng-container>
 
@@ -21,7 +25,8 @@
     [public-key]="publicKey"
     [crop]="crop"
     tabs="file camera url gphotos instagram"
-    (on-upload-complete)="onUpload($event)"
+    (on-upload-complete)="onUploadComplete($event)"
+    (on-progress)="onProgress()"
     [value]="(value | async) ?? ''"
     class="default-widget"
 >

@@ -156,4 +156,8 @@ export class UserProfileFormComponent {
                 });
             });
     }
+
+    markDirty() {
+        this.userProfileForm.markAsDirty();
+    }
 }
