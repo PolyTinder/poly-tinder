@@ -47,6 +47,10 @@ export class MatchesPageComponent {
     }
 
     get userValid() {
-        return this.validationService.userProfileReady;
+        return this.validationService.userValid;
+    }
+
+    get userValidMessage() {
+        return this.validationService.userValidMessage;
     }
 }

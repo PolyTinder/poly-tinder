@@ -63,6 +63,7 @@
     "mysql2": "^3.6.1",
     "random-seed": "^0.3.0",
     "reflect-metadata": "^0.1.13",
+    "sendgrid": "^5.2.3",
     "socket.io": "^4.7.2",
     "tsyringe": "^4.7.0",
     "uuid": "^9.0.1",

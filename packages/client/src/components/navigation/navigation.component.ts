@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, map, tap } from 'rxjs';
 import { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
@@ -71,8 +71,10 @@ export class NavigationComponent {
         return this.publicProfileService.unreadConversationCount;
     }
 
-    get userValid() {
-        return this.validationService.userProfileReady;
+    get userValidActionsCount() {
+        return this.validationService.userValidActionsCount.pipe(
+            map((count) => count ?? 0),
+        );
     }
 
     logout() {

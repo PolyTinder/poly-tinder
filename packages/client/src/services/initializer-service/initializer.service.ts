@@ -13,6 +13,11 @@ import { WsService } from '../ws-service/ws.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { UserPublicSession } from 'common/models/authentication';
 import { Location } from '@angular/common';
+import {
+    EMAIL_VALIDATION_TOKEN_KEY,
+    EMAIL_VALIDATION_URL_REGEX,
+} from 'src/constants/user-validation';
+import { ValidationService } from 'src/modules/validation/services/validation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -25,10 +30,13 @@ export class InitializerService {
         private readonly router: Router,
         private readonly location: Location,
         private readonly wsService: WsService,
+        private readonly validationService: ValidationService,
     ) {}
 
     async initialize(): Promise<void> {
         this.stateService.setLoading();
+
+        this.handleEmailVerificationUrl(this.location.path());
 
         combineLatest([
             this.sessionService.session$,
@@ -60,6 +68,24 @@ export class InitializerService {
             }
             this.handleRedirect(session);
         });
+
+        combineLatest([
+            this.sessionService.session$,
+            this.wsService.ws,
+        ]).subscribe(([session, ws]) => {
+            if (session && ws) {
+                const emailValidationToken = localStorage.getItem(
+                    EMAIL_VALIDATION_TOKEN_KEY,
+                );
+                if (emailValidationToken) {
+                    this.validationService
+                        .validateEmail(emailValidationToken)
+                        .subscribe();
+                }
+
+                localStorage.removeItem(EMAIL_VALIDATION_TOKEN_KEY);
+            }
+        });
     }
 
     handleRedirect(session: UserPublicSession | undefined): void {
@@ -73,5 +99,15 @@ export class InitializerService {
         ) {
             this.router.navigate([LOGIN_ROUTE]);
         }
+    }
+
+    private handleEmailVerificationUrl(path: string): void {
+        const match = EMAIL_VALIDATION_URL_REGEX.exec(path);
+
+        const token = match?.groups?.['token'];
+
+        if (!token) return;
+
+        localStorage.setItem(EMAIL_VALIDATION_TOKEN_KEY, token);
     }
 }

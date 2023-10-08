@@ -16,6 +16,7 @@ import { logger } from './utils/logger';
 import helmet from 'helmet';
 import { DatabaseService } from './services/database-service/database-service';
 import { WsService } from './services/ws-service/ws-service';
+import { EmailService } from './services/email-service/email-service';
 
 @singleton()
 export class Application {
@@ -27,6 +28,7 @@ export class Application {
         private readonly controllers: AbstractController[],
         private readonly databaseService: DatabaseService,
         private readonly wsService: WsService,
+        private readonly emailService: EmailService,
     ) {
         this.app = express();
         this.server = http.createServer(this.app);

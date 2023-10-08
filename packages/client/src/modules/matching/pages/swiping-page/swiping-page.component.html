@@ -1,7 +1,7 @@
 <ng-container *ngIf="availableUsers | async; let availableUsers">
     <ng-container *ngIf="(userValid | async) === false">
         <div class="no-profiles">
-            <p>Profil incomplet, <a routerLink="/profile-edit">complétez le</a> !</p>
+            <p>{{ userValidMessage | async }}</p>
         </div>
     </ng-container>
 

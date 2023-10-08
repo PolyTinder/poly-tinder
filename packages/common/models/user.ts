@@ -59,7 +59,7 @@ export interface UserValidation {
     userProfileReady: boolean;
 }
 
-export type UserValidationResponse = Pick<UserValidation, 'userProfileReady'>;
+export type UserValidationResponse = Pick<UserValidation, 'userProfileReady' | 'emailValidated'>;
 
 export interface UserAlias {
     userAliasId: string;

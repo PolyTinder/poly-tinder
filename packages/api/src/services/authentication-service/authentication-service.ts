@@ -83,6 +83,10 @@ export class AuthenticationService {
         const session = await this.createSession(createdUser.userId);
         const token = this.generateToken(createdUser.userId, session.sessionId);
 
+        await this.userValidationService.requestEmailValidation(
+            createdUser.userId,
+        );
+
         return {
             user: {
                 userId: createdUser.userId,
