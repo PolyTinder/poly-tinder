@@ -1,7 +1,16 @@
+<ng-template #titleContent>
+    <i [class]="icon" *ngIf="icon"></i><span *ngIf="title">{{title}}</span>
+</ng-template>
+
 <div [class]="'card card--color--' + color" [id]="anchor" [ngClass]="{'card--no-padding': noPadding}">
     <div class="card__header" *ngIf="hasHeader">
         <h2 class="card__title">
-            <a [href]="anchor ? this.currentUrl + '#' + anchor : undefined"><i [class]="icon" *ngIf="icon"></i><span *ngIf="title">{{title}}</span></a>
+            <a [href]="this.currentUrl + '#' + anchor" *ngIf="anchor">
+                <ng-container *ngTemplateOutlet="titleContent"></ng-container>
+            </a>
+            <ng-container *ngIf="!anchor">
+                <ng-container *ngTemplateOutlet="titleContent"></ng-container>
+            </ng-container>
         </h2>
     </div>
     <div class="card__body">

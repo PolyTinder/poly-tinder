@@ -17,7 +17,7 @@ defaults:
 
 env:
   SERVICE: api
-  REGION: northamerica-northeast1
+  REGION: us-east1
   PROJECT: polytinder
   ENVIRONMENT: prod
 
