@@ -1,4 +1,4 @@
-import { cleanEnv, num, str } from 'envalid';
+import { cleanEnv, email, num, str } from 'envalid';
 
 const env = cleanEnv(process.env, {
     NODE_ENV: str({
@@ -15,6 +15,10 @@ const env = cleanEnv(process.env, {
     DB_USER: str(),
     DB_PASSWORD: str(),
     DB_DATABASE: str(),
+
+    EMAIL: email(),
+    MJ_APIKEY_PUBLIC: str(),
+    MJ_APIKEY_PRIVATE: str(),
 
     JWT_SECRET: str({ default: '123' }),
 });

@@ -1,5 +1,11 @@
 <app-layout headerType="hidden">
     <div class="user-profile" *ngIf="userProfile | async; let userProfile">
+        <app-card color="danger" *ngIf="(emailValidated | async) === false">
+            <p><b>Email non validé</b></p>
+            <p>Veuillez vérifier votre boite de courriel ou cliquez sur le bouton ci-dessous.</p>
+            <app-button (btnClick)="requestEmailValidation()" interactable="small">Réenvoyer un email de validation</app-button>
+        </app-card>
+
         <div class="user-profile__info">
             <img 
                 class="user-profile__info__avatar"
@@ -17,7 +23,7 @@
         <div class="user-profile__actions">
             <app-button icon="fas fa-user-edit" link="/profile-edit" interactable="small" [shadow]="true">
                 Modifier mon profil
-                <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="(userValid | async) === false">1</span>
+                <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="(userProfileReady | async) === false">1</span>
             </app-button>
 
             <app-button icon="fas fa-user" link="/profile-preview" interactable="small" [shadow]="true">Visualiser mon profil</app-button>

@@ -11,7 +11,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"Angular.ng-template"
+				"Angular.ng-template",
+				"IronGeek.vscode-env"
 			]
 		}
 	}

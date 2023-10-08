@@ -71,8 +71,10 @@ export class NavigationComponent {
         return this.publicProfileService.unreadConversationCount;
     }
 
-    get userValid() {
-        return this.validationService.userProfileReady;
+    get userValidActionsCount() {
+        return this.validationService.userValidActionsCount.pipe(
+            map((count) => count ?? 0),
+        );
     }
 
     logout() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { UserPublicSession } from 'common/models/authentication'
 
 @Injectable({
@@ -12,6 +12,10 @@ export class UserService {
 
   get session() {
     return this.session$.asObservable();
+  }
+
+  get isLoggedIn() {
+    return this.session.pipe(map((session) => !!session));
   }
 
   setSession(session: UserPublicSession | undefined) {

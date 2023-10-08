@@ -21,8 +21,12 @@ export class UserProfilePageComponent {
         return this.userProfileService.getUserProfile();
     }
 
-    get userValid() {
+    get userProfileReady() {
         return this.validationService.userProfileReady;
+    }
+
+    get emailValidated() {
+        return this.validationService.emailValidated;
     }
 
     logout() {
@@ -31,5 +35,9 @@ export class UserProfilePageComponent {
 
     askDeleteUser() {
         this.userService.askDeleteUser();
+    }
+
+    requestEmailValidation() {
+        this.validationService.requestEmailValidation().subscribe();
     }
 }

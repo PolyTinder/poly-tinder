@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NotLoadedPublicUserResult } from 'common/models/user';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map, tap } from 'rxjs';
 import { PublicUserResultClass } from '../../models/public-user-result';
 import { MatchListItem } from 'common/models/matching';
 import { MatchListItemClass } from '../../models/match-list-item';
 import { WsService } from 'src/services/ws-service/ws.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
+import { ValidationService } from 'src/modules/validation/services/validation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +20,7 @@ export class PublicProfileService {
         private readonly http: HttpClient,
         private readonly wsService: WsService,
         private readonly sessionService: SessionService,
+        private readonly validationService: ValidationService,
     ) {
         this.wsService.listen('message:new').subscribe((message) => {
             const matches = this.matches$.getValue();
@@ -42,8 +44,11 @@ export class PublicProfileService {
             this.fetchMatches().subscribe();
         });
 
-        this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
-            if (isLoggedIn) {
+        combineLatest([
+            this.sessionService.isLoggedIn(),
+            this.validationService.userValid,
+        ]).subscribe(([isLoggedIn, userValid]) => {
+            if (isLoggedIn && userValid) {
                 this.fetchMatches().subscribe();
             } else {
                 this.matches$.next([]);

@@ -31,6 +31,9 @@ services:
       DB_USER: admin
       DB_PASSWORD: admin
       DB_DATABASE: db
+      EMAIL: $EMAIL
+      MJ_APIKEY_PUBLIC: $MJ_APIKEY_PUBLIC
+      MJ_APIKEY_PRIVATE: $MJ_APIKEY_PRIVATE
     volumes:
       - ./packages/api:/src/www/app
       - ./packages/common:/src/www/common
@@ -48,6 +51,9 @@ services:
       DB_PASSWORD: admin
       DB_DATABASE: db
       PORT: 3001
+      EMAIL: $EMAIL
+      MJ_APIKEY_PUBLIC: $MJ_APIKEY_PUBLIC
+      MJ_APIKEY_PRIVATE: $MJ_APIKEY_PRIVATE
     volumes:
       - ./packages/api:/src/www/app
       - ./packages/common:/src/www/common
