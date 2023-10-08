@@ -7,8 +7,6 @@ import { VerificationTokenService } from '../verification-token-service/verifica
 import { EmailService } from '../email-service/email-service';
 import { UserService } from '../user-service/user-service';
 import { env } from '../../utils/environment';
-import { HttpException } from '../../models/http-exception';
-import { StatusCodes } from 'http-status-codes';
 
 @singleton()
 export class UserValidationService {

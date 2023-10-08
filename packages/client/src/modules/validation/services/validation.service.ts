@@ -35,7 +35,7 @@ export class ValidationService {
 
         this.sessionService.isLoggedIn().subscribe((isLoggedIn) => {
             if (isLoggedIn) {
-                this.fetchValidation().subscribe(console.log);
+                this.fetchValidation().subscribe();
             } else {
                 this.userValid$.next(undefined);
             }
