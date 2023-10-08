@@ -11,6 +11,8 @@ export const TERMS_AND_CONDITIONS_ROUTE = '/terms-and-conditions';
 export const ACCEPTABLE_USE_POLICY_ROUTE = '/acceptable-use-policy';
 export const LOGIN_ROUTE = '/login';
 export const SIGNUP_ROUTE = '/signup';
+export const REQUEST_PASSWORD_RESET_ROUTE = '/request-password-reset';
+export const PASSWORD_RESET_ROUTE = '/password-reset';
 
 export const PUBLIC_ROUTES_PATH = [LOGIN_ROUTE, SIGNUP_ROUTE];
 export const PUBLICLY_ACCESSIBLE_ROUTES_PATH = [
@@ -18,5 +20,7 @@ export const PUBLICLY_ACCESSIBLE_ROUTES_PATH = [
     PRIVACY_POLICY_ROUTE,
     LOGIN_ROUTE,
     SIGNUP_ROUTE,
+    REQUEST_PASSWORD_RESET_ROUTE,
+    PASSWORD_RESET_ROUTE,
 ];
 export const NO_NAVIGATION_ROUTES_PATH = [MATCHED_USER_ROUTE];

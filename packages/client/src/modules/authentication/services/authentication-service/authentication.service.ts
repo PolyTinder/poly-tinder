@@ -80,4 +80,15 @@ export class AuthenticationService {
             catchError(() => of(undefined)),
         );
     }
+
+    requestPasswordReset(email: string): Observable<void> {
+        return this.http.post<void>('/auth/password-reset/request', { email });
+    }
+
+    resetPassword(token: string, newPassword: string): Observable<void> {
+        return this.http.post<void>('/auth/password-reset', {
+            token,
+            newPassword,
+        });
+    }
 }

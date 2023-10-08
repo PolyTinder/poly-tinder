@@ -93,10 +93,7 @@ export class InitializerService {
             this.router.navigate([HOME_ROUTE]);
         }
 
-        if (
-            !session &&
-            !PUBLICLY_ACCESSIBLE_ROUTES_PATH.includes(this.location.path())
-        ) {
+        if (!session && !this.isPubliclyAccessibleRoute(this.location.path())) {
             this.router.navigate([LOGIN_ROUTE]);
         }
     }
@@ -109,5 +106,13 @@ export class InitializerService {
         if (!token) return;
 
         localStorage.setItem(EMAIL_VALIDATION_TOKEN_KEY, token);
+    }
+
+    private isPubliclyAccessibleRoute(path: string): boolean {
+        return (
+            PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((publicPath) =>
+                new RegExp(`${publicPath}(?:?.+)?$`).test(path),
+            ) !== undefined
+        );
     }
 }

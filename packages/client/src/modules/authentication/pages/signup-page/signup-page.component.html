@@ -16,7 +16,7 @@
                 </mat-form-field>
             
                 <mat-form-field>
-                    <mat-label><i class="fas fa-key"></i> Password</mat-label>
+                    <mat-label><i class="fas fa-key"></i> Mot de passe</mat-label>
                     <input formControlName="password" type="password" (keyup)="onChange()" matInput>
                     <mat-error *ngIf="signupForm.controls.password.errors?.['required']">Le mot de passe est requis</mat-error>
                 </mat-form-field>

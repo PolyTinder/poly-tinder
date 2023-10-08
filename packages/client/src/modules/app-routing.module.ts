@@ -7,10 +7,12 @@ import {
     LOGIN_ROUTE,
     MATCHED_USER_ROUTE,
     MATCHES_ROUTE,
+    PASSWORD_RESET_ROUTE,
     PRIVACY_POLICY_ROUTE,
     PROFILE_EDIT_ROUTE,
     PROFILE_PREVIEW_ROUTE,
     PROFILE_ROUTE,
+    REQUEST_PASSWORD_RESET_ROUTE,
     SIGNUP_ROUTE,
     SWIPING_ROUTE,
     TERMS_AND_CONDITIONS_ROUTE,
@@ -26,6 +28,8 @@ import { MatchedUserPageComponent } from './matching/pages/matched-user-page/mat
 import { PrivacyPolicyComponent } from './about/pages/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './about/pages/terms-and-conditions/terms-and-conditions.component';
 import { AcceptableUsePolicyComponent } from './about/pages/acceptable-use-policy/acceptable-use-policy.component';
+import { RequestPasswordResetPageComponent } from './authentication/pages/request-password-reset-page/request-password-reset-page.component';
+import { PasswordResetPageComponent } from './authentication/pages/password-reset-page/password-reset-page.component';
 
 const privateRoute: Route = {
     // canActivate: [privateRouteGuard],
@@ -72,6 +76,16 @@ const routes: Routes = [
     },
     { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },
     { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },
+    {
+        path: REQUEST_PASSWORD_RESET_ROUTE,
+        component: RequestPasswordResetPageComponent,
+        ...publicRoute,
+    },
+    {
+        path: PASSWORD_RESET_ROUTE,
+        component: PasswordResetPageComponent,
+        ...publicRoute,
+    },
     { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },
 ];
 

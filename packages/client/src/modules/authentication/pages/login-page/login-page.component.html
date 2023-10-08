@@ -16,7 +16,7 @@
                 </mat-form-field>
             
                 <mat-form-field>
-                    <mat-label><i class="fas fa-key"></i> Password</mat-label>
+                    <mat-label><i class="fas fa-key"></i> Mot de passe</mat-label>
                     <input formControlName="password" type="password" (keyup)="onChange()" matInput>
                     <mat-error *ngIf="loginForm.controls.password.errors?.['required']">Le mot de passe est requis</mat-error>
                 </mat-form-field>
@@ -30,6 +30,10 @@
                 <button type="submit" *ngIf="!(loading | async)">Me connecter</button>
                 <button type="submit" *ngIf="loading | async" [disabled]="true"><i class="fas fa-spinner-third fa-spin"></i></button>
             </form>
+        </app-card>
+
+        <app-card>
+            <p class="link-text">Oublié votre mot de passe ? <a routerLink="/request-password-reset">Réinitialiser le mot de passe</a>.</p>
         </app-card>
 
         <app-card>
