@@ -2,7 +2,7 @@
 <ng-container *ngIf="userProfile">
     <div class="user-profile">
         <div class="user-profile__main">
-            <div class="user-profile__main__picture" [style.background-image]="'url(' + userProfile.pictures?.[0] + ')'"></div>
+            <div class="user-profile__main__picture" [style.background-image]="'url(' + userProfile.pictures?.[0] + '-/scale_crop/700x1020/center/' + ')'"></div>
             <div class="user-profile__main__info">
                 <p class="user-profile__main__info__name">{{userProfile.name}}</p>
                 <p class="user-profile__main__info__subtitle">
@@ -25,7 +25,7 @@
         <div 
             class="user-profile__picture"
             *ngIf="userProfile.pictures?.[1]"
-            [style.background-image]="'url(' + userProfile.pictures?.[1] + ')'"
+            [style.background-image]="'url(' + userProfile.pictures?.[1] + '-/scale_crop/700x1020/center/' + ')'"
         >
         </div>
 
@@ -70,7 +70,7 @@
         <div 
             class="user-profile__picture"
             *ngIf="userProfile.pictures?.[2]"
-            [style.background-image]="'url(' + userProfile.pictures?.[2] + ')'"
+            [style.background-image]="'url(' + userProfile.pictures?.[2] + '-/scale_crop/700x1020/center/' + ')'"
         >
         </div>
 
@@ -86,7 +86,7 @@
         <div 
             class="user-profile__picture"
             *ngIf="userProfile.pictures?.[3]"
-            [style.background-image]="'url(' + userProfile.pictures?.[3] + ')'"
+            [style.background-image]="'url(' + userProfile.pictures?.[3] + '-/scale_crop/700x1020/center/' + ')'"
         >
         </div>
 
@@ -102,14 +102,14 @@
         <div 
             class="user-profile__picture"
             *ngIf="userProfile.pictures?.[4]"
-            [style.background-image]="'url(' + userProfile.pictures?.[4] + ')'"
+            [style.background-image]="'url(' + userProfile.pictures?.[4] + '-/scale_crop/700x1020/center/' + ')'"
         >
         </div>
 
         <div 
             class="user-profile__picture"
             *ngIf="userProfile.pictures?.[5]"
-            [style.background-image]="'url(' + userProfile.pictures?.[5] + ')'"
+            [style.background-image]="'url(' + userProfile.pictures?.[5] + '-/scale_crop/700x1020/center/' + ')'"
         >
         </div>
 
