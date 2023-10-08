@@ -21,6 +21,7 @@ import { ModerationService } from '../moderation-service/moderation-service';
 import { AdminService } from '../admin-service/admin-service';
 import { VerificationTokenService } from '../verification-token-service/verification-token-service';
 import { EmailService } from '../email-service/email-service';
+import { normaliseEmail } from '../../utils/email';
 
 @singleton()
 export class AuthenticationService {
@@ -48,14 +49,16 @@ export class AuthenticationService {
     }
 
     async signup(user: AuthenticationUser): Promise<UserPublicSession> {
-        if (await this.getUserByEmail(user.email)) {
+        const email = normaliseEmail(user.email);
+
+        if (await this.getUserByEmail(email)) {
             throw new HttpException(
                 'User already exists',
                 StatusCodes.CONFLICT,
             );
         }
 
-        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+        if (await this.moderationService.isEmailBannedOrSuspended(email)) {
             throw new HttpException(
                 'Cannot create account',
                 StatusCodes.LOCKED,
@@ -63,7 +66,7 @@ export class AuthenticationService {
         }
 
         const newUser: NoId<User> = {
-            email: user.email,
+            email,
             lastLogin: new Date(),
             ...(await this.hashPassword(user.password)),
         };
@@ -104,7 +107,8 @@ export class AuthenticationService {
         user: AuthenticationUser,
         admin = false,
     ): Promise<UserPublicSession> {
-        const foundUser = await this.getUserByEmail(user.email);
+        const email = normaliseEmail(user.email);
+        const foundUser = await this.getUserByEmail(email);
 
         if (!foundUser) {
             throw new HttpException(
@@ -113,7 +117,7 @@ export class AuthenticationService {
             );
         }
 
-        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+        if (await this.moderationService.isEmailBannedOrSuspended(email)) {
             throw new HttpException('Cannot login', StatusCodes.LOCKED);
         }
 
@@ -218,6 +222,7 @@ export class AuthenticationService {
     }
 
     async requestPasswordReset(email: string): Promise<void> {
+        email = normaliseEmail(email);
         const user = await this.getUserByEmail(email);
 
         if (!user) {

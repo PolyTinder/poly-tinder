@@ -10,6 +10,7 @@ import {
 } from 'common/models/moderation';
 import { WsService } from '../ws-service/ws-service';
 import { UserService } from '../user-service/user-service';
+import { normaliseEmail } from '../../utils/email';
 
 @singleton()
 export class ModerationService {
@@ -115,8 +116,11 @@ export class ModerationService {
 
     async isEmailBannedOrSuspended(email: string): Promise<boolean> {
         const [ban, suspends] = await Promise.all([
-            this.banned.select('*').where({ email }).first(),
-            this.suspended.select('*').where({ email }),
+            this.banned
+                .select('*')
+                .where({ email: normaliseEmail(email) })
+                .first(),
+            this.suspended.select('*').where({ email: normaliseEmail(email) }),
         ]);
 
         return (
