@@ -14,6 +14,7 @@
     height: 100%;
     width: 100%;
     cursor: pointer;
+    position: relative;
     
     &--no-image {
         border: dashed 2px var(--theme-main);
@@ -33,5 +34,27 @@
 
     &--image {
         background-color: rgba(var(--theme-main-rgb), 0.25);
+    }
+
+    &__image {
+        border-radius: 6px;
+    }
+
+    &__delete-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        translate: 50% -50%;
+        height: 36px;
+        width: 36px;
+        appearance: none;
+        background-color: var(--theme-main-contrast);
+        color: var(--theme-main);
+        border: solid 1px rgb(240, 240, 240);
+        border-radius: 36px;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

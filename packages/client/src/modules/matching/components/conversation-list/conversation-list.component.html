@@ -4,7 +4,7 @@
             <ng-container *ngIf="conversation.value | async; let value">
                 <a [routerLink]="'/matches/' + value.userId">
                     <div class="conversation-list__item" [ngClass]="{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}">
-                        <div *ngIf="value.pictures?.[0]" class="conversation-list__item__image interactable" [style.background-image]="'url(' + value.pictures?.[0] + ')'" alt=""></div>
+                        <div *ngIf="value.pictures?.[0]" class="conversation-list__item__image interactable" [style.background-image]="'url(' + value.pictures?.[0] + '-/scale_crop/144x144/center/' + ')'" alt=""></div>
                         <div *ngIf="!value.pictures?.[0]" class="conversation-list__item__image conversation-list__item__image--not-loaded interactable"></div>
 
                         <div class="conversation-list__item__info">

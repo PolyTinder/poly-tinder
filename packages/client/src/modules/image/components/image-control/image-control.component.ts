@@ -27,11 +27,13 @@ export class ImageControlComponent {
     @Input() value: BehaviorSubject<string | undefined> = new BehaviorSubject<
         string | undefined
     >(undefined);
-    @Output() change = new EventEmitter<string[]>();
+    @Input() canDelete: boolean = true;
+    @Output() change = new EventEmitter<string | undefined>();
     @ViewChild('widget') widget!: ElementRef & { widget: UcWidgetComponent };
 
     publicKey = PUBLIC_KEY;
     maxFileSizeBytes = MAX_FILE_SIZE_BYTES;
+    loading$ = new BehaviorSubject<boolean>(false);
 
     get url(): Observable<string | undefined> {
         return this.value.pipe(
@@ -60,8 +62,18 @@ export class ImageControlComponent {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onUpload(info: any) {
+    onUploadComplete(info: any) {
         this.value.next(info.cdnUrl);
         this.change.next(info.cdnUrl);
+        this.loading$.next(false);
+    }
+
+    onProgress() {
+        this.loading$.next(true);
+    }
+
+    deleteImage() {
+        this.value.next(undefined);
+        this.change.next(undefined);
     }
 }

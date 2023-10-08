@@ -157,47 +157,7 @@ export class UserProfileFormComponent {
             });
     }
 
-    onInterestChange(interest: string, event: Event) {
-        const target = event.currentTarget as HTMLInputElement;
-        if (!target) throw new Error('Target not found');
-
-        const currentValue = this.userProfileForm.value.interests ?? [];
-
-        if (target.checked) {
-            if (!currentValue.includes(interest)) {
-                currentValue.push(interest);
-            }
-        } else {
-            if (currentValue.includes(interest)) {
-                currentValue.splice(currentValue.indexOf(interest), 1);
-            }
-        }
-
-        this.userProfileForm.patchValue({
-            interests: currentValue.filter((interest) => interest.length > 0),
-        });
-    }
-
-    onAssociationChange(association: string, event: Event) {
-        const target = event.currentTarget as HTMLInputElement;
-        if (!target) throw new Error('Target not found');
-
-        const currentValue = this.userProfileForm.value.associations ?? [];
-
-        if (target.checked) {
-            if (!currentValue.includes(association)) {
-                currentValue.push(association);
-            }
-        } else {
-            if (currentValue.includes(association)) {
-                currentValue.splice(currentValue.indexOf(association), 1);
-            }
-        }
-
-        this.userProfileForm.patchValue({
-            associations: currentValue.filter(
-                (association) => association.length > 0,
-            ),
-        });
+    markDirty() {
+        this.userProfileForm.markAsDirty();
     }
 }

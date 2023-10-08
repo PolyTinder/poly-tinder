@@ -9,7 +9,7 @@
         <div class="user-profile__info">
             <img 
                 class="user-profile__info__avatar"
-                [src]="userProfile.pictures?.[0]"
+                [src]="userProfile.pictures?.[0] + '-/scale_crop/360x360/center/'"
                 [alt]="'Photo de profile de ' + userProfile.name"
                 *ngIf="userProfile.pictures?.[0]"
             >
