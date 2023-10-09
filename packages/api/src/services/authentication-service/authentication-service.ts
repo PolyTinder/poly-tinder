@@ -19,6 +19,9 @@ import { WsService } from '../ws-service/ws-service';
 import { Socket } from 'socket.io';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { AdminService } from '../admin-service/admin-service';
+import { VerificationTokenService } from '../verification-token-service/verification-token-service';
+import { EmailService } from '../email-service/email-service';
+import { normaliseEmail } from '../../utils/email';
 
 @singleton()
 export class AuthenticationService {
@@ -29,6 +32,8 @@ export class AuthenticationService {
         private readonly wsService: WsService,
         private readonly moderationService: ModerationService,
         private readonly adminService: AdminService,
+        private readonly verificationTokenService: VerificationTokenService,
+        private readonly emailService: EmailService,
     ) {
         this.wsService.registerAuthenticationValidation(
             this.validateSocket.bind(this),
@@ -44,14 +49,16 @@ export class AuthenticationService {
     }
 
     async signup(user: AuthenticationUser): Promise<UserPublicSession> {
-        if (await this.getUserByEmail(user.email)) {
+        const email = normaliseEmail(user.email);
+
+        if (await this.getUserByEmail(email)) {
             throw new HttpException(
                 'User already exists',
                 StatusCodes.CONFLICT,
             );
         }
 
-        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+        if (await this.moderationService.isEmailBannedOrSuspended(email)) {
             throw new HttpException(
                 'Cannot create account',
                 StatusCodes.LOCKED,
@@ -59,7 +66,7 @@ export class AuthenticationService {
         }
 
         const newUser: NoId<User> = {
-            email: user.email,
+            email,
             lastLogin: new Date(),
             ...(await this.hashPassword(user.password)),
         };
@@ -100,7 +107,8 @@ export class AuthenticationService {
         user: AuthenticationUser,
         admin = false,
     ): Promise<UserPublicSession> {
-        const foundUser = await this.getUserByEmail(user.email);
+        const email = normaliseEmail(user.email);
+        const foundUser = await this.getUserByEmail(email);
 
         if (!foundUser) {
             throw new HttpException(
@@ -109,7 +117,7 @@ export class AuthenticationService {
             );
         }
 
-        if (await this.moderationService.isEmailBannedOrSuspended(user.email)) {
+        if (await this.moderationService.isEmailBannedOrSuspended(email)) {
             throw new HttpException('Cannot login', StatusCodes.LOCKED);
         }
 
@@ -211,6 +219,64 @@ export class AuthenticationService {
         };
 
         await this.sessions.delete().where({ userId });
+    }
+
+    async requestPasswordReset(email: string): Promise<void> {
+        email = normaliseEmail(email);
+        const user = await this.getUserByEmail(email);
+
+        if (!user) {
+            throw new HttpException('User not found', StatusCodes.NOT_FOUND);
+        }
+
+        const token = await this.verificationTokenService.generateToken(
+            user.userId,
+            'password-reset',
+        );
+
+        const url = `${
+            env.NODE_ENV === 'production'
+                ? 'https://polytinder.com'
+                : 'http://localhost:4200'
+        }/password-reset?token=${encodeURIComponent(token)}`;
+
+        const content = `
+            <h1>PolyTinder</h1>
+            <h2>Réinitialiser votre mot de passe</h2>
+            <p>Allez à cet URL <a href="${url}">${url}</a> réinitialiser votre mot de passe.</p>
+        `;
+
+        await this.emailService.sendEmail(
+            user.email,
+            'Réinitialiser votre mot de passe',
+            content,
+        );
+    }
+
+    async resetPassword(token: string, password: string): Promise<void> {
+        const userId = await this.verificationTokenService.validateToken(
+            undefined,
+            token,
+            'password-reset',
+        );
+
+        const user = await this.users.select().where({ userId }).first();
+
+        if (!user) {
+            throw new HttpException('User not found', StatusCodes.NOT_FOUND);
+        }
+
+        const { hash, salt } = await this.hashPassword(password);
+
+        await this.users
+            .update({ hash, salt })
+            .where({ userId })
+            .catch(() => {
+                throw new HttpException(
+                    'Password not updated',
+                    StatusCodes.INTERNAL_SERVER_ERROR,
+                );
+            });
     }
 
     async comparePassword(password: string, hash: string): Promise<boolean> {

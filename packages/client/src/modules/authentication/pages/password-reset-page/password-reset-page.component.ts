@@ -6,20 +6,17 @@ import {
     ValidationErrors,
     Validators,
 } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
-import { AuthenticationUser } from 'common/models/authentication';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-signup-page',
-    templateUrl: './signup-page.component.html',
-    styleUrls: ['./signup-page.component.scss'],
+    selector: 'app-password-reset-page',
+    templateUrl: './password-reset-page.component.html',
+    styleUrls: ['./password-reset-page.component.scss'],
 })
-export class SignupPageComponent {
-    showErrors = new BehaviorSubject<boolean>(false);
-    signupForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
+export class PasswordResetPageComponent {
+    resetPasswordForm = new FormGroup({
         password: new FormControl('', [
             Validators.required,
             Validators.pattern(
@@ -31,43 +28,47 @@ export class SignupPageComponent {
             Validators.required,
             this.confirmPasswordValidator,
         ]),
-        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),
     });
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    sent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    token: string | undefined = undefined;
+    tokenError: Observable<string | undefined>;
 
     constructor(
         private readonly authenticationService: AuthenticationService,
-    ) {}
-
-    onChange() {
-        this.showErrors.next(false);
+        private readonly activatedRoute: ActivatedRoute,
+    ) {
+        this.activatedRoute.queryParams.subscribe(
+            (params) => (this.token = params['token']),
+        );
+        this.tokenError = this.activatedRoute.queryParams.pipe(
+            map((params) =>
+                params['token'] ? undefined : "Le token n'est pas valide",
+            ),
+        );
     }
 
     onSubmit() {
-        this.showErrors.next(true);
-
-        if (!this.signupForm.valid) {
-            this.signupForm.setErrors({ invalid: true });
+        if (!this.resetPasswordForm.valid) {
+            return;
+        }
+        if (!this.token) {
             return;
         }
 
-        this.signupForm.setErrors(null);
         this.loading.next(true);
-
         this.authenticationService
-            .signup(this.signupForm.value as AuthenticationUser)
+            .resetPassword(this.token, this.resetPasswordForm.value.password!)
             .subscribe({
                 next: () => {
                     this.loading.next(false);
+                    this.resetPasswordForm.reset();
+                    this.sent.next(true);
                 },
-                error: (e: HttpErrorResponse) => {
-                    if (e.status === HttpStatusCode.Conflict) {
-                        this.signupForm.setErrors({ conflict: true });
-                    } else if (e.status === HttpStatusCode.Locked) {
-                        this.signupForm.setErrors({ accountLocked: true });
-                    } else {
-                        this.signupForm.setErrors({ unknownError: true });
-                    }
+                error: () => {
+                    this.resetPasswordForm.setErrors({
+                        unknownError: true,
+                    });
                     this.loading.next(false);
                 },
             });

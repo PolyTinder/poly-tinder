@@ -7,11 +7,20 @@ import { SESSION_TOKEN_KEY } from '../../constants/local-storage';
     providedIn: 'root',
 })
 export class SessionService {
-    session$: BehaviorSubject<UserPublicSession | undefined> =
+    private session$: BehaviorSubject<UserPublicSession | undefined> =
         new BehaviorSubject<UserPublicSession | undefined>(undefined);
 
     constructor() {
         this.session$.subscribe((session) => this.handleSession(session));
+    }
+
+    get session(): Observable<UserPublicSession | undefined> {
+        return this.session$.asObservable();
+    }
+
+    setSession(session: UserPublicSession | undefined): void {
+        if (session?.token === this.session$.value?.token) return;
+        this.session$.next(session);
     }
 
     isLoggedIn(): Observable<boolean> {

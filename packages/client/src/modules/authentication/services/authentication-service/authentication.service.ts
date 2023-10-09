@@ -26,7 +26,7 @@ export class AuthenticationService {
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
                     tap(() => {
-                        this.sessionService.session$.next(session);
+                        this.sessionService.setSession(session);
                         this.router.navigate([HOME_ROUTE]);
                     }),
                     map(() => session),
@@ -40,7 +40,7 @@ export class AuthenticationService {
             switchMap((session) =>
                 this.wsService.connect(session.token).pipe(
                     tap(() => {
-                        this.sessionService.session$.next(session);
+                        this.sessionService.setSession(session);
                         this.router.navigate([HOME_ROUTE]);
                     }),
                     map(() => session),
@@ -52,7 +52,7 @@ export class AuthenticationService {
     logout(ignoreApi: boolean = false): Observable<void> {
         const onLogout = () => {
             this.wsService.disconnect();
-            this.sessionService.session$.next(undefined);
+            this.sessionService.setSession(undefined);
             this.router.navigate([LOGIN_ROUTE]);
         };
 
@@ -75,9 +75,20 @@ export class AuthenticationService {
 
         return this.http.post<UserPublicSession>('/auth/load', { token }).pipe(
             tap((session) => {
-                this.sessionService.session$.next(session);
+                this.sessionService.setSession(session);
             }),
             catchError(() => of(undefined)),
         );
+    }
+
+    requestPasswordReset(email: string): Observable<void> {
+        return this.http.post<void>('/auth/password-reset/request', { email });
+    }
+
+    resetPassword(token: string, newPassword: string): Observable<void> {
+        return this.http.post<void>('/auth/password-reset', {
+            token,
+            newPassword,
+        });
     }
 }

@@ -74,5 +74,38 @@ export class AuthenticationController extends AbstractController {
                 res.status(StatusCodes.OK).end();
             },
         );
+
+        router.post(
+            '/password-reset/request',
+            async (req: Request<object, { email: string }>, res, next) => {
+                try {
+                    await this.authenticationService.requestPasswordReset(
+                        req.body.email,
+                    );
+                    res.status(StatusCodes.OK).end();
+                } catch (error) {
+                    next(error);
+                }
+            },
+        );
+
+        router.post(
+            '/password-reset',
+            async (
+                req: Request<object, { token: string; newPassword: string }>,
+                res,
+                next,
+            ) => {
+                try {
+                    await this.authenticationService.resetPassword(
+                        req.body.token,
+                        req.body.newPassword,
+                    );
+                    res.status(StatusCodes.OK).end();
+                } catch (error) {
+                    next(error);
+                }
+            },
+        );
     }
 }

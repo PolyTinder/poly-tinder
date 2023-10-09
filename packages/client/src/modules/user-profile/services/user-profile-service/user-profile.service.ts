@@ -20,7 +20,7 @@ export class UserProfileService {
         private readonly validationService: ValidationService,
         private readonly http: HttpClient,
     ) {
-        this.sessionService.session$.subscribe((session) =>
+        this.sessionService.session.subscribe((session) =>
             this.handleSession(session),
         );
     }

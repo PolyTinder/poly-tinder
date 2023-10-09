@@ -9,9 +9,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UiModule } from '../ui/ui.module';
+import { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';
+import { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';
 
 @NgModule({
-    declarations: [LoginPageComponent, SignupPageComponent],
+    declarations: [
+        LoginPageComponent,
+        SignupPageComponent,
+        RequestPasswordResetPageComponent,
+        PasswordResetPageComponent,
+    ],
     imports: [
         CommonModule,
         HttpClientModule,
@@ -22,6 +29,11 @@ import { UiModule } from '../ui/ui.module';
         MatCheckboxModule,
         UiModule,
     ],
-    exports: [LoginPageComponent, SignupPageComponent],
+    exports: [
+        LoginPageComponent,
+        SignupPageComponent,
+        RequestPasswordResetPageComponent,
+        PasswordResetPageComponent,
+    ],
 })
 export class AuthenticationModule {}

@@ -32,10 +32,10 @@ export class VerificationTokenService {
     }
 
     async validateToken(
-        userId: number,
+        userId: number | undefined,
         token: string,
         tokenType: string,
-    ): Promise<true> {
+    ): Promise<number> {
         const verificationToken = await this.verificationTokens
             .where({ token, tokenType, isUsed: false })
             .first();
@@ -54,13 +54,13 @@ export class VerificationTokenService {
             userId: number;
         };
 
-        if (userId !== tokenUserId) {
+        if (userId && userId !== tokenUserId) {
             throw new HttpException(
                 'Token does not match user',
                 StatusCodes.BAD_REQUEST,
             );
         }
 
-        return true;
+        return tokenUserId;
     }
 }

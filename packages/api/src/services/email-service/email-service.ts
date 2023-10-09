@@ -2,6 +2,7 @@ import { singleton } from 'tsyringe';
 import { env } from '../../utils/environment';
 import MailJet from 'node-mailjet';
 import { Client } from 'node-mailjet';
+import { normaliseEmail } from '../../utils/email';
 
 @singleton()
 export class EmailService {
@@ -20,7 +21,7 @@ export class EmailService {
                     },
                     To: [
                         {
-                            Email: to,
+                            Email: normaliseEmail(to),
                         },
                     ],
                     Subject: subject,
