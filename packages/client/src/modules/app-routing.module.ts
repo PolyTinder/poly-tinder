@@ -98,7 +98,7 @@ const routeNames = routes.map((route) => ({
     imports: [
         RouterModule.forRoot(routeNames),
         RouterModule.forRoot(routeNames, {
-            scrollPositionRestoration: 'enabled',
+            scrollPositionRestoration: 'top',
         }),
     ],
     exports: [RouterModule],
