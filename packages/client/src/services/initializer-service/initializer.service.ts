@@ -111,7 +111,7 @@ export class InitializerService {
     private isPubliclyAccessibleRoute(path: string): boolean {
         return (
             PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((publicPath) =>
-                new RegExp(`${publicPath}(?:?.+)?$`).test(path),
+                new RegExp(`^${publicPath}(?:\\?.+)?$`).test(path),
             ) !== undefined
         );
     }
