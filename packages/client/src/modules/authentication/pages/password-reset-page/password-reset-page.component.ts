@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    ValidationErrors,
+    Validators,
+} from '@angular/forms';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,8 +17,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PasswordResetPageComponent {
     resetPasswordForm = new FormGroup({
-        password: new FormControl('', [Validators.required]),
-        confirmPassword: new FormControl('', [Validators.required]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.pattern(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
+            ),
+            Validators.minLength(8),
+        ]),
+        confirmPassword: new FormControl('', [
+            Validators.required,
+            this.confirmPasswordValidator,
+        ]),
     });
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     sent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -41,16 +56,6 @@ export class PasswordResetPageComponent {
             return;
         }
 
-        if (
-            this.resetPasswordForm.value.password !==
-            this.resetPasswordForm.value.confirmPassword
-        ) {
-            this.resetPasswordForm.controls.confirmPassword.setErrors({
-                passwordMismatch: true,
-            });
-            return;
-        }
-
         this.loading.next(true);
         this.authenticationService
             .resetPassword(this.token, this.resetPasswordForm.value.password!)
@@ -67,5 +72,19 @@ export class PasswordResetPageComponent {
                     this.loading.next(false);
                 },
             });
+    }
+
+    confirmPasswordValidator(
+        control: AbstractControl,
+    ): ValidationErrors | null {
+        if (
+            control.value &&
+            control.parent &&
+            control.parent.get('password') &&
+            control.value !== control.parent!.get('password')!.value
+        ) {
+            return { passwordMismatch: true };
+        }
+        return null;
     }
 }

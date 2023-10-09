@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    ValidationErrors,
+    Validators,
+} from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AuthenticationUser } from 'common/models/authentication';
@@ -13,13 +19,17 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 export class SignupPageComponent {
     showErrors = new BehaviorSubject<boolean>(false);
     signupForm = new FormGroup({
-        email: new FormControl('', [
-            Validators.required,
-            Validators.minLength(1),
-        ]),
+        email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
             Validators.required,
-            Validators.minLength(1),
+            Validators.pattern(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
+            ),
+            Validators.minLength(8),
+        ]),
+        confirmPassword: new FormControl('', [
+            Validators.required,
+            this.confirmPasswordValidator,
         ]),
         privacyPolicy: new FormControl(false, [Validators.requiredTrue]),
     });
@@ -61,5 +71,19 @@ export class SignupPageComponent {
                     this.loading.next(false);
                 },
             });
+    }
+
+    confirmPasswordValidator(
+        control: AbstractControl,
+    ): ValidationErrors | null {
+        if (
+            control.value &&
+            control.parent &&
+            control.parent.get('password') &&
+            control.value !== control.parent!.get('password')!.value
+        ) {
+            return { passwordMismatch: true };
+        }
+        return null;
     }
 }
