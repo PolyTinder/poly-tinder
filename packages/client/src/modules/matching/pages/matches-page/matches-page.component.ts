@@ -43,7 +43,11 @@ export class MatchesPageComponent {
             map((conversations) => conversations.length > 0),
         );
 
-        this.publicProfileService.fetchMatches().subscribe();
+        this.validationService.userValid.subscribe((userValid) => {
+            if (userValid) {
+                this.publicProfileService.fetchMatches().subscribe();
+            }
+        });
     }
 
     get userValid() {
