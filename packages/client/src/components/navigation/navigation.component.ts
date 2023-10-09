@@ -38,7 +38,7 @@ export class NavigationComponent {
     }
 
     get user() {
-        return this.sessionService.session$.pipe(
+        return this.sessionService.session.pipe(
             map((session) => session?.user),
         );
     }

@@ -39,7 +39,7 @@ export class InitializerService {
         this.handleEmailVerificationUrl(this.location.path());
 
         combineLatest([
-            this.sessionService.session$,
+            this.sessionService.session,
             this.wsService.disconnect$,
         ]).subscribe({
             next: ([session]) => {
@@ -70,7 +70,7 @@ export class InitializerService {
         });
 
         combineLatest([
-            this.sessionService.session$,
+            this.sessionService.session,
             this.wsService.ws,
         ]).subscribe(([session, ws]) => {
             if (session && ws) {
