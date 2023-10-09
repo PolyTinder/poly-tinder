@@ -10,7 +10,7 @@ import {
 } from 'common/models/moderation';
 import { WsService } from '../ws-service/ws-service';
 import { UserService } from '../user-service/user-service';
-import { normaliseEmail } from '../../utils/email';
+import { normaliseEmail, removeEmailModifier } from '../../utils/email';
 
 @singleton()
 export class ModerationService {
@@ -43,8 +43,8 @@ export class ModerationService {
         ]);
 
         await this.reports.insert({
-            reportedUserEmail: reportedUser.email,
-            reportingUserEmail: reportingUser.email,
+            reportedUserEmail: removeEmailModifier(reportedUser.email),
+            reportingUserEmail: removeEmailModifier(reportingUser.email),
             reportType: request.reportType,
             description: request.description,
         });
@@ -57,8 +57,8 @@ export class ModerationService {
         ]);
 
         await this.blocks.insert({
-            blockingUserEmail: blockingUser.email,
-            blockedUserEmail: blockedUser.email,
+            blockingUserEmail: removeEmailModifier(blockingUser.email),
+            blockedUserEmail: removeEmailModifier(blockedUser.email),
         });
 
         this.wsService.emitToUserIfConnected(
@@ -72,7 +72,7 @@ export class ModerationService {
         const user = await this.userService.getUser(userId);
 
         await this.banned.insert({
-            email: user.email,
+            email: removeEmailModifier(user.email),
             reason,
         });
     }
@@ -85,7 +85,7 @@ export class ModerationService {
         const user = await this.userService.getUser(userId);
 
         await this.suspended.insert({
-            email: user.email,
+            email: removeEmailModifier(user.email),
             until,
             reason,
         });
@@ -100,8 +100,8 @@ export class ModerationService {
         const block = await this.blocks
             .select()
             .where({
-                blockingUserEmail: user.email,
-                blockedUserEmail: targetUser.email,
+                blockingUserEmail: removeEmailModifier(user.email),
+                blockedUserEmail: removeEmailModifier(targetUser.email),
             })
             .first();
 
@@ -111,16 +111,17 @@ export class ModerationService {
     async isBannedOrSuspended(userId: number): Promise<boolean> {
         const user = await this.userService.getUser(userId);
 
-        return this.isEmailBannedOrSuspended(user.email);
+        return this.isEmailBannedOrSuspended(removeEmailModifier(user.email));
     }
 
     async isEmailBannedOrSuspended(email: string): Promise<boolean> {
+        email = removeEmailModifier(normaliseEmail(email));
+
+        console.log('check email', email);
+
         const [ban, suspends] = await Promise.all([
-            this.banned
-                .select('*')
-                .where({ email: normaliseEmail(email) })
-                .first(),
-            this.suspended.select('*').where({ email: normaliseEmail(email) }),
+            this.banned.select('*').where({ email }).first(),
+            this.suspended.select('*').where({ email }),
         ]);
 
         return (
