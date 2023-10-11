@@ -89,14 +89,17 @@ const routes: Routes = [
     { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },
 ];
 
+const routeNames = routes.map((route) => ({
+    ...route,
+    path: route.path?.replace(/^\//, ''),
+}));
+
 @NgModule({
     imports: [
-        RouterModule.forRoot(
-            routes.map((route) => ({
-                ...route,
-                path: route.path?.replace(/^\//, ''),
-            })),
-        ),
+        RouterModule.forRoot(routeNames),
+        RouterModule.forRoot(routeNames, {
+            scrollPositionRestoration: 'top',
+        }),
     ],
     exports: [RouterModule],
 })
