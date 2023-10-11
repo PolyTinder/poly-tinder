@@ -103,7 +103,7 @@ This service is used to manage moderation (reports, suspensions, bans, etc.).
 | --- | --- |
 | `reportUser()` | Report a user |
 | `blockUser()` | Block a user |
-| `isBlocked()` | Get if a user blocked another one |
+| `isBlocked()` | Check if two users are blocked |
 | `isBannedOrSuspended()` | Get if a user is banned or suspended |
 | `isEmailBannedOrSuspended()` | Get if an email is banned or suspended |
 
@@ -185,7 +185,7 @@ This service is used to manage websocket connections.
 | Method | Description |
 | --- | --- |
 | `instantiate()` | Initialize the websocket server |
-| `registerAuthenticationValidation()` | Register the validation method for a socket connection |
+| `registerAuthenticationValidation()` | Register the validation function for authentication on socket connection |
 | `connectClient()` | Add an entry to the connected socket map |
 | `disconnectClient()` | Remove an entry from the connected socket map |
 | `emit()` | Emit an event to all sockets |

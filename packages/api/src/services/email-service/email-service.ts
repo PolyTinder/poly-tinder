@@ -12,6 +12,14 @@ export class EmailService {
         this.mailjet = this.init();
     }
 
+    /**
+     * Send an email
+     *
+     * @param to Email address to send to
+     * @param subject Email subject
+     * @param content Email content (in HTML format)
+     * @returns Promise
+     */
     sendEmail(to: string, subject: string, content: string): Promise<unknown> {
         return this.haveAllRequiredEnvironmentVariables()
             ? this.sendEmailWithMailJet(to, subject, content)

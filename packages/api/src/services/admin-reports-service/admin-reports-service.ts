@@ -11,6 +11,11 @@ export class AdminReportsService {
         return this.databaseService.database('reports');
     }
 
+    /**
+     * Get all reports
+     *
+     * @returns All reports in the database
+     */
     async getReports(): Promise<Report[]> {
         return this.reports
             .select([
