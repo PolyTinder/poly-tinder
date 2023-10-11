@@ -22,6 +22,12 @@ export class UserValidationService {
         return this.databaseService.database<UserValidation>('userValidations');
     }
 
+    /**
+     * Get the validation status of a user
+     *
+     * @param userId ID of the user to get the validation status of
+     * @returns Get all validation status of a user
+     */
     async fetchValidation(userId: number): Promise<UserValidation> {
         const userValidation = await this.userValidations
             .select('*')
@@ -35,10 +41,21 @@ export class UserValidationService {
         return userValidation;
     }
 
+    /**
+     * Create a validation entry for a user
+     *
+     * @param userId ID of the user to create a validation entry for
+     */
     async createUserValidation(userId: number): Promise<void> {
         await this.userValidations.insert({ userId });
     }
 
+    /**
+     * Check if all validations are valid for a user
+     *
+     * @param userId ID of the user to check
+     * @returns Whether or not the user is valid
+     */
     async isUserValid(userId: number): Promise<boolean> {
         try {
             const validation = await this.fetchValidation(userId);
@@ -49,6 +66,12 @@ export class UserValidationService {
         }
     }
 
+    /**
+     * Set the user profile ready status of a user
+     *
+     * @param userId ID of the user to set the user profile ready status of
+     * @param userProfileReady New user profile ready status
+     */
     async setUserProfileReady(
         userId: number,
         userProfileReady: boolean,
@@ -66,6 +89,11 @@ export class UserValidationService {
         );
     }
 
+    /**
+     * Request an email validation for a user
+     *
+     * @param userId ID of the user to request an email validation for
+     */
     async requestEmailValidation(userId: number): Promise<void> {
         const user = await this.userService.getUser(userId);
         const token = await this.verificationTokenService.generateToken(
@@ -92,6 +120,13 @@ export class UserValidationService {
         );
     }
 
+    /**
+     * Validate an email
+     *
+     * @param userId ID of the user to validate the email of
+     * @param token Token to validate the email with
+     * @returns Whether or not the email was validated
+     */
     async validateEmail(userId: number, token: string): Promise<boolean> {
         await this.verificationTokenService.validateToken(
             userId,

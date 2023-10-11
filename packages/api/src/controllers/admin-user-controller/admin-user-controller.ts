@@ -123,7 +123,7 @@ export class AdminUserController extends AbstractController {
         router.get('/reports/:userId', async (req, res, next) => {
             try {
                 res.status(StatusCodes.OK).json(
-                    await this.adminUserService.getReports(
+                    await this.adminUserService.getReportsForUser(
                         Number(req.params.userId),
                     ),
                 );

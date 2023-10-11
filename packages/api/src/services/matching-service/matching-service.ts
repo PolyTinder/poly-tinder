@@ -25,6 +25,13 @@ export class MatchingService {
         return this.databaseService.database<Swipe>('swipes');
     }
 
+    /**
+     * Like or dislike a user. Triggers a match if needed.
+     *
+     * @param activeUserId ID of the user who is swiping
+     * @param targetUserId ID of the user who is being swiped
+     * @param liked Whether or not the user was liked
+     */
     async swipeUser(
         activeUserId: number,
         targetUserId: number,
@@ -67,6 +74,12 @@ export class MatchingService {
         }
     }
 
+    /**
+     * Unmatch a user
+     *
+     * @param userId ID of the user who is unmatching
+     * @param unmatchedUserId ID of the user who is being unmatched
+     */
     async unmatchUser(userId: number, unmatchedUserId: number): Promise<void> {
         await this.matches
             .update({
@@ -90,6 +103,13 @@ export class MatchingService {
         );
     }
 
+    /**
+     * Check if two user are matched
+     *
+     * @param userId ID of the first user
+     * @param targetUserId ID of the second user
+     * @returns Whether or not the users are matched
+     */
     async areMatched(userId: number, targetUserId: number): Promise<boolean> {
         return !!(await this.matches
             .select()

@@ -21,6 +21,13 @@ export class MessagesService {
         return this.databaseService.database('messages');
     }
 
+    /**
+     * Send a message to a user
+     *
+     * @param senderId ID of the user sending the message
+     * @param recipientId ID of the user receiving the message
+     * @param content Content of the message
+     */
     async sendMessage(
         senderId: number,
         recipientId: number,
@@ -65,6 +72,15 @@ export class MessagesService {
         }
     }
 
+    /**
+     * Get messages between two users
+     *
+     * @param userId ID of the user requesting the messages
+     * @param otherUserId ID of the other user
+     * @param limit Maximum number of messages to get
+     * @param offset Number of messages to skip
+     * @returns Messages between the two users
+     */
     async getMessages(
         userId: number,
         otherUserId: number,
@@ -107,6 +123,12 @@ export class MessagesService {
         return messages.reverse();
     }
 
+    /**
+     * Mark messages between two users as read
+     *
+     * @param userId ID of the user marking the messages as read
+     * @param otherUserId ID of the other user
+     */
     async markAsRead(userId: number, otherUserId: number): Promise<void> {
         if (!(await this.matchingService.areMatched(userId, otherUserId))) {
             throw new Error('Cannot mark messages as read with unmatched user');

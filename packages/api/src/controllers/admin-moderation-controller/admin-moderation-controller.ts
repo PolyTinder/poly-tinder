@@ -2,15 +2,11 @@ import { Router } from 'express';
 import { AbstractController } from '../abstract-controller';
 import { StatusCodes } from 'http-status-codes';
 import { singleton } from 'tsyringe';
-import { ModerationService } from '../../services/moderation-service/moderation-service';
-import { AdminService } from '../../services/admin-service/admin-service';
+import { AdminReportsService } from '../../services/admin-reports-service/admin-reports-service';
 
 @singleton()
 export class AdminModerationController extends AbstractController {
-    constructor(
-        private readonly moderationService: ModerationService,
-        private readonly adminService: AdminService,
-    ) {
+    constructor(private readonly adminReportsService: AdminReportsService) {
         super('/admin/moderation');
     }
 
@@ -18,7 +14,7 @@ export class AdminModerationController extends AbstractController {
         router.get('/reports', async (req, res, next) => {
             try {
                 res.status(StatusCodes.OK).json(
-                    await this.adminService.getReports(),
+                    await this.adminReportsService.getReports(),
                 );
             } catch (e) {
                 next(e);

@@ -15,6 +15,12 @@ export class UserAliasService {
         return this.databaseService.database<UserAlias>('userAliases');
     }
 
+    /**
+     * Create a new user alias
+     *
+     * @param userId ID of the user to create an alias for
+     * @returns The user alias ID
+     */
     async createAlias(userId: TypeOfId<User>): Promise<string> {
         const userAliasId = uuidv4();
         const expiration = new Date();
@@ -25,6 +31,12 @@ export class UserAliasService {
         return userAliasId;
     }
 
+    /**
+     * Get the user ID for a user alias
+     *
+     * @param userAliasId ID of the user alias
+     * @returns The user ID
+     */
     async getUserId(userAliasId: string): Promise<TypeOfId<User>> {
         const userAlias = await this.userAliases
             .select()

@@ -13,6 +13,12 @@ export class UserService {
         return this.databaseService.database<User>('users');
     }
 
+    /**
+     * Get a user by their ID
+     *
+     * @param userId ID of the user to get
+     * @returns The user
+     */
     async getUser(userId: number): Promise<User> {
         const user = await this.user.select('*').where({ userId }).first();
 

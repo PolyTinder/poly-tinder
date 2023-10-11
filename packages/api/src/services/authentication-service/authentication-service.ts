@@ -48,6 +48,12 @@ export class AuthenticationService {
         return this.databaserService.database<UserSavedSession>('sessions');
     }
 
+    /**
+     * Signup a user
+     *
+     * @param user Authentication information
+     * @returns The user and a token
+     */
     async signup(user: AuthenticationUser): Promise<UserPublicSession> {
         const email = normaliseEmail(user.email);
 
@@ -103,6 +109,13 @@ export class AuthenticationService {
         };
     }
 
+    /**
+     * Login a user
+     *
+     * @param user Authentication information
+     * @param admin Whether or not the user is an admin (for login in the admin panel)
+     * @returns The user and a token
+     */
     async login(
         user: AuthenticationUser,
         admin = false,
@@ -149,6 +162,13 @@ export class AuthenticationService {
         };
     }
 
+    /**
+     * Create session from token and refreshes it
+     *
+     * @param token Token to load the session from
+     * @param admin Whether or not the user is an admin (for login in the admin panel)
+     * @returns The user and a token
+     */
     async loadSession(
         token: string,
         admin = false,
@@ -194,6 +214,11 @@ export class AuthenticationService {
         };
     }
 
+    /**
+     * Logout a user
+     *
+     * @param token Active token of the user
+     */
     async logout(token: string): Promise<void> {
         const { userId, sessionId } = jwt.verify(token, env.JWT_SECRET) as {
             userId: TypeOfId<User>;
@@ -212,6 +237,11 @@ export class AuthenticationService {
         await this.sessions.delete().where({ userId, sessionId });
     }
 
+    /**
+     * Logout all sessions of a user
+     *
+     * @param token Active token of the user
+     */
     async logoutAll(token: string): Promise<void> {
         const { userId } = jwt.verify(token, env.JWT_SECRET) as {
             userId: TypeOfId<User>;
@@ -221,6 +251,11 @@ export class AuthenticationService {
         await this.sessions.delete().where({ userId });
     }
 
+    /**
+     * Creates a password reset request and send an email to the user
+     *
+     * @param email Email of the user to reset the password for
+     */
     async requestPasswordReset(email: string): Promise<void> {
         email = normaliseEmail(email);
         const user = await this.getUserByEmail(email);
@@ -253,6 +288,12 @@ export class AuthenticationService {
         );
     }
 
+    /**
+     * Reset the password of a user
+     *
+     * @param token Token to validate the password reset request
+     * @param password New password
+     */
     async resetPassword(token: string, password: string): Promise<void> {
         const userId = await this.verificationTokenService.validateToken(
             undefined,
@@ -279,6 +320,13 @@ export class AuthenticationService {
             });
     }
 
+    /**
+     * Compare a password with a hash
+     *
+     * @param password Password in plain text
+     * @param hash Hash to compare the password with
+     * @returns Whether or not the password matches the hash
+     */
     async comparePassword(password: string, hash: string): Promise<boolean> {
         if (password.length === 0 && hash.length === 0) return true;
         return await bcrypt.compare(password, hash);

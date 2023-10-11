@@ -18,10 +18,21 @@ export class UserProfileService {
         return this.databaserService.database<UserProfileDB>('userProfiles');
     }
 
+    /**
+     * Creates an empty entry for a user
+     *
+     * @param userId ID of the user to create a profile for
+     */
     async initUserProfile(userId: TypeOfId<User>): Promise<void> {
         await this.userProfiles.insert({ userId });
     }
 
+    /**
+     * Get a user's profile
+     *
+     * @param userId ID of the user to get the profile for
+     * @returns The user's profile
+     */
     async getUserProfile(userId: TypeOfId<User>): Promise<NoId<UserProfile>> {
         const res = await this.userProfiles.select().where({ userId }).first();
 
@@ -37,6 +48,12 @@ export class UserProfileService {
         return this.fromUserProfileDB(res);
     }
 
+    /**
+     * Update a user's profile
+     *
+     * @param userId ID of the user to update the profile for
+     * @param userProfile The new profile
+     */
     async setUserProfile(
         userId: TypeOfId<User>,
         userProfile: UserProfile,

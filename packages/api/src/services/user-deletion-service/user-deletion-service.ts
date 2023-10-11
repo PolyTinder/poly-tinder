@@ -57,6 +57,12 @@ export class UserDeletionService {
         return this.databaseService.database<User>('users');
     }
 
+    /**
+     * Delete a user
+     *
+     * @param userId ID of the user to delete
+     * @param password Password of the user to delete
+     */
     async deleteUser(userId: number, password: string): Promise<void> {
         const user = await this.userService.getUser(userId);
 
