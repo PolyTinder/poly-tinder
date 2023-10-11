@@ -117,8 +117,6 @@ export class ModerationService {
     async isEmailBannedOrSuspended(email: string): Promise<boolean> {
         email = removeEmailModifier(normaliseEmail(email));
 
-        console.log('check email', email);
-
         const [ban, suspends] = await Promise.all([
             this.banned.select('*').where({ email }).first(),
             this.suspended.select('*').where({ email }),
