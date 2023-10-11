@@ -86,10 +86,12 @@ export class EmailService {
                     'Missing required environment variables for email service',
                 );
             } else {
-                // eslint-disable-next-line no-console
-                console.warn(
-                    'Missing required environment variables for email service. Defaulting to console logging for development.',
-                );
+                if (env.NODE_ENV !== 'test') {
+                    // eslint-disable-next-line no-console
+                    console.warn(
+                        'Missing required environment variables for email service. Defaulting to console logging for development.',
+                    );
+                }
 
                 return false;
             }
