@@ -66,8 +66,17 @@ export class PublicProfileService {
     ): Promise<NotLoadedPublicUserResult[]> {
         const db = this.databaseService.database;
 
-        const availableUsers: { userId: number; name: string }[] = await db
-            .select(['targetUser.userId', 'targetUserProfile.name'])
+        const date = new Date();
+        const seed = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+        const availableUsers: (NotLoadedPublicUserResult & {
+            order?: number;
+        })[] = await db
+            .select([
+                'targetUser.userId',
+                'targetUserProfile.name',
+                db.raw(`RAND(${seed}) as \`order\``),
+            ])
             .fromRaw('(`users` as `targetUser`, `users` as `activeUser`)')
             .leftJoin('swipes', function () {
                 this.on('targetUser.userId', '=', 'swipes.targetUserId').andOn(
@@ -177,22 +186,14 @@ export class PublicProfileService {
                     });
             })
             .groupBy('targetUser.userId')
+            .orderBy('order')
             .limit(1000);
 
-        const size = availableUsers.length;
+        return availableUsers.map((user) => {
+            delete user.order;
 
-        const results: { userId: number; name: string }[] = [];
-
-        const date = new Date();
-        const rand = createRandom(
-            `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
-        );
-
-        for (let i = 0; i < Math.min(MATCHING_BATCH_SIZE, size); ++i) {
-            results.push(popRandom(availableUsers, rand));
-        }
-
-        return results;
+            return user;
+        });
 
         // return Promise.all(
         //     results.map<Promise<NotLoadedPublicUserResult>>(async (user) => ({
