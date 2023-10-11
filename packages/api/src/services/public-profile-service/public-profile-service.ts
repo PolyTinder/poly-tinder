@@ -1,6 +1,4 @@
 import { singleton } from 'tsyringe';
-import { MATCHING_BATCH_SIZE } from '../../constants/matching';
-import { popRandom } from '../../utils/random';
 import { TypeOfId } from 'common/types/id';
 import {
     NotLoadedPublicUserResult,
@@ -22,7 +20,6 @@ import { Message } from 'common/models/message';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
-import { create as createRandom } from 'random-seed';
 
 @singleton()
 export class PublicProfileService {
@@ -41,6 +38,13 @@ export class PublicProfileService {
         return this.databaseService.database<Match>('matches');
     }
 
+    /**
+     * Get the profile of a user from its ID only if the requesting user can see it
+     *
+     * @param userId ID of the user to get
+     * @param requestingUserId ID of the user requesting the profile
+     * @returns The user's profile
+     */
     async findUser(
         userId: TypeOfId<User>,
         requestingUserId: TypeOfId<User>,
@@ -61,6 +65,12 @@ export class PublicProfileService {
         return { ...userProfile, userId };
     }
 
+    /**
+     * Get the list of users available for swiping
+     *
+     * @param userId ID of the user requesting
+     * @returns The list of available users
+     */
     async getAvailableUsers(
         userId: TypeOfId<User>,
     ): Promise<NotLoadedPublicUserResult[]> {
@@ -205,6 +215,12 @@ export class PublicProfileService {
         // );
     }
 
+    /**
+     * Get the list of matches for a user
+     *
+     * @param userId ID of the user requesting
+     * @returns The list of matches
+     */
     async getMatches(
         userId: TypeOfId<User>,
     ): Promise<NotLoadedPublicUserResult[]> {

@@ -14,6 +14,11 @@ export class DatabaseService {
         return this.db;
     }
 
+    /**
+     * Connect to the database and migrate database if needed
+     *
+     * @param migrate Wheter of not to run migrations
+     */
     async instantiate(migrate = true): Promise<void> {
         this.db = knex({
             client: 'mysql2',
@@ -23,6 +28,11 @@ export class DatabaseService {
         if (migrate) await this.db.migrate.latest();
     }
 
+    /**
+     * Check if the database is connected
+     *
+     * @returns Whether or not the database is connected
+     */
     isConnected(): boolean {
         return !!this.db;
     }

@@ -16,6 +16,13 @@ export class VerificationTokenService {
         );
     }
 
+    /**
+     * Generate a token for a user
+     *
+     * @param userId ID of the user to generate a token for
+     * @param tokenType Type of token to generate
+     * @returns The generated token
+     */
     async generateToken(userId: number, tokenType: string): Promise<string> {
         const tokenKey = uuid();
         const token = jwt
@@ -31,6 +38,14 @@ export class VerificationTokenService {
         return token;
     }
 
+    /**
+     * Validate a token
+     *
+     * @param userId ID of the user to validate the token for
+     * @param token Token to validate
+     * @param tokenType Type of token to validate
+     * @returns The user ID
+     */
     async validateToken(
         userId: number | undefined,
         token: string,
