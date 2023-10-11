@@ -67,6 +67,13 @@ export class AdminUserService {
         return this.ban.where({ email: user.email }).first();
     }
 
+    async getReportsForUser(userId: number): Promise<Report[]> {
+        const user = await this.userService.getUser(userId);
+        return this.reports
+            .where({ reportedUserEmail: user.email })
+            .orderBy('created_at', 'desc');
+    }
+
     async suspendUser(
         userId: number,
         until: Date,
@@ -99,12 +106,5 @@ export class AdminUserService {
     async unbanUser(userId: number): Promise<void> {
         const user = await this.userService.getUser(userId);
         await this.ban.where({ email: user.email }).delete();
-    }
-
-    async getReports(userId: number): Promise<Report[]> {
-        const user = await this.userService.getUser(userId);
-        return this.reports
-            .where({ reportedUserEmail: user.email })
-            .orderBy('created_at', 'desc');
     }
 }
