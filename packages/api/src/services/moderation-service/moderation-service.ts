@@ -68,29 +68,6 @@ export class ModerationService {
         );
     }
 
-    async banUser(userId: number, reason?: string): Promise<void> {
-        const user = await this.userService.getUser(userId);
-
-        await this.banned.insert({
-            email: removeEmailModifier(user.email),
-            reason,
-        });
-    }
-
-    async suspendUser(
-        userId: number,
-        until: Date,
-        reason?: string,
-    ): Promise<void> {
-        const user = await this.userService.getUser(userId);
-
-        await this.suspended.insert({
-            email: removeEmailModifier(user.email),
-            until,
-            reason,
-        });
-    }
-
     async isBlocked(userId: number, targetUserId: number): Promise<boolean> {
         const [user, targetUser] = await Promise.all([
             this.userService.getUser(userId),
