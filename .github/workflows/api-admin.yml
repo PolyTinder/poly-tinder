@@ -50,14 +50,14 @@ jobs:
         with:
           node-version: 19
           cache: 'npm'
-          cache-dependency-path: packages/${{env.SERVICE}}/package-lock.json
+          cache-dependency-path: packages/${{env.DIR}}/package-lock.json
       - name: Install dependencies
         run: |
-          cd packages/$SERVICE
+          cd packages/$DIR
           npm ci
       - name: Test
         run: |
-          cd packages/$SERVICE
+          cd packages/$DIR
           npm test
 
   build:
