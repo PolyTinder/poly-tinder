@@ -1,6 +1,4 @@
 import { singleton } from 'tsyringe';
-import { MATCHING_BATCH_SIZE } from '../../constants/matching';
-import { popRandom } from '../../utils/random';
 import { TypeOfId } from 'common/types/id';
 import {
     NotLoadedPublicUserResult,
@@ -22,7 +20,6 @@ import { Message } from 'common/models/message';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
-import { create as createRandom } from 'random-seed';
 
 @singleton()
 export class PublicProfileService {
