@@ -1,60 +1,78 @@
-<app-layout headerType="transparent">
-    <span layout-title>À propos</span>
+<app-about-layout title="À propos">
+    <app-card title="Sur cette page" icon="fas fa-list" anchor="table-of-content">
+        <ul class="table-of-content">
+            <li><a href="/about#application">À propos de l'application</a></li>
+            <li><a href="/about#rules">Règlements de l'application</a></li>
+            <li><a href="/about#ressources">Ressources</a></li>
+            <li><a href="/about#how-to">Comment faire</a></li>
+            <li><a href="/about#contact">Nous joindre</a></li>
+        </ul>
+    </app-card>
 
-    <main>
-        <app-card title="Sur cette page" icon="fas fa-list" anchor="table-of-content">
-            <ul class="table-of-content">
-                <li><a href="/about#application">À propos de l'application</a></li>
-                <li><a href="/about#rules">Règlements</a></li>
-                <li><a href="/about#genre-and-sexuality">L'identité de genre et la sexualité</a></li>
-                <li><a href="/about#contact">Nous joindre</a></li>
-            </ul>
-        </app-card>
+    <app-card title="À propos de l'application" icon="fas fa-mobile" anchor="application">
+        <p>L'application PolyTinder est l'outil idéal pour élargir votre cercle social. Vous pourrez aisément rencontrer de nouvelles personnes au sein de votre campus, que ce soit pour trouver l'amour ou simplement établir de nouvelles amitiés. Notre plateforme facilite les rencontres au sein de votre communauté académique, vous permettant ainsi de créer des connexions significatives avec des personnes partageant vos intérêts et votre parcours universitaire. Rejoignez-nous dès maintenant pour commencer à tisser des liens qui pourraient changer votre vie!</p>
+        <p>L'application a été créé dans un contexte académique et doit être traîté ainsi. Elle n'a pas été développé à des fins commerciales et aucun revenu n'en sera retiré dans son état actuelle.</p>
+    </app-card>
 
-        <app-card title="À propos de l'application" icon="fas fa-mobile" anchor="application">
-            <p>L'application PolyTinder est l'outil idéal pour élargir votre cercle social. Vous pourrez aisément rencontrer de nouvelles personnes au sein de votre campus, que ce soit pour trouver l'amour ou simplement établir de nouvelles amitiés. Notre plateforme facilite les rencontres au sein de votre communauté académique, vous permettant ainsi de créer des connexions significatives avec des personnes partageant vos intérêts et votre parcours universitaire. Rejoignez-nous dès maintenant pour commencer à tisser des liens qui pourraient changer votre vie!</p>
-            <p>L'application a été créé dans un contexte académique et doit être traîté ainsi. Elle n'a pas été développé à des fins commerciales et aucun revenu n'en sera retiré dans son état actuelle.</p>
-        </app-card>
+    <h3 class="section-title" id="rules">Règlements de l'application</h3>
 
-        <app-card title="Règlements" icon="fas fa-gavel" anchor="rules">
-            <ol>
-                <li>Respectez la vie privée: Ne partagez pas d'informations personnelles sensibles, telles que votre adresse, votre numéro de téléphone ou vos données bancaires. Protégez votre vie privée et celle des autres.</li>
-                <li>Soyez respectueux: Traitez tous les utilisateurs avec gentillesse et respect, quel que soit leur genre, leur orientation sexuelle, leur origine ethnique, ou leur apparence. Les commentaires offensants ou discriminatoires ne sont pas tolérés.</li>
-                <li>Pas de harcèlement: N'envoyez pas de messages non sollicités ou insistants. Si quelqu'un vous demande de cesser de communiquer avec lui, respectez sa demande.</li>
-                <li>Utilisez des photos appropriées: Choisissez des photos de profil appropriées et respectez nos directives en matière d'image. Les contenus offensants, vulgaires ou explicites ne sont pas autorisés.</li>
-                <li>Soyez honnête: Utilisez des informations précises dans votre profil. La confiance est essentielle dans les relations en ligne.</li>
-                <li>Signalez les comportements inappropriés: Si vous êtes témoin de comportements contraires à nos règles, signalez-les immédiatement à notre équipe de modération. Nous prenons la sécurité de notre communauté très au sérieux.</li>
-                <li>Respectez les lois locales: Assurez-vous de respecter les lois locales en matière de rencontres en ligne et de comportement sur Internet.</li>
-                <li>En respectant ces règles, vous contribuerez à créer une expérience positive et respectueuse pour tous les utilisateurs de notre application.</li>
-            </ol>
-        </app-card>
+    <section>
+        <app-about-card
+            title="Règlements généraux"
+            subtitle="Les règles à suivre pour utiliser l'application"
+            image="assets/about/rules.svg"
+            link="/about/rules/general-rules"
+        ></app-about-card>
+        <app-about-card
+            title="Politiques"
+            subtitle="Politique de confidentialité, termes et conditions, politique d'utilisation acceptable"
+            image="assets/about/privacy-policy.svg"
+            link="/about/rules/policies"
+        ></app-about-card>
+    </section>
 
-        <app-card title="L'identité de genre et la sexualité" icon="fas fa-transgender" anchor="genre-and-sexuality">
-            <p>Notre objectif est de favoriser des rencontres respectueuses et enrichissantes qui célèbrent la diversité de l'amour et de l'amitié.. Nous célébrons la diversité des identités de genre et des orientations sexuelles.</p>
-            <p>Nous vous offrons la possibilité d'exprimer votre identité de genre de manière authentique et de spécifier vos préférences de genre et votre sexualité, tout en préservant votre confidentialité. Voici comment ces éléments sont gérés dans notre application.</p>
+    <h3 class="section-title" id="ressources">Ressources</h3>
 
-            <h3>Identité de Genre</h3>
-            <p>Dans les paramètres de votre compte, vous avez la liberté de choisir parmi trois options pour votre identité de genre : Homme, Femme ou Autre.</p>
-            <p>Si vous choisissez "Autre", votre profile sera visible par tous les utilisateurs de la plateforme. Ce genre n'est pas visible sur votre profile.</p>
-            <p>Toutefois, vous avez la possibilité de spécifier une identité de genre qui sera rendue publique, reflétant ainsi votre authenticité. Cette approche vous permet de vous définir comme vous le souhaitez, sans contraintes.</p>
+    <section>
+        <app-about-card
+            title="L'inclusivité"
+            subtitle="Comment être inclusif"
+            image="assets/about/inclusivity.svg"
+            link="/about/ressources/inclusivity"
+        ></app-about-card>
 
-            <h3>Préférences de Genre</h3>
-            <p>Nous valorisons la diversité des orientations amoureuses, c'est pourquoi vous pouvez spécifier vos préférences de genre dans vos paramètres. Vous avez le choix entre Homme, Femme ou Tous. Cette fonctionnalité vous permet de personnaliser vos critères de recherche pour trouver des personnes qui correspondent à vos préférences, respectant ainsi votre liberté de choix.</p>
+        <app-about-card
+            title="Organismes d'aides"
+            subtitle="Des ressources d'aides pour vous"
+            image="assets/about/aid-organizations.svg"
+            link="/about/ressources/aid-organizations"
+        ></app-about-card>
+    </section>
 
-            <h3>Sexualité</h3>
-            <p>L'application propose également un champ où vous pouvez indiquer votre sexualité, bien que cette information n'impacte pas la visibilité de votre compte. Elle est destinée uniquement à titre indicatif pour faciliter des connexions significatives. Nous encourageons les utilisateurs à être ouverts et respectueux envers toutes les orientations sexuelles.</p>
-        </app-card>
+    <h3 class="section-title" id="how-to">Comment faire</h3>
 
-        <app-card title="Politiques" anchor="privacy-policy">
-            <app-button link="/privacy-policy" interactable="small">Politique de confidentialité</app-button>
-            <br>
-            <app-button link="/terms-and-conditions" interactable="small">Termes et conditions</app-button>
-            <br>
-            <app-button link="/acceptable-use-policy" interactable="small">Politique d'utilisation acceptable</app-button>
-        </app-card>
-
-        <app-card title="Nous joindre" icon="fas fa-phone" anchor="contact">
-            <p>Email: <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a></p>
-        </app-card>
-    </main>
-</app-layout>
+    <section>
+        <app-about-card
+            title="Signaler un utilisateur"
+            subtitle="Comment signaler un utilisateur"
+            image="assets/about/report.svg"
+            link="/about/security/how-to-report"
+        ></app-about-card>
+        <app-about-card
+            title="Bloquer un utilisateur"
+            subtitle="Comment bloquer un utilisateur"
+            image="assets/about/block.svg"
+            link="/about/security/how-to-block"
+        ></app-about-card>
+        <app-about-card
+            title="Supprimer un match"
+            subtitle="Comment supprimer un match"
+            image="assets/about/unmatch.svg"
+            link="/about/security/how-to-unmatch"
+        ></app-about-card>
+    </section>
+    
+    <app-card title="Nous joindre" icon="fas fa-phone" anchor="contact">
+        <p>Email: <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a></p>
+    </app-card>
+</app-about-layout>

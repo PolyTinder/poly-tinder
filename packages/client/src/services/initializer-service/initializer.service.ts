@@ -18,6 +18,7 @@ import {
     EMAIL_VALIDATION_URL_REGEX,
 } from 'src/constants/user-validation';
 import { ValidationService } from 'src/modules/validation/services/validation.service';
+import { ABOUT_ROUTE } from 'src/modules/about/constants/routes';
 
 @Injectable({
     providedIn: 'root',
@@ -110,6 +111,7 @@ export class InitializerService {
 
     private isPubliclyAccessibleRoute(path: string): boolean {
         return (
+            path.startsWith(ABOUT_ROUTE) ||
             PUBLICLY_ACCESSIBLE_ROUTES_PATH.find((publicPath) =>
                 new RegExp(`^${publicPath}(?:\\?.+)?$`).test(path),
             ) !== undefined
