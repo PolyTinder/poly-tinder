@@ -79,81 +79,9 @@
     
             &--transparent {
                 .layout__head {
-                    padding: 12px 12px 0 12px;
+                    padding: 24px 12px 0 12px;
                 }
             }
         }
     }
 }
-
-// .layout {
-//     $head-size: 70px;
-
-//     height: 100%;
-//     width: 100%;
-//     display: grid;
-//     grid-template-rows: auto minmax(0, 1fr);
-//     position: relative;
-
-//     &--no-header {
-//         grid-template-rows: minmax(0, 1fr);
-//     }
-    
-//     &__head {
-//         @include no-select;
-
-//         height: $head-size;
-
-//         &__back {
-//             $size: 36px;
-
-//             display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             background-color: var(--theme-background);
-//             border-radius: $size;
-//             width: $size;
-//             height: $size;
-//             text-decoration: none;
-//             color: var(--theme-background--contrast);
-//             border: solid 1px rgb(240, 240, 240);
-//             position: fixed;
-//             top: $head-size / 2;
-//             margin-left: $head-size / 2;
-//             translate: -50% -50%;
-//             box-shadow: $default-shadow;
-//             z-index: 100;
-
-//             i {
-//                 margin-left: -2px;
-//             }
-//         }
-
-//         &__title {
-//             display: flex;
-//             justify-content: center;
-//             align-items: center;
-//             height: $head-size;
-//             font-size: 1.4rem;
-//             font-weight: 500;
-//             color: var(--theme-background--contrast);
-//         }
-//     }
-
-//     @media screen and (max-width: $mobile-breakpoint) {
-//         $head-size: 60px;
-
-//         &__head {
-//             height: $head-size;
-
-//             &__back {
-//                 top: $head-size / 2;
-//                 margin-left: $head-size / 2;
-//             }
-
-//             &__title {
-//                 height: $head-size;
-//             }
-//         }
-//     }
-// }
