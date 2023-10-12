@@ -1,0 +1,9 @@
+<app-layout headerType="transparent">
+    <app-layout-action *ngIf="backLink" layout-action-left icon="fas fa-chevron-left" [link]="backLink"></app-layout-action>
+
+    <span layout-title>{{ title }}</span>
+
+    <main>
+        <ng-content></ng-content>
+    </main>
+</app-layout>
