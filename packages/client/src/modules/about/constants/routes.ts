@@ -15,3 +15,4 @@ export const HOW_TO_UNMATCH_ROUTE = '/about/security/how-to-unmatch';
 
 export const INCLUSIVITY_ROUTE = '/about/ressources/inclusivity';
 export const AID_ORGANIZATIONS_ROUTE = '/about/ressources/aid-organizations';
+export const CONSENT_ROUTE = '/about/ressources/consent';

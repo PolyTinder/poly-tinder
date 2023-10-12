@@ -15,6 +15,7 @@ import { HowToBlockPageComponent } from './pages/security/how-to-block-page/how-
 import { HowToUnmatchComponent } from './pages/security/how-to-unmatch/how-to-unmatch.component';
 import { InclusivityPageComponent } from './pages/ressources/inclusivity-page/inclusivity-page.component';
 import { AidOrganizationsPageComponent } from './pages/ressources/aid-organizations-page/aid-organizations-page.component';
+import { ConsentPageComponent } from './pages/ressources/consent-page/consent-page.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { AidOrganizationsPageComponent } from './pages/ressources/aid-organizati
         HowToUnmatchComponent,
         InclusivityPageComponent,
         AidOrganizationsPageComponent,
+        ConsentPageComponent,
     ],
     imports: [CommonModule, UiModule, AppRoutingModule],
     exports: [],

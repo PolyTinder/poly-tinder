@@ -3,6 +3,7 @@ import {
     ABOUT_ROUTE,
     ACCEPTABLE_USE_POLICY_ROUTE,
     AID_ORGANIZATIONS_ROUTE,
+    CONSENT_ROUTE,
     HOW_TO_BLOCK_ROUTE,
     HOW_TO_REPORT_ROUTE,
     HOW_TO_UNMATCH_ROUTE,
@@ -23,6 +24,7 @@ import { HowToBlockPageComponent } from './pages/security/how-to-block-page/how-
 import { HowToUnmatchComponent } from './pages/security/how-to-unmatch/how-to-unmatch.component';
 import { InclusivityPageComponent } from './pages/ressources/inclusivity-page/inclusivity-page.component';
 import { AidOrganizationsPageComponent } from './pages/ressources/aid-organizations-page/aid-organizations-page.component';
+import { ConsentPageComponent } from './pages/ressources/consent-page/consent-page.component';
 
 const routes: Routes = [
     { path: ABOUT_ROUTE, component: AboutPageComponent },
@@ -45,6 +47,7 @@ const routes: Routes = [
 
     { path: INCLUSIVITY_ROUTE, component: InclusivityPageComponent },
     { path: AID_ORGANIZATIONS_ROUTE, component: AidOrganizationsPageComponent },
+    { path: CONSENT_ROUTE, component: ConsentPageComponent },
 
     { path: ABOUT_ROUTE + '**', redirectTo: ABOUT_ROUTE },
 ];
