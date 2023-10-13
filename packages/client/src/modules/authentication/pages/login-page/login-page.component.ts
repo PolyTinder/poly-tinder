@@ -11,7 +11,6 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
     styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-    showErrors = new BehaviorSubject<boolean>(false);
     loginForm = new FormGroup({
         email: new FormControl('', [
             Validators.required,
@@ -25,19 +24,7 @@ export class LoginPageComponent {
         private readonly authenticationService: AuthenticationService,
     ) {}
 
-    onChange() {
-        this.showErrors.next(false);
-    }
-
     onSubmit() {
-        this.showErrors.next(true);
-
-        if (!this.loginForm.valid) {
-            this.loginForm.setErrors({ invalid: true });
-            return;
-        }
-
-        this.loginForm.setErrors(null);
         this.loading.next(true);
 
         this.authenticationService

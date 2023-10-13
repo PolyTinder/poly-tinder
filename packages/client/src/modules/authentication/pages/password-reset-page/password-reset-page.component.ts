@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import {
-    AbstractControl,
-    FormControl,
-    FormGroup,
-    ValidationErrors,
-    Validators,
-} from '@angular/forms';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { ActivatedRoute } from '@angular/router';
+import { confirmPasswordValidator } from '../../validators/confirm-password-validator';
 
 @Component({
     selector: 'app-password-reset-page',
@@ -26,32 +21,23 @@ export class PasswordResetPageComponent {
         ]),
         confirmPassword: new FormControl('', [
             Validators.required,
-            this.confirmPasswordValidator,
+            confirmPasswordValidator(),
         ]),
     });
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     sent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     token: string | undefined = undefined;
-    tokenError: Observable<string | undefined>;
 
     constructor(
         private readonly authenticationService: AuthenticationService,
         private readonly activatedRoute: ActivatedRoute,
     ) {
-        this.activatedRoute.queryParams.subscribe(
-            (params) => (this.token = params['token']),
-        );
-        this.tokenError = this.activatedRoute.queryParams.pipe(
-            map((params) =>
-                params['token'] ? undefined : "Le token n'est pas valide",
-            ),
-        );
+        this.activatedRoute.queryParams.subscribe((params) => {
+            this.token = params['token'];
+        });
     }
 
     onSubmit() {
-        if (!this.resetPasswordForm.valid) {
-            return;
-        }
         if (!this.token) {
             return;
         }
@@ -72,19 +58,5 @@ export class PasswordResetPageComponent {
                     this.loading.next(false);
                 },
             });
-    }
-
-    confirmPasswordValidator(
-        control: AbstractControl,
-    ): ValidationErrors | null {
-        if (
-            control.value &&
-            control.parent &&
-            control.parent.get('password') &&
-            control.value !== control.parent!.get('password')!.value
-        ) {
-            return { passwordMismatch: true };
-        }
-        return null;
     }
 }
