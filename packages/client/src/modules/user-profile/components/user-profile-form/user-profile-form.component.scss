@@ -48,26 +48,11 @@
     }
 
     &__submit {
-        appearance: none;
-        border: none;
         position: fixed;
         bottom: 24px;
         right: 24px;
-        background-color: var(--theme-main);
-        color: var(--theme-main-contrast);
-        box-shadow: $default-shadow;
-        font: inherit;
-        font-size: 1.3em;
-        padding: 12px 24px;
-        border-radius: 40px;
-
-        &:disabled {
-            opacity: 0.55;
-        }
-
-        i {
-            margin-right: 6px;
-        }
+        font-size: 1.2em;
+        z-index: 2;
     }
 
     @media screen and (max-width: $mobile-breakpoint) {

@@ -89,6 +89,8 @@ export class UserProfileFormComponent {
         new BehaviorSubject<string | undefined>(undefined),
     ];
 
+    loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
     constructor(
         private readonly userProfileService: UserProfileService,
         private readonly snackBar: MatSnackBar,
@@ -130,6 +132,7 @@ export class UserProfileFormComponent {
             (res as any)[k] = v ?? undefined;
         }
 
+        this.loading$.next(true);
         this.userProfileForm.markAsPending();
         this.userProfileService.updateUserProfile(res);
         this.userProfileService
@@ -145,6 +148,7 @@ export class UserProfileFormComponent {
                             verticalPosition: 'top',
                         },
                     );
+                    this.loading$.next(false);
                     return err;
                 }),
             )
@@ -154,6 +158,7 @@ export class UserProfileFormComponent {
                     politeness: 'polite',
                     verticalPosition: 'top',
                 });
+                this.loading$.next(false);
             });
     }
 
