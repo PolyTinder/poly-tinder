@@ -43,7 +43,7 @@ jobs:
           npm run lint
       - name: JSCPD
         run: |
-          cd packages/$SERVICE
+          cd packages/$DIR
           npm run jscpd
 
   test:
