@@ -1,42 +1,76 @@
-<nav [ngClass]="{ collapsed }">
-    <div class="top-nav">
+<nav class="navigation">
+    <div class="navigation__top">
         <br class="desktop-only">
-        <!-- <button class="collapse-btn" (click)="toggleCollapsed()"><i class="far fa-bars"></i></button> -->
 
-        <div class="brand">
-            <img class="brand__logo" src="/assets/logo.svg" alt="Logo">
-            <span class="brand__name">PolyTinder</span>
+        <div class="navigation__top__brand desktop-only">
+            <img
+                src="/assets/logo.svg"
+                alt="PolyTinder logo"
+                class="navigation__top__brand__logo"
+            >
+            <span class="navigation__top__brand__name">PolyTinder</span>
         </div>
-    
-        <ul class="main-nav">
-            <li *ngFor="let item of (navigation | async)" class="nav-item">
-                <a [routerLink]="isActiveLink(item.href) ? undefined : item.href" class="nav-item__link" [ngClass]="{'nav-item__link--active': isActiveLink(item.href), 'nav-item__link---not-active': !isActiveLink(item.href), 'interactable--small': !isActiveLink(item.href)}">
-                    <i [class]="'fa-' + item.icon + ' fas nav-item__link__icon'"></i>
-                    <span class="nav-item__link__content">{{item.text}}</span>
-                    <span class="nav-item__link__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
-                    <span class="nav-item__link__pill nav-item__link__pill--error" *ngIf="item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0">{{userValidActionsCount | async}}</span>
-                </a>
+
+        <div class="navigation__top__menu">
+            <li *ngFor="let item of (navigation | async)" class="navigation__top__menu__item">
+                <app-button
+                    [link]="isActiveLink(item.href) ? undefined : item.href"
+                    [color]="isActiveLink(item.href) ? 'primary' : 'transparent'"
+                    [interactable]="isActiveLink(item.href) ? 'none' : 'small'"
+                    [icon]="'fas fa-' + item.icon"
+                    class="desktop-only"
+                >
+                    <div
+                        class="navigation__top__menu__item__content"
+                        [ngClass]="{'navigation__top__menu__item__content--active': isActiveLink(item.href)}"
+                    >
+                        <span class="navigation__top__menu__item__content__text">{{item.text}}</span>
+                        <span class="navigation__top__menu__item__content__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
+                        <span class="navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error" *ngIf="item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0">{{userValidActionsCount | async}}</span>
+                    </div>
+                </app-button>
+
+
+                <app-button
+                    [link]="isActiveLink(item.href) ? undefined : item.href"
+                    color="transparent"
+                    [interactable]="isActiveLink(item.href) ? 'none' : 'small'"
+                    class="mobile-only"
+                >
+                    <div
+                        class="navigation__top__menu__item__content"
+                        [ngClass]="{'navigation__top__menu__item__content--active': isActiveLink(item.href)}"
+                    >
+                        <i [class]="'fa-' + item.icon + ' fas navigation__top__menu__item__content__icon'"></i>
+                        <span class="navigation__top__menu__item__content__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
+                        <span class="navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error" *ngIf="item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0">{{userValidActionsCount | async}}</span>
+                    </div>
+                </app-button>
             </li>
-        </ul>
+        </div>
     </div>
 
-
-    <div class="bottom-nav">
-        <ul>
-            <!-- <li class="nav-item interactable" matTooltip="Préférences" *ngIf="isLoggedIn | async">
-                <a routerLink="/settings" class="nav-item__link"><i class="fas fa-cog"></i></a>
-            </li> -->
-            <li class="nav-item interactable" matTooltip="À propos" *ngIf="isLoggedIn | async">
-                <a routerLink="/about" class="nav-item__link"><i class="fas fa-info-circle"></i></a>
+    <div class="navigation__bottom desktop-only">
+        <ul class="navigation__bottom__left">
+            <li
+                class="navigation__bottom__left__item"
+                matTooltip="À propos"
+                *ngIf="isLoggedIn | async"
+            >
+                <app-button link="/about" icon="fas fa-info-circle" [iconOnly]="true"></app-button>
             </li>
-            <li class="nav-item interactable" matTooltip="Github" *ngIf="isLoggedIn | async">
-                <a href="https://github.com/PolyTinder/poly-tinder" target="_blank" class="nav-item__link"><i class="fab fa-github"></i></a>
+            <li class="navigation__bottom__left__item" matTooltip="Github">
+                <app-button link="https://github.com/PolyTinder/poly-tinder" icon="fab fa-github" [iconOnly]="true"></app-button>
             </li>
         </ul>
 
-        <ul>
-            <li class="nav-item interactable" matTooltip="Se déconnecter" *ngIf="isLoggedIn | async">
-                <a class="nav-item__link" [matMenuTriggerFor]="logoutMenu"><i class="fas fa-sign-out"></i></a>
+        <ul class="navigation__bottom__right">
+            <li
+                class="navigation__bottom__left__item"
+                matTooltip="À propos"
+                *ngIf="isLoggedIn | async"
+            >
+                <app-button [matMenuTriggerFor]="logoutMenu" icon="fas fa-sign-out" [iconOnly]="true"></app-button>
 
                 <mat-menu #logoutMenu="matMenu">
                     <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>

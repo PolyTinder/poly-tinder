@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AboutModule } from './modules/about/about.module';
 import { StatusPageComponent } from './components/status-page/status-page.component';
 import { UserModule } from './modules/user/user.module';
+import { UiModule } from './modules/ui/ui.module';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent, StatusPageComponent],
@@ -31,6 +32,7 @@ import { UserModule } from './modules/user/user.module';
         MatTooltipModule,
         MatMenuModule,
         UserModule,
+        UiModule,
     ],
     providers: [
         InitializerService,

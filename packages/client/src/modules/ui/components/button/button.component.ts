@@ -10,11 +10,13 @@ export class ButtonComponent {
     @Input() linkTarget?: '_blank' | '_self' | '_parent' | '_top';
     @Input() disabled?: boolean;
     @Input() type?: 'button' | 'submit' | 'reset' = 'button';
-    @Input() color?: 'default' | 'primary' | 'danger' = 'default';
+    @Input() color?: 'default' | 'primary' | 'transparent' | 'danger' =
+        'default';
     @Input() icon?: string;
+    @Input() iconOnly: boolean = false;
     @Input() isLoading: boolean | null = false;
     @Input() shadow: boolean = false;
-    @Input() interactable: 'default' | 'large' | 'small' = 'default';
+    @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
 
     onClick(event: Event) {
@@ -34,6 +36,7 @@ export class ButtonComponent {
             this.shadow ? 'btn--shadow' : '',
             this.isLoading ? 'btn--loading' : '',
             this.disabled ? 'btn--disabled' : '',
+            this.iconOnly ? 'btn--icon-only' : '',
         ].join(' ');
     }
 

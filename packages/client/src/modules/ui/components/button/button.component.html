@@ -23,7 +23,7 @@
 <ng-template #content>
     <div class="btn__content">
         <i [class]="icon" *ngIf="icon"></i>
-        <span><ng-content></ng-content></span>
+        <ng-content></ng-content>
     </div>
     <div class="btn__loading">
         <i class="fas fa-spinner-third fa-spin"></i>
