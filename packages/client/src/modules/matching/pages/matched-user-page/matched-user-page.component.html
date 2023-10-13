@@ -3,7 +3,11 @@
 
     <div layout-title class="matched-user-page__header__title">
         <ng-container *ngIf="userProfileValue | async; let userProfile">
-            <div class="matched-user-page__header__title__avatar" [style.background-image]="'url(' + userProfile.pictures?.[0] + '-/scale_crop/72x72/center/' + ')'"></div>
+            <img
+                [src]="userProfile.pictures?.[0] + '-/scale_crop/72x72/center/'"
+                [alt]="'Photo de profil de ' + userProfile.name"
+                class="matched-user-page__header__title__avatar"
+            >
             <span class="matched-user-page__header__title__content">{{userProfile.name}}</span>
         </ng-container>
     </div>

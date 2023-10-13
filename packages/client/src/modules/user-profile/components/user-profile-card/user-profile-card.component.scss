@@ -63,8 +63,8 @@
         aspect-ratio: 3/4;
         background-color: rgb(240, 240, 240);
         border-radius: $inner-radius;
-        background-size: cover;
-        background-position: center;
+        object-fit: cover;
+        object-position: center;
     }
 
     &__table {
@@ -136,15 +136,16 @@
     &__main {
         display: grid;
         grid-template-rows: minmax(0, 1fr) auto;
+        align-items: stretch;
         height: 100%;
         gap: $spacing;
         flex-shrink: 0;
 
         &__picture {
+            display: block;
             width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            object-position: center;
             border-radius: $inner-radius;
             background-color: rgb(240, 240, 240);
         }
