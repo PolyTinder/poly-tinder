@@ -1,0 +1,40 @@
+<app-layout headerType="hidden">
+    <main class="auth-layout">
+        <div class="auth-layout__brand mobile-only">
+            <img class="auth-layout__brand__logo" src="/assets/logo.svg" alt="Logo">
+            <span class="auth-layout__brand__name">PolyTinder</span>
+        </div>
+
+        <app-card>
+            <div class="auth-layout__head">
+                <h1 class="auth-layout__head__name">{{name}}</h1>
+                <p class="auth-layout__head__description" *ngIf="description">{{description}}</p>
+            </div>
+
+            <form
+                [formGroup]="formGroup"
+                (submit)="onSubmit($event)"
+                class="auth-layout__form"
+            >
+                <ng-content select="[auth-form-field]"></ng-content>
+
+                <div class="auth-layout__form__messages">
+                    <ng-container *ngFor="let error of formsErrors | keyvalue">
+                        <mat-error *ngIf="formGroup.errors?.[error.key]">{{error.value}}</mat-error>
+                    </ng-container>
+                </div>
+                
+                <app-button
+                    type="submit"
+                    color="primary"
+                    [isLoading]="loading | async"
+                    [forceFocusable]="true"
+                    interactable="small"
+                    [disabled]="disabled ?? false"
+                >{{name}}</app-button>
+            </form>
+        </app-card>
+        
+        <ng-content select="[auth-extra]"></ng-content>
+    </main>
+</app-layout>

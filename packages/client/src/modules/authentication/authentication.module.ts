@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UiModule } from '../ui/ui.module';
 import { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';
 import { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';
+import { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { PasswordResetPageComponent } from './pages/password-reset-page/password
         SignupPageComponent,
         RequestPasswordResetPageComponent,
         PasswordResetPageComponent,
+        AuthenticationLayoutComponent,
     ],
     imports: [
         CommonModule,

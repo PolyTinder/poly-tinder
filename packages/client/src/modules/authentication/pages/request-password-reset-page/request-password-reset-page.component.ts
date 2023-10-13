@@ -20,10 +20,6 @@ export class RequestPasswordResetPageComponent {
     ) {}
 
     onSubmit() {
-        if (!this.requestResetPasswordForm.valid) {
-            return;
-        }
-
         this.loading.next(true);
         this.authenticationService
             .requestPasswordReset(

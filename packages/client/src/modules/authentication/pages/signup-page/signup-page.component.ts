@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import {
-    AbstractControl,
-    FormControl,
-    FormGroup,
-    ValidationErrors,
-    Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AuthenticationUser } from 'common/models/authentication';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { confirmPasswordValidator } from '../../validators/confirm-password-validator';
 
 @Component({
     selector: 'app-signup-page',
@@ -17,7 +12,6 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
     styleUrls: ['./signup-page.component.scss'],
 })
 export class SignupPageComponent {
-    showErrors = new BehaviorSubject<boolean>(false);
     signupForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
@@ -29,7 +23,7 @@ export class SignupPageComponent {
         ]),
         confirmPassword: new FormControl('', [
             Validators.required,
-            this.confirmPasswordValidator,
+            confirmPasswordValidator(),
         ]),
         privacyPolicy: new FormControl(false, [Validators.requiredTrue]),
     });
@@ -39,19 +33,7 @@ export class SignupPageComponent {
         private readonly authenticationService: AuthenticationService,
     ) {}
 
-    onChange() {
-        this.showErrors.next(false);
-    }
-
     onSubmit() {
-        this.showErrors.next(true);
-
-        if (!this.signupForm.valid) {
-            this.signupForm.setErrors({ invalid: true });
-            return;
-        }
-
-        this.signupForm.setErrors(null);
         this.loading.next(true);
 
         this.authenticationService
@@ -71,19 +53,5 @@ export class SignupPageComponent {
                     this.loading.next(false);
                 },
             });
-    }
-
-    confirmPasswordValidator(
-        control: AbstractControl,
-    ): ValidationErrors | null {
-        if (
-            control.value &&
-            control.parent &&
-            control.parent.get('password') &&
-            control.value !== control.parent!.get('password')!.value
-        ) {
-            return { passwordMismatch: true };
-        }
-        return null;
     }
 }
