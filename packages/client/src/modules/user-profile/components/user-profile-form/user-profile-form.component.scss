@@ -6,7 +6,6 @@
     align-items: stretch;
     gap: 24px;
     padding: 24px;
-    padding-bottom: 100px;
 
     a {
         color: rgba(var(--theme-background-contrast-rgb), 0.75);
@@ -74,7 +73,6 @@
     @media screen and (max-width: $mobile-breakpoint) {
         gap: 12px;
         padding: 12px;
-        padding-bottom: 72px;
 
         section {
             padding: 12px;
