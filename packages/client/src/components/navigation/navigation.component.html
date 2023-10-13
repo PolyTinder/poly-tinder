@@ -70,7 +70,7 @@
                 matTooltip="À propos"
                 *ngIf="isLoggedIn | async"
             >
-                <app-button [matMenuTriggerFor]="logoutMenu" icon="fas fa-sign-out" [iconOnly]="true"></app-button>
+                <app-button [matMenuTriggerFor]="logoutMenu" icon="fas fa-sign-out" [iconOnly]="true" [forceFocusable]="true"></app-button>
 
                 <mat-menu #logoutMenu="matMenu">
                     <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-button',
@@ -17,10 +18,21 @@ export class ButtonComponent {
     @Input() isLoading: boolean | null = false;
     @Input() shadow: boolean = false;
     @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
+    @Input() forceFocusable: boolean = false;
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
+
+    constructor(private readonly router: Router) {}
 
     onClick(event: Event) {
         if (this.disabled) return;
+
+        if (this.link) {
+            if (this.isLinkExternal) {
+                window.open(this.link, this.linkTarget);
+            } else {
+                this.router.navigate([this.link]);
+            }
+        }
 
         this.btnClick.emit(event);
     }
