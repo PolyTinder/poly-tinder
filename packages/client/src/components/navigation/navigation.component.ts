@@ -14,8 +14,6 @@ import { ValidationService } from 'src/modules/validation/services/validation.se
     styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
-    collapsed = false;
-
     constructor(
         private readonly authenticationService: AuthenticationService,
         private readonly sessionService: SessionService,
@@ -83,9 +81,5 @@ export class NavigationComponent {
 
     isActiveLink(href: string) {
         return this.router.url === href;
-    }
-
-    toggleCollapsed() {
-        this.collapsed = !this.collapsed;
     }
 }

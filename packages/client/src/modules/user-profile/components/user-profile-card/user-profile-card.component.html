@@ -2,7 +2,11 @@
 <ng-container *ngIf="userProfile">
     <div class="user-profile">
         <div class="user-profile__main">
-            <div class="user-profile__main__picture" [style.background-image]="'url(' + userProfile.pictures?.[0] + '-/scale_crop/700x1020/center/' + ')'"></div>
+            <img
+                [src]="userProfile.pictures?.[0] + '-/scale_crop/700x1020/center/'"
+                [alt]="'Photo de ' + userProfile.name"
+                class="user-profile__main__picture"
+            >
             <div class="user-profile__main__info">
                 <p class="user-profile__main__info__name">{{userProfile.name}}</p>
                 <p class="user-profile__main__info__subtitle">
@@ -21,13 +25,13 @@
             <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-flower-tulip"></i> À la recherche de</p>
             <p class="user-profile__looking-for__content"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>
         </div>
-
-        <div 
-            class="user-profile__picture"
+        
+        <img
+            [src]="userProfile.pictures?.[1]+ '-/scale_crop/700x1020/center/'"
             *ngIf="userProfile.pictures?.[1]"
-            [style.background-image]="'url(' + userProfile.pictures?.[1] + '-/scale_crop/700x1020/center/' + ')'"
+            [alt]="'Photo de ' + userProfile.name"
+            class="user-profile__picture"
         >
-        </div>
 
         <div class="user-profile__table">
             <div class="user-profile__table__entry user-profile__table__entry--multiple">
@@ -66,13 +70,13 @@
                 <i class="fas fa-transgender"></i> {{userProfile.gender}}
             </div>
         </div>
-
-        <div 
-            class="user-profile__picture"
+        
+        <img
+            [src]="userProfile.pictures?.[2]+ '-/scale_crop/700x1020/center/'"
             *ngIf="userProfile.pictures?.[2]"
-            [style.background-image]="'url(' + userProfile.pictures?.[2] + '-/scale_crop/700x1020/center/' + ')'"
+            [alt]="'Photo de ' + userProfile.name"
+            class="user-profile__picture"
         >
-        </div>
 
         <div class="user-profile__interests user-profile__section" *ngIf="interests">
             <p class="user-profile__section-title user-profile__interests__title"><i class="fas fa-heart"></i> Mes intérêts</p>
@@ -82,13 +86,13 @@
                 </div>
             </div>
         </div>
-
-        <div 
-            class="user-profile__picture"
+        
+        <img
+            [src]="userProfile.pictures?.[3]+ '-/scale_crop/700x1020/center/'"
             *ngIf="userProfile.pictures?.[3]"
-            [style.background-image]="'url(' + userProfile.pictures?.[3] + '-/scale_crop/700x1020/center/' + ')'"
+            [alt]="'Photo de ' + userProfile.name"
+            class="user-profile__picture"
         >
-        </div>
 
         <div class="user-profile__associations user-profile__section" *ngIf="associations">
             <p class="user-profile__section-title user-profile__associations__title"><i class="fas fa-users"></i> Mes associations</p>
@@ -98,20 +102,20 @@
                 </div>
             </div>
         </div>
-
-        <div 
-            class="user-profile__picture"
+        
+        <img
+            [src]="userProfile.pictures?.[4]+ '-/scale_crop/700x1020/center/'"
             *ngIf="userProfile.pictures?.[4]"
-            [style.background-image]="'url(' + userProfile.pictures?.[4] + '-/scale_crop/700x1020/center/' + ')'"
-        >
-        </div>
-
-        <div 
+            [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
-            *ngIf="userProfile.pictures?.[5]"
-            [style.background-image]="'url(' + userProfile.pictures?.[5] + '-/scale_crop/700x1020/center/' + ')'"
         >
-        </div>
+        
+        <img
+            [src]="userProfile.pictures?.[5]+ '-/scale_crop/700x1020/center/'"
+            *ngIf="userProfile.pictures?.[5]"
+            [alt]="'Photo de ' + userProfile.name"
+            class="user-profile__picture"
+        >
 
         <hr>
 

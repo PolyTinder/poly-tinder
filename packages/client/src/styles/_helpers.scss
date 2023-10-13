@@ -54,12 +54,22 @@
 
 .desktop-only {
     @media screen and (max-width: $mobile-breakpoint) {
-        display: none;
+        display: none !important;
+        position: absolute !important;
+        top: -1000px !important;
+        left: -1000px !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
 }
 
 .mobile-only {
     @media screen and (min-width: $mobile-breakpoint) {
-        display: none;
+        display: none !important;
+        position: absolute !important;
+        top: -1000px !important;
+        left: -1000px !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
 }

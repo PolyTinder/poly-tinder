@@ -1,31 +1,16 @@
 <button
     (click)="onClick($event)"
-    [routerLink]="link"
     [disabled]="disabled"
     [type]="type"
     [class]="classes"
-    *ngIf="!isLinkExternal && !linkTarget"
+    [routerLink]="isLinkExternal ? null : link"
+    [tabIndex]="link || btnClick.observed || forceFocusable ? 0 : -1"
 >
-    <div *ngTemplateOutlet="content"></div>
-</button>
-
-<a
-    (click)="onClick($event)"
-    [href]="link"
-    [target]="linkTarget"
-    [type]="type"
-    [class]="classes"
-    *ngIf="isLinkExternal || linkTarget"
->
-    <div *ngTemplateOutlet="content"></div>
-</a>
-
-<ng-template #content>
     <div class="btn__content">
         <i [class]="icon" *ngIf="icon"></i>
-        <span><ng-content></ng-content></span>
+        <ng-content></ng-content>
     </div>
     <div class="btn__loading">
         <i class="fas fa-spinner-third fa-spin"></i>
     </div>
-</ng-template>
+</button>

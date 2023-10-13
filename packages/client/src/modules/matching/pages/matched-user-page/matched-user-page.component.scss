@@ -30,8 +30,8 @@
                 width: 36px;
                 background-color: rgb(240, 240, 240);
                 border-radius: 6px;
-                background-size: cover;
-                background-position: center;
+                object-fit: cover;
+                object-position: center;
             }
         }
     }

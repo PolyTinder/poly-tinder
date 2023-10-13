@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-button',
@@ -10,15 +11,28 @@ export class ButtonComponent {
     @Input() linkTarget?: '_blank' | '_self' | '_parent' | '_top';
     @Input() disabled?: boolean;
     @Input() type?: 'button' | 'submit' | 'reset' = 'button';
-    @Input() color?: 'default' | 'primary' | 'danger' = 'default';
+    @Input() color?: 'default' | 'primary' | 'transparent' | 'danger' =
+        'default';
     @Input() icon?: string;
+    @Input() iconOnly: boolean = false;
     @Input() isLoading: boolean | null = false;
     @Input() shadow: boolean = false;
-    @Input() interactable: 'default' | 'large' | 'small' = 'default';
+    @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
+    @Input() forceFocusable: boolean = false;
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
+
+    constructor(private readonly router: Router) {}
 
     onClick(event: Event) {
         if (this.disabled) return;
+
+        if (this.link) {
+            if (this.isLinkExternal) {
+                window.open(this.link, this.linkTarget);
+            } else {
+                this.router.navigate([this.link]);
+            }
+        }
 
         this.btnClick.emit(event);
     }
@@ -34,6 +48,7 @@ export class ButtonComponent {
             this.shadow ? 'btn--shadow' : '',
             this.isLoading ? 'btn--loading' : '',
             this.disabled ? 'btn--disabled' : '',
+            this.iconOnly ? 'btn--icon-only' : '',
         ].join(' ');
     }
 

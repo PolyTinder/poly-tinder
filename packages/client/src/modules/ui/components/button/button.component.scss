@@ -21,6 +21,7 @@
 
     &__content {
         display: flex;
+        height: 100%;
         gap: 12px;
         align-items: center;
         justify-content: center;
@@ -51,6 +52,10 @@
     }
 
     &--style {
+        &--transparent {
+            border-color: transparent;
+        }
+
         &--primary {
             background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
             color: var(--theme-main-contrast);
@@ -62,6 +67,13 @@
             color: white;
             border: none;
         }
+    }
+
+    &--icon-only {
+        height: 46px;
+        width: 46px;
+        padding: 0;
+        font-size: 1.05em;
     }
 
     &--shadow {

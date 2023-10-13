@@ -24,8 +24,8 @@
             height: 72px;
             aspect-ratio: 1;
             border-radius: 6px;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            object-position: center;
             background-color: rgb(240, 240, 240);
         }
 
