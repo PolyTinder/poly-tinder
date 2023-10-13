@@ -2,6 +2,7 @@
     class="layout-action"
     [ngClass]="{ 'interactable': !disabled, 'layout-action--icon-only': !content, 'layout-action--not-icon-only': !!content }"
     (click)="disabled ? undefined : handleClick()"
+    tabindex="0"
 >
     <div class="layout-action__icon" *ngIf="icon">
         <i
