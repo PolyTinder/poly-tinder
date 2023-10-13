@@ -7,8 +7,8 @@ on:
       - packages/common/**
       - Dockerfile.api
       - .github/workflows/api.yml
-    branches:
-      - main
+    tags:
+      - v*
   pull_request:
     paths:
       - packages/api/**
@@ -90,13 +90,13 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker $REGION-docker.pkg.dev
       - name: Push
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: startsWith(github.event.ref, 'refs/tags/')
         run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE
 
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: startsWith(github.event.ref, 'refs/tags/')
     steps:
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
