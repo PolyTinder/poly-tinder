@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
-    "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts ."
+    "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
+    "jscpd": "jscpd -t 5 -f \"typescript,html,scss\" src/"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +42,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "jasmine-core": "~4.6.0",
+    "jscpd": "^3.5.10",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",

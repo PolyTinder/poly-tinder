@@ -40,6 +40,10 @@ jobs:
         run: |
           cd packages/$SERVICE
           npm run lint
+      - name: JSCPD
+        run: |
+          cd packages/$SERVICE
+          npm run jscpd
 
   test:
     runs-on: ubuntu-latest
