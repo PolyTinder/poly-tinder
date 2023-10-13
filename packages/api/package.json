@@ -11,7 +11,8 @@
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "test": "cross-env NODE_ENV=test dotenv -e .env.test jest"
+    "test": "cross-env NODE_ENV=test dotenv -e .env.test jest",
+    "jscpd": "jscpd -t 5 src/"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +39,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "faker": "^6.6.6",
     "jest": "^29.3.1",
+    "jscpd": "^3.5.10",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.1",
     "supertest": "^6.3.3",
