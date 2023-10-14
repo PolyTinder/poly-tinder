@@ -186,7 +186,14 @@
 
     <ng-container *ngTemplateOutlet="formInvalid"></ng-container>
 
-    <button class="form__submit interactable" type="submit" [disabled]="!userProfileForm.dirty || userProfileForm.invalid">
-        <i class="fas fa-save"></i> Enregistrer
-    </button>
+    <app-button
+        class="form__submit"
+        icon="fas fa-save"
+        [shadow]="true"
+        interactable="small"
+        type="submit"
+        [disabled]="!userProfileForm.dirty || userProfileForm.invalid"
+        [isLoading]="loading$ | async"
+        color="primary"
+    >Enregistrer</app-button>
 </form>
