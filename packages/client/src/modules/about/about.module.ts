@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { UiModule } from '../ui/ui.module';
-import { AppRoutingModule } from '../app-routing.module';
 import { PrivacyPolicyComponent } from './pages/application-rules/privacy-policy/privacy-policy.component';
 import { TermsAndConditionsComponent } from './pages/application-rules/terms-and-conditions/terms-and-conditions.component';
 import { AcceptableUsePolicyComponent } from './pages/application-rules/acceptable-use-policy/acceptable-use-policy.component';
@@ -16,6 +15,7 @@ import { HowToUnmatchComponent } from './pages/security/how-to-unmatch/how-to-un
 import { InclusivityPageComponent } from './pages/ressources/inclusivity-page/inclusivity-page.component';
 import { AidOrganizationsPageComponent } from './pages/ressources/aid-organizations-page/aid-organizations-page.component';
 import { ConsentPageComponent } from './pages/ressources/consent-page/consent-page.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -34,7 +34,7 @@ import { ConsentPageComponent } from './pages/ressources/consent-page/consent-pa
         AidOrganizationsPageComponent,
         ConsentPageComponent,
     ],
-    imports: [CommonModule, UiModule, AppRoutingModule],
+    imports: [CommonModule, UiModule, RouterModule],
     exports: [],
 })
 export class AboutModule {}
