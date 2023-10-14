@@ -65,6 +65,7 @@ const meta: Meta<UserProfileCardComponent> = {
         template: `
             <app-user-profile-card
                 [userProfile]="userProfile"
+                [disableModeration]="disableModeration"
                 style="width: 100%; height: 100%;"
             ></app-user-profile-card>
         `,
