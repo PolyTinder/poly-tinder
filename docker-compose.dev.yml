@@ -59,7 +59,17 @@ services:
       - ./packages/common:/src/www/common
     ports:
       - 3001:3001
-    
+
+  storybook:
+    image: node:20
+    command: npm run storybook -- --host 0.0.0.0
+    working_dir: /src/www/app
+    volumes:
+      - ./packages/client:/src/www/app
+      - ./packages/common:/src/www/common
+    ports:
+      - 6006:6006
+
   db:
     image: mysql:8.1
     environment:
