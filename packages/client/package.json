@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
-    "jscpd": "jscpd -t 5 -f \"typescript,html,scss\" src/"
+    "jscpd": "jscpd -t 5 -f \"typescript,html,scss\" src/",
+    "storybook": "ng run client:storybook",
+    "build-storybook": "ng run client:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -36,11 +38,20 @@
     "@angular-devkit/build-angular": "^16.2.3",
     "@angular/cli": "~16.2.3",
     "@angular/compiler-cli": "^16.2.0",
+    "@compodoc/compodoc": "^1.1.21",
+    "@storybook/addon-docs": "^7.4.6",
+    "@storybook/addon-essentials": "^7.4.6",
+    "@storybook/addon-interactions": "^7.4.6",
+    "@storybook/addon-links": "^7.4.6",
+    "@storybook/angular": "^7.4.6",
+    "@storybook/blocks": "^7.4.6",
+    "@storybook/testing-library": "^0.2.2",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "jasmine-core": "~4.6.0",
     "jscpd": "^3.5.10",
     "karma": "~6.4.0",
@@ -49,6 +60,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.4.6",
     "typescript": "~5.1.3"
   }
 }
