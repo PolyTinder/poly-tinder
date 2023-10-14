@@ -291,18 +291,6 @@
             "indexSignatures": [],
             "kind": 168,
             "methods": []
-        },
-        {
-            "name": "User",
-            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
-            "file": "src/stories/User.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "export interface User {}\n",
-            "properties": [],
-            "indexSignatures": [],
-            "methods": []
         }
     ],
     "injectables": [
@@ -3717,139 +3705,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-a53fd738b978780d39fb5fcc9ae4cfe0088e57a1f6ce674862d57dab9192140bd1c05548a9910db0469a431142886e658ff2e761f15781b2ad430e58d64724d0",
-            "file": "src/stories/button.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-button",
-            "styleUrls": [
-                "./button.css"
-            ],
-            "styles": [],
-            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "backgroundColor",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nWhat background color to use\n",
-                    "description": "<p>What background color to use</p>\n",
-                    "line": 28,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "'Button'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "pos": 786,
-                            "end": 799,
-                            "flags": 8421376,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 330,
-                            "tagName": {
-                                "pos": 787,
-                                "end": 795,
-                                "flags": 8421376,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "required"
-                            },
-                            "comment": ""
-                        }
-                    ],
-                    "rawdescription": "\n\nButton contents\n\n",
-                    "description": "<p>Button contents</p>\n",
-                    "line": 42,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "primary",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
-                    "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 22,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'medium'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nHow large should the button be?\n",
-                    "description": "<p>How large should the button be?</p>\n",
-                    "line": 34,
-                    "type": "\"small\" | \"medium\" | \"large\"",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onClick",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nOptional click handler\n",
-                    "description": "<p>Optional click handler</p>\n",
-                    "line": 48,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [
-                {
-                    "name": "CommonModule",
-                    "type": "module"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  imports: [CommonModule],\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
-                    "styleUrl": "./button.css"
-                }
-            ],
-            "stylesData": "",
-            "accessors": {
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "[]",
-                        "returnType": "string[]",
-                        "line": 50
-                    }
-                }
-            }
-        },
-        {
-            "name": "ButtonComponent",
-            "id": "component-ButtonComponent-edb75878518593fb55d5b7734410c31385375946a3e7a5985fd7e03b30f14add0cde3b5597e860bc6374ec256cdb03a80175df926222285efcdbff72842d4923-1",
+            "id": "component-ButtonComponent-edb75878518593fb55d5b7734410c31385375946a3e7a5985fd7e03b30f14add0cde3b5597e860bc6374ec256cdb03a80175df926222285efcdbff72842d4923",
             "file": "src/modules/ui/components/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4068,9 +3924,6 @@
                     }
                 }
             },
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "ButtonComponent-1",
             "templateData": "<button\n    (click)=\"onClick($event)\"\n    [disabled]=\"disabled\"\n    [type]=\"type\"\n    [class]=\"classes\"\n    [routerLink]=\"isLinkExternal ? null : link\"\n    [tabIndex]=\"link || btnClick.observed || forceFocusable ? 0 : -1\"\n>\n    <div class=\"btn__content\">\n        <i [class]=\"icon\" *ngIf=\"icon\"></i>\n        <ng-content></ng-content>\n    </div>\n    <div class=\"btn__loading\">\n        <i class=\"fas fa-spinner-third fa-spin\"></i>\n    </div>\n</button>\n"
         },
         {
@@ -4839,82 +4692,6 @@
             ],
             "stylesData": "",
             "templateData": "<app-about-layout title=\"Règlements géneraux\" backLink=\"/about\">\n    <app-card title=\"Règlements\" icon=\"fas fa-gavel\" anchor=\"rules\">\n        <ol>\n            <li>Respectez la vie privée: Ne partagez pas d'informations personnelles sensibles, telles que votre adresse, votre numéro de téléphone ou vos données bancaires. Protégez votre vie privée et celle des autres.</li>\n            <li>Soyez respectueux: Traitez tous les utilisateurs avec gentillesse et respect, quel que soit leur genre, leur orientation sexuelle, leur origine ethnique, ou leur apparence. Les commentaires offensants ou discriminatoires ne sont pas tolérés.</li>\n            <li>Pas de harcèlement: N'envoyez pas de messages non sollicités ou insistants. Si quelqu'un vous demande de cesser de communiquer avec lui, respectez sa demande.</li>\n            <li>Utilisez des photos appropriées: Choisissez des photos de profil appropriées et respectez nos directives en matière d'image. Les contenus offensants, vulgaires ou explicites ne sont pas autorisés.</li>\n            <li>Soyez honnête: Utilisez des informations précises dans votre profil. La confiance est essentielle dans les relations en ligne.</li>\n            <li>Signalez les comportements inappropriés: Si vous êtes témoin de comportements contraires à nos règles, signalez-les immédiatement à notre équipe de modération. Nous prenons la sécurité de notre communauté très au sérieux.</li>\n            <li>Respectez les lois locales: Assurez-vous de respecter les lois locales en matière de rencontres en ligne et de comportement sur Internet.</li>\n            <li>En respectant ces règles, vous contribuerez à créer une expérience positive et respectueuse pour tous les utilisateurs de notre application.</li>\n        </ol>\n    </app-card>\n</app-about-layout>"
-        },
-        {
-            "name": "HeaderComponent",
-            "id": "component-HeaderComponent-3d494fd89671305c6be07de00e019efdf08f2e36c2169e5fb75a5acdb2841da927e3ef3cbd21cc18f478373a784b1fb90e8b63b9df4b3498a75b652bd9c37b38",
-            "file": "src/stories/header.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
-            "styles": [],
-            "template": "<header>    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 65,
-                    "type": "User | null",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 74,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 68,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 71,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport type { User } from './User';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-header {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
-                    "styleUrl": "./header.css"
-                }
-            ],
-            "stylesData": ""
         },
         {
             "name": "HowToBlockPageComponent",
@@ -6552,89 +6329,6 @@
                 }
             },
             "templateData": "<nav class=\"navigation\">\n    <div class=\"navigation__top\">\n        <br class=\"desktop-only\">\n\n        <div class=\"navigation__top__brand desktop-only\">\n            <img\n                src=\"/assets/logo.svg\"\n                alt=\"PolyTinder logo\"\n                class=\"navigation__top__brand__logo\"\n            >\n            <span class=\"navigation__top__brand__name\">PolyTinder</span>\n        </div>\n\n        <div class=\"navigation__top__menu\">\n            <li *ngFor=\"let item of (navigation | async)\" class=\"navigation__top__menu__item\">\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    [color]=\"isActiveLink(item.href) ? 'primary' : 'transparent'\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    [icon]=\"'fas fa-' + item.icon\"\n                    class=\"desktop-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <span class=\"navigation__top__menu__item__content__text\">{{item.text}}</span>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n\n\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    color=\"transparent\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    class=\"mobile-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <i [class]=\"'fa-' + item.icon + ' fas navigation__top__menu__item__content__icon'\"></i>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n            </li>\n        </div>\n    </div>\n\n    <div class=\"navigation__bottom desktop-only\">\n        <ul class=\"navigation__bottom__left\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button link=\"/about\" icon=\"fas fa-info-circle\" [iconOnly]=\"true\"></app-button>\n            </li>\n            <li class=\"navigation__bottom__left__item\" matTooltip=\"Github\">\n                <app-button link=\"https://github.com/PolyTinder/poly-tinder\" icon=\"fab fa-github\" [iconOnly]=\"true\"></app-button>\n            </li>\n        </ul>\n\n        <ul class=\"navigation__bottom__right\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button [matMenuTriggerFor]=\"logoutMenu\" icon=\"fas fa-sign-out\" [iconOnly]=\"true\" [forceFocusable]=\"true\"></app-button>\n\n                <mat-menu #logoutMenu=\"matMenu\">\n                    <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n                </mat-menu>\n            </li>\n        </ul>\n    </div>\n</nav>\n"
-        },
-        {
-            "name": "PageComponent",
-            "id": "component-PageComponent-badb6d8cee577661da79ba82ad8f599604afd40fa34e36c7b88d71d77a4fbc7184228cba2f0d73e255d0b7bc51c4c7a8e7b0128b3624aeb0255abab9030fa59a",
-            "file": "src/stories/page.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-page",
-            "styleUrls": [
-                "./page.css"
-            ],
-            "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "User | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 64
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "doCreateAccount",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 74,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "doLogin",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 70,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "doLogout",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 66,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": false,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport type { User } from './User';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-page {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\n.storybook-page h2 {\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\n.storybook-page ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.storybook-page .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
-                    "styleUrl": "./page.css"
-                }
-            ],
-            "stylesData": ""
         },
         {
             "name": "PasswordResetPageComponent",
@@ -8417,13 +8111,13 @@
     "modules": [
         {
             "name": "AboutModule",
-            "id": "module-AboutModule-9e50a1cb8b1e4a51c5c0253d2668475d60fbee755aeddba9d9dc57629edb18fc4a859cccb837f6e32322180fabf898e33116be003bd2770aa1a5fff2dadca945",
+            "id": "module-AboutModule-113823508771774299e9a9c4b84d38163aeaf6edebcf60daa2c72c7500074c25ca8f614f5e36605befd68c1fb536b49a9f4233342d3b3cfa3e7fbe12bafc9e10",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/about/about.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AboutPageComponent } from './pages/about-page/about-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { AppRoutingModule } from '../app-routing.module';\nimport { PrivacyPolicyComponent } from './pages/application-rules/privacy-policy/privacy-policy.component';\nimport { TermsAndConditionsComponent } from './pages/application-rules/terms-and-conditions/terms-and-conditions.component';\nimport { AcceptableUsePolicyComponent } from './pages/application-rules/acceptable-use-policy/acceptable-use-policy.component';\nimport { AboutCardComponent } from './components/about-card/about-card.component';\nimport { AboutLayoutComponent } from './components/about-layout/about-layout.component';\nimport { GeneralRulesPageComponent } from './pages/application-rules/general-rules-page/general-rules-page.component';\nimport { PoliciesPageComponent } from './pages/application-rules/policies-page/policies-page.component';\nimport { HowToReportPageComponent } from './pages/security/how-to-report-page/how-to-report-page.component';\nimport { HowToBlockPageComponent } from './pages/security/how-to-block-page/how-to-block-page.component';\nimport { HowToUnmatchComponent } from './pages/security/how-to-unmatch/how-to-unmatch.component';\nimport { InclusivityPageComponent } from './pages/ressources/inclusivity-page/inclusivity-page.component';\nimport { AidOrganizationsPageComponent } from './pages/ressources/aid-organizations-page/aid-organizations-page.component';\nimport { ConsentPageComponent } from './pages/ressources/consent-page/consent-page.component';\n\n@NgModule({\n    declarations: [\n        AboutPageComponent,\n        PrivacyPolicyComponent,\n        TermsAndConditionsComponent,\n        AcceptableUsePolicyComponent,\n        AboutCardComponent,\n        AboutLayoutComponent,\n        GeneralRulesPageComponent,\n        PoliciesPageComponent,\n        HowToReportPageComponent,\n        HowToBlockPageComponent,\n        HowToUnmatchComponent,\n        InclusivityPageComponent,\n        AidOrganizationsPageComponent,\n        ConsentPageComponent,\n    ],\n    imports: [CommonModule, UiModule, AppRoutingModule],\n    exports: [],\n})\nexport class AboutModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { AboutPageComponent } from './pages/about-page/about-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { PrivacyPolicyComponent } from './pages/application-rules/privacy-policy/privacy-policy.component';\nimport { TermsAndConditionsComponent } from './pages/application-rules/terms-and-conditions/terms-and-conditions.component';\nimport { AcceptableUsePolicyComponent } from './pages/application-rules/acceptable-use-policy/acceptable-use-policy.component';\nimport { AboutCardComponent } from './components/about-card/about-card.component';\nimport { AboutLayoutComponent } from './components/about-layout/about-layout.component';\nimport { GeneralRulesPageComponent } from './pages/application-rules/general-rules-page/general-rules-page.component';\nimport { PoliciesPageComponent } from './pages/application-rules/policies-page/policies-page.component';\nimport { HowToReportPageComponent } from './pages/security/how-to-report-page/how-to-report-page.component';\nimport { HowToBlockPageComponent } from './pages/security/how-to-block-page/how-to-block-page.component';\nimport { HowToUnmatchComponent } from './pages/security/how-to-unmatch/how-to-unmatch.component';\nimport { InclusivityPageComponent } from './pages/ressources/inclusivity-page/inclusivity-page.component';\nimport { AidOrganizationsPageComponent } from './pages/ressources/aid-organizations-page/aid-organizations-page.component';\nimport { ConsentPageComponent } from './pages/ressources/consent-page/consent-page.component';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        AboutPageComponent,\n        PrivacyPolicyComponent,\n        TermsAndConditionsComponent,\n        AcceptableUsePolicyComponent,\n        AboutCardComponent,\n        AboutLayoutComponent,\n        GeneralRulesPageComponent,\n        PoliciesPageComponent,\n        HowToReportPageComponent,\n        HowToBlockPageComponent,\n        HowToUnmatchComponent,\n        InclusivityPageComponent,\n        AidOrganizationsPageComponent,\n        ConsentPageComponent,\n    ],\n    imports: [CommonModule, UiModule, RouterModule],\n    exports: [],\n})\nexport class AboutModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8479,9 +8173,6 @@
                 {
                     "type": "imports",
                     "elements": [
-                        {
-                            "name": "AppRoutingModule"
-                        },
                         {
                             "name": "UiModule"
                         }
@@ -8621,13 +8312,13 @@
         },
         {
             "name": "AuthenticationModule",
-            "id": "module-AuthenticationModule-70fbd91764438da1846477ae2dc69685e0dd724fc086ecfb531192a37ba344a2dd7e4cb5c4ed3ea930e7ea69ef8908d7fac3e15f161b399299727a5c4411b571",
+            "id": "module-AuthenticationModule-2d6cc4488389733d4fec7184f0aeae10a1ed1baae57c956428218bd7ec50b3b8ec95d71004561b3020008ce2a72dd71fae3f44268360e46ced28eb16ad0dd084",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/authentication/authentication.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LoginPageComponent } from './pages/login-page/login-page.component';\nimport { HttpClientModule } from '@angular/common/http';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { SignupPageComponent } from './pages/signup-page/signup-page.component';\nimport { AppRoutingModule } from '../app-routing.module';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { UiModule } from '../ui/ui.module';\nimport { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';\nimport { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';\n\n@NgModule({\n    declarations: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n        AuthenticationLayoutComponent,\n    ],\n    imports: [\n        CommonModule,\n        HttpClientModule,\n        ReactiveFormsModule,\n        AppRoutingModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatCheckboxModule,\n        UiModule,\n    ],\n    exports: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n    ],\n})\nexport class AuthenticationModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LoginPageComponent } from './pages/login-page/login-page.component';\nimport { HttpClientModule } from '@angular/common/http';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { SignupPageComponent } from './pages/signup-page/signup-page.component';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { UiModule } from '../ui/ui.module';\nimport { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';\nimport { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';\n\n@NgModule({\n    declarations: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n        AuthenticationLayoutComponent,\n    ],\n    imports: [\n        CommonModule,\n        HttpClientModule,\n        ReactiveFormsModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatCheckboxModule,\n        UiModule,\n    ],\n    exports: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n    ],\n})\nexport class AuthenticationModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8656,9 +8347,6 @@
                 {
                     "type": "imports",
                     "elements": [
-                        {
-                            "name": "AppRoutingModule"
-                        },
                         {
                             "name": "UiModule"
                         }
@@ -8737,13 +8425,13 @@
         },
         {
             "name": "MatchingModule",
-            "id": "module-MatchingModule-9dfba1ae040d8ca284d55d56512be283f6a6eac00fed807693e86c275d8df56df414df1161dc7e9dbe6e48dd13c5e0c30f85bbe95e0f3c71748d65d93c756db0",
+            "id": "module-MatchingModule-0da0755f56b21b5547113bf93da710c583c890544513853f2e17975194e2a327b61d581ff05fbba7bf45fabb70531c068875d9408d7f6f4af240128edb8f3760",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/matching/matching.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatchesPageComponent } from './pages/matches-page/matches-page.component';\nimport { UserProfileModule } from '../user-profile/user-profile.module';\nimport { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { MatchListComponent } from './components/match-list/match-list.component';\nimport { AppRoutingModule } from '../app-routing.module';\nimport { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { MatchedModalComponent } from './components/matched-modal/matched-modal.component';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { ConversationListComponent } from './components/conversation-list/conversation-list.component';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { ModalsModule } from '../modals/modals.module';\nimport { ModerationModule } from '../moderation/moderation.module';\n\n@NgModule({\n    declarations: [\n        MatchesPageComponent,\n        SwipingPageComponent,\n        MatchListComponent,\n        MatchedUserPageComponent,\n        MatchedModalComponent,\n        ConversationListComponent,\n    ],\n    imports: [\n        CommonModule,\n        AppRoutingModule,\n        MatDialogModule,\n        ReactiveFormsModule,\n        UserProfileModule,\n        UiModule,\n        MatMenuModule,\n        ModalsModule,\n        ModerationModule,\n    ],\n    exports: [MatchesPageComponent, MatchedUserPageComponent],\n})\nexport class MatchingModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatchesPageComponent } from './pages/matches-page/matches-page.component';\nimport { UserProfileModule } from '../user-profile/user-profile.module';\nimport { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { MatchListComponent } from './components/match-list/match-list.component';\nimport { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { MatchedModalComponent } from './components/matched-modal/matched-modal.component';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { ConversationListComponent } from './components/conversation-list/conversation-list.component';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { ModalsModule } from '../modals/modals.module';\nimport { ModerationModule } from '../moderation/moderation.module';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        MatchesPageComponent,\n        SwipingPageComponent,\n        MatchListComponent,\n        MatchedUserPageComponent,\n        MatchedModalComponent,\n        ConversationListComponent,\n    ],\n    imports: [\n        CommonModule,\n        RouterModule,\n        MatDialogModule,\n        ReactiveFormsModule,\n        UserProfileModule,\n        UiModule,\n        MatMenuModule,\n        ModalsModule,\n        ModerationModule,\n    ],\n    exports: [MatchesPageComponent, MatchedUserPageComponent],\n})\nexport class MatchingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8775,9 +8463,6 @@
                 {
                     "type": "imports",
                     "elements": [
-                        {
-                            "name": "AppRoutingModule"
-                        },
                         {
                             "name": "ModalsModule"
                         },
@@ -8855,13 +8540,13 @@
         },
         {
             "name": "ModerationModule",
-            "id": "module-ModerationModule-8dd965e8c34695b5d1e021c25c862337c12120153df799be1fcab8bf54ddf596028cb184795507f97d1eb2f7cb8882712e50ae077f43e892229191ca7873ad15",
+            "id": "module-ModerationModule-49c02a367f5b1cebfe961ac46ffc78f6acd99a77ca7695f055b18b9e81ec48560cdb4eee614c212feecf389f26d4d956b9e7c2b6c34896ef4988d91afcebfca6",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/moderation/moderation.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { ReportUserModalComponent } from './components/report-user-modal/report-user-modal.component';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\n\n@NgModule({\n    declarations: [ReportUserModalComponent],\n    imports: [\n        CommonModule,\n        MatDialogModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatSelectModule,\n        ReactiveFormsModule,\n        MatSnackBarModule,\n    ],\n})\nexport class ModerationModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { ReportUserModalComponent } from './components/report-user-modal/report-user-modal.component';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\nimport { ModalsModule } from '../modals/modals.module';\n\n@NgModule({\n    declarations: [ReportUserModalComponent],\n    imports: [\n        CommonModule,\n        MatDialogModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatSelectModule,\n        ReactiveFormsModule,\n        MatSnackBarModule,\n        ModalsModule,\n    ],\n})\nexport class ModerationModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8877,7 +8562,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "ModalsModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -8895,13 +8584,13 @@
         },
         {
             "name": "UiModule",
-            "id": "module-UiModule-b4db9a7edde4b00c06f3f32aa45ecc20539cd878d415cf349d641de43480c2363884f7c563c5ea652449076034a13b0821267464df6659cfb1148b87241b783b",
+            "id": "module-UiModule-dd14571df8168bfef878275d2eeca68810447b9c5a9a7f2bf2a5b31daba3dd479b745365da8ca968fdf7263c0d3092cbb2f038b308a7ca045a41d78d7cd7283c",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/ui/ui.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { AppRoutingModule } from '../app-routing.module';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n    ],\n    imports: [CommonModule, AppRoutingModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n    ],\n})\nexport class UiModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n    ],\n    imports: [CommonModule, RouterModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n    ],\n})\nexport class UiModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8926,15 +8615,14 @@
                 },
                 {
                     "type": "imports",
-                    "elements": [
-                        {
-                            "name": "AppRoutingModule"
-                        }
-                    ]
+                    "elements": []
                 },
                 {
                     "type": "exports",
                     "elements": [
+                        {
+                            "name": "ButtonComponent"
+                        },
                         {
                             "name": "CardComponent"
                         },
@@ -9002,13 +8690,13 @@
         },
         {
             "name": "UserProfileModule",
-            "id": "module-UserProfileModule-aa8b2b84e2aa1eeb76ba84008a4a8dd81cc538db9075f88c944e813f0e68345a9ab191633e30d91ac73cb4e3d1088d9ee32007e460cd8380d5b38d716e31a1ee",
+            "id": "module-UserProfileModule-370d172aa8f43f07d2796e4b5aa2afe5b4ef77ca4a0088d1611c8d77d773506567465f0aecd9b988206e561f3f27672adb97ed7456949b09c529336c6bd4a98c",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/user-profile/user-profile.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';\nimport { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';\nimport { ImageModule } from '../image/image.module';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { UserProfileEditPageComponent } from './pages/user-profile-edit-page/user-profile-edit-page.component';\nimport { AppRoutingModule } from '../app-routing.module';\nimport { UiModule } from '../ui/ui.module';\nimport {\n    MAT_FORM_FIELD_DEFAULT_OPTIONS,\n    MatFormFieldModule,\n} from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\nimport { UserProfilePreviewComponent } from './pages/user-profile-preview/user-profile-preview.component';\n\n@NgModule({\n    declarations: [\n        UserProfilePageComponent,\n        UserProfileFormComponent,\n        UserProfileCardComponent,\n        UserProfileEditPageComponent,\n        UserProfilePreviewComponent,\n    ],\n    imports: [\n        CommonModule,\n        AppRoutingModule,\n        ReactiveFormsModule,\n        UiModule,\n        ImageModule,\n        MatMenuModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatSelectModule,\n        MatSnackBarModule,\n    ],\n    exports: [\n        UserProfilePageComponent,\n        UserProfileEditPageComponent,\n        UserProfileCardComponent,\n        UserProfilePreviewComponent,\n    ],\n    providers: [\n        {\n            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,\n            useValue: { appearance: 'outline' },\n        },\n    ],\n})\nexport class UserProfileModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { UserProfileFormComponent } from './components/user-profile-form/user-profile-form.component';\nimport { UserProfileCardComponent } from './components/user-profile-card/user-profile-card.component';\nimport { ImageModule } from '../image/image.module';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { UserProfileEditPageComponent } from './pages/user-profile-edit-page/user-profile-edit-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport {\n    MAT_FORM_FIELD_DEFAULT_OPTIONS,\n    MatFormFieldModule,\n} from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatSelectModule } from '@angular/material/select';\nimport { MatSnackBarModule } from '@angular/material/snack-bar';\nimport { UserProfilePreviewComponent } from './pages/user-profile-preview/user-profile-preview.component';\n\n@NgModule({\n    declarations: [\n        UserProfilePageComponent,\n        UserProfileFormComponent,\n        UserProfileCardComponent,\n        UserProfileEditPageComponent,\n        UserProfilePreviewComponent,\n    ],\n    imports: [\n        CommonModule,\n        ReactiveFormsModule,\n        UiModule,\n        ImageModule,\n        MatMenuModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatSelectModule,\n        MatSnackBarModule,\n    ],\n    exports: [\n        UserProfilePageComponent,\n        UserProfileEditPageComponent,\n        UserProfileCardComponent,\n        UserProfilePreviewComponent,\n    ],\n    providers: [\n        {\n            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,\n            useValue: { appearance: 'outline' },\n        },\n    ],\n})\nexport class UserProfileModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -9037,9 +8725,6 @@
                 {
                     "type": "imports",
                     "elements": [
-                        {
-                            "name": "AppRoutingModule"
-                        },
                         {
                             "name": "ImageModule"
                         },
@@ -9193,6 +8878,56 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'/about/ressources/consent'"
+            },
+            {
+                "name": "Danger",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        title: undefined,\n        icon: undefined,\n        content: 'This is a danger card',\n        color: 'danger',\n    },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
             },
             {
                 "name": "DRINKING_HABITS",
@@ -9375,54 +9110,14 @@
                 "defaultValue": "(message: Message, previousMessage: Message): boolean => {\n    return (\n        message.senderId === previousMessage.senderId &&\n        message.timestamp.getTime() - previousMessage.timestamp.getTime() <\n            5 * 60 * 1000\n    );\n}"
             },
             {
-                "name": "Large",
+                "name": "Loading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/modules/ui/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = await canvas.getByRole('button', {\n      name: /Log in/i,\n    });\n    await userEvent.click(loginButton);\n  },\n}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n}"
+                "defaultValue": "{\n    args: {\n        isLoading: true,\n    },\n}"
             },
             {
                 "name": "LOGIN_ROUTE",
@@ -9478,31 +9173,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<Button>",
-                "defaultValue": "{\n  title: 'Example/Button',\n  component: Button,\n  tags: ['autodocs'],\n  render: (args: Button) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<Header>",
-                "defaultValue": "{\n  title: 'Example/Header',\n  component: Header,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/angular/writing-docs/autodocs\n  tags: ['autodocs'],\n  render: (args) => ({ props: args }),\n  decorators: [\n    moduleMetadata({\n      declarations: [Button],\n      imports: [CommonModule],\n    }),\n  ],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<Page>",
-                "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
+                "type": "Meta<UserProfileCardComponent>",
+                "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
             },
             {
                 "name": "meta",
@@ -9512,7 +9187,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<StoryType>",
-                "defaultValue": "{\n    title: 'UI/Button',\n    component: ButtonComponent,\n    tags: ['autodocs'],\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-button\n                link=\"/about\"\n                [color]=\"color\"\n                [disabled]=\"disabled\"\n                [icon]=\"icon\"\n                [iconOnly]=\"iconOnly\"\n                [isLoading]=\"isLoading\"\n                [shadow]=\"shadow\"\n                [interactable]=\"interactable\"\n            >\n                ${args.content}\n            </app-button>\n        `,\n    }),\n}"
+                "defaultValue": "{\n    title: 'UI/Button',\n    component: ButtonComponent,\n    argTypes: {\n        color: {\n            control: 'select',\n            options: ['primary', 'default', 'transparent', 'danger'],\n        },\n        interactable: {\n            control: 'select',\n            options: ['default', 'large', 'small', 'none'],\n        },\n    },\n    args: {\n        content: 'This is a button',\n        color: 'default',\n        disabled: false,\n        icon: 'fas fa-flag',\n        iconOnly: false,\n        isLoading: false,\n        shadow: false,\n        interactable: 'small',\n    },\n    decorators: [\n        componentWrapperDecorator(\n            (story) => `<div style=\"display: flex;\">${story}</div>`,\n        ),\n    ],\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-button\n                link=\"/about\"\n                [color]=\"color\"\n                [disabled]=\"disabled\"\n                [icon]=\"icon\"\n                [iconOnly]=\"iconOnly\"\n                [isLoading]=\"isLoading\"\n                [shadow]=\"shadow\"\n                [interactable]=\"interactable\"\n            >\n                ${args.content}\n            </app-button>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StoryType>",
+                "defaultValue": "{\n    title: 'UI/Card',\n    component: CardComponent,\n    args: {\n        title: 'This is a title',\n        icon: 'fas fa-flag',\n        content: 'This is a card',\n        noPadding: false,\n        color: 'default',\n    },\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-card\n                [icon]=\"icon\"\n                [title]=\"title\"\n                [anchor]=\"anchor\"\n                [noPadding]=\"noPadding\"\n                [color]=\"color\"\n            >\n                ${args.content}\n            </app-card>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/ui/stories/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StoryType>",
+                "defaultValue": "{\n    title: 'UI/Layout',\n    component: LayoutComponent,\n    decorators: [\n        moduleMetadata({\n            declarations: [LayoutComponent, LayoutActionComponent],\n        }),\n    ],\n    args: {\n        title: 'Title',\n        content: 'This is the content',\n        actionsLeft: [\n            {\n                icon: 'fas fa-chevron-left',\n            },\n        ],\n        actionsRight: [\n            {\n                content: 'Action',\n            },\n            {\n                icon: 'fas fa-ellipsis-v',\n            },\n        ],\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-layout>\n                <span layout-title>{{ title }}</span>\n\n                <app-layout-action\n                    layout-action-left\n                    *ngFor=\"let action of actionsLeft\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <app-layout-action\n                    layout-action-right\n                    *ngFor=\"let action of actionsRight\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <span style=\"padding: 0 24px;\">{{ content }}</span>\n            </app-layout>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "Minimal",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
             },
             {
                 "name": "NAVIGATION",
@@ -9588,21 +9293,11 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/modules/ui/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n    args: {\n        content: 'This is a button',\n        color: 'primary',\n        disabled: false,\n        icon: 'fas fa-flag',\n        iconOnly: false,\n        isLoading: false,\n        shadow: false,\n        interactable: 'small',\n    },\n}"
+                "defaultValue": "{\n    args: {\n        color: 'primary',\n    },\n}"
             },
             {
                 "name": "PRIVACY_POLICY_ROUTE",
@@ -9805,16 +9500,6 @@
                 "defaultValue": "'/about/rules/general-rules'"
             },
             {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-            },
-            {
                 "name": "SESSION_TOKEN_KEY",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9843,16 +9528,6 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'/signup'"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
             },
             {
                 "name": "SMOKING_HABITS",
@@ -9919,33 +9594,22 @@
                 "kind": 190
             },
             {
-                "name": "Story",
+                "name": "LayoutAction",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<Button>",
-                "file": "src/stories/Button.stories.ts",
+                "rawtype": "",
+                "file": "src/modules/ui/stories/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
-                "kind": 180
+                "kind": 197
             },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<Header>",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 180
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<Page>",
-                "file": "src/stories/Page.stories.ts",
+                "rawtype": "StoryObj<UserProfileCardComponent>",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -9963,11 +9627,55 @@
                 "kind": 180
             },
             {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<StoryType>",
+                "file": "src/modules/ui/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<StoryType>",
+                "file": "src/modules/ui/stories/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
                 "name": "StoryType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "",
                 "file": "src/modules/ui/stories/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 190
+            },
+            {
+                "name": "StoryType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
+                "file": "src/modules/ui/stories/card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 190
+            },
+            {
+                "name": "StoryType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
+                "file": "src/modules/ui/stories/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -10194,6 +9902,134 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "(passwordControlName: string = 'password') =>\n    (control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            control.parent &&\n            control.parent.get(passwordControlName) &&\n            control.value !== control.parent!.get(passwordControlName)!.value\n        ) {\n            return { passwordMismatch: true };\n        }\n        return null;\n    }"
+                }
+            ],
+            "src/modules/ui/stories/card.stories.ts": [
+                {
+                    "name": "Danger",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        title: undefined,\n        icon: undefined,\n        content: 'This is a danger card',\n        color: 'danger',\n    },\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<StoryType>",
+                    "defaultValue": "{\n    title: 'UI/Card',\n    component: CardComponent,\n    args: {\n        title: 'This is a title',\n        icon: 'fas fa-flag',\n        content: 'This is a card',\n        noPadding: false,\n        color: 'default',\n    },\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-card\n                [icon]=\"icon\"\n                [title]=\"title\"\n                [anchor]=\"anchor\"\n                [noPadding]=\"noPadding\"\n                [color]=\"color\"\n            >\n                ${args.content}\n            </app-card>\n        `,\n    }),\n}"
+                }
+            ],
+            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<UserProfileCardComponent>",
+                    "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
+                },
+                {
+                    "name": "Minimal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
+                }
+            ],
+            "src/modules/ui/stories/button.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "Loading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        isLoading: true,\n    },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<StoryType>",
+                    "defaultValue": "{\n    title: 'UI/Button',\n    component: ButtonComponent,\n    argTypes: {\n        color: {\n            control: 'select',\n            options: ['primary', 'default', 'transparent', 'danger'],\n        },\n        interactable: {\n            control: 'select',\n            options: ['default', 'large', 'small', 'none'],\n        },\n    },\n    args: {\n        content: 'This is a button',\n        color: 'default',\n        disabled: false,\n        icon: 'fas fa-flag',\n        iconOnly: false,\n        isLoading: false,\n        shadow: false,\n        interactable: 'small',\n    },\n    decorators: [\n        componentWrapperDecorator(\n            (story) => `<div style=\"display: flex;\">${story}</div>`,\n        ),\n    ],\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-button\n                link=\"/about\"\n                [color]=\"color\"\n                [disabled]=\"disabled\"\n                [icon]=\"icon\"\n                [iconOnly]=\"iconOnly\"\n                [isLoading]=\"isLoading\"\n                [shadow]=\"shadow\"\n                [interactable]=\"interactable\"\n            >\n                ${args.content}\n            </app-button>\n        `,\n    }),\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        color: 'primary',\n    },\n}"
+                }
+            ],
+            "src/modules/ui/stories/layout.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/ui/stories/layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<StoryType>",
+                    "defaultValue": "{\n    title: 'UI/Layout',\n    component: LayoutComponent,\n    decorators: [\n        moduleMetadata({\n            declarations: [LayoutComponent, LayoutActionComponent],\n        }),\n    ],\n    args: {\n        title: 'Title',\n        content: 'This is the content',\n        actionsLeft: [\n            {\n                icon: 'fas fa-chevron-left',\n            },\n        ],\n        actionsRight: [\n            {\n                content: 'Action',\n            },\n            {\n                icon: 'fas fa-ellipsis-v',\n            },\n        ],\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-layout>\n                <span layout-title>{{ title }}</span>\n\n                <app-layout-action\n                    layout-action-left\n                    *ngFor=\"let action of actionsLeft\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <app-layout-action\n                    layout-action-right\n                    *ngFor=\"let action of actionsRight\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <span style=\"padding: 0 24px;\">{{ content }}</span>\n            </app-layout>\n        `,\n    }),\n}"
                 }
             ],
             "src/modules/user-profile/constants/lifestyle.ts": [
@@ -10524,122 +10360,6 @@
                     "defaultValue": "[\n    'Animation stop-motion',\n    'Antiquités',\n    'Apiculture',\n    'Archéologie',\n    'Astronomie',\n    'Bandes dessinées',\n    'Barbecue',\n    'Basketball',\n    'Bibliophilie',\n    'Billard',\n    'Bingo',\n    'Botanique',\n    'Bougie artisanale',\n    'Bricolage',\n    'Bridge',\n    'Broderie',\n    'Calligraphie',\n    'Camping',\n    'Canoë-kayak',\n    'Chasse au trésor',\n    'Chasse photographique',\n    'Chorale communautaire',\n    \"Cinéma d'animation\",\n    'Cinéma',\n    'Collection de pièces de monnaie',\n    'Collection de timbres',\n    'Comédies musicales',\n    'Confitures maison',\n    'Course à pied',\n    'Course de chevaux',\n    'Couture',\n    'Création de bijoux',\n    'Création de mosaïques',\n    'Critique de films',\n    'Crochet',\n    'Cuisine végétalienne',\n    'Cuisine',\n    'Curling',\n    'Danse contemporaine',\n    'Danse',\n    'Découpage',\n    'Dégustation de thé',\n    'Dégustation de vins',\n    'Dessin',\n    'Disney',\n    'Doctor Who',\n    'Documentaires',\n    'Échecs',\n    'Écriture',\n    \"Élevage d'animaux de compagnie\",\n    \"Élevage de plantes d'intérieur\",\n    'Énigmes et casse-tête',\n    'Escalade',\n    'Escape games',\n    'Escrime',\n    'Étude de la généalogie',\n    'Étude de la météorologie',\n    'Étude des constellations',\n    'Étude des étoiles',\n    'Étude des insectes',\n    'Étude des oiseaux',\n    'Étude des sciences naturelles',\n    'Fabrication de bijoux',\n    'Fabrication de chandelles',\n    'Fléchettes',\n    'Football',\n    'Game of Thrones',\n    'Géologie',\n    'Golf',\n    'Graffiti',\n    'Guitare',\n    'Gymnastique',\n    'Harry Potter',\n    'Hip-hop',\n    \"Histoire de l'art\",\n    'Jardinage',\n    'Jazz',\n    'Jeu de cartes',\n    'Jeu de dames',\n    'Jeu de dominos',\n    'Jeu de tarot',\n    'Jeux de société',\n    'Jeux vidéo',\n    'Jogging',\n    'Karaoké',\n    'Lancer de frisbee',\n    'Le Seigneur des Anneaux',\n    'Lecture de poésie',\n    'Lecture de roman classique',\n    'Lecture',\n    'Livres audio',\n    'Manga',\n    'Marionnettes',\n    'Marvel Cinematic Universe',\n    'Mixologie',\n    'Modélisme',\n    'Mosaïque',\n    'Musique classique',\n    'Musique électronique',\n    'Musique',\n    'Natation',\n    'Observation des étoiles',\n    'Observation des papillons',\n    'Origami',\n    'Patin à roulettes',\n    'Patinage artistique',\n    'Patinage de vitesse',\n    'Pâtisserie',\n    'Pêche',\n    'Peinture',\n    'Percussions',\n    'Pétanque',\n    'Photographie',\n    'Piano',\n    'Plongée',\n    'Poésie',\n    'Pokémon',\n    'Poker',\n    'Polo à cheval',\n    'Poterie',\n    'Randonnée',\n    'Réalisation de vidéos familiales',\n    'Reconstitution historique',\n    'Rédaction de lettres manuscrites',\n    'Reliure de livres',\n    'Réparation de vélos',\n    'Restauration de meubles anciens',\n    \"Rock'n'roll\",\n    'Romans policiers',\n    'Science-fiction',\n    'Scrapbooking',\n    'Sculpture',\n    'Séries télévisées',\n    'Ski',\n    'Star Trek',\n    'Star Wars',\n    'Sudoku',\n    'Taylor Swift',\n    'Tennis',\n    'The Hunger Games',\n    'Théâtre',\n    'Tissage',\n    'Tricot',\n    'Ultimate Frisbee',\n    'Vélo',\n    'Violon',\n    'Visite de jardins botaniques',\n    \"Visite de musées d'art\",\n    'Visite de parcs nationaux',\n    'Vol en montgolfière',\n    'Voyage',\n    'Water-polo',\n]"
                 }
             ],
-            "src/stories/Button.stories.ts": [
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<Button>",
-                    "defaultValue": "{\n  title: 'Example/Button',\n  component: Button,\n  tags: ['autodocs'],\n  render: (args: Button) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
-                }
-            ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<Header>",
-                    "defaultValue": "{\n  title: 'Example/Header',\n  component: Header,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/angular/writing-docs/autodocs\n  tags: ['autodocs'],\n  render: (args) => ({ props: args }),\n  decorators: [\n    moduleMetadata({\n      declarations: [Button],\n      imports: [CommonModule],\n    }),\n  ],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
-                }
-            ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = await canvas.getByRole('button', {\n      name: /Log in/i,\n    });\n    await userEvent.click(loginButton);\n  },\n}"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<Page>",
-                    "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
-                }
-            ],
             "src/modules/user-profile/constants/looking-for.ts": [
                 {
                     "name": "LOOKING_FOR",
@@ -10650,28 +10370,6 @@
                     "deprecationMessage": "",
                     "type": "[]",
                     "defaultValue": "[\n    {\n        id: 'lt',\n        name: 'Long terme',\n        emoji: '💕',\n        color: '234, 46, 172',\n    },\n    {\n        id: 'ltst',\n        name: 'Long terme, ouvert à du court terme',\n        emoji: '💖',\n        color: '238, 106, 192',\n    },\n    {\n        id: 'stlt',\n        name: 'Court terme, ouvert à du long terme',\n        emoji: '🍻',\n        color: '253, 223, 131',\n    },\n    {\n        id: 'fun',\n        name: 'Fun',\n        emoji: '🍆',\n        color: '110, 55, 107',\n    },\n    {\n        id: 'friend',\n        name: 'Amitié',\n        emoji: '🤝',\n        color: '255, 228, 115',\n    },\n    {\n        id: 'idk',\n        name: 'Je sais pas',\n        emoji: '🤷‍♀️',\n        color: '255, 228, 115',\n    },\n]"
-                }
-            ],
-            "src/modules/ui/stories/button.stories.ts": [
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/ui/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<StoryType>",
-                    "defaultValue": "{\n    title: 'UI/Button',\n    component: ButtonComponent,\n    tags: ['autodocs'],\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-button\n                link=\"/about\"\n                [color]=\"color\"\n                [disabled]=\"disabled\"\n                [icon]=\"icon\"\n                [iconOnly]=\"iconOnly\"\n                [isLoading]=\"isLoading\"\n                [shadow]=\"shadow\"\n                [interactable]=\"interactable\"\n            >\n                ${args.content}\n            </app-button>\n        `,\n    }),\n}"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/ui/stories/button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n    args: {\n        content: 'This is a button',\n        color: 'primary',\n        disabled: false,\n        icon: 'fas fa-flag',\n        iconOnly: false,\n        isLoading: false,\n        shadow: false,\n        interactable: 'small',\n    },\n}"
                 }
             ],
             "src/constants/navigation.ts": [
@@ -10905,39 +10603,48 @@
                     "kind": 190
                 }
             ],
-            "src/stories/Button.stories.ts": [
+            "src/modules/ui/stories/layout.stories.ts": [
+                {
+                    "name": "LayoutAction",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "src/modules/ui/stories/layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 197
+                },
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<Button>",
-                    "file": "src/stories/Button.stories.ts",
+                    "rawtype": "StoryObj<StoryType>",
+                    "file": "src/modules/ui/stories/layout.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
                     "kind": 180
-                }
-            ],
-            "src/stories/Header.stories.ts": [
+                },
                 {
-                    "name": "Story",
+                    "name": "StoryType",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<Header>",
-                    "file": "src/stories/Header.stories.ts",
+                    "rawtype": "",
+                    "file": "src/modules/ui/stories/layout.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
-                    "kind": 180
+                    "kind": 190
                 }
             ],
-            "src/stories/Page.stories.ts": [
+            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<Page>",
-                    "file": "src/stories/Page.stories.ts",
+                    "rawtype": "StoryObj<UserProfileCardComponent>",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -10962,6 +10669,30 @@
                     "subtype": "typealias",
                     "rawtype": "",
                     "file": "src/modules/ui/stories/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 190
+                }
+            ],
+            "src/modules/ui/stories/card.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<StoryType>",
+                    "file": "src/modules/ui/stories/card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                },
+                {
+                    "name": "StoryType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "src/modules/ui/stories/card.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -11985,6 +11716,26 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Loading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "meta",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -11996,6 +11747,56 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Danger",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/stories/layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -12215,6 +12016,36 @@
                 "status": "low"
             },
             {
+                "filePath": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Minimal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/modules/user/components/delete-user-modal/delete-user-modal.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -12266,152 +12097,6 @@
                 "name": "WsService",
                 "coveragePercent": 0,
                 "coverageCount": "0/8",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Header.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/User.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "User",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ButtonComponent",
-                "coveragePercent": 83,
-                "coverageCount": "5/6",
-                "status": "very-good"
-            },
-            {
-                "filePath": "src/stories/header.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "HeaderComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/page.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "PageComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
                 "status": "low"
             }
         ]
