@@ -14,7 +14,7 @@
     --theme-background-secondary: rgb(var(--theme-background-secondary-rgb));
 }
 
-html, body {
+html.app-html, body.app-body {
     margin: 0;
     width: 100%;
     height: 100%;

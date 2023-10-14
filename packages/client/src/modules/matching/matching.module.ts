@@ -5,7 +5,6 @@ import { UserProfileModule } from '../user-profile/user-profile.module';
 import { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';
 import { UiModule } from '../ui/ui.module';
 import { MatchListComponent } from './components/match-list/match-list.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatchedModalComponent } from './components/matched-modal/matched-modal.component';
@@ -14,6 +13,7 @@ import { ConversationListComponent } from './components/conversation-list/conver
 import { MatMenuModule } from '@angular/material/menu';
 import { ModalsModule } from '../modals/modals.module';
 import { ModerationModule } from '../moderation/moderation.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -26,7 +26,7 @@ import { ModerationModule } from '../moderation/moderation.module';
     ],
     imports: [
         CommonModule,
-        AppRoutingModule,
+        RouterModule,
         MatDialogModule,
         ReactiveFormsModule,
         UserProfileModule,

@@ -7,7 +7,6 @@ import { UserProfileCardComponent } from './components/user-profile-card/user-pr
 import { ImageModule } from '../image/image.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserProfileEditPageComponent } from './pages/user-profile-edit-page/user-profile-edit-page.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { UiModule } from '../ui/ui.module';
 import {
     MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -28,7 +27,6 @@ import { UserProfilePreviewComponent } from './pages/user-profile-preview/user-p
     ],
     imports: [
         CommonModule,
-        AppRoutingModule,
         ReactiveFormsModule,
         UiModule,
         ImageModule,
