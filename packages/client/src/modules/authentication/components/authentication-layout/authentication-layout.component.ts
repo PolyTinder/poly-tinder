@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-authentication-layout',
@@ -12,7 +11,7 @@ export class AuthenticationLayoutComponent {
     @Input() description?: string;
     @Input() formGroup!: FormGroup;
     @Input() formsErrors: Record<string, string> = {};
-    @Input() loading?: Observable<boolean>;
+    @Input() loading: boolean | null = false;
     @Input() disabled: boolean | null = false;
 
     @Output() formSubmit = new EventEmitter<void>();

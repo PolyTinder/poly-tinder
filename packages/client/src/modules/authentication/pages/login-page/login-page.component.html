@@ -7,7 +7,7 @@
         accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter poly.tinder.2023@gmail.com si vous pensez que c\'est un erreur.',
         unknownError: 'Un erreur est survenu',
     }"
-    [loading]="loading"
+    [loading]="loading | async"
     (formSubmit)="onSubmit()"
 >
     <ng-container auth-form-field>
