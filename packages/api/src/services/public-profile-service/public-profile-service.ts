@@ -144,6 +144,12 @@ export class PublicProfileService {
             })
             .leftJoin('banned', 'targetUser.email', '=', 'banned.email')
             .leftJoin('suspend', 'targetUser.email', '=', 'suspend.email')
+            .leftJoin(
+                'userVisibility',
+                'targetUser.userId',
+                '=',
+                'userVisibility.userId',
+            )
             .where('targetUser.userId', '!=', userId)
             .andWhere('activeUser.userId', '=', userId)
             .andWhere('activeUserValidations.userProfileReady', '=', true)
@@ -151,6 +157,13 @@ export class PublicProfileService {
             .andWhere('swipes.targetUserId', 'is', null)
             .andWhere('blocks.blockId', 'is', null)
             .andWhere('banned.email', 'is', null)
+            .andWhere(function () {
+                this.where('userVisibility.visible', '=', true).orWhere(
+                    'userVisibility.visible',
+                    'is',
+                    null,
+                );
+            })
             .andWhere(function () {
                 this.where('suspend.until', '<', db.raw('NOW()')).orWhere(
                     'suspend.until',
