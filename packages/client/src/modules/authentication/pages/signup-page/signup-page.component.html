@@ -7,7 +7,7 @@
         accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter',
         unknownError: 'Un erreur est survenu',
     }"
-    [loading]="loading"
+    [loading]="loading | async"
     (formSubmit)="onSubmit()"
 >
     <ng-container auth-form-field>

@@ -3573,7 +3573,7 @@
         },
         {
             "name": "AuthenticationLayoutComponent",
-            "id": "component-AuthenticationLayoutComponent-57787a2acb6cd609ba6575eeadd9f6c06cf6f4d0af46fa074715527d333a8380b342ff6ef8a6fd1fd73d3d81b616d1c5cabf61039fddfdbdf1d58dfe5db340cb",
+            "id": "component-AuthenticationLayoutComponent-459f4a1c5cbe662365af4cde090be66d0b08b08d395c159cc2cb3a018e5dd006b75041c4ad17382009160296f83929fffccf89cbe6e1ab603fb34a370b6bf37e",
             "file": "src/modules/authentication/components/authentication-layout/authentication-layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3595,7 +3595,7 @@
                     "name": "description",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 },
@@ -3604,7 +3604,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 15,
                     "type": "boolean | null",
                     "decorators": []
                 },
@@ -3612,7 +3612,7 @@
                     "name": "formGroup",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 12,
                     "type": "FormGroup",
                     "decorators": []
                 },
@@ -3621,23 +3621,24 @@
                     "defaultValue": "{}",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 13,
                     "type": "Record<string | string>",
                     "decorators": []
                 },
                 {
                     "name": "loading",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
-                    "type": "Observable<boolean>",
+                    "line": 14,
+                    "type": "boolean | null",
                     "decorators": []
                 },
                 {
                     "name": "name",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 10,
                     "type": "string",
                     "decorators": []
                 }
@@ -3648,7 +3649,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 17,
                     "type": "EventEmitter"
                 }
             ],
@@ -3667,7 +3668,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 19,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -3692,7 +3693,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { FormGroup } from '@angular/forms';\nimport { Observable } from 'rxjs';\n\n@Component({\n    selector: 'app-authentication-layout',\n    templateUrl: './authentication-layout.component.html',\n    styleUrls: ['./authentication-layout.component.scss'],\n})\nexport class AuthenticationLayoutComponent {\n    @Input() name!: string;\n    @Input() description?: string;\n    @Input() formGroup!: FormGroup;\n    @Input() formsErrors: Record<string, string> = {};\n    @Input() loading?: Observable<boolean>;\n    @Input() disabled: boolean | null = false;\n\n    @Output() formSubmit = new EventEmitter<void>();\n\n    onSubmit(event: Event) {\n        event.preventDefault();\n        event.stopImmediatePropagation();\n\n        if (!this.formGroup.valid || this.formGroup.status === 'INVALID') {\n            this.formGroup.setErrors({ invalid: true });\n            return;\n        }\n\n        if (this.formGroup.status !== 'VALID') {\n            return;\n        }\n\n        this.formGroup.setErrors(null);\n\n        this.formSubmit.emit();\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { FormGroup } from '@angular/forms';\n\n@Component({\n    selector: 'app-authentication-layout',\n    templateUrl: './authentication-layout.component.html',\n    styleUrls: ['./authentication-layout.component.scss'],\n})\nexport class AuthenticationLayoutComponent {\n    @Input() name!: string;\n    @Input() description?: string;\n    @Input() formGroup!: FormGroup;\n    @Input() formsErrors: Record<string, string> = {};\n    @Input() loading: boolean | null = false;\n    @Input() disabled: boolean | null = false;\n\n    @Output() formSubmit = new EventEmitter<void>();\n\n    onSubmit(event: Event) {\n        event.preventDefault();\n        event.stopImmediatePropagation();\n\n        if (!this.formGroup.valid || this.formGroup.status === 'INVALID') {\n            this.formGroup.setErrors({ invalid: true });\n            return;\n        }\n\n        if (this.formGroup.status !== 'VALID') {\n            return;\n        }\n\n        this.formGroup.setErrors(null);\n\n        this.formSubmit.emit();\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3701,7 +3702,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-layout headerType=\"hidden\">\n    <main class=\"auth-layout\">\n        <div class=\"auth-layout__brand mobile-only\">\n            <img class=\"auth-layout__brand__logo\" src=\"/assets/logo.svg\" alt=\"Logo\">\n            <span class=\"auth-layout__brand__name\">PolyTinder</span>\n        </div>\n\n        <app-card>\n            <div class=\"auth-layout__head\">\n                <h1 class=\"auth-layout__head__name\">{{name}}</h1>\n                <p class=\"auth-layout__head__description\" *ngIf=\"description\">{{description}}</p>\n            </div>\n\n            <form\n                [formGroup]=\"formGroup\"\n                (submit)=\"onSubmit($event)\"\n                class=\"auth-layout__form\"\n            >\n                <ng-content select=\"[auth-form-field]\"></ng-content>\n\n                <div class=\"auth-layout__form__messages\">\n                    <ng-container *ngFor=\"let error of formsErrors | keyvalue\">\n                        <mat-error *ngIf=\"formGroup.errors?.[error.key]\">{{error.value}}</mat-error>\n                    </ng-container>\n                </div>\n                \n                <app-button\n                    type=\"submit\"\n                    color=\"primary\"\n                    [isLoading]=\"loading | async\"\n                    [forceFocusable]=\"true\"\n                    interactable=\"small\"\n                    [disabled]=\"disabled ?? false\"\n                >{{name}}</app-button>\n            </form>\n        </app-card>\n        \n        <ng-content select=\"[auth-extra]\"></ng-content>\n    </main>\n</app-layout>"
+            "templateData": "<app-layout headerType=\"hidden\">\n    <main class=\"auth-layout\">\n        <div class=\"auth-layout__brand mobile-only\">\n            <img class=\"auth-layout__brand__logo\" src=\"/assets/logo.svg\" alt=\"Logo\">\n            <span class=\"auth-layout__brand__name\">PolyTinder</span>\n        </div>\n\n        <app-card>\n            <div class=\"auth-layout__head\">\n                <h1 class=\"auth-layout__head__name\">{{name}}</h1>\n                <p class=\"auth-layout__head__description\" *ngIf=\"description\">{{description}}</p>\n            </div>\n\n            <form\n                [formGroup]=\"formGroup\"\n                (submit)=\"onSubmit($event)\"\n                class=\"auth-layout__form\"\n            >\n                <ng-content select=\"[auth-form-field]\"></ng-content>\n\n                <div class=\"auth-layout__form__messages\">\n                    <ng-container *ngFor=\"let error of formsErrors | keyvalue\">\n                        <mat-error *ngIf=\"formGroup.errors?.[error.key]\">{{error.value}}</mat-error>\n                    </ng-container>\n                </div>\n                \n                <app-button\n                    type=\"submit\"\n                    color=\"primary\"\n                    [isLoading]=\"loading\"\n                    [forceFocusable]=\"true\"\n                    interactable=\"small\"\n                    [disabled]=\"disabled ?? false\"\n                >{{name}}</app-button>\n            </form>\n        </app-card>\n        \n        <ng-content select=\"[auth-extra]\"></ng-content>\n    </main>\n</app-layout>"
         },
         {
             "name": "ButtonComponent",
@@ -8893,7 +8894,7 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -8924,6 +8925,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/modules/ui/stories/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -9173,11 +9184,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<UserProfileCardComponent>",
-                "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
+                "type": "Meta<AuthenticationLayoutComponent>",
+                "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule, RouterTestingModule],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({}),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n}"
             },
             {
                 "name": "meta",
@@ -9208,6 +9219,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<StoryType>",
                 "defaultValue": "{\n    title: 'UI/Layout',\n    component: LayoutComponent,\n    decorators: [\n        moduleMetadata({\n            declarations: [LayoutComponent, LayoutActionComponent],\n        }),\n    ],\n    args: {\n        title: 'Title',\n        content: 'This is the content',\n        actionsLeft: [\n            {\n                icon: 'fas fa-chevron-left',\n            },\n        ],\n        actionsRight: [\n            {\n                content: 'Action',\n            },\n            {\n                icon: 'fas fa-ellipsis-v',\n            },\n        ],\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-layout>\n                <span layout-title>{{ title }}</span>\n\n                <app-layout-action\n                    layout-action-left\n                    *ngFor=\"let action of actionsLeft\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <app-layout-action\n                    layout-action-right\n                    *ngFor=\"let action of actionsRight\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <span style=\"padding: 0 24px;\">{{ content }}</span>\n            </app-layout>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<UserProfileCardComponent>",
+                "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
             },
             {
                 "name": "Minimal",
@@ -9608,8 +9629,8 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<UserProfileCardComponent>",
-                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "rawtype": "StoryObj<AuthenticationLayoutComponent>",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -9643,6 +9664,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<StoryType>",
                 "file": "src/modules/ui/stories/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<UserProfileCardComponent>",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -9936,12 +9968,12 @@
                     "defaultValue": "{\n    title: 'UI/Card',\n    component: CardComponent,\n    args: {\n        title: 'This is a title',\n        icon: 'fas fa-flag',\n        content: 'This is a card',\n        noPadding: false,\n        color: 'default',\n    },\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-card\n                [icon]=\"icon\"\n                [title]=\"title\"\n                [anchor]=\"anchor\"\n                [noPadding]=\"noPadding\"\n                [color]=\"color\"\n            >\n                ${args.content}\n            </app-card>\n        `,\n    }),\n}"
                 }
             ],
-            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
+            "src/modules/authentication/stories/authentication-layout.stories.ts": [
                 {
                     "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -9951,21 +9983,11 @@
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Meta<UserProfileCardComponent>",
-                    "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
-                },
-                {
-                    "name": "Minimal",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
+                    "type": "Meta<AuthenticationLayoutComponent>",
+                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule, RouterTestingModule],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({}),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n}"
                 }
             ],
             "src/modules/ui/stories/button.stories.ts": [
@@ -10030,6 +10052,38 @@
                     "deprecationMessage": "",
                     "type": "Meta<StoryType>",
                     "defaultValue": "{\n    title: 'UI/Layout',\n    component: LayoutComponent,\n    decorators: [\n        moduleMetadata({\n            declarations: [LayoutComponent, LayoutActionComponent],\n        }),\n    ],\n    args: {\n        title: 'Title',\n        content: 'This is the content',\n        actionsLeft: [\n            {\n                icon: 'fas fa-chevron-left',\n            },\n        ],\n        actionsRight: [\n            {\n                content: 'Action',\n            },\n            {\n                icon: 'fas fa-ellipsis-v',\n            },\n        ],\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-layout>\n                <span layout-title>{{ title }}</span>\n\n                <app-layout-action\n                    layout-action-left\n                    *ngFor=\"let action of actionsLeft\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <app-layout-action\n                    layout-action-right\n                    *ngFor=\"let action of actionsRight\"\n                    [icon]=\"action.icon\"\n                    [content]=\"action.content\"\n                    [disabled]=\"action.disabled\"\n                    [iconAdjustH]=\"action.iconAdjustH\"\n                    [iconAdjustV]=\"action.iconAdjustV\"\n                ></app-layout-action>\n\n                <span style=\"padding: 0 24px;\">{{ content }}</span>\n            </app-layout>\n        `,\n    }),\n}"
+                }
+            ],
+            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<UserProfileCardComponent>",
+                    "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
+                },
+                {
+                    "name": "Minimal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
                 }
             ],
             "src/modules/user-profile/constants/lifestyle.ts": [
@@ -10638,13 +10692,13 @@
                     "kind": 190
                 }
             ],
-            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
+            "src/modules/authentication/stories/authentication-layout.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<UserProfileCardComponent>",
-                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "rawtype": "StoryObj<AuthenticationLayoutComponent>",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -10697,6 +10751,19 @@
                     "deprecationMessage": "",
                     "description": "",
                     "kind": 190
+                }
+            ],
+            "src/modules/user-profile/stories/user-profile-card.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<UserProfileCardComponent>",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
                 }
             ]
         }
@@ -11357,6 +11424,26 @@
                 "name": "SessionService",
                 "coveragePercent": 0,
                 "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
