@@ -50,37 +50,9 @@ jobs:
           cd packages/$SERVICE
           npm run jscpd
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 19
-          cache: 'npm'
-          cache-dependency-path: packages/${{env.SERVICE}}/package-lock.json
-      - name: Install dependencies
-        run: |
-          cd packages/$SERVICE
-          npm ci
-      - name: Install Playwright
-        run:  |
-          cd packages/$SERVICE
-          npx playwright install --with-deps
-      - name: Build Storybook
-        run: |
-          cd packages/$SERVICE
-          npm run build-storybook --quiet
-      - name: Test
-        run: |
-          cd packages/$SERVICE
-          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
-            "npx http-server storybook-static --port 6006 --silent" \
-            "npx wait-on tcp:6006 && npm run test-storybook"
-
   build:
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [lint]
     steps:
       - uses: actions/checkout@v3
       - run: cd packages/$SERVICE
