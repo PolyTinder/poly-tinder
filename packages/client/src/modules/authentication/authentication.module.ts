@@ -11,6 +11,7 @@ import { UiModule } from '../ui/ui.module';
 import { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';
 import { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';
 import { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { AuthenticationLayoutComponent } from './components/authentication-layou
     ],
     imports: [
         CommonModule,
+        RouterModule,
         HttpClientModule,
         ReactiveFormsModule,
         MatFormFieldModule,
