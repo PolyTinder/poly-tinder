@@ -11,7 +11,8 @@
     "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
     "jscpd": "jscpd -t 5 -f \"typescript,html,scss\" src/",
     "storybook": "ng run client:storybook",
-    "build-storybook": "ng run client:build-storybook"
+    "build-storybook": "ng run client:build-storybook",
+    "test-storybook": "test-storybook"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +46,7 @@
     "@storybook/addon-links": "^7.4.6",
     "@storybook/angular": "^7.4.6",
     "@storybook/blocks": "^7.4.6",
+    "@storybook/test-runner": "^0.13.0",
     "@storybook/testing-library": "^0.2.2",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
