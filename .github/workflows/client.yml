@@ -67,10 +67,16 @@ jobs:
         run:  |
           cd packages/$SERVICE
           npx playwright install --with-deps
-      - name: Storybook tests
+      - name: Build Storybook
         run: |
           cd packages/$SERVICE
-          npm run test-storybook
+          npm run build-storybook --quiet
+      - name: Test
+        run: |
+          cd packages/$SERVICE
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && npm run test-storybook"
 
   build:
     runs-on: ubuntu-latest
