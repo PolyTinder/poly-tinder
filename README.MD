@@ -99,19 +99,36 @@ Then, the application stack is launched with Docker Compose to launch all the ne
     npm ci
     ```
 
-4. Populate the database, from the API package, run:
+5. Execute the initial dabaase migration, from the API package, run:
+
+    ```bash
+    npx knex migrate:latest
+    ```
+
+6. Populate the database, from the API package, run:
 
     ```bash
     npx knex seed:run test-users
     ```
 
-5. Launch the stack
+7. Launch the stack
 
     ```bash
     make
     ```
 
-6. Open the app in your browser at [http://localhost:4200](http://localhost:4200). You can login with any user from the [seeds](./packages/api/seeds/test-users.js) file (but leaving the password blank).
+    This command will launch the following services:
+    - **[API](./packages/api)** (http://localhost:3000): Public API of the application
+    - **[API Admin](./packages/api)** (http://localhost:3001): Private API for the admin (same package as API)
+    - **[Client](./packages/client)** (http://localhost:4200): Web client for the app
+    - **[Admin](./packages/admin)** (http://localhost:4201): Web client for the admin
+    - **[Storybook](./packages/client)** (http://localhost:6006): Storybook for the client
+
+8. Open the app in your browser at [http://localhost:4200](http://localhost:4200). You can login with any user from the [seeds](./packages/api/seeds/test-users.js) file (but leaving the password blank).
+
+### Tips and tricks
+
+- **Install the `Docker` extension in VSCode**: Since the start command creates multiple containers, the console will output all the logs from all the containers. This can be confusing. The `Docker` extension allows you to see the logs of each container separately.
 
 ## 📄 More documentation
 
