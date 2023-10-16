@@ -33,7 +33,7 @@
         </mat-form-field>
 
         <mat-checkbox formControlName="privacyPolicy">
-            En cliquant sur le bouton 'Créer mon compte', vous confirmez avoir lu et accepté nos <a href="/privacy-policy" target="_blank">Politiques de confidentialité</a>, nos <a href="/terms-and-conditions" target="_blank">Termes et conditions</a>, ainsi que notre <a href="/acceptable-use-policy" target="_blank">Politique d'utilisation acceptable</a>.
+            En cliquant sur le bouton 'Créer mon compte', vous confirmez avoir lu et accepté nos <a href="/about/rules/policies/privacy-policy" target="_blank">Politiques de confidentialité</a>, nos <a href="/about/rules/policies/terms-and-conditions" target="_blank">Termes et conditions</a>, ainsi que notre <a href="/about/rules/policies/acceptable-use-policy" target="_blank">Politique d'utilisation acceptable</a>.
         </mat-checkbox>
         <br>
         <mat-error *ngIf="signupForm.dirty && signupForm.controls.privacyPolicy.errors?.['required']">Vous devez lire et accepter les politiques avant de continuer.</mat-error>
