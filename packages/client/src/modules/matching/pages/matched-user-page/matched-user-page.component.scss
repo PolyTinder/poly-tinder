@@ -284,6 +284,10 @@
                 width: $item-size;
                 font-size: 1em;
             }
+
+            @media all and (display-mode: standalone) {
+                padding: 12px 12px 40px 12px;
+            }
         }
     }
 }
