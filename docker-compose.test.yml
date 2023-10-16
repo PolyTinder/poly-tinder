@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  api-test:
+    image: node:20
+    command: npm test
+    working_dir: /src/www/app
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_DATABASE: db
+      PORT: 39834
+    volumes:
+      - ./packages/api:/src/www/app
+      - ./packages/common:/src/www/common
+
+  db:
+    image: mysql:8.1
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
