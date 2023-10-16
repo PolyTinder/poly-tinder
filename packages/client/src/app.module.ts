@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './modules/app-routing.module';
@@ -18,6 +18,7 @@ import { AboutModule } from './modules/about/about.module';
 import { StatusPageComponent } from './components/status-page/status-page.component';
 import { UserModule } from './modules/user/user.module';
 import { UiModule } from './modules/ui/ui.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
     declarations: [AppComponent, NavigationComponent, StatusPageComponent],
@@ -33,6 +34,12 @@ import { UiModule } from './modules/ui/ui.module';
         MatMenuModule,
         UserModule,
         UiModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000',
+        }),
     ],
     providers: [
         InitializerService,

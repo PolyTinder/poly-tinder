@@ -25,6 +25,7 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@angular/service-worker": "^16.2.0",
     "@uploadcare/blocks": "^0.25.6",
     "common": "file:../common",
     "ngx-uploadcare-widget": "^4.0.0",
