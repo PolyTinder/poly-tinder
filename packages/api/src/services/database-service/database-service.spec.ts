@@ -6,8 +6,7 @@ describe('DatabaseService', () => {
     let service: DatabaseService;
 
     beforeEach(async () => {
-        testingModule = new TestingModule();
-        await testingModule.instantiate();
+        testingModule = await TestingModule.create();
     });
 
     beforeEach(async () => {
@@ -24,5 +23,9 @@ describe('DatabaseService', () => {
 
     it('should be connected', () => {
         expect(service.isConnected()).toBe(true);
+    });
+
+    it('should query', async () => {
+        await expect(service.database.raw('SELECT 1')).resolves.not.toThrow();
     });
 });

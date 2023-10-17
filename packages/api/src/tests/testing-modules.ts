@@ -25,8 +25,19 @@ export class TestingModule {
         this.databaseService = this.container.resolve(DatabaseService);
     }
 
+    static async create() {
+        const module = new TestingModule();
+        await module.instantiate();
+
+        return module;
+    }
+
     async instantiate() {
         await this.databaseService.instantiate();
+    }
+
+    async seed() {
+        await this.databaseService.database.seed.run();
     }
 
     resolve<T>(token: InjectionToken<T>): T {
@@ -44,14 +55,8 @@ export class TestingModule {
     }
 
     async restore() {
-        await this.restoreDb();
+        await this.databaseService.disconnect();
         this.sandbox.restore();
         this.container.reset();
-    }
-
-    async restoreDb() {
-        if (this.databaseService.isConnected()) {
-            await this.databaseService.database.destroy();
-        }
     }
 }

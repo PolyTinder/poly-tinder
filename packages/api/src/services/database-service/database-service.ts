@@ -37,6 +37,16 @@ export class DatabaseService {
         return !!this.db;
     }
 
+    /**
+     * Disconnect from the database
+     */
+    async disconnect(): Promise<void> {
+        if (this.db) {
+            await this.db.destroy();
+            this.db = undefined;
+        }
+    }
+
     private getConnectionConfig():
         | Knex.StaticConnectionConfig
         | Knex.ConnectionConfigProvider {
