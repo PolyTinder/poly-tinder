@@ -64,9 +64,7 @@ jobs:
           cd packages/$SERVICE
           npm ci
       - name: Test
-        run: |
-          cd packages/$SERVICE
-          npm test
+        run: make test-api
 
   build:
     runs-on: ubuntu-latest
