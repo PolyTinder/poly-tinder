@@ -180,6 +180,28 @@ export class PublicProfileService {
                             'activeUserProfile.genderPreference',
                             '=',
                             'all',
+                        ).andWhere(
+                            'activeUserProfile.genderCategory',
+                            '=',
+                            'other',
+                        );
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'targetUserProfile.genderPreference',
+                            '=',
+                            'all',
+                        ).andWhere(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            'other',
+                        );
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'activeUserProfile.genderPreference',
+                            '=',
+                            'all',
                         ).andWhere(function () {
                             this.where(
                                 'targetUserProfile.genderPreference',
@@ -198,14 +220,14 @@ export class PublicProfileService {
                             '=',
                             'other',
                         ).andWhere(function () {
-                            this.where(
-                                'activeUserProfile.genderPreference',
-                                '=',
-                                'all',
-                            ).orWhere(
+                            this.orWhere(
                                 'activeUserProfile.genderPreference',
                                 '=',
                                 db.ref('targetUserProfile.genderCategory'),
+                            ).orWhere(
+                                'targetUserProfile.genderCategory',
+                                '=',
+                                'other',
                             );
                         });
                     })
@@ -214,34 +236,22 @@ export class PublicProfileService {
                             'targetUserProfile.genderPreference',
                             '=',
                             'all',
-                        ).andWhere(function () {
-                            this.where(
-                                'targetUserProfile.genderCategory',
-                                '=',
-                                'other',
-                            ).orWhere(
-                                'targetUserProfile.genderCategory',
-                                '=',
-                                db.ref('activeUserProfile.genderPreference'),
-                            );
-                        });
+                        ).andWhere(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            db.ref('activeUserProfile.genderPreference'),
+                        );
                     })
                     .orWhere(function () {
                         this.where(
                             'targetUserProfile.genderCategory',
                             '=',
                             'other',
-                        ).andWhere(function () {
-                            this.where(
-                                'targetUserProfile.genderPreference',
-                                '=',
-                                'all',
-                            ).orWhere(
-                                'targetUserProfile.genderPreference',
-                                '=',
-                                db.ref('activeUserProfile.genderCategory'),
-                            );
-                        });
+                        ).andWhere(
+                            'targetUserProfile.genderPreference',
+                            '=',
+                            db.ref('activeUserProfile.genderCategory'),
+                        );
                     });
             })
             .groupBy('targetUser.userId')

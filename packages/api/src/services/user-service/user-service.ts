@@ -28,4 +28,20 @@ export class UserService {
 
         return user;
     }
+
+    /**
+     * Get a user by their email
+     *
+     * @param email Email of the user to get
+     * @returns The user
+     */
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.user.select('*').where({ email }).first();
+
+        if (!user) {
+            throw new HttpException('User not found', StatusCodes.NOT_FOUND);
+        }
+
+        return user;
+    }
 }
