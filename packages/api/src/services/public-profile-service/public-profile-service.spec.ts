@@ -7,6 +7,7 @@ import { UserValidationService } from '../user-validation-service/user-validatio
 import { MatchingService } from '../matching-service/matching-service';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { AdminUserService } from '../admin-user-service/admin-user-service';
+import { DatabaseService } from '../database-service/database-service';
 
 const USER_EMAIL = 'Raphael';
 const OTHER_USER = 'Roxane';
@@ -19,6 +20,7 @@ describe('PublicProfileService', () => {
     let matchingService: MatchingService;
     let moderationService: ModerationService;
     let adminUserService: AdminUserService;
+    let databaseService: DatabaseService;
 
     beforeEach(async () => {
         testingModule = await TestingModule.create();
@@ -31,6 +33,7 @@ describe('PublicProfileService', () => {
         matchingService = testingModule.resolve(MatchingService);
         moderationService = testingModule.resolve(ModerationService);
         adminUserService = testingModule.resolve(AdminUserService);
+        databaseService = testingModule.resolve(DatabaseService);
     });
 
     afterEach(async () => {
@@ -273,6 +276,35 @@ describe('PublicProfileService', () => {
                     (user) => user.userId,
                 ),
             ).toContain(otherUser.userId);
+        });
+
+        it('should not return a user if user is not visible', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+
+            await databaseService.database('userVisibility').insert({
+                userId: otherUser.userId,
+                visible: false,
+            });
+
+            expect(
+                (await service.getAvailableUsers(user.userId)).map(
+                    (user) => user.userId,
+                ),
+            ).not.toContain(otherUser.userId);
+        });
+
+        it('should always return the users in the same order', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+
+            const result = await service.getAvailableUsers(user.userId);
+
+            for (let i = 0; i < 5; i++) {
+                const newResult = await service.getAvailableUsers(user.userId);
+                expect(newResult.map((user) => user.userId)).toEqual(
+                    result.map((user) => user.userId),
+                );
+            }
         });
     });
 });
