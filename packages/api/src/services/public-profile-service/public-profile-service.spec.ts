@@ -8,6 +8,8 @@ import { MatchingService } from '../matching-service/matching-service';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { AdminUserService } from '../admin-user-service/admin-user-service';
 import { DatabaseService } from '../database-service/database-service';
+import { Match } from 'common/models/matching';
+import { MessagesService } from '../messages-service/messages-service';
 
 const USER_EMAIL = 'Raphael';
 const OTHER_USER = 'Roxane';
@@ -21,6 +23,7 @@ describe('PublicProfileService', () => {
     let moderationService: ModerationService;
     let adminUserService: AdminUserService;
     let databaseService: DatabaseService;
+    let messagesService: MessagesService;
 
     beforeEach(async () => {
         testingModule = await TestingModule.create();
@@ -34,6 +37,7 @@ describe('PublicProfileService', () => {
         moderationService = testingModule.resolve(ModerationService);
         adminUserService = testingModule.resolve(AdminUserService);
         databaseService = testingModule.resolve(DatabaseService);
+        messagesService = testingModule.resolve(MessagesService);
     });
 
     afterEach(async () => {
@@ -305,6 +309,103 @@ describe('PublicProfileService', () => {
                     result.map((user) => user.userId),
                 );
             }
+        });
+    });
+
+    describe('getMatches', () => {
+        it('should return the matches', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+
+            await databaseService.database<Match>('matches').insert({
+                user1Id: user.userId,
+                user2Id: otherUser.userId,
+            });
+
+            const result = await service.getMatches(user.userId);
+
+            expect(result).toBeDefined();
+            expect(result).toHaveLength(1);
+            expect(result[0].userId).toEqual(otherUser.userId);
+        });
+
+        it('should only return matches with active user', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+            const otherUser2 = await userService.getUserByEmail('Remy');
+
+            await databaseService.database<Match>('matches').insert({
+                user1Id: otherUser2.userId,
+                user2Id: otherUser.userId,
+            });
+
+            const result = await service.getMatches(user.userId);
+
+            expect(result).toHaveLength(0);
+        });
+
+        it('should not return a match if user is unmatched', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+
+            await databaseService.database<Match>('matches').insert({
+                user1Id: user.userId,
+                user2Id: otherUser.userId,
+            });
+
+            await matchingService.unmatchUser(user.userId, otherUser.userId);
+
+            const result = await service.getMatches(user.userId);
+
+            expect(result).toHaveLength(0);
+        });
+
+        it('should not return a match if user is blocked', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+
+            await databaseService.database<Match>('matches').insert({
+                user1Id: user.userId,
+                user2Id: otherUser.userId,
+            });
+
+            await moderationService.blockUser({
+                blockingUserId: user.userId,
+                blockedUserId: otherUser.userId,
+            });
+
+            const result = await service.getMatches(user.userId);
+
+            expect(result).toHaveLength(0);
+        });
+
+        it('should contain last message', async () => {
+            const user = await userService.getUserByEmail(USER_EMAIL);
+            const otherUser = await userService.getUserByEmail(OTHER_USER);
+
+            await databaseService.database<Match>('matches').insert({
+                user1Id: user.userId,
+                user2Id: otherUser.userId,
+            });
+
+            const message = 'Hello world';
+
+            await messagesService.sendMessage(
+                user.userId,
+                otherUser.userId,
+                'First message',
+            );
+            await messagesService.sendMessage(
+                otherUser.userId,
+                user.userId,
+                message,
+            );
+
+            const result = await service.getMatches(user.userId);
+
+            expect(result).toHaveLength(1);
+            expect(result[0].lastMessage).toEqual(message);
+            expect(result[0].lastMessageAuthorId).toEqual(otherUser.userId);
         });
     });
 });

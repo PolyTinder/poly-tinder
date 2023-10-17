@@ -148,9 +148,13 @@ export class MatchingService {
             user2Id: targetUserId,
         });
 
-        this.wsService.emitToUser(activeUserId, 'match:matched-active', {
-            matchedUserId: targetUserId,
-        });
+        this.wsService.emitToUserIfConnected(
+            activeUserId,
+            'match:matched-active',
+            {
+                matchedUserId: targetUserId,
+            },
+        );
         this.wsService.emitToUserIfConnected(
             targetUserId,
             'match:matched-passive',
