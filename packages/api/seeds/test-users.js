@@ -7,6 +7,11 @@ import { PEOPLE } from '../src/constants/test-users';
  */
 exports.seed = async function (knex) {
     // Deletes ALL existing entries
+    await knex('verificationTokens').del();
+    await knex('admin').del();
+    await knex('userVisibility').del();
+    await knex('banned').del();
+    await knex('suspend').del();
     await knex('reports').del();
     await knex('blocks').del();
     await knex('messages').del();

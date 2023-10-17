@@ -61,15 +61,11 @@ export class MessagesService {
 
         await this.messages.insert(message);
 
-        try {
-            await this.wsService.emitToUser(
-                recipientId,
-                'message:new',
-                message,
-            );
-        } catch {
-            // Ignore
-        }
+        this.wsService.emitToUserIfConnected(
+            recipientId,
+            'message:new',
+            message,
+        );
     }
 
     /**

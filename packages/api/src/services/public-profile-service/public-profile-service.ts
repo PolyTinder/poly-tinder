@@ -271,9 +271,7 @@ export class PublicProfileService {
      * @param userId ID of the user requesting
      * @returns The list of matches
      */
-    async getMatches(
-        userId: TypeOfId<User>,
-    ): Promise<NotLoadedPublicUserResult[]> {
+    async getMatches(userId: TypeOfId<User>): Promise<MatchListItem[]> {
         const matches: PartialMatchQueryItem[] = await this.matches
             .select(
                 'user1Id',

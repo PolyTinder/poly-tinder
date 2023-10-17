@@ -11,7 +11,7 @@
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "test": "cross-env NODE_ENV=test dotenv -e .env.test jest",
+    "test": "cross-env NODE_ENV=test dotenv -e .env.test jest --runInBand",
     "jscpd": "jscpd -t 5 src/"
   },
   "keywords": [],

@@ -34,6 +34,7 @@ export class TestingModule {
 
     async instantiate() {
         await this.databaseService.instantiate();
+        await this.seed();
     }
 
     async seed() {
