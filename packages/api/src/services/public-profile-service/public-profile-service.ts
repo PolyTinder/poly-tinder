@@ -8,7 +8,6 @@ import {
 import { UserProfileService } from '../user-profile-service/user-profile-service';
 import { DatabaseService } from '../database-service/database-service';
 import { Knex } from 'knex';
-import { UserAliasService } from '../user-alias-service/user-alias-service';
 import {
     Match,
     MatchListItem,
@@ -26,13 +25,8 @@ export class PublicProfileService {
     constructor(
         private readonly databaseService: DatabaseService,
         private readonly userProfileService: UserProfileService,
-        private readonly userAliasService: UserAliasService,
         private readonly moderationService: ModerationService,
     ) {}
-
-    private get users(): Knex.QueryBuilder<User> {
-        return this.databaseService.database<User>('users');
-    }
 
     private get matches(): Knex.QueryBuilder<Match> {
         return this.databaseService.database<Match>('matches');
@@ -56,11 +50,9 @@ export class PublicProfileService {
             );
         }
 
-        // const userId = await this.userAliasService.getUserId(userAliasId);
         const userProfile = await this.userProfileService.getUserProfile(
             userId,
         );
-        // const newUserAliasId = await this.userAliasService.createAlias(userId);
 
         return { ...userProfile, userId };
     }
@@ -172,40 +164,84 @@ export class PublicProfileService {
                 );
             })
             .andWhere(function () {
-                this.where('activeUserProfile.genderPreference', '=', 'all')
-                    .orWhere('targetUserProfile.genderCategory', '=', 'other')
+                this.where(function () {
+                    this.where(
+                        'activeUserProfile.genderPreference',
+                        '=',
+                        db.ref('targetUserProfile.genderCategory'),
+                    ).andWhere(
+                        'targetUserProfile.genderPreference',
+                        '=',
+                        db.ref('activeUserProfile.genderCategory'),
+                    );
+                })
                     .orWhere(function () {
                         this.where(
-                            'activeUserProfile.genderCategory',
-                            '=',
-                            db.ref('targetUserProfile.genderPreference'),
-                        ).andWhere(
-                            'targetUserProfile.genderCategory',
-                            '=',
-                            db.ref('activeUserProfile.genderPreference'),
-                        );
-                    })
-                    .orWhere(function () {
-                        this.where(
-                            'targetUserProfile.genderCategory',
-                            '=',
-                            db.ref('activeUserProfile.genderPreference'),
-                        ).andWhere(
-                            'activeUserProfile.genderCategory',
-                            '=',
-                            'other',
-                        );
-                    })
-                    .orWhere(function () {
-                        this.where(
-                            'targetUserProfile.genderCategory',
-                            '=',
-                            db.ref('activeUserProfile.genderPreference'),
-                        ).andWhere(
                             'activeUserProfile.genderPreference',
                             '=',
                             'all',
-                        );
+                        ).andWhere(function () {
+                            this.where(
+                                'targetUserProfile.genderPreference',
+                                '=',
+                                db.ref('activeUserProfile.genderCategory'),
+                            ).orWhere(
+                                'targetUserProfile.genderPreference',
+                                '=',
+                                'all',
+                            );
+                        });
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'activeUserProfile.genderCategory',
+                            '=',
+                            'other',
+                        ).andWhere(function () {
+                            this.where(
+                                'activeUserProfile.genderPreference',
+                                '=',
+                                'all',
+                            ).orWhere(
+                                'activeUserProfile.genderPreference',
+                                '=',
+                                db.ref('targetUserProfile.genderCategory'),
+                            );
+                        });
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'targetUserProfile.genderPreference',
+                            '=',
+                            'all',
+                        ).andWhere(function () {
+                            this.where(
+                                'targetUserProfile.genderCategory',
+                                '=',
+                                'other',
+                            ).orWhere(
+                                'targetUserProfile.genderCategory',
+                                '=',
+                                db.ref('activeUserProfile.genderPreference'),
+                            );
+                        });
+                    })
+                    .orWhere(function () {
+                        this.where(
+                            'targetUserProfile.genderCategory',
+                            '=',
+                            'other',
+                        ).andWhere(function () {
+                            this.where(
+                                'targetUserProfile.genderPreference',
+                                '=',
+                                'all',
+                            ).orWhere(
+                                'targetUserProfile.genderPreference',
+                                '=',
+                                db.ref('activeUserProfile.genderCategory'),
+                            );
+                        });
                     });
             })
             .groupBy('targetUser.userId')
@@ -217,15 +253,6 @@ export class PublicProfileService {
 
             return user;
         });
-
-        // return Promise.all(
-        //     results.map<Promise<NotLoadedPublicUserResult>>(async (user) => ({
-        //         userAliasId: await this.userAliasService.createAlias(
-        //             user.userId,
-        //         ),
-        //         name: user.name,
-        //     })),
-        // );
     }
 
     /**
