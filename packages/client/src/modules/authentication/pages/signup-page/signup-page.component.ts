@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication-service/authentication.service';
 import { AuthenticationUser } from 'common/models/authentication';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { confirmPasswordValidator } from '../../validators/confirm-password-validator';
+import disposableEmailDomains from 'disposable-email-domains';
 
 @Component({
     selector: 'app-signup-page',
@@ -13,7 +19,11 @@ import { confirmPasswordValidator } from '../../validators/confirm-password-vali
 })
 export class SignupPageComponent {
     signupForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email,
+            this.disposableEmailValidator,
+        ]),
         password: new FormControl('', [
             Validators.required,
             Validators.pattern(/.+[a-z]+.+/), // letters,
@@ -53,5 +63,18 @@ export class SignupPageComponent {
                     this.loading.next(false);
                 },
             });
+    }
+
+    private disposableEmailValidator(control: AbstractControl) {
+        if (
+            control.value &&
+            disposableEmailDomains.find((d) =>
+                control.value.trim().toLowerCase().endsWith(d),
+            )
+        ) {
+            return { disposableEmail: true };
+        }
+
+        return null;
     }
 }
