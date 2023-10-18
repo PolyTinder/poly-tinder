@@ -11,7 +11,6 @@ import { AuthenticationUser } from 'common/models/authentication';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { confirmPasswordValidator } from '../../validators/confirm-password-validator';
 import disposableEmailDomains from 'disposable-email-domains';
-import { isEmailBurner } from 'burner-email-providers';
 
 @Component({
     selector: 'app-signup-page',

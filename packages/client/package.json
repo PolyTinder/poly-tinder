@@ -28,7 +28,6 @@
     "@angular/service-worker": "^16.2.0",
     "@types/disposable-email-domains": "^1.0.5",
     "@uploadcare/blocks": "^0.25.6",
-    "burner-email-providers": "^1.0.67",
     "common": "file:../common",
     "disposable-email-domains": "^1.0.62",
     "ngx-uploadcare-widget": "^4.0.0",
