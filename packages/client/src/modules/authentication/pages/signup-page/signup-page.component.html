@@ -16,6 +16,7 @@
             <input formControlName="email" matInput>
             <mat-error *ngIf="signupForm.controls.email.errors?.['required']">Le email est requis</mat-error>
             <mat-error *ngIf="signupForm.controls.email.errors?.['email']">Doit être un email valide</mat-error>
+            <mat-error *ngIf="signupForm.controls.email.errors?.['disposableEmail']">Doit être unn email authentique</mat-error>
         </mat-form-field>
     
         <mat-form-field>
