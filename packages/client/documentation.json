@@ -5400,7 +5400,7 @@
                     }
                 ]
             },
-            "templateData": "<app-authentication-layout\n    name=\"Se connecter\"\n    description=\"Connectez-vous pour découvrir des rencontres authentiques au sein de Polytechnique.\"\n    [formGroup]=\"loginForm\"\n    [formsErrors]=\"{\n        invalidCredentials: 'Le email ou le mot de passe est invalide',\n        accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter poly.tinder.2023@gmail.com si vous pensez que c\\'est un erreur.',\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading\"\n    (formSubmit)=\"onSubmit()\"\n>\n    <ng-container auth-form-field>\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n            <input formControlName=\"email\" matInput>\n            <mat-error *ngIf=\"loginForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n        </mat-form-field>\n    \n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Mot de passe</mat-label>\n            <input formControlName=\"password\" type=\"password\" matInput>\n            <mat-error *ngIf=\"loginForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n        </mat-form-field>\n    </ng-container>\n\n    <ng-container auth-extra>\n        <app-card>\n            <p class=\"link-text\">Oublié votre mot de passe ? <a routerLink=\"/request-password-reset\">Réinitialiser le mot de passe</a>.</p>\n        </app-card>\n    \n        <app-card>\n            <p class=\"link-text\">Vous n'avez pas de compte ? <a routerLink=\"/signup\">Créez en un</a> !</p>\n        </app-card>\n    </ng-container>\n</app-authentication-layout>"
+            "templateData": "<app-authentication-layout\n    name=\"Se connecter\"\n    description=\"Connectez-vous pour découvrir des rencontres authentiques au sein de Polytechnique.\"\n    [formGroup]=\"loginForm\"\n    [formsErrors]=\"{\n        invalidCredentials: 'Le email ou le mot de passe est invalide',\n        accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter poly.tinder.2023@gmail.com si vous pensez que c\\'est un erreur.',\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading | async\"\n    (formSubmit)=\"onSubmit()\"\n>\n    <ng-container auth-form-field>\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n            <input formControlName=\"email\" matInput>\n            <mat-error *ngIf=\"loginForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n        </mat-form-field>\n    \n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Mot de passe</mat-label>\n            <input formControlName=\"password\" type=\"password\" matInput>\n            <mat-error *ngIf=\"loginForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n        </mat-form-field>\n    </ng-container>\n\n    <ng-container auth-extra>\n        <app-card>\n            <p class=\"link-text\">Oublié votre mot de passe ? <a routerLink=\"/request-password-reset\">Réinitialiser le mot de passe</a>.</p>\n        </app-card>\n    \n        <app-card>\n            <p class=\"link-text\">Vous n'avez pas de compte ? <a routerLink=\"/signup\">Créez en un</a> !</p>\n        </app-card>\n    </ng-container>\n</app-authentication-layout>"
         },
         {
             "name": "MatchedModalComponent",
@@ -5746,7 +5746,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.matched-user-page {\n    display: grid;\n    grid-template-rows: minmax(0, 1fr);\n    height: 100%;\n\n    // &__header,\n    &__footer {\n        background-color: var(--theme-background);\n        padding: 24px;\n        display: grid;\n        align-items: center;\n        gap: 24px;\n    }\n\n    &__header {\n        &__title {\n            font-size: 1.5em;\n            font-weight: 500;\n            color: var(--theme-background-contrast);\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            gap: 12px;\n\n            &__avatar {\n                height: 36px;\n                width: 36px;\n                background-color: rgb(240, 240, 240);\n                border-radius: 6px;\n                object-fit: cover;\n                object-position: center;\n            }\n        }\n    }\n\n    &__container {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        height: 100%;\n    }\n\n    &__content {\n        display: flex;\n        flex-direction: column-reverse;\n        overflow-y: auto;\n\n        &__messages {\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n            padding: 24px;\n\n            &__system-message {\n                @include no-select;\n\n                width: 100%;\n                background-color: rgb(240, 240, 240);\n                max-width: 600px;\n                align-self: center;\n                padding: 24px;\n                border-radius: 6px;\n                text-align: center;\n                color: rgba(0, 0, 0, 0.55);\n                box-sizing: border-box;\n                margin-bottom: 12px;\n            }\n\n            &__question {\n                max-width: 600px;\n                align-self: center;\n                margin-bottom: 12px;\n                text-align: center;\n\n                &__description {\n                    @include no-select;\n                    opacity: 0.55;\n                    font-style: italic;\n                }\n\n                &__question {\n                    font-size: 1.65em;\n                    font-weight: 500;\n                    margin: 24px 0;\n                    line-height: 1.2em;\n                }\n\n                &__actions {\n                    @include no-select;\n                    display: flex;\n                    gap: 24px;\n                    justify-content: center;\n\n                    &__action {\n                        border: solid 1px rgb(240, 240, 240);\n                        padding: 6px 12px;\n                        border-radius: 6px;\n\n                        i {\n                            margin-right: 6px;\n                        }\n                    }\n                }\n            }\n\n            &__group {\n                width: 100%;\n                display: flex;\n                flex-direction: column;\n                gap: 6px;\n\n                &__time {\n                    @include no-select;\n\n                    opacity: 0.55;\n                    font-weight: 500;\n                    align-self: center;\n                    font-size: 0.85em;\n                }\n\n                &__content {\n                    display: flex;\n                    align-items: flex-end;\n                    gap: 6px;\n\n                    &__sender {\n                        &__avatar {\n                            height: 10px;\n                            width: 10px;\n                            background-color: rgb(220, 220, 220);\n                            border-radius: 10px;\n                        }\n                    }\n\n                    &__messages {\n                        display: flex;\n                        gap: 3px;\n                        flex-direction: column;\n\n                        &__message {\n                            background-color: rgb(220, 220, 220);\n                            padding: 6px 12px;\n                            border-radius: 3px;\n                            max-width: 80%;\n                            word-wrap: break-word;\n\n                            &--only-emoji {\n                                background: none;\n                                font-size: 2em;\n                                padding: 6px 0;\n                                line-height: 1em;\n                            }\n                        }\n                    }\n                }\n\n                &--self {\n                    .matched-user-page__content__messages__group__content {\n                        flex-direction: row-reverse;\n\n                        &__messages {\n                            align-items: flex-end;\n\n                            &__message {\n                                background-color: var(--theme-main);\n                                color: var(--theme-main-contrast);\n                                border-top-left-radius: 12px;\n                                border-bottom-left-radius: 12px;\n\n                                &:first-child {\n                                    border-top-right-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-right-radius: 12px;\n                                }\n\n                                &--only-emoji {\n                                    background: none;\n                                }\n                            }\n                        }\n                    }\n                }\n\n                &--other {\n                    .matched-user-page__content__messages__group__content {\n                        &__messages {\n                            align-items: flex-start;\n\n                            &__message {\n                                border-top-right-radius: 12px;\n                                border-bottom-right-radius: 12px;\n\n                                &:first-child {\n                                    border-top-left-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-left-radius: 12px;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__footer {\n        $item-size: 40px;\n\n        border-top: solid 1px rgb(240, 240, 240);\n        grid-template-columns: 1fr auto;\n\n        &__control {\n            height: $item-size;\n            appearance: none;\n            background-color: rgb(250, 250, 250);\n            border: solid 1px rgb(240, 240, 240);\n            font: inherit;\n            outline: none;\n            border-radius: $item-size;\n            padding: 0 24px;\n            box-sizing: border-box;\n        }\n\n        &__button {\n            @include no-select;\n\n            height: $item-size;\n            width: $item-size;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-size: 1.1em;\n            border: solid 1px rgb(240, 240, 240);\n            border-radius: $item-size;\n            background-color: var(--theme-background);\n            flex-grow: 0;\n            flex-shrink: 0;\n            box-sizing: border-box;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        &__header,\n        &__footer {\n            padding: 12px;\n            gap: 12px;\n        }\n\n        &__header {\n            &__back {\n                height: 32px;\n                width: 32px;\n                font-size: 1.1em;\n\n                i {\n                    margin-left: -1px;\n                }\n            }\n\n            &__title {\n                font-size: 1.2em;\n    \n                &__avatar {\n                    height: 32px;\n                    width: 32px;\n                }\n            }\n        }\n\n        &__footer {\n            $item-size: 32px;\n\n            &__control {\n                padding: 0 12px;\n                height: $item-size;\n            }\n\n            &__button {\n                height: $item-size;\n                width: $item-size;\n                font-size: 1em;\n            }\n        }\n    }\n}",
+                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.matched-user-page {\n    display: grid;\n    grid-template-rows: minmax(0, 1fr);\n    height: 100%;\n\n    // &__header,\n    &__footer {\n        background-color: var(--theme-background);\n        padding: 24px;\n        display: grid;\n        align-items: center;\n        gap: 24px;\n    }\n\n    &__header {\n        &__title {\n            font-size: 1.5em;\n            font-weight: 500;\n            color: var(--theme-background-contrast);\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            gap: 12px;\n\n            &__avatar {\n                height: 36px;\n                width: 36px;\n                background-color: rgb(240, 240, 240);\n                border-radius: 6px;\n                object-fit: cover;\n                object-position: center;\n            }\n        }\n    }\n\n    &__container {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        height: 100%;\n    }\n\n    &__content {\n        display: flex;\n        flex-direction: column-reverse;\n        overflow-y: auto;\n\n        &__messages {\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n            padding: 24px;\n\n            &__system-message {\n                @include no-select;\n\n                width: 100%;\n                background-color: rgb(240, 240, 240);\n                max-width: 600px;\n                align-self: center;\n                padding: 24px;\n                border-radius: 6px;\n                text-align: center;\n                color: rgba(0, 0, 0, 0.55);\n                box-sizing: border-box;\n                margin-bottom: 12px;\n            }\n\n            &__question {\n                max-width: 600px;\n                align-self: center;\n                margin-bottom: 12px;\n                text-align: center;\n\n                &__description {\n                    @include no-select;\n                    opacity: 0.55;\n                    font-style: italic;\n                }\n\n                &__question {\n                    font-size: 1.65em;\n                    font-weight: 500;\n                    margin: 24px 0;\n                    line-height: 1.2em;\n                }\n\n                &__actions {\n                    @include no-select;\n                    display: flex;\n                    gap: 24px;\n                    justify-content: center;\n\n                    &__action {\n                        border: solid 1px rgb(240, 240, 240);\n                        padding: 6px 12px;\n                        border-radius: 6px;\n\n                        i {\n                            margin-right: 6px;\n                        }\n                    }\n                }\n            }\n\n            &__group {\n                width: 100%;\n                display: flex;\n                flex-direction: column;\n                gap: 6px;\n\n                &__time {\n                    @include no-select;\n\n                    opacity: 0.55;\n                    font-weight: 500;\n                    align-self: center;\n                    font-size: 0.85em;\n                }\n\n                &__content {\n                    display: flex;\n                    align-items: flex-end;\n                    gap: 6px;\n\n                    &__sender {\n                        &__avatar {\n                            height: 10px;\n                            width: 10px;\n                            background-color: rgb(220, 220, 220);\n                            border-radius: 10px;\n                        }\n                    }\n\n                    &__messages {\n                        display: flex;\n                        gap: 3px;\n                        flex-direction: column;\n\n                        &__message {\n                            background-color: rgb(220, 220, 220);\n                            padding: 6px 12px;\n                            border-radius: 3px;\n                            max-width: 80%;\n                            word-wrap: break-word;\n\n                            &--only-emoji {\n                                background: none;\n                                font-size: 2em;\n                                padding: 6px 0;\n                                line-height: 1em;\n                            }\n                        }\n                    }\n                }\n\n                &--self {\n                    .matched-user-page__content__messages__group__content {\n                        flex-direction: row-reverse;\n\n                        &__messages {\n                            align-items: flex-end;\n\n                            &__message {\n                                background-color: var(--theme-main);\n                                color: var(--theme-main-contrast);\n                                border-top-left-radius: 12px;\n                                border-bottom-left-radius: 12px;\n\n                                &:first-child {\n                                    border-top-right-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-right-radius: 12px;\n                                }\n\n                                &--only-emoji {\n                                    background: none;\n                                }\n                            }\n                        }\n                    }\n                }\n\n                &--other {\n                    .matched-user-page__content__messages__group__content {\n                        &__messages {\n                            align-items: flex-start;\n\n                            &__message {\n                                border-top-right-radius: 12px;\n                                border-bottom-right-radius: 12px;\n\n                                &:first-child {\n                                    border-top-left-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-left-radius: 12px;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__footer {\n        $item-size: 40px;\n\n        border-top: solid 1px rgb(240, 240, 240);\n        grid-template-columns: 1fr auto;\n\n        &__control {\n            height: $item-size;\n            appearance: none;\n            background-color: rgb(250, 250, 250);\n            border: solid 1px rgb(240, 240, 240);\n            font: inherit;\n            outline: none;\n            border-radius: $item-size;\n            padding: 0 24px;\n            box-sizing: border-box;\n        }\n\n        &__button {\n            @include no-select;\n\n            height: $item-size;\n            width: $item-size;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-size: 1.1em;\n            border: solid 1px rgb(240, 240, 240);\n            border-radius: $item-size;\n            background-color: var(--theme-background);\n            flex-grow: 0;\n            flex-shrink: 0;\n            box-sizing: border-box;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        &__header,\n        &__footer {\n            padding: 12px;\n            gap: 12px;\n        }\n\n        &__header {\n            &__back {\n                height: 32px;\n                width: 32px;\n                font-size: 1.1em;\n\n                i {\n                    margin-left: -1px;\n                }\n            }\n\n            &__title {\n                font-size: 1.2em;\n    \n                &__avatar {\n                    height: 32px;\n                    width: 32px;\n                }\n            }\n        }\n\n        &__footer {\n            $item-size: 32px;\n\n            &__control {\n                padding: 0 12px;\n                height: $item-size;\n            }\n\n            &__button {\n                height: $item-size;\n                width: $item-size;\n                font-size: 1em;\n            }\n\n            @media all and (display-mode: standalone) {\n                padding: 12px 12px 40px 12px;\n            }\n        }\n    }\n}",
                     "styleUrl": "./matched-user-page.component.scss"
                 }
             ],
@@ -6149,7 +6149,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../styles/utils';\n@import '../../styles/variables';\n\n.navigation {\n    @include no-select;\n\n    border-right: solid 1px rgb(240, 240, 240);\n    height: 100%;\n    overflow-y: auto;\n    padding: 24px 16px;\n    box-sizing: border-box;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    max-width: 350px;\n    min-width: 250px;\n    width: 33vw;\n    gap: 24px;\n\n    &__top {\n        display: flex;\n        flex-direction: column;\n        gap: 36px;\n\n        &__brand {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            gap: 12px;\n            \n            &__logo {\n                width: 100%;\n                max-width: 90px;\n            }\n\n            &__name {\n                font-size: 1.4em;\n                font-weight: 600;\n            }\n        }\n\n        &__menu {\n            margin: 0;\n            padding: 0;\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n\n            &__item {\n                list-style: none;\n\n                &__content {\n                    display: grid;\n                    grid-template-columns: minmax(0, 1fr) auto;\n                    align-items: center;\n                    gap: 12px;\n                    font-weight: 500;\n                    font-size: 1.1em;\n                    width: 100%;\n\n                    &__text {\n                        white-space: nowrap;\n                        text-overflow: ellipsis;\n                        overflow: hidden;\n                        text-align: left;\n                    }\n\n                    &__pill {\n                        background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));\n                        color: var(--theme-main-contrast);\n                        font-size: 0.9em;\n                        padding: 2px 12px;\n                        border-radius: 20px;\n\n                        &--error {\n                            background: tomato !important;\n                        }\n                    }\n\n                    &--active {\n                        .navigation__top__menu__item__content {\n                            &__pill {\n                                background: var(--theme-main-contrast);\n                                color: var(--theme-main);\n\n                                &--error {\n                                    color: white !important;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__bottom {\n        display: flex;\n        gap: 12px;\n        justify-content: space-between;\n\n        &__left,\n        &__right {\n            display: flex;\n            gap: 12px;\n            padding: 0;\n            margin: 0;\n\n            &__item {\n                list-style: none;\n            }\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        height: auto;\n        width: 100%;\n        max-width: none;\n        min-width: none;\n        border: none;\n        padding: 8px;\n        border-top: solid 1px rgb(240, 240, 240);\n\n        &__top {\n            &__menu {\n                flex-direction: row;\n                justify-content: space-around;\n\n                &__item {\n                    &__content {\n                        // padding: 8px 16px;\n                        gap: 2px;\n                        position: relative;\n                        display: flex;\n                        justify-content: center;\n\n                        &__icon {\n                            font-size: 1.2em;\n                        }\n\n                        &__pill {\n                            position: absolute;\n                            top: -12px;\n                            right: -24px;\n                            font-size: 0.65em;\n                            padding: 0 8px;\n                            box-shadow: $default-shadow;\n                        }\n\n                        &--active {\n                            .navigation__top__menu__item__content {\n                                &__icon {\n                                    color: var(--theme-main);\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n}\n",
+                    "data": "@import '../../styles/utils';\n@import '../../styles/variables';\n\n.navigation {\n    @include no-select;\n\n    border-right: solid 1px rgb(240, 240, 240);\n    height: 100%;\n    overflow-y: auto;\n    padding: 24px 16px;\n    box-sizing: border-box;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    max-width: 350px;\n    min-width: 250px;\n    width: 33vw;\n    gap: 24px;\n\n    &__top {\n        display: flex;\n        flex-direction: column;\n        gap: 36px;\n\n        &__brand {\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            gap: 12px;\n            \n            &__logo {\n                width: 100%;\n                max-width: 90px;\n            }\n\n            &__name {\n                font-size: 1.4em;\n                font-weight: 600;\n            }\n        }\n\n        &__menu {\n            margin: 0;\n            padding: 0;\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n\n            &__item {\n                list-style: none;\n\n                &__content {\n                    display: grid;\n                    grid-template-columns: minmax(0, 1fr) auto;\n                    align-items: center;\n                    gap: 12px;\n                    font-weight: 500;\n                    font-size: 1.1em;\n                    width: 100%;\n\n                    &__text {\n                        white-space: nowrap;\n                        text-overflow: ellipsis;\n                        overflow: hidden;\n                        text-align: left;\n                    }\n\n                    &__pill {\n                        background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));\n                        color: var(--theme-main-contrast);\n                        font-size: 0.9em;\n                        padding: 2px 12px;\n                        border-radius: 20px;\n\n                        &--error {\n                            background: tomato !important;\n                        }\n                    }\n\n                    &--active {\n                        .navigation__top__menu__item__content {\n                            &__pill {\n                                background: var(--theme-main-contrast);\n                                color: var(--theme-main);\n\n                                &--error {\n                                    color: white !important;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__bottom {\n        display: flex;\n        gap: 12px;\n        justify-content: space-between;\n\n        &__left,\n        &__right {\n            display: flex;\n            gap: 12px;\n            padding: 0;\n            margin: 0;\n\n            &__item {\n                list-style: none;\n            }\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        height: auto;\n        width: 100%;\n        max-width: none;\n        min-width: none;\n        border: none;\n        padding: 8px;\n        border-top: solid 1px rgb(240, 240, 240);\n\n        &__top {\n            &__menu {\n                flex-direction: row;\n                justify-content: space-around;\n\n                &__item {\n                    &__content {\n                        // padding: 8px 16px;\n                        gap: 2px;\n                        position: relative;\n                        display: flex;\n                        justify-content: center;\n\n                        &__icon {\n                            font-size: 1.2em;\n                        }\n\n                        &__pill {\n                            position: absolute;\n                            top: -12px;\n                            right: -24px;\n                            font-size: 0.65em;\n                            padding: 0 8px;\n                            box-shadow: $default-shadow;\n                        }\n\n                        &--active {\n                            .navigation__top__menu__item__content {\n                                &__icon {\n                                    color: var(--theme-main);\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n\n        @media all and (display-mode: standalone) {\n            padding: 8px 8px 36px 8px;\n        }\n    }\n}\n",
                     "styleUrl": "./navigation.component.scss"
                 }
             ],
@@ -6465,7 +6465,7 @@
                     }
                 ]
             },
-            "templateData": "<app-authentication-layout\n    name=\"Réinitialiser le mot de passe\"\n    [formGroup]=\"resetPasswordForm\"\n    [formsErrors]=\"{\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading\"\n    (formSubmit)=\"onSubmit()\"\n    [disabled]=\"!token || (sent | async)\"\n>\n    <ng-container auth-form-field>\n        <ng-container *ngIf=\"!(sent | async); else sentMessage\">\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-key\"></i> Nouveau mot de passe</mat-label>\n                <input formControlName=\"password\" type=\"password\" matInput>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['minlength']\">Doit contenir minimum 8 caractères</mat-error>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['pattern']\">Doit contenir une lettre, un nombre et un caractère spécial</mat-error>\n            </mat-form-field>\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-key\"></i> Confirmer le mot de passe</mat-label>\n                <input formControlName=\"confirmPassword\" type=\"password\" matInput>\n                <mat-error *ngIf=\"resetPasswordForm.controls.confirmPassword.errors?.['passwordMismatch']\">Le mot de passe ne correspond pas</mat-error>\n            </mat-form-field>\n\n            <mat-error *ngIf=\"!token\">Le token est invalide. Veuillez vérifier l'URL.</mat-error>\n        </ng-container>\n\n        <ng-template #sentMessage>\n            <p>Votre mot de passe a été réinitialisé avec succès. <a routerLink=\"/login\">Connectez-vous</a> avec votre nouveau mot de passe.</p>\n        </ng-template>\n    </ng-container>\n</app-authentication-layout>\n"
+            "templateData": "<app-authentication-layout\n    name=\"Réinitialiser le mot de passe\"\n    [formGroup]=\"resetPasswordForm\"\n    [formsErrors]=\"{\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading | async\"\n    (formSubmit)=\"onSubmit()\"\n    [disabled]=\"!token || (sent | async)\"\n>\n    <ng-container auth-form-field>\n        <ng-container *ngIf=\"!(sent | async); else sentMessage\">\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-key\"></i> Nouveau mot de passe</mat-label>\n                <input formControlName=\"password\" type=\"password\" matInput>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['minlength']\">Doit contenir minimum 8 caractères</mat-error>\n                <mat-error *ngIf=\"resetPasswordForm.controls.password.errors?.['pattern']\">Doit contenir une lettre, un nombre et un caractère spécial</mat-error>\n            </mat-form-field>\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-key\"></i> Confirmer le mot de passe</mat-label>\n                <input formControlName=\"confirmPassword\" type=\"password\" matInput>\n                <mat-error *ngIf=\"resetPasswordForm.controls.confirmPassword.errors?.['passwordMismatch']\">Le mot de passe ne correspond pas</mat-error>\n            </mat-form-field>\n\n            <mat-error *ngIf=\"!token\">Le token est invalide. Veuillez vérifier l'URL.</mat-error>\n        </ng-container>\n\n        <ng-template #sentMessage>\n            <p>Votre mot de passe a été réinitialisé avec succès. <a routerLink=\"/login\">Connectez-vous</a> avec votre nouveau mot de passe.</p>\n        </ng-template>\n    </ng-container>\n</app-authentication-layout>\n"
         },
         {
             "name": "PoliciesPageComponent",
@@ -6813,11 +6813,11 @@
                     }
                 ]
             },
-            "templateData": "<app-authentication-layout\n    name=\"Réinitialiser le mot de passe\"\n    [formGroup]=\"requestResetPasswordForm\"\n    [formsErrors]=\"{\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading\"\n    (formSubmit)=\"onSubmit()\"\n    [disabled]=\"sent | async\"\n>\n    <ng-container auth-form-field>\n        <ng-container *ngIf=\"!(sent | async); else sentMessage\">\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                <input formControlName=\"email\" matInput>\n                <mat-error *ngIf=\"requestResetPasswordForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n                <mat-error *ngIf=\"requestResetPasswordForm.controls.email.errors?.['email']\">Doit être un email valide</mat-error>\n            </mat-form-field>\n        </ng-container>\n\n        <ng-template #sentMessage>\n            <p>Un email vous a été envoyé avec le lien pour réinitialiser le mot de passe.</p>\n        </ng-template>\n    </ng-container>\n</app-authentication-layout>"
+            "templateData": "<app-authentication-layout\n    name=\"Réinitialiser le mot de passe\"\n    [formGroup]=\"requestResetPasswordForm\"\n    [formsErrors]=\"{\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading | async\"\n    (formSubmit)=\"onSubmit()\"\n    [disabled]=\"sent | async\"\n>\n    <ng-container auth-form-field>\n        <ng-container *ngIf=\"!(sent | async); else sentMessage\">\n            <mat-form-field>\n                <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                <input formControlName=\"email\" matInput>\n                <mat-error *ngIf=\"requestResetPasswordForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n                <mat-error *ngIf=\"requestResetPasswordForm.controls.email.errors?.['email']\">Doit être un email valide</mat-error>\n            </mat-form-field>\n        </ng-container>\n\n        <ng-template #sentMessage>\n            <p>Un email vous a été envoyé avec le lien pour réinitialiser le mot de passe.</p>\n        </ng-template>\n    </ng-container>\n</app-authentication-layout>"
         },
         {
             "name": "SignupPageComponent",
-            "id": "component-SignupPageComponent-f689db782daec25522cac3e0163d05dc004d3d6e1a57d2439dab819588d61f0953cb1d86d44294c98009035878465988a8fb99835c6aedc5ab0458143b717bac",
+            "id": "component-SignupPageComponent-f34aa0dab71eaf0535e0839ffc09ff3cfe73445d3840f3bd292dc378fbfe9a926e80d3eb975e570e3feef1f04b00688f5067cdfae1d18b676db3817ac9ac9861",
             "file": "src/modules/authentication/pages/signup-page/signup-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6849,7 +6849,7 @@
                 },
                 {
                     "name": "signupForm",
-                    "defaultValue": "new FormGroup({\n        email: new FormControl('', [Validators.required, Validators.email]),\n        password: new FormControl('', [\n            Validators.required,\n            Validators.pattern(\n                /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$/,\n            ),\n            Validators.minLength(8),\n        ]),\n        confirmPassword: new FormControl('', [\n            Validators.required,\n            confirmPasswordValidator(),\n        ]),\n        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),\n    })",
+                    "defaultValue": "new FormGroup({\n        email: new FormControl('', [Validators.required, Validators.email]),\n        password: new FormControl('', [\n            Validators.required,\n            Validators.pattern(/.+[a-z]+.+/), // letters,\n            Validators.pattern(/.+[0-9]+.+/), // numbers,\n            Validators.pattern(/.+[!@#$%?&*()-_=+/\\\\|,.;:^¨~<>[\\]{}]+.+/), // letters,\n            Validators.minLength(8),\n        ]),\n        confirmPassword: new FormControl('', [\n            Validators.required,\n            confirmPasswordValidator(),\n        ]),\n        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -6879,7 +6879,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { BehaviorSubject } from 'rxjs';\nimport { AuthenticationService } from '../../services/authentication-service/authentication.service';\nimport { AuthenticationUser } from 'common/models/authentication';\nimport { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';\nimport { confirmPasswordValidator } from '../../validators/confirm-password-validator';\n\n@Component({\n    selector: 'app-signup-page',\n    templateUrl: './signup-page.component.html',\n    styleUrls: ['./signup-page.component.scss'],\n})\nexport class SignupPageComponent {\n    signupForm = new FormGroup({\n        email: new FormControl('', [Validators.required, Validators.email]),\n        password: new FormControl('', [\n            Validators.required,\n            Validators.pattern(\n                /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]+$/,\n            ),\n            Validators.minLength(8),\n        ]),\n        confirmPassword: new FormControl('', [\n            Validators.required,\n            confirmPasswordValidator(),\n        ]),\n        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),\n    });\n    loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);\n\n    constructor(\n        private readonly authenticationService: AuthenticationService,\n    ) {}\n\n    onSubmit() {\n        this.loading.next(true);\n\n        this.authenticationService\n            .signup(this.signupForm.value as AuthenticationUser)\n            .subscribe({\n                next: () => {\n                    this.loading.next(false);\n                },\n                error: (e: HttpErrorResponse) => {\n                    if (e.status === HttpStatusCode.Conflict) {\n                        this.signupForm.setErrors({ conflict: true });\n                    } else if (e.status === HttpStatusCode.Locked) {\n                        this.signupForm.setErrors({ accountLocked: true });\n                    } else {\n                        this.signupForm.setErrors({ unknownError: true });\n                    }\n                    this.loading.next(false);\n                },\n            });\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { BehaviorSubject } from 'rxjs';\nimport { AuthenticationService } from '../../services/authentication-service/authentication.service';\nimport { AuthenticationUser } from 'common/models/authentication';\nimport { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';\nimport { confirmPasswordValidator } from '../../validators/confirm-password-validator';\n\n@Component({\n    selector: 'app-signup-page',\n    templateUrl: './signup-page.component.html',\n    styleUrls: ['./signup-page.component.scss'],\n})\nexport class SignupPageComponent {\n    signupForm = new FormGroup({\n        email: new FormControl('', [Validators.required, Validators.email]),\n        password: new FormControl('', [\n            Validators.required,\n            Validators.pattern(/.+[a-z]+.+/), // letters,\n            Validators.pattern(/.+[0-9]+.+/), // numbers,\n            Validators.pattern(/.+[!@#$%?&*()-_=+/\\\\|,.;:^¨~<>[\\]{}]+.+/), // letters,\n            Validators.minLength(8),\n        ]),\n        confirmPassword: new FormControl('', [\n            Validators.required,\n            confirmPasswordValidator(),\n        ]),\n        privacyPolicy: new FormControl(false, [Validators.requiredTrue]),\n    });\n    loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);\n\n    constructor(\n        private readonly authenticationService: AuthenticationService,\n    ) {}\n\n    onSubmit() {\n        this.loading.next(true);\n\n        this.authenticationService\n            .signup(this.signupForm.value as AuthenticationUser)\n            .subscribe({\n                next: () => {\n                    this.loading.next(false);\n                },\n                error: (e: HttpErrorResponse) => {\n                    if (e.status === HttpStatusCode.Conflict) {\n                        this.signupForm.setErrors({ conflict: true });\n                    } else if (e.status === HttpStatusCode.Locked) {\n                        this.signupForm.setErrors({ accountLocked: true });\n                    } else {\n                        this.signupForm.setErrors({ unknownError: true });\n                    }\n                    this.loading.next(false);\n                },\n            });\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6914,7 +6914,7 @@
                     }
                 ]
             },
-            "templateData": "<app-authentication-layout\n    name=\"S'inscrire\"\n    description=\"Rejoignez-nous pour élargir votre cercle social ou trouver l'amour sur le campus.\"\n    [formGroup]=\"signupForm\"\n    [formsErrors]=\"{\n        conflict: 'Ce email est déjà utilisé',\n        accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter',\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading\"\n    (formSubmit)=\"onSubmit()\"\n>\n    <ng-container auth-form-field>\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n            <input formControlName=\"email\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.email.errors?.['email']\">Doit être un email valide</mat-error>\n        </mat-form-field>\n    \n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Mot de passe</mat-label>\n            <input formControlName=\"password\" type=\"password\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['minlength']\">Doit contenir minimum 8 caractères</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['pattern']\">Doit contenir une lettre, un nombre et un caractère spécial</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Confirmer le mot de passe</mat-label>\n            <input formControlName=\"confirmPassword\" type=\"password\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.confirmPassword.errors?.['passwordMismatch']\">Le mot de passe ne correspond pas</mat-error>\n        </mat-form-field>\n\n        <mat-checkbox formControlName=\"privacyPolicy\">\n            En cliquant sur le bouton 'Créer mon compte', vous confirmez avoir lu et accepté nos <a href=\"/privacy-policy\" target=\"_blank\">Politiques de confidentialité</a>, nos <a href=\"/terms-and-conditions\" target=\"_blank\">Termes et conditions</a>, ainsi que notre <a href=\"/acceptable-use-policy\" target=\"_blank\">Politique d'utilisation acceptable</a>.\n        </mat-checkbox>\n        <br>\n        <mat-error *ngIf=\"signupForm.dirty && signupForm.controls.privacyPolicy.errors?.['required']\">Vous devez lire et accepter les politiques avant de continuer.</mat-error>\n    </ng-container>\n\n    <ng-container auth-extra>\n        <app-card>\n            <p class=\"link-text\">Vous avez déjà un compte ? <a routerLink=\"/login\">Connectez vous</a> !</p>\n        </app-card>\n    </ng-container>\n</app-authentication-layout>"
+            "templateData": "<app-authentication-layout\n    name=\"S'inscrire\"\n    description=\"Rejoignez-nous pour élargir votre cercle social ou trouver l'amour sur le campus.\"\n    [formGroup]=\"signupForm\"\n    [formsErrors]=\"{\n        conflict: 'Ce email est déjà utilisé',\n        accountLocked: 'Le compte a été bloqué ou suspendu. Veuillez contacter',\n        unknownError: 'Un erreur est survenu',\n    }\"\n    [loading]=\"loading | async\"\n    (formSubmit)=\"onSubmit()\"\n>\n    <ng-container auth-form-field>\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n            <input formControlName=\"email\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.email.errors?.['required']\">Le email est requis</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.email.errors?.['email']\">Doit être un email valide</mat-error>\n        </mat-form-field>\n    \n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Mot de passe</mat-label>\n            <input formControlName=\"password\" type=\"password\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['required']\">Le mot de passe est requis</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['minlength']\">Doit contenir minimum 8 caractères</mat-error>\n            <mat-error *ngIf=\"signupForm.controls.password.errors?.['pattern']\">Doit contenir une lettre, un nombre et un caractère spécial</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-key\"></i> Confirmer le mot de passe</mat-label>\n            <input formControlName=\"confirmPassword\" type=\"password\" matInput>\n            <mat-error *ngIf=\"signupForm.controls.confirmPassword.errors?.['passwordMismatch']\">Le mot de passe ne correspond pas</mat-error>\n        </mat-form-field>\n\n        <mat-checkbox formControlName=\"privacyPolicy\">\n            En cliquant sur le bouton 'Créer mon compte', vous confirmez avoir lu et accepté nos <a href=\"/about/rules/policies/privacy-policy\" target=\"_blank\">Politiques de confidentialité</a>, nos <a href=\"/about/rules/policies/terms-and-conditions\" target=\"_blank\">Termes et conditions</a>, ainsi que notre <a href=\"/about/rules/policies/acceptable-use-policy\" target=\"_blank\">Politique d'utilisation acceptable</a>.\n        </mat-checkbox>\n        <br>\n        <mat-error *ngIf=\"signupForm.dirty && signupForm.controls.privacyPolicy.errors?.['required']\">Vous devez lire et accepter les politiques avant de continuer.</mat-error>\n    </ng-container>\n\n    <ng-container auth-extra>\n        <app-card>\n            <p class=\"link-text\">Vous avez déjà un compte ? <a routerLink=\"/login\">Connectez vous</a> !</p>\n        </app-card>\n    </ng-container>\n</app-authentication-layout>"
         },
         {
             "name": "StatusPageComponent",
@@ -8195,13 +8195,13 @@
         },
         {
             "name": "AppModule",
-            "id": "module-AppModule-40a8bab8201af0a0fed6a8b4a9ba564a9133da0f1d31b32d17e508cb84d2c66789d72df301941905bb5866d1ecc780b56bab7d9bd9f100171815c8653eba92ab",
+            "id": "module-AppModule-beb44613a2655e2e260e8b639b765900cc068e2c228d930d28dffc15f682179157062547b5826de9bcc570c79b75f8766778bd6376a7a6ee209ec9e1c272ac3c",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app.module.ts",
             "methods": [],
-            "sourceCode": "import { APP_INITIALIZER, NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './modules/app-routing.module';\nimport { AppComponent } from './app/app.component';\nimport { HTTP_INTERCEPTORS } from '@angular/common/http';\nimport { ApiInterceptor } from 'src/middlewares/api';\nimport { InitializerService } from 'src/services/initializer-service/initializer.service';\nimport { AuthenticationModule } from './modules/authentication/authentication.module';\nimport { AuthenticationInterceptor } from './middlewares/auth';\nimport { NavigationComponent } from './components/navigation/navigation.component';\nimport { UserProfileModule } from './modules/user-profile/user-profile.module';\nimport { MatchingModule } from './modules/matching/matching.module';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { AboutModule } from './modules/about/about.module';\nimport { StatusPageComponent } from './components/status-page/status-page.component';\nimport { UserModule } from './modules/user/user.module';\nimport { UiModule } from './modules/ui/ui.module';\n\n@NgModule({\n    declarations: [AppComponent, NavigationComponent, StatusPageComponent],\n    imports: [\n        BrowserModule,\n        AppRoutingModule,\n        AuthenticationModule,\n        UserProfileModule,\n        MatchingModule,\n        AboutModule,\n        BrowserAnimationsModule,\n        MatTooltipModule,\n        MatMenuModule,\n        UserModule,\n        UiModule,\n    ],\n    providers: [\n        InitializerService,\n        {\n            provide: APP_INITIALIZER,\n            useFactory: (initializer: InitializerService) => async () =>\n                await initializer.initialize(),\n            deps: [InitializerService],\n            multi: true,\n        },\n        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },\n        {\n            provide: HTTP_INTERCEPTORS,\n            useClass: AuthenticationInterceptor,\n            multi: true,\n        },\n    ],\n    bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { APP_INITIALIZER, NgModule, isDevMode } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './modules/app-routing.module';\nimport { AppComponent } from './app/app.component';\nimport { HTTP_INTERCEPTORS } from '@angular/common/http';\nimport { ApiInterceptor } from 'src/middlewares/api';\nimport { InitializerService } from 'src/services/initializer-service/initializer.service';\nimport { AuthenticationModule } from './modules/authentication/authentication.module';\nimport { AuthenticationInterceptor } from './middlewares/auth';\nimport { NavigationComponent } from './components/navigation/navigation.component';\nimport { UserProfileModule } from './modules/user-profile/user-profile.module';\nimport { MatchingModule } from './modules/matching/matching.module';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { MatTooltipModule } from '@angular/material/tooltip';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { AboutModule } from './modules/about/about.module';\nimport { StatusPageComponent } from './components/status-page/status-page.component';\nimport { UserModule } from './modules/user/user.module';\nimport { UiModule } from './modules/ui/ui.module';\nimport { ServiceWorkerModule } from '@angular/service-worker';\n\n@NgModule({\n    declarations: [AppComponent, NavigationComponent, StatusPageComponent],\n    imports: [\n        BrowserModule,\n        AppRoutingModule,\n        AuthenticationModule,\n        UserProfileModule,\n        MatchingModule,\n        AboutModule,\n        BrowserAnimationsModule,\n        MatTooltipModule,\n        MatMenuModule,\n        UserModule,\n        UiModule,\n        ServiceWorkerModule.register('ngsw-worker.js', {\n            enabled: !isDevMode(),\n            // Register the ServiceWorker as soon as the application is stable\n            // or after 30 seconds (whichever comes first).\n            registrationStrategy: 'registerWhenStable:30000',\n        }),\n    ],\n    providers: [\n        InitializerService,\n        {\n            provide: APP_INITIALIZER,\n            useFactory: (initializer: InitializerService) => async () =>\n                await initializer.initialize(),\n            deps: [InitializerService],\n            multi: true,\n        },\n        { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },\n        {\n            provide: HTTP_INTERCEPTORS,\n            useClass: AuthenticationInterceptor,\n            multi: true,\n        },\n    ],\n    bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8313,13 +8313,13 @@
         },
         {
             "name": "AuthenticationModule",
-            "id": "module-AuthenticationModule-2d6cc4488389733d4fec7184f0aeae10a1ed1baae57c956428218bd7ec50b3b8ec95d71004561b3020008ce2a72dd71fae3f44268360e46ced28eb16ad0dd084",
+            "id": "module-AuthenticationModule-45102f8d021ae7e0a218cbdd2ec72ba3dee5ace524cc057142fc71e2fbdde06985333092019b186b94a8f960d0d1d8f35523e0bdc173ab321536487607882676",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/authentication/authentication.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LoginPageComponent } from './pages/login-page/login-page.component';\nimport { HttpClientModule } from '@angular/common/http';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { SignupPageComponent } from './pages/signup-page/signup-page.component';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { UiModule } from '../ui/ui.module';\nimport { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';\nimport { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';\n\n@NgModule({\n    declarations: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n        AuthenticationLayoutComponent,\n    ],\n    imports: [\n        CommonModule,\n        HttpClientModule,\n        ReactiveFormsModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatCheckboxModule,\n        UiModule,\n    ],\n    exports: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n    ],\n})\nexport class AuthenticationModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LoginPageComponent } from './pages/login-page/login-page.component';\nimport { HttpClientModule } from '@angular/common/http';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { SignupPageComponent } from './pages/signup-page/signup-page.component';\nimport { MatFormFieldModule } from '@angular/material/form-field';\nimport { MatInputModule } from '@angular/material/input';\nimport { MatCheckboxModule } from '@angular/material/checkbox';\nimport { UiModule } from '../ui/ui.module';\nimport { RequestPasswordResetPageComponent } from './pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './pages/password-reset-page/password-reset-page.component';\nimport { AuthenticationLayoutComponent } from './components/authentication-layout/authentication-layout.component';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n        AuthenticationLayoutComponent,\n    ],\n    imports: [\n        CommonModule,\n        RouterModule,\n        HttpClientModule,\n        ReactiveFormsModule,\n        MatFormFieldModule,\n        MatInputModule,\n        MatCheckboxModule,\n        UiModule,\n    ],\n    exports: [\n        LoginPageComponent,\n        SignupPageComponent,\n        RequestPasswordResetPageComponent,\n        PasswordResetPageComponent,\n    ],\n})\nexport class AuthenticationModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8904,6 +8904,26 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        conversations: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        matches: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/modules/ui/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -8991,6 +9011,26 @@
                 "defaultValue": "/^(?:[\\u2700-\\u27bf]|(?:\\ud83c[\\udde6-\\uddff]){2}|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\u0023-\\u0039]\\ufe0f?\\u20e3|\\u3299|\\u3297|\\u303d|\\u3030|\\u24c2|\\ud83c[\\udd70-\\udd71]|\\ud83c[\\udd7e-\\udd7f]|\\ud83c\\udd8e|\\ud83c[\\udd91-\\udd9a]|\\ud83c[\\udde6-\\uddff]|[\\ud83c[\\ude01-\\ude02]|\\ud83c\\ude1a|\\ud83c\\ude2f|[\\ud83c[\\ude32-\\ude3a]|[\\ud83c[\\ude50-\\ude51]|\\u203c|\\u2049|[\\u25aa-\\u25ab]|\\u25b6|\\u25c0|[\\u25fb-\\u25fe]|\\u00a9|\\u00ae|\\u2122|\\u2139|\\ud83c\\udc04|[\\u2600-\\u26FF]|\\u2b05|\\u2b06|\\u2b07|\\u2b1b|\\u2b1c|\\u2b50|\\u2b55|\\u231a|\\u231b|\\u2328|\\u23cf|[\\u23e9-\\u23f3]|[\\u23f8-\\u23fa]|\\ud83c\\udccf|\\u2934|\\u2935|[\\u2190-\\u21ff])+$/"
             },
             {
+                "name": "Empty",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        conversations: [],\n    },\n}"
+            },
+            {
+                "name": "Empty",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        matches: [],\n    },\n}"
+            },
+            {
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9009,6 +9049,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n    production: true,\n    ws: {\n        url: 'ws://api.polytinder.com',\n        reconnectInterval: 5000,\n        reconnectAttempts: 5,\n    },\n    api: {\n        url: 'https://api.polytinder.com',\n    },\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        isLoading: false,\n        isError: true,\n        message: 'Error!',\n    },\n}"
             },
             {
                 "name": "GENDER_IDENTITIES",
@@ -9124,11 +9174,31 @@
                 "name": "Loading",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Loading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/modules/ui/stories/button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n    args: {\n        isLoading: true,\n    },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    decorators: [\n        moduleMetadata({\n            providers: [\n                {\n                    provide: SessionService,\n                    useValue: {\n                        isLoggedIn: () => of(true),\n                        session: of({}),\n                    },\n                },\n            ],\n        }),\n    ],\n}"
             },
             {
                 "name": "LOGIN_ROUTE",
@@ -9184,11 +9254,51 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<NavigationComponent>",
+                "defaultValue": "{\n    title: 'Navigation',\n    component: NavigationComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                HttpClientTestingModule,\n                RouterTestingModule,\n                MatSnackBarModule,\n                UiModule,\n            ],\n            providers: [\n                AuthenticationService,\n                UserProfileService,\n                ValidationService,\n                PublicProfileService,\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) => `<div style=\"height: 100vh;\">${story}</div>`,\n        ),\n    ],\n    parameters: {\n        layout: 'fullscreen',\n    },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AuthenticationLayoutComponent>",
-                "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule, RouterTestingModule],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({}),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n}"
+                "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StatusPageComponent>",
+                "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ConversationListComponent>",
+                "defaultValue": "{\n    title: 'Matching/Conversation List',\n    component: ConversationListComponent,\n    decorators: [\n        applicationConfig({\n            providers: [provideAnimations()],\n        }),\n        moduleMetadata({\n            imports: [\n                RouterTestingModule.withRoutes([\n                    { path: '**', component: ConversationListComponent },\n                ]),\n                HttpClientTestingModule,\n                MatDialogModule,\n                MatSnackBarModule,\n                MatMenuModule,\n                UiModule,\n            ],\n            providers: [\n                MatchingService,\n                ModerationService,\n                PublicProfileService,\n                ValidationService,\n                ModalService,\n            ],\n        }),\n    ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MatchListComponent>",
+                "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
             },
             {
                 "name": "meta",
@@ -9269,6 +9379,16 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[MATCHED_USER_ROUTE]"
+            },
+            {
+                "name": "NotLoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    decorators: [\n        moduleMetadata({\n            providers: [\n                {\n                    provide: SessionService,\n                    useValue: {\n                        isLoggedIn: () => of(false),\n                        session: of({}),\n                    },\n                },\n            ],\n        }),\n    ],\n}"
             },
             {
                 "name": "onlyHasEmoji",
@@ -9629,8 +9749,52 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<NavigationComponent>",
+                "file": "src/stories/navigation.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<AuthenticationLayoutComponent>",
                 "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<StatusPageComponent>",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ConversationListComponent>",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MatchListComponent>",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -9987,7 +10151,71 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AuthenticationLayoutComponent>",
-                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule, RouterTestingModule],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({}),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n}"
+                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
+                }
+            ],
+            "src/modules/matching/stories/conversation-list.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        conversations: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
+                },
+                {
+                    "name": "Empty",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        conversations: [],\n    },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ConversationListComponent>",
+                    "defaultValue": "{\n    title: 'Matching/Conversation List',\n    component: ConversationListComponent,\n    decorators: [\n        applicationConfig({\n            providers: [provideAnimations()],\n        }),\n        moduleMetadata({\n            imports: [\n                RouterTestingModule.withRoutes([\n                    { path: '**', component: ConversationListComponent },\n                ]),\n                HttpClientTestingModule,\n                MatDialogModule,\n                MatSnackBarModule,\n                MatMenuModule,\n                UiModule,\n            ],\n            providers: [\n                MatchingService,\n                ModerationService,\n                PublicProfileService,\n                ValidationService,\n                ModalService,\n            ],\n        }),\n    ],\n}"
+                }
+            ],
+            "src/modules/matching/stories/match-list.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/match-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        matches: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
+                },
+                {
+                    "name": "Empty",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/match-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        matches: [],\n    },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/matching/stories/match-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<MatchListComponent>",
+                    "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
                 }
             ],
             "src/modules/ui/stories/button.stories.ts": [
@@ -10194,6 +10422,38 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n    production: true,\n    ws: {\n        url: 'ws://api.polytinder.com',\n        reconnectInterval: 5000,\n        reconnectAttempts: 5,\n    },\n    api: {\n        url: 'https://api.polytinder.com',\n    },\n}"
+                }
+            ],
+            "src/modules/authentication/stories/status-page.stories.ts": [
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/status-page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        isLoading: false,\n        isError: true,\n        message: 'Error!',\n    },\n}"
+                },
+                {
+                    "name": "Loading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/status-page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/status-page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<StatusPageComponent>",
+                    "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
                 }
             ],
             "src/modules/user-profile/constants/gender.ts": [
@@ -10412,6 +10672,38 @@
                     "deprecationMessage": "",
                     "type": "[]",
                     "defaultValue": "[\n    'Animation stop-motion',\n    'Antiquités',\n    'Apiculture',\n    'Archéologie',\n    'Astronomie',\n    'Bandes dessinées',\n    'Barbecue',\n    'Basketball',\n    'Bibliophilie',\n    'Billard',\n    'Bingo',\n    'Botanique',\n    'Bougie artisanale',\n    'Bricolage',\n    'Bridge',\n    'Broderie',\n    'Calligraphie',\n    'Camping',\n    'Canoë-kayak',\n    'Chasse au trésor',\n    'Chasse photographique',\n    'Chorale communautaire',\n    \"Cinéma d'animation\",\n    'Cinéma',\n    'Collection de pièces de monnaie',\n    'Collection de timbres',\n    'Comédies musicales',\n    'Confitures maison',\n    'Course à pied',\n    'Course de chevaux',\n    'Couture',\n    'Création de bijoux',\n    'Création de mosaïques',\n    'Critique de films',\n    'Crochet',\n    'Cuisine végétalienne',\n    'Cuisine',\n    'Curling',\n    'Danse contemporaine',\n    'Danse',\n    'Découpage',\n    'Dégustation de thé',\n    'Dégustation de vins',\n    'Dessin',\n    'Disney',\n    'Doctor Who',\n    'Documentaires',\n    'Échecs',\n    'Écriture',\n    \"Élevage d'animaux de compagnie\",\n    \"Élevage de plantes d'intérieur\",\n    'Énigmes et casse-tête',\n    'Escalade',\n    'Escape games',\n    'Escrime',\n    'Étude de la généalogie',\n    'Étude de la météorologie',\n    'Étude des constellations',\n    'Étude des étoiles',\n    'Étude des insectes',\n    'Étude des oiseaux',\n    'Étude des sciences naturelles',\n    'Fabrication de bijoux',\n    'Fabrication de chandelles',\n    'Fléchettes',\n    'Football',\n    'Game of Thrones',\n    'Géologie',\n    'Golf',\n    'Graffiti',\n    'Guitare',\n    'Gymnastique',\n    'Harry Potter',\n    'Hip-hop',\n    \"Histoire de l'art\",\n    'Jardinage',\n    'Jazz',\n    'Jeu de cartes',\n    'Jeu de dames',\n    'Jeu de dominos',\n    'Jeu de tarot',\n    'Jeux de société',\n    'Jeux vidéo',\n    'Jogging',\n    'Karaoké',\n    'Lancer de frisbee',\n    'Le Seigneur des Anneaux',\n    'Lecture de poésie',\n    'Lecture de roman classique',\n    'Lecture',\n    'Livres audio',\n    'Manga',\n    'Marionnettes',\n    'Marvel Cinematic Universe',\n    'Mixologie',\n    'Modélisme',\n    'Mosaïque',\n    'Musique classique',\n    'Musique électronique',\n    'Musique',\n    'Natation',\n    'Observation des étoiles',\n    'Observation des papillons',\n    'Origami',\n    'Patin à roulettes',\n    'Patinage artistique',\n    'Patinage de vitesse',\n    'Pâtisserie',\n    'Pêche',\n    'Peinture',\n    'Percussions',\n    'Pétanque',\n    'Photographie',\n    'Piano',\n    'Plongée',\n    'Poésie',\n    'Pokémon',\n    'Poker',\n    'Polo à cheval',\n    'Poterie',\n    'Randonnée',\n    'Réalisation de vidéos familiales',\n    'Reconstitution historique',\n    'Rédaction de lettres manuscrites',\n    'Reliure de livres',\n    'Réparation de vélos',\n    'Restauration de meubles anciens',\n    \"Rock'n'roll\",\n    'Romans policiers',\n    'Science-fiction',\n    'Scrapbooking',\n    'Sculpture',\n    'Séries télévisées',\n    'Ski',\n    'Star Trek',\n    'Star Wars',\n    'Sudoku',\n    'Taylor Swift',\n    'Tennis',\n    'The Hunger Games',\n    'Théâtre',\n    'Tissage',\n    'Tricot',\n    'Ultimate Frisbee',\n    'Vélo',\n    'Violon',\n    'Visite de jardins botaniques',\n    \"Visite de musées d'art\",\n    'Visite de parcs nationaux',\n    'Vol en montgolfière',\n    'Voyage',\n    'Water-polo',\n]"
+                }
+            ],
+            "src/stories/navigation.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    decorators: [\n        moduleMetadata({\n            providers: [\n                {\n                    provide: SessionService,\n                    useValue: {\n                        isLoggedIn: () => of(true),\n                        session: of({}),\n                    },\n                },\n            ],\n        }),\n    ],\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<NavigationComponent>",
+                    "defaultValue": "{\n    title: 'Navigation',\n    component: NavigationComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                HttpClientTestingModule,\n                RouterTestingModule,\n                MatSnackBarModule,\n                UiModule,\n            ],\n            providers: [\n                AuthenticationService,\n                UserProfileService,\n                ValidationService,\n                PublicProfileService,\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) => `<div style=\"height: 100vh;\">${story}</div>`,\n        ),\n    ],\n    parameters: {\n        layout: 'fullscreen',\n    },\n}"
+                },
+                {
+                    "name": "NotLoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    decorators: [\n        moduleMetadata({\n            providers: [\n                {\n                    provide: SessionService,\n                    useValue: {\n                        isLoggedIn: () => of(false),\n                        session: of({}),\n                    },\n                },\n            ],\n        }),\n    ],\n}"
                 }
             ],
             "src/modules/user-profile/constants/looking-for.ts": [
@@ -10692,6 +10984,19 @@
                     "kind": 190
                 }
             ],
+            "src/stories/navigation.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<NavigationComponent>",
+                    "file": "src/stories/navigation.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
             "src/modules/authentication/stories/authentication-layout.stories.ts": [
                 {
                     "name": "Story",
@@ -10699,6 +11004,45 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<AuthenticationLayoutComponent>",
                     "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/authentication/stories/status-page.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<StatusPageComponent>",
+                    "file": "src/modules/authentication/stories/status-page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/matching/stories/conversation-list.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ConversationListComponent>",
+                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/matching/stories/match-list.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MatchListComponent>",
+                    "file": "src/modules/matching/stories/match-list.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -11447,6 +11791,36 @@
                 "status": "low"
             },
             {
+                "filePath": "src/modules/authentication/stories/status-page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/authentication/stories/status-page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Loading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/authentication/stories/status-page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/modules/authentication/validators/confirm-password-validator.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -11638,6 +12012,66 @@
                 "name": "PublicProfileService",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/conversation-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/conversation-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Empty",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/conversation-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/match-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/match-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Empty",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/matching/stories/match-list.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -12184,6 +12618,36 @@
                 "name": "WsService",
                 "coveragePercent": 0,
                 "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/navigation.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/navigation.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/navigation.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "NotLoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             }
         ]

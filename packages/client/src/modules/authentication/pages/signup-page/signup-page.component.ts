@@ -16,9 +16,9 @@ export class SignupPageComponent {
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
             Validators.required,
-            Validators.pattern(
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/,
-            ),
+            Validators.pattern(/.+[a-z]+.+/), // letters,
+            Validators.pattern(/.+[0-9]+.+/), // numbers,
+            Validators.pattern(/.+[!@#$%?&*()-_=+/\\|,.;:^¨~<>[\]{}]+.+/), // symbols,
             Validators.minLength(8),
         ]),
         confirmPassword: new FormControl('', [
