@@ -56,7 +56,7 @@ export class AdminUserController extends AbstractController {
             async (
                 req: Request<
                     { userId: string },
-                    { until: string; reason?: string }
+                    { until: string; reason?: string; sendEmail?: boolean }
                 >,
                 res,
                 next,
@@ -66,6 +66,7 @@ export class AdminUserController extends AbstractController {
                         Number(req.params.userId),
                         new Date(req.body.until),
                         req.body.reason,
+                        req.body.sendEmail,
                     );
                     res.status(StatusCodes.OK).json();
                 } catch (e) {
@@ -102,6 +103,7 @@ export class AdminUserController extends AbstractController {
                 await this.adminUserService.banUser(
                     Number(req.params.userId),
                     req.body.reason,
+                    req.body.sendEmail,
                 );
                 res.status(StatusCodes.OK).json();
             } catch (e) {

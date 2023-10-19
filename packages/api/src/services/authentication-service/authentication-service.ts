@@ -71,7 +71,7 @@ export class AuthenticationService {
             );
         }
 
-        const newUser: NoId<User> = {
+        const newUser: NoId<Omit<User, 'createdAt' | 'updatedAt'>> = {
             email,
             lastLogin: new Date(),
             ...(await this.hashPassword(user.password)),

@@ -26,6 +26,9 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReportsPageComponent } from './pages/reports-page/reports-page.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { ReportsPageComponent } from './pages/reports-page/reports-page.componen
     HomePageComponent,
     LoginPageComponent,
     UserPageComponent,
-    ReportsPageComponent
+    ReportsPageComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,8 @@ import { ReportsPageComponent } from './pages/reports-page/reports-page.componen
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSortModule,
+    MatCheckboxModule,    
   ],
   providers: [
     InitializationService,

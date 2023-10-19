@@ -4,6 +4,8 @@ export interface User {
     hash: string;
     salt: string;
     lastLogin: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export type GenderCategory = 'man' | 'woman' | 'other';
@@ -35,6 +37,8 @@ export interface UserProfile {
     genderCategory?: 'men' | 'women' | 'other';
     genderPreference?: 'men' | 'women' | 'all';
     sexualOrientation?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export type UnsafeUserProfileAttributes = 'pictures' | 'interests' | 'associations' | 'languages';

@@ -47,7 +47,7 @@ export class EmailService {
                         HTMLPart: content,
                     },
                 ],
-            }) ?? Promise.resolve()
+            }) ?? Promise.reject('Mailjet not initialised')
         );
     }
 

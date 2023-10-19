@@ -31,16 +31,16 @@ export class UsersAdminService {
     return this.http.get<Ban>(`/admin/users/ban/${userId}`);
   }
 
-  suspendUser(userId: number, until: Date, reason?: string): Observable<void> {
-    return this.http.post<void>(`/admin/users/suspend/${userId}`, { until, reason });
+  suspendUser(userId: number, until: Date, reason?: string, sendEmail: boolean = false): Observable<void> {
+    return this.http.post<void>(`/admin/users/suspend/${userId}`, { until, reason, sendEmail });
   }
 
   revokeSuspension(userId: number): Observable<void> {
     return this.http.delete<void>(`/admin/users/suspend/${userId}`);
   }
 
-  banUser(userId: number, reason?: string): Observable<void> {
-    return this.http.post<void>(`/admin/users/ban/${userId}`, { reason });
+  banUser(userId: number, reason?: string, sendEmail: boolean = false): Observable<void> {
+    return this.http.post<void>(`/admin/users/ban/${userId}`, { reason, sendEmail });
   }
 
   unbanUser(userId: number): Observable<void> {

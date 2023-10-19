@@ -16,7 +16,13 @@
 
         <br>
 
-        <p><b>Updated at:</b> {{updatedAt$ | async}}</p>
+        <p><b>User created at:</b> {{user.createdAt | date: 'MMM dd YYYY, h:mm z'}} ({{user.createdAt | dateAgo}})</p>
+        <p><b>User updated at:</b> {{user.updatedAt | date: 'MMM dd YYYY, h:mm z'}} ({{user.updatedAt | dateAgo}})</p>
+        <p><b>Profile updated at:</b> {{(userProfile$ | async)?.updatedAt | date: 'MMM dd YYYY, h:mm z'}} ({{(userProfile$ | async)?.updatedAt | dateAgo}})</p>
+
+        <br>
+
+        <p><b>Page update:</b> {{updatedAt$ | async}}</p>
 
         <br>
 
@@ -34,6 +40,13 @@
         <textarea style="width: 100%;" rows="20" disabled>
             {{ userProfile | json }}
         </textarea>
+
+        <hr>
+
+        <h2>Pictures</h2>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;">
+            <img *ngFor="let picture of userProfile.pictures" [src]="picture + '-/resize/200x/'" [srcset]="picture + '-/resize/200x/ 1x, ' + picture + '-/resize/400x/ 2x'" alt="">
+        </div>
     </mat-card-content>
 </mat-card>
 
@@ -121,6 +134,8 @@
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+
+            <mat-checkbox formControlName="sendEmail">Send email</mat-checkbox>
         </form>
 
         <button mat-flat-button color="primary" (click)="revokeSuspension()">Revoke suspension</button>
@@ -151,6 +166,8 @@
                     <mat-option [value]="reason" *ngFor="let reason of banReasons">{{reason}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+
+                <mat-checkbox formControlName="sendEmail">Send email</mat-checkbox>
             </form>
         </ng-container>
         <button mat-flat-button color="primary" (click)="unban()" *ngIf="(ban$ | async)">Unban</button>

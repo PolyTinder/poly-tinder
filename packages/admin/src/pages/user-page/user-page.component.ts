@@ -27,9 +27,11 @@ export class UserPageComponent {
   suspendForm = new FormGroup({
     reason: new FormControl(''),
     until: new FormControl(new Date()),
+    sendEmail: new FormControl(false),
   })
   banForm = new FormGroup({
     reason: new FormControl(''),
+    sendEmail: new FormControl(false),
   })
 
 
@@ -116,7 +118,8 @@ export class UserPageComponent {
 
   suspend() {
     if (confirm(`Do you want to suspend this user for "${this.suspendForm.value.reason}" until ${this.suspendForm.value.until}`)) {
-      this.usersAdminService.suspendUser(this.route.snapshot.params['id'], this.suspendForm.value.until!, this.suspendForm.value.reason ?? undefined).subscribe(() => {
+      console.log(this.suspendForm.value);
+      this.usersAdminService.suspendUser(this.route.snapshot.params['id'], this.suspendForm.value.until!, this.suspendForm.value.reason ?? undefined, this.suspendForm.value.sendEmail ?? false).subscribe(() => {
         this.update();
         this.snackBar.open('User suspended', 'Dismiss', { duration: 3000 });
       });
@@ -134,7 +137,7 @@ export class UserPageComponent {
 
   ban() {
     if(confirm(`Do you want to ban this user for "${this.banForm.value.reason}"?`)) {
-      this.usersAdminService.banUser(this.route.snapshot.params['id'], this.banForm.value.reason ?? undefined).subscribe(() => {
+      this.usersAdminService.banUser(this.route.snapshot.params['id'], this.banForm.value.reason ?? undefined, this.banForm.value.sendEmail ?? false).subscribe(() => {
         this.update();
         this.snackBar.open('User banned', 'Dismiss', { duration: 3000 });
       });
