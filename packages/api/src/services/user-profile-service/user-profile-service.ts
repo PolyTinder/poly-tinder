@@ -91,6 +91,7 @@ export class UserProfileService {
             genderCategory: converted.genderCategory ?? null,
             genderPreference: converted.genderPreference ?? null,
             sexualOrientation: converted.sexualOrientation ?? null,
+            updatedAt: new Date(),
         };
 
         if (await this.userProfiles.select().where({ userId }).first()) {

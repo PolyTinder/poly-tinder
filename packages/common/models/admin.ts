@@ -5,9 +5,10 @@ export interface Admin {
     userId: number;
 }
 
-export type UserListItem = Pick<User, 'userId' | 'email'> & Pick<UserProfile, 'name' | 'age'> & {
+export type UserListItem = Pick<User, 'userId' | 'email' | 'createdAt' | 'updatedAt'> & Pick<UserProfile, 'name' | 'age' | 'pictures'> & {
     lastLogin: Date;
     isBanned?: boolean;
     isSuspended?: boolean;
     reportCount: number;
+    profileUpdatedAt?: Date;
 };
