@@ -20,7 +20,7 @@ import { UserProfileService } from '../../services/user-profile-service/user-pro
 import { UserProfile } from 'common/models/user';
 import { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { containedInValidator } from '../../validators/contained-in-validator';
+import { arrayContainedInValidator, containedInValidator } from '../../validators/contained-in-validator';
 
 @Component({
     selector: 'app-user-profile-form',
@@ -54,11 +54,11 @@ export class UserProfileFormComponent {
         height: new FormControl(0, [Validators.min(0), Validators.max(300)]),
         interests: new FormControl<string[]>(
             [],
-            [containedInValidator(INTERESTS)],
+            [arrayContainedInValidator(INTERESTS)],
         ),
         associations: new FormControl<string[]>(
             [],
-            [containedInValidator(ASSOCIATIONS)],
+            [arrayContainedInValidator(ASSOCIATIONS)],
         ),
         lookingFor: new FormControl('', [
             containedInValidator(
