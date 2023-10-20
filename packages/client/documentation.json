@@ -7353,7 +7353,7 @@
         },
         {
             "name": "UserProfileCardComponent",
-            "id": "component-UserProfileCardComponent-438462fcbabab4f3454fe563629b2be42a1c4c5e3cccd2b2f7108cd7c9eca71ab6cce0b32ff5ac8e62c3fb9efe1d305f73355c1118e8edfe75b9487e9c622e1a",
+            "id": "component-UserProfileCardComponent-b6871885bcb1fdf157a652a15fa3be45a3775a881456778af19dc2d22a82c5f5f296f8580e61c2887f2f9438ee3ecccbd26732078f14794452a4aaf8de9add53",
             "file": "src/modules/user-profile/components/user-profile-card/user-profile-card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7376,7 +7376,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 20,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -7385,7 +7385,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 18,
                     "type": "UserProfile | PublicUserResult | undefined | null",
                     "decorators": []
                 }
@@ -7396,7 +7396,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 21,
                     "type": "EventEmitter<void>"
                 }
             ],
@@ -7408,7 +7408,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 92,
+                    "line": 94,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7418,7 +7418,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -7432,7 +7432,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport { ZODIAC_SIGNS } from '../../constants/zodiac';\nimport { SEXUAL_ORIENTATIONS } from '../../constants/gender';\nimport { RELATIONSHIP_TYPES } from '../../constants/relationship-type';\nimport { PROGRAMS } from '../../constants/programs';\nimport { LOOKING_FOR } from '../../constants/looking-for';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport {\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    SEXUAL_ORIENTATIONS,\n    PROGRAMS,\n} from '../../constants';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7454,7 +7454,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 19,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "moderationService",
@@ -7474,7 +7474,7 @@
                         "name": "program",
                         "type": "",
                         "returnType": "",
-                        "line": 23
+                        "line": 25
                     }
                 },
                 "interests": {
@@ -7483,7 +7483,7 @@
                         "name": "interests",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 30
+                        "line": 32
                     }
                 },
                 "associations": {
@@ -7492,7 +7492,7 @@
                         "name": "associations",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 38
+                        "line": 40
                     }
                 },
                 "zodiacSign": {
@@ -7501,7 +7501,7 @@
                         "name": "zodiacSign",
                         "type": "",
                         "returnType": "",
-                        "line": 46
+                        "line": 48
                     }
                 },
                 "sexualOrientation": {
@@ -7510,7 +7510,7 @@
                         "name": "sexualOrientation",
                         "type": "",
                         "returnType": "",
-                        "line": 52
+                        "line": 54
                     }
                 },
                 "relationshipType": {
@@ -7519,7 +7519,7 @@
                         "name": "relationshipType",
                         "type": "",
                         "returnType": "",
-                        "line": 59
+                        "line": 61
                     }
                 },
                 "lookingFor": {
@@ -7528,7 +7528,7 @@
                         "name": "lookingFor",
                         "type": "",
                         "returnType": "",
-                        "line": 65
+                        "line": 67
                     }
                 },
                 "height": {
@@ -7537,7 +7537,7 @@
                         "name": "height",
                         "type": "",
                         "returnType": "",
-                        "line": 71
+                        "line": 73
                     }
                 }
             },
@@ -7625,7 +7625,7 @@
         },
         {
             "name": "UserProfileFormComponent",
-            "id": "component-UserProfileFormComponent-4102845e1e311edee58503e7eaf10d3f6693e5846eb27b990c5cf164a89f4f06e0bf792e4567de318c58663b9eda9967b3246c4667afa73dc8b567a2fec385b5",
+            "id": "component-UserProfileFormComponent-257da66df35814b09fdcaf1123100b2dc6a30bf96931e9bcdfe8ce1a9ecbbd541dc884443fcd9d073c9a08c472a2de088b11086a74e7d8099bff54f9462943af",
             "file": "src/modules/user-profile/components/user-profile-form/user-profile-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7653,7 +7653,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 81
+                    "line": 143
                 },
                 {
                     "name": "drinkingHabits",
@@ -7663,7 +7663,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 72
+                    "line": 134
                 },
                 {
                     "name": "drugHabits",
@@ -7673,7 +7673,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 74
+                    "line": 136
                 },
                 {
                     "name": "genderIdentities",
@@ -7683,7 +7683,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 77
+                    "line": 139
                 },
                 {
                     "name": "genderPreferences",
@@ -7693,7 +7693,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 78
+                    "line": 140
                 },
                 {
                     "name": "genders",
@@ -7703,7 +7703,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 76
+                    "line": 138
                 },
                 {
                     "name": "interests",
@@ -7713,7 +7713,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 80
+                    "line": 142
                 },
                 {
                     "name": "loading$",
@@ -7723,7 +7723,7 @@
                     "type": "BehaviorSubject<boolean>",
                     "optional": false,
                     "description": "",
-                    "line": 92
+                    "line": 154
                 },
                 {
                     "name": "lookingFor",
@@ -7733,7 +7733,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 69
+                    "line": 131
                 },
                 {
                     "name": "pictures",
@@ -7743,7 +7743,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 83
+                    "line": 145
                 },
                 {
                     "name": "programs",
@@ -7753,7 +7753,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 68
+                    "line": 130
                 },
                 {
                     "name": "relationshipTypes",
@@ -7763,7 +7763,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 70
+                    "line": 132
                 },
                 {
                     "name": "sexualities",
@@ -7773,7 +7773,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 79
+                    "line": 141
                 },
                 {
                     "name": "smokingHabits",
@@ -7783,17 +7783,17 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 73
+                    "line": 135
                 },
                 {
                     "name": "userProfileForm",
-                    "defaultValue": "new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', []),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>([], []),\n        associations: new FormControl<string[]>([], []),\n        lookingFor: new FormControl('', []),\n        relationshipType: new FormControl('', []),\n        zodiacSign: new FormControl('', []),\n        drinking: new FormControl('', []),\n        smoking: new FormControl('', []),\n        drugs: new FormControl('', []),\n        workout: new FormControl('', []),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [Validators.required]),\n        genderPreference: new FormControl('', [Validators.required]),\n        sexualOrientation: new FormControl(''),\n    })",
+                    "defaultValue": "new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 32
+                    "line": 34
                 },
                 {
                     "name": "workoutHabits",
@@ -7803,7 +7803,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 75
+                    "line": 137
                 },
                 {
                     "name": "zodiacSigns",
@@ -7813,7 +7813,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 71
+                    "line": 133
                 }
             ],
             "methodsClass": [
@@ -7823,7 +7823,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 165,
+                    "line": 227,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7833,7 +7833,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 185,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -7847,7 +7847,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport { PROGRAMS_ARRAY } from '../../constants/programs';\nimport { LOOKING_FOR } from '../../constants/looking-for';\nimport { RELATIONSHIP_TYPES } from '../../constants/relationship-type';\nimport { ZODIAC_SIGNS } from '../../constants/zodiac';\nimport {\n    DRINKING_HABITS,\n    DRUGS_HABITS,\n    SMOKING_HABITS,\n    WORKOUT_HABITS,\n} from '../../constants/lifestyle';\nimport {\n    GENDERS,\n    GENDER_IDENTITIES,\n    GENDER_PREFERENCES,\n    SEXUAL_ORIENTATIONS,\n} from '../../constants/gender';\nimport { UserProfileService } from '../../services/user-profile-service/user-profile.service';\nimport { UserProfile } from 'common/models/user';\nimport { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';\nimport { INTERESTS } from '../../constants/interets';\nimport { ASSOCIATIONS } from '../../constants/associations';\nimport { MatSnackBar } from '@angular/material/snack-bar';\n\n@Component({\n    selector: 'app-user-profile-form',\n    templateUrl: './user-profile-form.component.html',\n    styleUrls: ['./user-profile-form.component.scss'],\n})\nexport class UserProfileFormComponent {\n    userProfileForm = new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', []),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>([], []),\n        associations: new FormControl<string[]>([], []),\n        lookingFor: new FormControl('', []),\n        relationshipType: new FormControl('', []),\n        zodiacSign: new FormControl('', []),\n        drinking: new FormControl('', []),\n        smoking: new FormControl('', []),\n        drugs: new FormControl('', []),\n        workout: new FormControl('', []),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [Validators.required]),\n        genderPreference: new FormControl('', [Validators.required]),\n        sexualOrientation: new FormControl(''),\n    });\n    programs = PROGRAMS_ARRAY;\n    lookingFor = LOOKING_FOR;\n    relationshipTypes = RELATIONSHIP_TYPES;\n    zodiacSigns = ZODIAC_SIGNS;\n    drinkingHabits = DRINKING_HABITS;\n    smokingHabits = SMOKING_HABITS;\n    drugHabits = DRUGS_HABITS;\n    workoutHabits = WORKOUT_HABITS;\n    genders = GENDERS;\n    genderIdentities = GENDER_IDENTITIES;\n    genderPreferences = GENDER_PREFERENCES;\n    sexualities = SEXUAL_ORIENTATIONS;\n    interests = INTERESTS;\n    associations = ASSOCIATIONS;\n\n    pictures = [\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n    ];\n\n    loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);\n\n    constructor(\n        private readonly userProfileService: UserProfileService,\n        private readonly snackBar: MatSnackBar,\n    ) {\n        this.userProfileService.getUserProfile().subscribe((userProfile) => {\n            if (userProfile) {\n                this.userProfileForm.patchValue(userProfile);\n\n                if (userProfile.pictures) {\n                    for (let i = 0; i < this.pictures.length; i++) {\n                        this.pictures[i].next(userProfile.pictures[i]);\n                    }\n                }\n\n                this.userProfileForm.markAsPristine();\n            }\n        });\n\n        combineLatest(this.pictures)\n            .pipe(debounceTime(1))\n            .subscribe((pictures) => {\n                this.userProfileForm.patchValue({ pictures });\n            });\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    onSubmit() {\n        if (this.userProfileForm.invalid) {\n            return;\n        }\n\n        const res: Omit<Partial<UserProfile>, 'userId'> = {};\n\n        for (const [k, v] of Object.entries(this.userProfileForm.value)) {\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            (res as any)[k] = v ?? undefined;\n        }\n\n        this.loading$.next(true);\n        this.userProfileForm.markAsPending();\n        this.userProfileService.updateUserProfile(res);\n        this.userProfileService\n            .applyUserProfileChanges()\n            .pipe(\n                catchError((err) => {\n                    this.snackBar.open(\n                        'Erreur lors de la mise à jour du profil',\n                        undefined,\n                        {\n                            duration: 2000,\n                            politeness: 'assertive',\n                            verticalPosition: 'top',\n                        },\n                    );\n                    this.loading$.next(false);\n                    return err;\n                }),\n            )\n            .subscribe(() => {\n                this.snackBar.open('Profil mis à jour', undefined, {\n                    duration: 2000,\n                    politeness: 'polite',\n                    verticalPosition: 'top',\n                });\n                this.loading$.next(false);\n            });\n    }\n\n    markDirty() {\n        this.userProfileForm.markAsDirty();\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport {\n    PROGRAMS_ARRAY,\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    DRINKING_HABITS,\n    DRUGS_HABITS,\n    SMOKING_HABITS,\n    WORKOUT_HABITS,\n    GENDERS,\n    GENDER_IDENTITIES,\n    GENDER_PREFERENCES,\n    SEXUAL_ORIENTATIONS,\n    INTERESTS,\n    ASSOCIATIONS,\n} from '../../constants';\nimport { UserProfileService } from '../../services/user-profile-service/user-profile.service';\nimport { UserProfile } from 'common/models/user';\nimport { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport {\n    arrayContainedInValidator,\n    containedInValidator,\n} from '../../validators/contained-in-validator';\n\n@Component({\n    selector: 'app-user-profile-form',\n    templateUrl: './user-profile-form.component.html',\n    styleUrls: ['./user-profile-form.component.scss'],\n})\nexport class UserProfileFormComponent {\n    userProfileForm = new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    });\n    programs = PROGRAMS_ARRAY;\n    lookingFor = LOOKING_FOR;\n    relationshipTypes = RELATIONSHIP_TYPES;\n    zodiacSigns = ZODIAC_SIGNS;\n    drinkingHabits = DRINKING_HABITS;\n    smokingHabits = SMOKING_HABITS;\n    drugHabits = DRUGS_HABITS;\n    workoutHabits = WORKOUT_HABITS;\n    genders = GENDERS;\n    genderIdentities = GENDER_IDENTITIES;\n    genderPreferences = GENDER_PREFERENCES;\n    sexualities = SEXUAL_ORIENTATIONS;\n    interests = INTERESTS;\n    associations = ASSOCIATIONS;\n\n    pictures = [\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n    ];\n\n    loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);\n\n    constructor(\n        private readonly userProfileService: UserProfileService,\n        private readonly snackBar: MatSnackBar,\n    ) {\n        this.userProfileService.getUserProfile().subscribe((userProfile) => {\n            if (userProfile) {\n                this.userProfileForm.patchValue(userProfile);\n\n                if (userProfile.pictures) {\n                    for (let i = 0; i < this.pictures.length; i++) {\n                        this.pictures[i].next(userProfile.pictures[i]);\n                    }\n                }\n\n                this.userProfileForm.markAsPristine();\n            }\n        });\n\n        combineLatest(this.pictures)\n            .pipe(debounceTime(1))\n            .subscribe((pictures) => {\n                this.userProfileForm.patchValue({ pictures });\n            });\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    onSubmit() {\n        if (this.userProfileForm.invalid) {\n            return;\n        }\n\n        const res: Omit<Partial<UserProfile>, 'userId'> = {};\n\n        for (const [k, v] of Object.entries(this.userProfileForm.value)) {\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            (res as any)[k] = v ?? undefined;\n        }\n\n        this.loading$.next(true);\n        this.userProfileForm.markAsPending();\n        this.userProfileService.updateUserProfile(res);\n        this.userProfileService\n            .applyUserProfileChanges()\n            .pipe(\n                catchError((err) => {\n                    this.snackBar.open(\n                        'Erreur lors de la mise à jour du profil',\n                        undefined,\n                        {\n                            duration: 2000,\n                            politeness: 'assertive',\n                            verticalPosition: 'top',\n                        },\n                    );\n                    this.loading$.next(false);\n                    return err;\n                }),\n            )\n            .subscribe(() => {\n                this.snackBar.open('Profil mis à jour', undefined, {\n                    duration: 2000,\n                    politeness: 'polite',\n                    verticalPosition: 'top',\n                });\n                this.loading$.next(false);\n            });\n    }\n\n    markDirty() {\n        this.userProfileForm.markAsDirty();\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7875,7 +7875,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 92,
+                "line": 154,
                 "jsdoctags": [
                     {
                         "name": "userProfileService",
@@ -7904,11 +7904,11 @@
                         "name": "userProfile",
                         "type": "",
                         "returnType": "",
-                        "line": 119
+                        "line": 181
                     }
                 }
             },
-            "templateData": "<ng-template #formInvalid>\n    <app-card *ngIf=\"userProfileForm.invalid\" color=\"danger\">\n        Assurez-vous d'avoir rempli tous les champs obligatoires (incluant au moins une image).\n    </app-card>\n</ng-template>\n\n<form [formGroup]=\"userProfileForm\" (submit)=\"onSubmit()\" class=\"form\">\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-card title=\"Mes photos\" icon=\"fas fa-camera-retro\">\n        <div class=\"form__pictures\">\n            <app-image-control\n                *ngFor=\"let picture of pictures; let index = index\"\n                class=\"form__pictures__control\"\n                [value]=\"picture\"\n                crop=\"3:4\"\n                (change)=\"markDirty()\"\n                [canDelete]=\"index !== 0\"\n            ></app-image-control>\n        </div>\n    </app-card>\n\n    <app-card title=\"Mon profil\" icon=\"fas fa-user\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-signature\"></i> Nom</mat-label>\n            <input formControlName=\"name\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-calendar\"></i> Age</mat-label>\n            <input formControlName=\"age\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-book\"></i> À propos de moi</mat-label>\n            <textarea formControlName=\"bio\" rows=\"5\" matInput></textarea>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-ruler\"></i> Taille (cm)</mat-label>\n            <input formControlName=\"height\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-city\"></i> Ville</mat-label>\n            <input formControlName=\"livingIn\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie amoureuse\" icon=\"fas fa-heart\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-heart\"></i> Ouvert à</mat-label>\n            <mat-select formControlName=\"lookingFor\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let lookingFor of lookingFor\" [value]=\"lookingFor.id\">{{ lookingFor.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-user-friends\"></i> Type de relation</mat-label>\n            <mat-select formControlName=\"relationshipType\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let relationshipType of relationshipTypes\" [value]=\"relationshipType.id\">{{ relationshipType.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Catégorie de genre</mat-label>\n            <mat-select formControlName=\"genderCategory\">\n                <mat-option *ngFor=\"let gender of genders\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Identitée de genre</mat-label>\n            <mat-select formControlName=\"gender\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let gender of genderIdentities\" [value]=\"gender\">{{ gender }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> À la recherche de</mat-label>\n            <mat-select formControlName=\"genderPreference\">\n                <mat-option *ngFor=\"let gender of genderPreferences\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-flag\"></i> Sexualité</mat-label>\n            <mat-select formControlName=\"sexualOrientation\">\n                <mat-option *ngFor=\"let sexuality of sexualities\" [value]=\"sexuality.id\">{{ sexuality.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <a href=\"/about/ressources/inclusivity\" target=\"__BLANK\"><i class=\"fas fa-info-circle\"></i> En savoir plus sur les genres et la sexualité</a>\n    </app-card>\n\n    <app-card title=\"Ma vie à Poly\" icon=\"fas fa-school\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Programme d'étude</mat-label>\n            <mat-select formControlName=\"program\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let program of programs\" [value]=\"program.id\">{{ program.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Comités et Associations</mat-label>\n            <mat-select formControlName=\"associations\" multiple>\n                <mat-option \n                    *ngFor=\"let association of associations\"\n                    [value]=\"association\"\n                >\n                    {{association}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Mon mode de vie\" icon=\"fas fa-leaf\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-star-shooting\"></i> Signe zodiac</mat-label>\n            <mat-select formControlName=\"zodiacSign\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let zodiacSign of zodiacSigns\" [value]=\"zodiacSign.id\">{{ zodiacSign.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-glass-martini\"></i> Alcool</mat-label>\n            <mat-select formControlName=\"drinking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drinkingHabit of drinkingHabits\" [value]=\"drinkingHabit.id\">{{ drinkingHabit.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-smoking\"></i> Cigarette</mat-label>\n            <mat-select formControlName=\"smoking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let smokingHabit of smokingHabits\" [value]=\"smokingHabit.id\">{{ smokingHabit.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-cannabis\"></i> Drogues</mat-label>\n            <mat-select formControlName=\"drugs\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drugHabit of drugHabits\" [value]=\"drugHabit.id\">{{ drugHabit.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-dumbbell\"></i> Sports</mat-label>\n            <mat-select formControlName=\"workout\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let workoutHabit of workoutHabits\" [value]=\"workoutHabit.id\">{{ workoutHabit.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Intérets et passes-temps</mat-label>\n            <mat-select formControlName=\"interests\" multiple>\n                <mat-option \n                    *ngFor=\"let interests of interests\"\n                    [value]=\"interests\"\n                >\n                    {{interests}}\n                </mat-option>\n            </mat-select>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie profesionnelle\" icon=\"fas fa-briefcase\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Emploi</mat-label>\n            <input formControlName=\"jobTitle\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Compagnie</mat-label>\n            <input formControlName=\"jobCompany\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-button\n        class=\"form__submit\"\n        icon=\"fas fa-save\"\n        [shadow]=\"true\"\n        interactable=\"small\"\n        type=\"submit\"\n        [disabled]=\"!userProfileForm.dirty || userProfileForm.invalid\"\n        [isLoading]=\"loading$ | async\"\n        color=\"primary\"\n    >Enregistrer</app-button>\n</form>\n"
+            "templateData": "<ng-template #formInvalid>\n    <app-card *ngIf=\"userProfileForm.invalid\" color=\"danger\">\n        Assurez-vous d'avoir rempli tous les champs obligatoires (incluant au moins une image).\n    </app-card>\n</ng-template>\n\n<form [formGroup]=\"userProfileForm\" (submit)=\"onSubmit()\" class=\"form\">\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-card title=\"Mes photos\" icon=\"fas fa-camera-retro\">\n        <div class=\"form__pictures\">\n            <app-image-control\n                *ngFor=\"let picture of pictures; let index = index\"\n                class=\"form__pictures__control\"\n                [value]=\"picture\"\n                crop=\"3:4\"\n                (change)=\"markDirty()\"\n                [canDelete]=\"index !== 0\"\n            ></app-image-control>\n        </div>\n    </app-card>\n\n    <app-card title=\"Mon profil\" icon=\"fas fa-user\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-signature\"></i> Nom</mat-label>\n            <input formControlName=\"name\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-calendar\"></i> Age</mat-label>\n            <input formControlName=\"age\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-book\"></i> À propos de moi</mat-label>\n            <textarea formControlName=\"bio\" rows=\"5\" matInput></textarea>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-ruler\"></i> Taille (cm)</mat-label>\n            <input formControlName=\"height\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-city\"></i> Ville</mat-label>\n            <input formControlName=\"livingIn\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie amoureuse\" icon=\"fas fa-heart\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-heart\"></i> Ouvert à</mat-label>\n            <mat-select formControlName=\"lookingFor\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let lookingFor of lookingFor\" [value]=\"lookingFor.id\">{{ lookingFor.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.lookingFor.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-user-friends\"></i> Type de relation</mat-label>\n            <mat-select formControlName=\"relationshipType\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let relationshipType of relationshipTypes\" [value]=\"relationshipType.id\">{{ relationshipType.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.relationshipType.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Catégorie de genre</mat-label>\n            <mat-select formControlName=\"genderCategory\">\n                <mat-option *ngFor=\"let gender of genders\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderCategory.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Identitée de genre</mat-label>\n            <mat-select formControlName=\"gender\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let gender of genderIdentities\" [value]=\"gender\">{{ gender }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.gender.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> À la recherche de</mat-label>\n            <mat-select formControlName=\"genderPreference\">\n                <mat-option *ngFor=\"let gender of genderPreferences\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderPreference.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-flag\"></i> Sexualité</mat-label>\n            <mat-select formControlName=\"sexualOrientation\">\n                <mat-option *ngFor=\"let sexuality of sexualities\" [value]=\"sexuality.id\">{{ sexuality.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.sexualOrientation.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <a href=\"/about/ressources/inclusivity\" target=\"__BLANK\"><i class=\"fas fa-info-circle\"></i> En savoir plus sur les genres et la sexualité</a>\n    </app-card>\n\n    <app-card title=\"Ma vie à Poly\" icon=\"fas fa-school\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Programme d'étude</mat-label>\n            <mat-select formControlName=\"program\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let program of programs\" [value]=\"program.id\">{{ program.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.program.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Comités et Associations</mat-label>\n            <mat-select formControlName=\"associations\" multiple>\n                <mat-option \n                    *ngFor=\"let association of associations\"\n                    [value]=\"association\"\n                >\n                    {{association}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.associations.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Mon mode de vie\" icon=\"fas fa-leaf\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-star-shooting\"></i> Signe zodiac</mat-label>\n            <mat-select formControlName=\"zodiacSign\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let zodiacSign of zodiacSigns\" [value]=\"zodiacSign.id\">{{ zodiacSign.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.zodiacSign.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-glass-martini\"></i> Alcool</mat-label>\n            <mat-select formControlName=\"drinking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drinkingHabit of drinkingHabits\" [value]=\"drinkingHabit.id\">{{ drinkingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drinking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-smoking\"></i> Cigarette</mat-label>\n            <mat-select formControlName=\"smoking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let smokingHabit of smokingHabits\" [value]=\"smokingHabit.id\">{{ smokingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.smoking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-cannabis\"></i> Drogues</mat-label>\n            <mat-select formControlName=\"drugs\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drugHabit of drugHabits\" [value]=\"drugHabit.id\">{{ drugHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drugs.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-dumbbell\"></i> Sports</mat-label>\n            <mat-select formControlName=\"workout\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let workoutHabit of workoutHabits\" [value]=\"workoutHabit.id\">{{ workoutHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.workout.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Intérets et passes-temps</mat-label>\n            <mat-select formControlName=\"interests\" multiple>\n                <mat-option \n                    *ngFor=\"let interests of interests\"\n                    [value]=\"interests\"\n                >\n                    {{interests}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.interests.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie profesionnelle\" icon=\"fas fa-briefcase\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Emploi</mat-label>\n            <input formControlName=\"jobTitle\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Compagnie</mat-label>\n            <input formControlName=\"jobCompany\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-button\n        class=\"form__submit\"\n        icon=\"fas fa-save\"\n        [shadow]=\"true\"\n        interactable=\"small\"\n        type=\"submit\"\n        [disabled]=\"!userProfileForm.dirty || userProfileForm.invalid\"\n        [isLoading]=\"loading$ | async\"\n        color=\"primary\"\n    >Enregistrer</app-button>\n</form>\n"
         },
         {
             "name": "UserProfilePageComponent",
@@ -8872,6 +8872,26 @@
                 "defaultValue": "'/about/ressources/aid-organizations'"
             },
             {
+                "name": "arrayContainedInValidator",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/validators/contained-in-validator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl<V[]>): ValidationErrors | null => {\n        if (\n            control.value &&\n            !control.value.filter((v) => typeof(v) === 'string' ? v.length : true).every((item: V) =>\n                array.find((arrayItem) => predicate(arrayItem, item)),\n            )\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+            },
+            {
+                "name": "ASSOCIATIONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/associations.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    'CEGM',\n    'CEGMines',\n    'CEGP',\n    'CEAP',\n    'CEGA',\n    'CEGBiomed',\n    'CEGCh',\n    'CEGCi',\n    'CEGE',\n    'CEGéo',\n    'CEGI',\n    'CEGInfo',\n    'CEGL',\n    'Agenda',\n    'Allo-Poly',\n    'Association des étudiants musulmans (AEMUDM)',\n    'Bannière de Polytechnique',\n    'CCGP - Comité de consultation en gestion de Polytechnique',\n    \"CCIP - Comité des Compétitions d'Ingénierie de Polytechnique\",\n    \"Chapitre étudiant de l'OSA-SPIE\",\n    'CLÉE - Comité de Liaison Étudiants/Entreprises de Polytechnique',\n    'Club Poly Énergies',\n    'Comic',\n    \"Comité à l'éducation pour l'année préparatoire\",\n    'Comité international de projets outre-mer (CIPO)',\n    'Foire aux livres',\n    'Houblonneries',\n    'Ingénieurs sans frontières (ISF)',\n    'Jeux de Génie - EPM',\n    'Le Polyscope',\n    'Le Pub',\n    'PINEP',\n    'Poly-Débat',\n    'Poly-FI',\n    'Poly-Habs',\n    'Poly-international',\n    'Poly-Monde',\n    'Poly-Out',\n    'Poly-Party',\n    'Poly-Projet',\n    'Poly-Show',\n    'Poly-Théâtre',\n    'PolyAir',\n    'PolyExplore',\n    'PolyFinances',\n    'PolyJam',\n    'PolyParcs',\n    'Polyphonie',\n    'PolyPhoto',\n    'PolyRad',\n    'PolySphère',\n    'PolySports',\n    'PolyTV',\n    'PolyVoile',\n    'Poly Entrepreneuriat',\n    'Poly Hx',\n    'Projet PC2',\n    'Promo 146',\n    'Station Polytechnique',\n    'STEP',\n]"
+            },
+            {
                 "name": "BASE_URL",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -8902,6 +8922,16 @@
                 "defaultValue": "'/about/ressources/consent'"
             },
             {
+                "name": "containedInValidator",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/validators/contained-in-validator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            !array.find((item) => predicate(item, control.value))\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+            },
+            {
                 "name": "Danger",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -8910,16 +8940,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n    args: {\n        title: undefined,\n        icon: undefined,\n        content: 'This is a danger card',\n        color: 'danger',\n    },\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
             },
             {
                 "name": "Default",
@@ -8940,6 +8960,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n    args: {\n        matches: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
             },
             {
                 "name": "Default",
@@ -8980,6 +9010,26 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{}"
+            },
+            {
+                "name": "DRINKING_HABITS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/lifestyle.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'socially',\n        name: 'Socialement',\n    },\n    {\n        id: 'often',\n        name: 'Souvent',\n    },\n    {\n        id: 'party',\n        name: 'Party animal',\n    },\n]"
+            },
+            {
+                "name": "DRUGS_HABITS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/lifestyle.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'sometimes',\n        name: 'Parfois',\n    },\n    {\n        id: 'socially',\n        name: 'Sociallement',\n    },\n    {\n        id: 'stoner',\n        name: 'Stoner',\n    },\n]"
             },
             {
                 "name": "EMAIL_VALIDATION_TOKEN_KEY",
@@ -9062,6 +9112,36 @@
                 "defaultValue": "{\n    args: {\n        isLoading: false,\n        isError: true,\n        message: 'Error!',\n    },\n}"
             },
             {
+                "name": "GENDER_IDENTITIES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/gender.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    'Agenre',\n    'Ambisexué',\n    'Amphigame',\n    'Androgyne',\n    'Androgynie',\n    'Autogynéphilie',\n    'Bardache',\n    'Bi-spiritualité',\n    'Bigenre',\n    'Binarité de genre',\n    'Bispirituel',\n    'Bispirituelle',\n    'Bissu',\n    'Butch',\n    'Camp',\n    'Castrat',\n    'Çauz',\n    'Ceuxelles',\n    'Cis het',\n    'Cisgenre',\n    'Demi-fille',\n    'Demi-garçon',\n    'Demi-genre',\n    'Diamorique',\n    'Drag king',\n    'Drag queen',\n    'Dyacis',\n    'Efféminé',\n    'El',\n    'Emo-sexualité',\n    'En questionnement',\n    'Enby',\n    'Eunuque',\n    'Femme',\n    'Garçonne',\n    'Gender fluid',\n    'Genderflux',\n    'Genderqueer',\n    'Genre X',\n    'Gynandre',\n    'Gynoïde',\n    'Hijra',\n    'Hommasse',\n    'Homme',\n    'Iel',\n    'Ielle',\n    'Ille',\n    'Mahu',\n    'Mâle',\n    'Masculin',\n    'Masculinisation',\n    'Mix',\n    'Multigenre',\n    'Nat-kadaw',\n    'Neutrois',\n    'New half',\n    'Non binaire',\n    'Omnigenre',\n    'Pangenre',\n    'Rae rae',\n    'Transidentité',\n    'Travelo',\n    'Travesti',\n    'Troisième genre',\n    'Two-spirit',\n]"
+            },
+            {
+                "name": "GENDER_PREFERENCES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/gender.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'man',\n        name: 'Homme',\n    },\n    {\n        id: 'woman',\n        name: 'Femme',\n    },\n    {\n        id: 'all',\n        name: 'Tout le monde',\n    },\n]"
+            },
+            {
+                "name": "GENDERS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/gender.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'man',\n        name: 'Homme',\n    },\n    {\n        id: 'woman',\n        name: 'Femme',\n    },\n    {\n        id: 'other',\n        name: 'Autre',\n    },\n]"
+            },
+            {
                 "name": "groupMessages",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9122,6 +9202,16 @@
                 "defaultValue": "'/about/ressources/inclusivity'"
             },
             {
+                "name": "INTERESTS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/interests.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    'Animation stop-motion',\n    'Antiquités',\n    'Apiculture',\n    'Archéologie',\n    'Astronomie',\n    'Bandes dessinées',\n    'Barbecue',\n    'Basketball',\n    'Bibliophilie',\n    'Billard',\n    'Bingo',\n    'Botanique',\n    'Bougie artisanale',\n    'Bricolage',\n    'Bridge',\n    'Broderie',\n    'Calligraphie',\n    'Camping',\n    'Canoë-kayak',\n    'Chasse au trésor',\n    'Chasse photographique',\n    'Chorale communautaire',\n    \"Cinéma d'animation\",\n    'Cinéma',\n    'Collection de pièces de monnaie',\n    'Collection de timbres',\n    'Comédies musicales',\n    'Confitures maison',\n    'Course à pied',\n    'Course de chevaux',\n    'Couture',\n    'Création de bijoux',\n    'Création de mosaïques',\n    'Critique de films',\n    'Crochet',\n    'Cuisine végétalienne',\n    'Cuisine',\n    'Curling',\n    'Danse contemporaine',\n    'Danse',\n    'Découpage',\n    'Dégustation de thé',\n    'Dégustation de vins',\n    'Dessin',\n    'Disney',\n    'Doctor Who',\n    'Documentaires',\n    'Échecs',\n    'Écriture',\n    \"Élevage d'animaux de compagnie\",\n    \"Élevage de plantes d'intérieur\",\n    'Énigmes et casse-tête',\n    'Escalade',\n    'Escape games',\n    'Escrime',\n    'Étude de la généalogie',\n    'Étude de la météorologie',\n    'Étude des constellations',\n    'Étude des étoiles',\n    'Étude des insectes',\n    'Étude des oiseaux',\n    'Étude des sciences naturelles',\n    'Fabrication de bijoux',\n    'Fabrication de chandelles',\n    'Fléchettes',\n    'Football',\n    'Game of Thrones',\n    'Géologie',\n    'Golf',\n    'Graffiti',\n    'Guitare',\n    'Gymnastique',\n    'Harry Potter',\n    'Hip-hop',\n    \"Histoire de l'art\",\n    'Jardinage',\n    'Jazz',\n    'Jeu de cartes',\n    'Jeu de dames',\n    'Jeu de dominos',\n    'Jeu de tarot',\n    'Jeux de société',\n    'Jeux vidéo',\n    'Jogging',\n    'Karaoké',\n    'Lancer de frisbee',\n    'Le Seigneur des Anneaux',\n    'Lecture de poésie',\n    'Lecture de roman classique',\n    'Lecture',\n    'Livres audio',\n    'Manga',\n    'Marionnettes',\n    'Marvel Cinematic Universe',\n    'Mixologie',\n    'Modélisme',\n    'Mosaïque',\n    'Musique classique',\n    'Musique électronique',\n    'Musique',\n    'Natation',\n    'Observation des étoiles',\n    'Observation des papillons',\n    'Origami',\n    'Patin à roulettes',\n    'Patinage artistique',\n    'Patinage de vitesse',\n    'Pâtisserie',\n    'Pêche',\n    'Peinture',\n    'Percussions',\n    'Pétanque',\n    'Photographie',\n    'Piano',\n    'Plongée',\n    'Poésie',\n    'Pokémon',\n    'Poker',\n    'Polo à cheval',\n    'Poterie',\n    'Randonnée',\n    'Réalisation de vidéos familiales',\n    'Reconstitution historique',\n    'Rédaction de lettres manuscrites',\n    'Reliure de livres',\n    'Réparation de vélos',\n    'Restauration de meubles anciens',\n    \"Rock'n'roll\",\n    'Romans policiers',\n    'Science-fiction',\n    'Scrapbooking',\n    'Sculpture',\n    'Séries télévisées',\n    'Ski',\n    'Star Trek',\n    'Star Wars',\n    'Sudoku',\n    'Taylor Swift',\n    'Tennis',\n    'The Hunger Games',\n    'Théâtre',\n    'Tissage',\n    'Tricot',\n    'Ultimate Frisbee',\n    'Vélo',\n    'Violon',\n    'Visite de jardins botaniques',\n    \"Visite de musées d'art\",\n    'Visite de parcs nationaux',\n    'Vol en montgolfière',\n    'Voyage',\n    'Water-polo',\n]"
+            },
+            {
                 "name": "isSameGroup",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9172,6 +9262,16 @@
                 "defaultValue": "'/login'"
             },
             {
+                "name": "LOOKING_FOR",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/looking-for.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'lt',\n        name: 'Long terme',\n        emoji: '💕',\n        color: '234, 46, 172',\n    },\n    {\n        id: 'ltst',\n        name: 'Long terme, ouvert à du court terme',\n        emoji: '💖',\n        color: '238, 106, 192',\n    },\n    {\n        id: 'stlt',\n        name: 'Court terme, ouvert à du long terme',\n        emoji: '🍻',\n        color: '253, 223, 131',\n    },\n    {\n        id: 'fun',\n        name: 'Fun',\n        emoji: '🍆',\n        color: '110, 55, 107',\n    },\n    {\n        id: 'friend',\n        name: 'Amitié',\n        emoji: '🤝',\n        color: '255, 228, 115',\n    },\n    {\n        id: 'idk',\n        name: 'Je sais pas',\n        emoji: '🤷‍♀️',\n        color: '255, 228, 115',\n    },\n]"
+            },
+            {
                 "name": "MATCHED_USER_ROUTE",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9215,26 +9315,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AuthenticationLayoutComponent>",
-                "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/modules/authentication/stories/status-page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<StatusPageComponent>",
-                "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/modules/matching/stories/conversation-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -9250,6 +9330,26 @@
                 "deprecationMessage": "",
                 "type": "Meta<MatchListComponent>",
                 "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<AuthenticationLayoutComponent>",
+                "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StatusPageComponent>",
+                "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
             },
             {
                 "name": "meta",
@@ -9452,6 +9552,36 @@
                 "defaultValue": "'/profile'"
             },
             {
+                "name": "PROGRAMS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/programs.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n    bacc_aero: 'Génie aérospatial',\n    bacc_bio: 'Génie biomédical',\n    bacc_chim: 'Génie chimique',\n    bacc_civ: 'Génie civil',\n    bacc_mine: 'Génie des mines',\n    bacc_ele: 'Génie électrique',\n    bacc_geo: 'Génie géologique',\n    bacc_ind: 'Génie industriel',\n    bacc_info: 'Génie informatique',\n    bacc_log: 'Génie logiciel',\n    bacc_meca: 'Génie mécanique',\n    bacc_phys: 'Génie physique',\n    mat_dd: 'Maîtrise développement durable',\n    mat_ergo: 'Maîtrise ergonomie et ergonomie du logiciel',\n    mat_aero: 'Maîtrise génie aérospatial',\n    mat_bio: 'Maîtrise génie biomédical',\n    mat_chim: 'Maîtrise génie chimique',\n    mat_civ: 'Maîtrise génie civil',\n    mat_mat: 'Maîtrise génie des matériaux',\n    mat_ele: 'Maîtrise génie électrique',\n    mat_eners: 'Maîtrise génie énergétique et nucléaire',\n    mat_ind: 'Maîtrise génie industriel',\n    mat_infolog: 'Maîtrise génie informatique et génie logiciel',\n    mat_meca: 'Maîtrise génie mécanique',\n    mat_mine: 'Maîtrise génie minéral',\n    mat_phys: 'Maîtrise génie physique',\n    mat_math: 'Maîtrise mathématiques',\n    mat_tech: 'Maîtrise technologie',\n    other_cert_micro: 'Certificats et microprogrammes de 1e cycle',\n    other_form_cont: 'Formation continue',\n    other_dd_hec: 'Double diplôme HEC Montréal (Baccalauréat)',\n}"
+            },
+            {
+                "name": "PROGRAMS_ARRAY",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/programs.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Object.entries(PROGRAMS).map(([id, name]) => ({\n    id,\n    name,\n}))"
+            },
+            {
+                "name": "PROGRAMS_CATEGORY",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/programs.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n    bacc: 'Baccalauréat',\n    mat: 'Maîtrise',\n    other: 'Autres',\n}"
+            },
+            {
                 "name": "PUBLIC_KEY",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9512,6 +9642,16 @@
                 "defaultValue": "[\n    \"Qu'est-ce que tu penses que je fais pour m'amuser ?\",\n    'Comment as-tu choisi ton programme ?',\n    \"Si tu n'étais pas à l'école, que ferais-tu ?\",\n    'À quelle distance de chez toi es-tu ?',\n    \"Comment se passe l'école en un mot ?\",\n    \"Que penses-tu que faire après l'école ?\",\n    \"Qu'est-ce que je devrais regarder dès que j'aurai du temps ?\",\n    \"Quelle caractéristique principale penses-tu que j'ai ?\",\n    'Quelle est la chose la plus inexplicable qui te soit arrivée ?',\n    'Quelle est ta caractéristique la plus toxique que tu peux admettre ?',\n    'À quoi penses-tu trop en ce moment ?',\n    \"Qu'est-ce que toi plus jeune aurait du mal à croire de ta vie aujourd'hui ?\",\n    'Quel est ton adjectif préféré pour te décrire et pourquoi ?',\n    'Quelle est la plus grosse erreur que tu aies commise ?',\n    'Si nous étions un groupe de musique, quel serait notre nom ?',\n    'Quel souvenir te fait instantanément sourire ?',\n    'À quoi penses-tu le plus souvent ?',\n    'Quel est quelque chose que tu apprécies et dont tu ne te lasses jamais ?',\n    \"Quelle est une chose qui devrait être enseignée, mais ne l'est pas ?\",\n    \"Si tu avais une étiquette d'avertissement, que dirait-elle ?\",\n    'Un étranger a-t-il déjà changé ta vie ?',\n    'Quel est le compliment que tu préfères recevoir ?',\n    'Quel est ton tout premier souvenir de bonheur ?',\n    \"Si tu devais résumer l'espèce humaine en 3 mots, quels seraient ces mots ?\",\n    \"Si tu mourais aujourd'hui, quels regrets aurais-tu de ta vie ?\",\n    'Pour quoi es-tu le plus reconnaissant en ce moment ?',\n    'Quel conseil en matière de rencontres donnerais-tu à ton moi plus jeune ?',\n    'Quelle est la dernière chose que tu as mentie ?',\n    \"Quand as-tu ressenti pour la dernière fois de la chance d'être toi ?\",\n    \"Quelle est la pire hypothèse que quelqu'un ait faite à ton sujet ?\",\n    \"Qu'as-tu le plus peur : de l'échec ou du succès, et pourquoi ?\",\n    \"Quelle est la caractéristique de personnalité que tu détestes le plus chez quelqu'un ?\",\n    'Quelle est ta citation de chanson préférée à laquelle tu peux penser spontanément ?',\n]"
             },
             {
+                "name": "RELATIONSHIP_TYPES",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/relationship-type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'mono',\n        name: 'Monogame',\n    },\n    {\n        id: 'poly',\n        name: 'Polygame',\n    },\n    {\n        id: 'open',\n        name: 'En relation ouverte',\n    },\n    {\n        id: 'exp',\n        name: \"Ouvert à l'expérience\",\n    },\n]"
+            },
+            {
                 "name": "REPORT_REASONS",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9562,6 +9702,16 @@
                 "defaultValue": "'user-session-token'"
             },
             {
+                "name": "SEXUAL_ORIENTATIONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/gender.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'straight',\n        name: 'Hétéro',\n    },\n    {\n        id: 'gay',\n        name: 'Gay',\n    },\n    {\n        id: 'lestbian',\n        name: 'Lesbienne',\n    },\n    {\n        id: 'bi',\n        name: 'Bisexual',\n    },\n    {\n        id: 'pan',\n        name: 'Pansexuel',\n    },\n    {\n        id: 'ace',\n        name: 'Asexuel',\n    },\n    {\n        id: 'queer',\n        name: 'Queer',\n    },\n    {\n        id: 'questioning',\n        name: 'En questionnement',\n    },\n    {\n        id: 'aromantic',\n        name: 'Aromantique',\n    },\n    {\n        id: 'other',\n        name: 'Autre',\n    },\n]"
+            },
+            {
                 "name": "SIGNUP_ROUTE",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9570,6 +9720,16 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'/signup'"
+            },
+            {
+                "name": "SMOKING_HABITS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/lifestyle.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'quitting',\n        name: \"En train d'arrêter\",\n    },\n    {\n        id: 'socially',\n        name: 'Socialement',\n    },\n    {\n        id: 'when_drinking',\n        name: 'Quand je bois',\n    },\n    {\n        id: 'party',\n        name: 'Party animal',\n    },\n]"
             },
             {
                 "name": "SWIPING_ROUTE",
@@ -9590,6 +9750,26 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'/about/rules/policies/terms-and-conditions'"
+            },
+            {
+                "name": "WORKOUT_HABITS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/lifestyle.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n        emoji: '🥔',\n    },\n    {\n        id: 'sometimes',\n        name: 'Parfois',\n        emoji: '🚶',\n    },\n    {\n        id: 'often',\n        name: 'Souvent',\n        emoji: '🏃',\n    },\n    {\n        id: 'athlete',\n        name: 'Athlète',\n        emoji: '🏋️‍♀️',\n    },\n]"
+            },
+            {
+                "name": "ZODIAC_SIGNS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/constants/zodiac.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        id: 'capricorn',\n        name: 'Capricorne',\n        emoji: '♑',\n    },\n    {\n        id: 'aquarius',\n        name: 'Verseau',\n        emoji: '♒',\n    },\n    {\n        id: 'pisces',\n        name: 'Poissons',\n        emoji: '♓',\n    },\n    {\n        id: 'aries',\n        name: 'Bélier',\n        emoji: '♈',\n    },\n    {\n        id: 'taurus',\n        name: 'Taureau',\n        emoji: '♉',\n    },\n    {\n        id: 'gemini',\n        name: 'Gémeaux',\n        emoji: '♊',\n    },\n    {\n        id: 'cancer',\n        name: 'Cancer',\n        emoji: '♋',\n    },\n    {\n        id: 'leo',\n        name: 'Lion',\n        emoji: '♌',\n    },\n    {\n        id: 'virgo',\n        name: 'Vierge',\n        emoji: '♍',\n    },\n    {\n        id: 'libra',\n        name: 'Balance',\n        emoji: '♎',\n    },\n    {\n        id: 'scorpio',\n        name: 'Scorpion',\n        emoji: '♏',\n    },\n    {\n        id: 'sagittarius',\n        name: 'Sagittaire',\n        emoji: '♐',\n    },\n]"
             }
         ],
         "functions": [],
@@ -9631,28 +9811,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<AuthenticationLayoutComponent>",
-                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 180
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<StatusPageComponent>",
-                "file": "src/modules/authentication/stories/status-page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 180
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<ConversationListComponent>",
                 "file": "src/modules/matching/stories/conversation-list.stories.ts",
                 "deprecated": false,
@@ -9666,6 +9824,28 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<MatchListComponent>",
                 "file": "src/modules/matching/stories/match-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<AuthenticationLayoutComponent>",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<StatusPageComponent>",
+                "file": "src/modules/authentication/stories/status-page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -9915,6 +10095,40 @@
                     "defaultValue": "routes.map((route) => ({\n    ...route,\n    path: route.path?.replace(/^\\//, ''),\n}))"
                 }
             ],
+            "src/modules/user-profile/validators/contained-in-validator.ts": [
+                {
+                    "name": "arrayContainedInValidator",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/validators/contained-in-validator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl<V[]>): ValidationErrors | null => {\n        if (\n            control.value &&\n            !control.value.filter((v) => typeof(v) === 'string' ? v.length : true).every((item: V) =>\n                array.find((arrayItem) => predicate(arrayItem, item)),\n            )\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+                },
+                {
+                    "name": "containedInValidator",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/validators/contained-in-validator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            !array.find((item) => predicate(item, control.value))\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+                }
+            ],
+            "src/modules/user-profile/constants/associations.ts": [
+                {
+                    "name": "ASSOCIATIONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/associations.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    'CEGM',\n    'CEGMines',\n    'CEGP',\n    'CEAP',\n    'CEGA',\n    'CEGBiomed',\n    'CEGCh',\n    'CEGCi',\n    'CEGE',\n    'CEGéo',\n    'CEGI',\n    'CEGInfo',\n    'CEGL',\n    'Agenda',\n    'Allo-Poly',\n    'Association des étudiants musulmans (AEMUDM)',\n    'Bannière de Polytechnique',\n    'CCGP - Comité de consultation en gestion de Polytechnique',\n    \"CCIP - Comité des Compétitions d'Ingénierie de Polytechnique\",\n    \"Chapitre étudiant de l'OSA-SPIE\",\n    'CLÉE - Comité de Liaison Étudiants/Entreprises de Polytechnique',\n    'Club Poly Énergies',\n    'Comic',\n    \"Comité à l'éducation pour l'année préparatoire\",\n    'Comité international de projets outre-mer (CIPO)',\n    'Foire aux livres',\n    'Houblonneries',\n    'Ingénieurs sans frontières (ISF)',\n    'Jeux de Génie - EPM',\n    'Le Polyscope',\n    'Le Pub',\n    'PINEP',\n    'Poly-Débat',\n    'Poly-FI',\n    'Poly-Habs',\n    'Poly-international',\n    'Poly-Monde',\n    'Poly-Out',\n    'Poly-Party',\n    'Poly-Projet',\n    'Poly-Show',\n    'Poly-Théâtre',\n    'PolyAir',\n    'PolyExplore',\n    'PolyFinances',\n    'PolyJam',\n    'PolyParcs',\n    'Polyphonie',\n    'PolyPhoto',\n    'PolyRad',\n    'PolySphère',\n    'PolySports',\n    'PolyTV',\n    'PolyVoile',\n    'Poly Entrepreneuriat',\n    'Poly Hx',\n    'Projet PC2',\n    'Promo 146',\n    'Station Polytechnique',\n    'STEP',\n]"
+                }
+            ],
             "src/modules/image/constants/uploadcare.ts": [
                 {
                     "name": "BASE_URL",
@@ -9991,28 +10205,6 @@
                     "defaultValue": "{\n    title: 'UI/Card',\n    component: CardComponent,\n    args: {\n        title: 'This is a title',\n        icon: 'fas fa-flag',\n        content: 'This is a card',\n        noPadding: false,\n        color: 'default',\n    },\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-card\n                [icon]=\"icon\"\n                [title]=\"title\"\n                [anchor]=\"anchor\"\n                [noPadding]=\"noPadding\"\n                [color]=\"color\"\n            >\n                ${args.content}\n            </app-card>\n        `,\n    }),\n}"
                 }
             ],
-            "src/modules/authentication/stories/authentication-layout.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AuthenticationLayoutComponent>",
-                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
-                }
-            ],
             "src/modules/matching/stories/conversation-list.stories.ts": [
                 {
                     "name": "Default",
@@ -10075,6 +10267,28 @@
                     "deprecationMessage": "",
                     "type": "Meta<MatchListComponent>",
                     "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
+                }
+            ],
+            "src/modules/authentication/stories/authentication-layout.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AuthenticationLayoutComponent>",
+                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
                 }
             ],
             "src/modules/ui/stories/button.stories.ts": [
@@ -10171,6 +10385,48 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
+                }
+            ],
+            "src/modules/user-profile/constants/lifestyle.ts": [
+                {
+                    "name": "DRINKING_HABITS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/lifestyle.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'socially',\n        name: 'Socialement',\n    },\n    {\n        id: 'often',\n        name: 'Souvent',\n    },\n    {\n        id: 'party',\n        name: 'Party animal',\n    },\n]"
+                },
+                {
+                    "name": "DRUGS_HABITS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/lifestyle.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'sometimes',\n        name: 'Parfois',\n    },\n    {\n        id: 'socially',\n        name: 'Sociallement',\n    },\n    {\n        id: 'stoner',\n        name: 'Stoner',\n    },\n]"
+                },
+                {
+                    "name": "SMOKING_HABITS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/lifestyle.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n    },\n    {\n        id: 'quitting',\n        name: \"En train d'arrêter\",\n    },\n    {\n        id: 'socially',\n        name: 'Socialement',\n    },\n    {\n        id: 'when_drinking',\n        name: 'Quand je bois',\n    },\n    {\n        id: 'party',\n        name: 'Party animal',\n    },\n]"
+                },
+                {
+                    "name": "WORKOUT_HABITS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/lifestyle.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'never',\n        name: 'Jamais',\n        emoji: '🥔',\n    },\n    {\n        id: 'sometimes',\n        name: 'Parfois',\n        emoji: '🚶',\n    },\n    {\n        id: 'often',\n        name: 'Souvent',\n        emoji: '🏃',\n    },\n    {\n        id: 'athlete',\n        name: 'Athlète',\n        emoji: '🏋️‍♀️',\n    },\n]"
                 }
             ],
             "src/constants/user-validation.ts": [
@@ -10271,6 +10527,48 @@
                     "deprecationMessage": "",
                     "type": "Meta<StatusPageComponent>",
                     "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
+                }
+            ],
+            "src/modules/user-profile/constants/gender.ts": [
+                {
+                    "name": "GENDER_IDENTITIES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/gender.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    'Agenre',\n    'Ambisexué',\n    'Amphigame',\n    'Androgyne',\n    'Androgynie',\n    'Autogynéphilie',\n    'Bardache',\n    'Bi-spiritualité',\n    'Bigenre',\n    'Binarité de genre',\n    'Bispirituel',\n    'Bispirituelle',\n    'Bissu',\n    'Butch',\n    'Camp',\n    'Castrat',\n    'Çauz',\n    'Ceuxelles',\n    'Cis het',\n    'Cisgenre',\n    'Demi-fille',\n    'Demi-garçon',\n    'Demi-genre',\n    'Diamorique',\n    'Drag king',\n    'Drag queen',\n    'Dyacis',\n    'Efféminé',\n    'El',\n    'Emo-sexualité',\n    'En questionnement',\n    'Enby',\n    'Eunuque',\n    'Femme',\n    'Garçonne',\n    'Gender fluid',\n    'Genderflux',\n    'Genderqueer',\n    'Genre X',\n    'Gynandre',\n    'Gynoïde',\n    'Hijra',\n    'Hommasse',\n    'Homme',\n    'Iel',\n    'Ielle',\n    'Ille',\n    'Mahu',\n    'Mâle',\n    'Masculin',\n    'Masculinisation',\n    'Mix',\n    'Multigenre',\n    'Nat-kadaw',\n    'Neutrois',\n    'New half',\n    'Non binaire',\n    'Omnigenre',\n    'Pangenre',\n    'Rae rae',\n    'Transidentité',\n    'Travelo',\n    'Travesti',\n    'Troisième genre',\n    'Two-spirit',\n]"
+                },
+                {
+                    "name": "GENDER_PREFERENCES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/gender.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'man',\n        name: 'Homme',\n    },\n    {\n        id: 'woman',\n        name: 'Femme',\n    },\n    {\n        id: 'all',\n        name: 'Tout le monde',\n    },\n]"
+                },
+                {
+                    "name": "GENDERS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/gender.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'man',\n        name: 'Homme',\n    },\n    {\n        id: 'woman',\n        name: 'Femme',\n    },\n    {\n        id: 'other',\n        name: 'Autre',\n    },\n]"
+                },
+                {
+                    "name": "SEXUAL_ORIENTATIONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/gender.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'straight',\n        name: 'Hétéro',\n    },\n    {\n        id: 'gay',\n        name: 'Gay',\n    },\n    {\n        id: 'lestbian',\n        name: 'Lesbienne',\n    },\n    {\n        id: 'bi',\n        name: 'Bisexual',\n    },\n    {\n        id: 'pan',\n        name: 'Pansexuel',\n    },\n    {\n        id: 'ace',\n        name: 'Asexuel',\n    },\n    {\n        id: 'queer',\n        name: 'Queer',\n    },\n    {\n        id: 'questioning',\n        name: 'En questionnement',\n    },\n    {\n        id: 'aromantic',\n        name: 'Aromantique',\n    },\n    {\n        id: 'other',\n        name: 'Autre',\n    },\n]"
                 }
             ],
             "src/modules/matching/utils/messages.ts": [
@@ -10437,6 +10735,18 @@
                     "defaultValue": "'/swiping'"
                 }
             ],
+            "src/modules/user-profile/constants/interests.ts": [
+                {
+                    "name": "INTERESTS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/interests.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    'Animation stop-motion',\n    'Antiquités',\n    'Apiculture',\n    'Archéologie',\n    'Astronomie',\n    'Bandes dessinées',\n    'Barbecue',\n    'Basketball',\n    'Bibliophilie',\n    'Billard',\n    'Bingo',\n    'Botanique',\n    'Bougie artisanale',\n    'Bricolage',\n    'Bridge',\n    'Broderie',\n    'Calligraphie',\n    'Camping',\n    'Canoë-kayak',\n    'Chasse au trésor',\n    'Chasse photographique',\n    'Chorale communautaire',\n    \"Cinéma d'animation\",\n    'Cinéma',\n    'Collection de pièces de monnaie',\n    'Collection de timbres',\n    'Comédies musicales',\n    'Confitures maison',\n    'Course à pied',\n    'Course de chevaux',\n    'Couture',\n    'Création de bijoux',\n    'Création de mosaïques',\n    'Critique de films',\n    'Crochet',\n    'Cuisine végétalienne',\n    'Cuisine',\n    'Curling',\n    'Danse contemporaine',\n    'Danse',\n    'Découpage',\n    'Dégustation de thé',\n    'Dégustation de vins',\n    'Dessin',\n    'Disney',\n    'Doctor Who',\n    'Documentaires',\n    'Échecs',\n    'Écriture',\n    \"Élevage d'animaux de compagnie\",\n    \"Élevage de plantes d'intérieur\",\n    'Énigmes et casse-tête',\n    'Escalade',\n    'Escape games',\n    'Escrime',\n    'Étude de la généalogie',\n    'Étude de la météorologie',\n    'Étude des constellations',\n    'Étude des étoiles',\n    'Étude des insectes',\n    'Étude des oiseaux',\n    'Étude des sciences naturelles',\n    'Fabrication de bijoux',\n    'Fabrication de chandelles',\n    'Fléchettes',\n    'Football',\n    'Game of Thrones',\n    'Géologie',\n    'Golf',\n    'Graffiti',\n    'Guitare',\n    'Gymnastique',\n    'Harry Potter',\n    'Hip-hop',\n    \"Histoire de l'art\",\n    'Jardinage',\n    'Jazz',\n    'Jeu de cartes',\n    'Jeu de dames',\n    'Jeu de dominos',\n    'Jeu de tarot',\n    'Jeux de société',\n    'Jeux vidéo',\n    'Jogging',\n    'Karaoké',\n    'Lancer de frisbee',\n    'Le Seigneur des Anneaux',\n    'Lecture de poésie',\n    'Lecture de roman classique',\n    'Lecture',\n    'Livres audio',\n    'Manga',\n    'Marionnettes',\n    'Marvel Cinematic Universe',\n    'Mixologie',\n    'Modélisme',\n    'Mosaïque',\n    'Musique classique',\n    'Musique électronique',\n    'Musique',\n    'Natation',\n    'Observation des étoiles',\n    'Observation des papillons',\n    'Origami',\n    'Patin à roulettes',\n    'Patinage artistique',\n    'Patinage de vitesse',\n    'Pâtisserie',\n    'Pêche',\n    'Peinture',\n    'Percussions',\n    'Pétanque',\n    'Photographie',\n    'Piano',\n    'Plongée',\n    'Poésie',\n    'Pokémon',\n    'Poker',\n    'Polo à cheval',\n    'Poterie',\n    'Randonnée',\n    'Réalisation de vidéos familiales',\n    'Reconstitution historique',\n    'Rédaction de lettres manuscrites',\n    'Reliure de livres',\n    'Réparation de vélos',\n    'Restauration de meubles anciens',\n    \"Rock'n'roll\",\n    'Romans policiers',\n    'Science-fiction',\n    'Scrapbooking',\n    'Sculpture',\n    'Séries télévisées',\n    'Ski',\n    'Star Trek',\n    'Star Wars',\n    'Sudoku',\n    'Taylor Swift',\n    'Tennis',\n    'The Hunger Games',\n    'Théâtre',\n    'Tissage',\n    'Tricot',\n    'Ultimate Frisbee',\n    'Vélo',\n    'Violon',\n    'Visite de jardins botaniques',\n    \"Visite de musées d'art\",\n    'Visite de parcs nationaux',\n    'Vol en montgolfière',\n    'Voyage',\n    'Water-polo',\n]"
+                }
+            ],
             "src/stories/navigation.stories.ts": [
                 {
                     "name": "LoggedIn",
@@ -10467,6 +10777,18 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n    decorators: [\n        moduleMetadata({\n            providers: [\n                {\n                    provide: SessionService,\n                    useValue: {\n                        isLoggedIn: () => of(false),\n                        session: of({}),\n                    },\n                },\n            ],\n        }),\n    ],\n}"
+                }
+            ],
+            "src/modules/user-profile/constants/looking-for.ts": [
+                {
+                    "name": "LOOKING_FOR",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/looking-for.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'lt',\n        name: 'Long terme',\n        emoji: '💕',\n        color: '234, 46, 172',\n    },\n    {\n        id: 'ltst',\n        name: 'Long terme, ouvert à du court terme',\n        emoji: '💖',\n        color: '238, 106, 192',\n    },\n    {\n        id: 'stlt',\n        name: 'Court terme, ouvert à du long terme',\n        emoji: '🍻',\n        color: '253, 223, 131',\n    },\n    {\n        id: 'fun',\n        name: 'Fun',\n        emoji: '🍆',\n        color: '110, 55, 107',\n    },\n    {\n        id: 'friend',\n        name: 'Amitié',\n        emoji: '🤝',\n        color: '255, 228, 115',\n    },\n    {\n        id: 'idk',\n        name: 'Je sais pas',\n        emoji: '🤷‍♀️',\n        color: '255, 228, 115',\n    },\n]"
                 }
             ],
             "src/constants/navigation.ts": [
@@ -10547,6 +10869,38 @@
                     "defaultValue": "() => {\n    const router = inject(Router);\n    const sessionService = inject(SessionService);\n    const stateService = inject(StateService);\n\n    return combineLatest([\n        sessionService.isLoggedIn(),\n        stateService.state,\n    ]).pipe(\n        map(([isLoggedIn, state]) => {\n            if (state !== State.READY) {\n                return true;\n            }\n\n            if (!isLoggedIn) {\n                router.navigate([LOGIN_ROUTE]);\n            }\n\n            return isLoggedIn;\n        }),\n    );\n}"
                 }
             ],
+            "src/modules/user-profile/constants/programs.ts": [
+                {
+                    "name": "PROGRAMS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/programs.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n    bacc_aero: 'Génie aérospatial',\n    bacc_bio: 'Génie biomédical',\n    bacc_chim: 'Génie chimique',\n    bacc_civ: 'Génie civil',\n    bacc_mine: 'Génie des mines',\n    bacc_ele: 'Génie électrique',\n    bacc_geo: 'Génie géologique',\n    bacc_ind: 'Génie industriel',\n    bacc_info: 'Génie informatique',\n    bacc_log: 'Génie logiciel',\n    bacc_meca: 'Génie mécanique',\n    bacc_phys: 'Génie physique',\n    mat_dd: 'Maîtrise développement durable',\n    mat_ergo: 'Maîtrise ergonomie et ergonomie du logiciel',\n    mat_aero: 'Maîtrise génie aérospatial',\n    mat_bio: 'Maîtrise génie biomédical',\n    mat_chim: 'Maîtrise génie chimique',\n    mat_civ: 'Maîtrise génie civil',\n    mat_mat: 'Maîtrise génie des matériaux',\n    mat_ele: 'Maîtrise génie électrique',\n    mat_eners: 'Maîtrise génie énergétique et nucléaire',\n    mat_ind: 'Maîtrise génie industriel',\n    mat_infolog: 'Maîtrise génie informatique et génie logiciel',\n    mat_meca: 'Maîtrise génie mécanique',\n    mat_mine: 'Maîtrise génie minéral',\n    mat_phys: 'Maîtrise génie physique',\n    mat_math: 'Maîtrise mathématiques',\n    mat_tech: 'Maîtrise technologie',\n    other_cert_micro: 'Certificats et microprogrammes de 1e cycle',\n    other_form_cont: 'Formation continue',\n    other_dd_hec: 'Double diplôme HEC Montréal (Baccalauréat)',\n}"
+                },
+                {
+                    "name": "PROGRAMS_ARRAY",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/programs.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Object.entries(PROGRAMS).map(([id, name]) => ({\n    id,\n    name,\n}))"
+                },
+                {
+                    "name": "PROGRAMS_CATEGORY",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/programs.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n    bacc: 'Baccalauréat',\n    mat: 'Maîtrise',\n    other: 'Autres',\n}"
+                }
+            ],
             "src/guards/public-route/public-route.guard.ts": [
                 {
                     "name": "publicRouteGuard",
@@ -10571,6 +10925,18 @@
                     "defaultValue": "[\n    \"Qu'est-ce que tu penses que je fais pour m'amuser ?\",\n    'Comment as-tu choisi ton programme ?',\n    \"Si tu n'étais pas à l'école, que ferais-tu ?\",\n    'À quelle distance de chez toi es-tu ?',\n    \"Comment se passe l'école en un mot ?\",\n    \"Que penses-tu que faire après l'école ?\",\n    \"Qu'est-ce que je devrais regarder dès que j'aurai du temps ?\",\n    \"Quelle caractéristique principale penses-tu que j'ai ?\",\n    'Quelle est la chose la plus inexplicable qui te soit arrivée ?',\n    'Quelle est ta caractéristique la plus toxique que tu peux admettre ?',\n    'À quoi penses-tu trop en ce moment ?',\n    \"Qu'est-ce que toi plus jeune aurait du mal à croire de ta vie aujourd'hui ?\",\n    'Quel est ton adjectif préféré pour te décrire et pourquoi ?',\n    'Quelle est la plus grosse erreur que tu aies commise ?',\n    'Si nous étions un groupe de musique, quel serait notre nom ?',\n    'Quel souvenir te fait instantanément sourire ?',\n    'À quoi penses-tu le plus souvent ?',\n    'Quel est quelque chose que tu apprécies et dont tu ne te lasses jamais ?',\n    \"Quelle est une chose qui devrait être enseignée, mais ne l'est pas ?\",\n    \"Si tu avais une étiquette d'avertissement, que dirait-elle ?\",\n    'Un étranger a-t-il déjà changé ta vie ?',\n    'Quel est le compliment que tu préfères recevoir ?',\n    'Quel est ton tout premier souvenir de bonheur ?',\n    \"Si tu devais résumer l'espèce humaine en 3 mots, quels seraient ces mots ?\",\n    \"Si tu mourais aujourd'hui, quels regrets aurais-tu de ta vie ?\",\n    'Pour quoi es-tu le plus reconnaissant en ce moment ?',\n    'Quel conseil en matière de rencontres donnerais-tu à ton moi plus jeune ?',\n    'Quelle est la dernière chose que tu as mentie ?',\n    \"Quand as-tu ressenti pour la dernière fois de la chance d'être toi ?\",\n    \"Quelle est la pire hypothèse que quelqu'un ait faite à ton sujet ?\",\n    \"Qu'as-tu le plus peur : de l'échec ou du succès, et pourquoi ?\",\n    \"Quelle est la caractéristique de personnalité que tu détestes le plus chez quelqu'un ?\",\n    'Quelle est ta citation de chanson préférée à laquelle tu peux penser spontanément ?',\n]"
                 }
             ],
+            "src/modules/user-profile/constants/relationship-type.ts": [
+                {
+                    "name": "RELATIONSHIP_TYPES",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/relationship-type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'mono',\n        name: 'Monogame',\n    },\n    {\n        id: 'poly',\n        name: 'Polygame',\n    },\n    {\n        id: 'open',\n        name: 'En relation ouverte',\n    },\n    {\n        id: 'exp',\n        name: \"Ouvert à l'expérience\",\n    },\n]"
+                }
+            ],
             "src/modules/modals/constants/reports.ts": [
                 {
                     "name": "REPORT_REASONS",
@@ -10593,6 +10959,18 @@
                     "deprecationMessage": "",
                     "type": "string",
                     "defaultValue": "'user-session-token'"
+                }
+            ],
+            "src/modules/user-profile/constants/zodiac.ts": [
+                {
+                    "name": "ZODIAC_SIGNS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/constants/zodiac.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        id: 'capricorn',\n        name: 'Capricorne',\n        emoji: '♑',\n    },\n    {\n        id: 'aquarius',\n        name: 'Verseau',\n        emoji: '♒',\n    },\n    {\n        id: 'pisces',\n        name: 'Poissons',\n        emoji: '♓',\n    },\n    {\n        id: 'aries',\n        name: 'Bélier',\n        emoji: '♈',\n    },\n    {\n        id: 'taurus',\n        name: 'Taureau',\n        emoji: '♉',\n    },\n    {\n        id: 'gemini',\n        name: 'Gémeaux',\n        emoji: '♊',\n    },\n    {\n        id: 'cancer',\n        name: 'Cancer',\n        emoji: '♋',\n    },\n    {\n        id: 'leo',\n        name: 'Lion',\n        emoji: '♌',\n    },\n    {\n        id: 'virgo',\n        name: 'Vierge',\n        emoji: '♍',\n    },\n    {\n        id: 'libra',\n        name: 'Balance',\n        emoji: '♎',\n    },\n    {\n        id: 'scorpio',\n        name: 'Scorpion',\n        emoji: '♏',\n    },\n    {\n        id: 'sagittarius',\n        name: 'Sagittaire',\n        emoji: '♐',\n    },\n]"
                 }
             ]
         },
@@ -10692,32 +11070,6 @@
                     "kind": 180
                 }
             ],
-            "src/modules/authentication/stories/authentication-layout.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AuthenticationLayoutComponent>",
-                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 180
-                }
-            ],
-            "src/modules/authentication/stories/status-page.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<StatusPageComponent>",
-                    "file": "src/modules/authentication/stories/status-page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 180
-                }
-            ],
             "src/modules/matching/stories/conversation-list.stories.ts": [
                 {
                     "name": "Story",
@@ -10738,6 +11090,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<MatchListComponent>",
                     "file": "src/modules/matching/stories/match-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/authentication/stories/authentication-layout.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<AuthenticationLayoutComponent>",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/authentication/stories/status-page.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<StatusPageComponent>",
+                    "file": "src/modules/authentication/stories/status-page.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -12036,6 +12414,166 @@
                 "status": "low"
             },
             {
+                "filePath": "src/modules/user-profile/constants/associations.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ASSOCIATIONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/gender.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GENDER_IDENTITIES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/gender.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GENDER_PREFERENCES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/gender.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GENDERS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/gender.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SEXUAL_ORIENTATIONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/interests.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "INTERESTS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/lifestyle.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DRINKING_HABITS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/lifestyle.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DRUGS_HABITS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/lifestyle.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SMOKING_HABITS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/lifestyle.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WORKOUT_HABITS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/looking-for.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LOOKING_FOR",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/programs.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PROGRAMS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/programs.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PROGRAMS_ARRAY",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/programs.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PROGRAMS_CATEGORY",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/relationship-type.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RELATIONSHIP_TYPES",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/constants/zodiac.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ZODIAC_SIGNS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/modules/user-profile/pages/user-profile-edit-page/user-profile-edit-page.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -12097,6 +12635,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Minimal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/validators/contained-in-validator.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "arrayContainedInValidator",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/validators/contained-in-validator.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "containedInValidator",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
