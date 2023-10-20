@@ -1,27 +1,29 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PROGRAMS_ARRAY } from '../../constants/programs';
-import { LOOKING_FOR } from '../../constants/looking-for';
-import { RELATIONSHIP_TYPES } from '../../constants/relationship-type';
-import { ZODIAC_SIGNS } from '../../constants/zodiac';
 import {
+    PROGRAMS_ARRAY,
+    LOOKING_FOR,
+    RELATIONSHIP_TYPES,
+    ZODIAC_SIGNS,
     DRINKING_HABITS,
     DRUGS_HABITS,
     SMOKING_HABITS,
     WORKOUT_HABITS,
-} from '../../constants/lifestyle';
-import {
     GENDERS,
     GENDER_IDENTITIES,
     GENDER_PREFERENCES,
     SEXUAL_ORIENTATIONS,
-} from '../../constants/gender';
+    INTERESTS,
+    ASSOCIATIONS,
+} from '../../constants';
 import { UserProfileService } from '../../services/user-profile-service/user-profile.service';
 import { UserProfile } from 'common/models/user';
 import { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';
-import { INTERESTS } from '../../constants/interets';
-import { ASSOCIATIONS } from '../../constants/associations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+    arrayContainedInValidator,
+    containedInValidator,
+} from '../../validators/contained-in-validator';
 
 @Component({
     selector: 'app-user-profile-form',
@@ -46,24 +48,84 @@ export class UserProfileFormComponent {
             Validators.minLength(5),
             Validators.maxLength(255),
         ]),
-        program: new FormControl('', []),
+        program: new FormControl('', [
+            containedInValidator(
+                PROGRAMS_ARRAY,
+                (item, value) => item.id === value,
+            ),
+        ]),
         height: new FormControl(0, [Validators.min(0), Validators.max(300)]),
-        interests: new FormControl<string[]>([], []),
-        associations: new FormControl<string[]>([], []),
-        lookingFor: new FormControl('', []),
-        relationshipType: new FormControl('', []),
-        zodiacSign: new FormControl('', []),
-        drinking: new FormControl('', []),
-        smoking: new FormControl('', []),
-        drugs: new FormControl('', []),
-        workout: new FormControl('', []),
+        interests: new FormControl<string[]>(
+            [],
+            [arrayContainedInValidator(INTERESTS)],
+        ),
+        associations: new FormControl<string[]>(
+            [],
+            // [arrayContainedInValidator(ASSOCIATIONS)],
+        ),
+        lookingFor: new FormControl('', [
+            containedInValidator(
+                LOOKING_FOR,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        relationshipType: new FormControl('', [
+            containedInValidator(
+                RELATIONSHIP_TYPES,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        zodiacSign: new FormControl('', [
+            containedInValidator(
+                ZODIAC_SIGNS,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        drinking: new FormControl('', [
+            containedInValidator(
+                DRINKING_HABITS,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        smoking: new FormControl('', [
+            containedInValidator(
+                SMOKING_HABITS,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        drugs: new FormControl('', [
+            containedInValidator(
+                DRUGS_HABITS,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        workout: new FormControl('', [
+            containedInValidator(
+                WORKOUT_HABITS,
+                (item, value) => item.id === value,
+            ),
+        ]),
         jobTitle: new FormControl(''),
         jobCompany: new FormControl(''),
         livingIn: new FormControl(''),
         gender: new FormControl(''),
-        genderCategory: new FormControl('', [Validators.required]),
-        genderPreference: new FormControl('', [Validators.required]),
-        sexualOrientation: new FormControl(''),
+        genderCategory: new FormControl('', [
+            Validators.required,
+            containedInValidator(GENDERS, (item, value) => item.id === value),
+        ]),
+        genderPreference: new FormControl('', [
+            Validators.required,
+            containedInValidator(
+                GENDER_PREFERENCES,
+                (item, value) => item.id === value,
+            ),
+        ]),
+        sexualOrientation: new FormControl('', [
+            containedInValidator(
+                SEXUAL_ORIENTATIONS,
+                (item, value) => item.id === value,
+            ),
+        ]),
     });
     programs = PROGRAMS_ARRAY;
     lookingFor = LOOKING_FOR;

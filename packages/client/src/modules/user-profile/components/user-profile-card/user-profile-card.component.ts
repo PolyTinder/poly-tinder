@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PublicUserResult, UserProfile } from 'common/models/user';
-import { ZODIAC_SIGNS } from '../../constants/zodiac';
-import { SEXUAL_ORIENTATIONS } from '../../constants/gender';
-import { RELATIONSHIP_TYPES } from '../../constants/relationship-type';
-import { PROGRAMS } from '../../constants/programs';
-import { LOOKING_FOR } from '../../constants/looking-for';
+import {
+    LOOKING_FOR,
+    RELATIONSHIP_TYPES,
+    ZODIAC_SIGNS,
+    SEXUAL_ORIENTATIONS,
+    PROGRAMS,
+    WORKOUT_HABITS,
+    DRINKING_HABITS,
+    SMOKING_HABITS,
+} from '../../constants';
 import { ModerationService } from 'src/modules/moderation/services/moderation.service';
 
 @Component({
@@ -65,6 +70,30 @@ export class UserProfileCardComponent {
     get lookingFor() {
         return LOOKING_FOR.find(
             (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,
+        );
+    }
+
+    get workout() {
+        return WORKOUT_HABITS.find(
+            (workout) => workout.id === this.userProfile?.workout,
+        );
+    }
+
+    get drinking() {
+        return DRINKING_HABITS.find(
+            (drinking) => drinking.id === this.userProfile?.drinking,
+        );
+    }
+
+    get smoking() {
+        return SMOKING_HABITS.find(
+            (smoking) => smoking.id === this.userProfile?.smoking,
+        );
+    }
+
+    get drugs() {
+        return DRINKING_HABITS.find(
+            (drugs) => drugs.id === this.userProfile?.drugs,
         );
     }
 

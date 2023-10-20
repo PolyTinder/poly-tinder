@@ -6,6 +6,19 @@ import { NoId, TypeOfId } from 'common/types/id';
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
 import { UserValidationService } from '../user-validation-service/user-validation-service';
+import {
+    ASSOCIATIONS,
+    DRINKING_HABITS,
+    GENDERS,
+    GENDER_PREFERENCES,
+    INTERESTS,
+    LOOKING_FOR,
+    PROGRAMS_ARRAY,
+    RELATIONSHIP_TYPES,
+    SEXUAL_ORIENTATIONS,
+    SMOKING_HABITS,
+    ZODIAC_SIGNS,
+} from '../../constants/user-profile';
 
 @singleton()
 export class UserProfileService {
@@ -94,6 +107,8 @@ export class UserProfileService {
             updatedAt: new Date(),
         };
 
+        this.validateUserProfile(userProfile);
+
         if (await this.userProfiles.select().where({ userId }).first()) {
             await this.userProfiles
                 .update(update as UserProfileDB)
@@ -161,5 +176,131 @@ export class UserProfileService {
             (userProfile.genderCategory ?? '').length > 0 &&
             (userProfile.genderPreference ?? '').length > 0
         );
+    }
+
+    private validateUserProfile(userProfile: UserProfile): void {
+        if (
+            userProfile.associations &&
+            !userProfile.associations.every((association) =>
+                ASSOCIATIONS.find((a) => a === association),
+            )
+        ) {
+            throw new HttpException(
+                'Invalid association',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.interests &&
+            !userProfile.interests.every((interest) =>
+                INTERESTS.find((i) => i === interest),
+            )
+        ) {
+            throw new HttpException(
+                'Invalid interest',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.genderCategory &&
+            !GENDERS.find((g) => g.id === userProfile.genderCategory)
+        ) {
+            throw new HttpException('Invalid gender', StatusCodes.BAD_REQUEST);
+        }
+
+        if (
+            userProfile.genderPreference &&
+            !GENDER_PREFERENCES.find(
+                (g) => g.id === userProfile.genderPreference,
+            )
+        ) {
+            throw new HttpException(
+                'Invalid gender preference',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.sexualOrientation &&
+            !SEXUAL_ORIENTATIONS.find(
+                (s) => s.id === userProfile.sexualOrientation,
+            )
+        ) {
+            throw new HttpException(
+                'Invalid sexual orientation',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.drinking &&
+            DRINKING_HABITS.find((d) => d.id === userProfile.drinking)
+        ) {
+            throw new HttpException(
+                'Invalid drinking habit',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.smoking &&
+            SMOKING_HABITS.find((s) => s.id === userProfile.smoking)
+        ) {
+            throw new HttpException(
+                'Invalid smoking habit',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.drugs &&
+            DRINKING_HABITS.find((d) => d.id === userProfile.drugs)
+        ) {
+            throw new HttpException(
+                'Invalid drugs habit',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.lookingFor &&
+            LOOKING_FOR.find((l) => l.id === userProfile.lookingFor)
+        ) {
+            throw new HttpException(
+                'Invalid looking for',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.program &&
+            PROGRAMS_ARRAY.find((p) => p.id === userProfile.program)
+        ) {
+            throw new HttpException('Invalid program', StatusCodes.BAD_REQUEST);
+        }
+
+        if (
+            userProfile.relationshipType &&
+            RELATIONSHIP_TYPES.find(
+                (r) => r.id === userProfile.relationshipType,
+            )
+        ) {
+            throw new HttpException(
+                'Invalid relationship type',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
+
+        if (
+            userProfile.zodiacSign &&
+            ZODIAC_SIGNS.find((z) => z.id === userProfile.zodiacSign)
+        ) {
+            throw new HttpException(
+                'Invalid zodiac sign',
+                StatusCodes.BAD_REQUEST,
+            );
+        }
     }
 }
