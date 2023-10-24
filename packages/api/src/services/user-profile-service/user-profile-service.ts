@@ -136,8 +136,12 @@ export class UserProfileService {
             picture4: userProfile.pictures?.[3],
             picture5: userProfile.pictures?.[4],
             picture6: userProfile.pictures?.[5],
-            interests: userProfile.interests?.join(','),
-            associations: userProfile.associations?.join(','),
+            interests: userProfile.interests
+                ?.filter((interest) => interest && interest.length > 0)
+                .join(','),
+            associations: userProfile.associations
+                ?.filter((association) => association && association.length > 0)
+                .join(','),
             languages: userProfile.languages?.join(','),
         };
     }
