@@ -9,6 +9,7 @@ import { UserValidationService } from '../user-validation-service/user-validatio
 import {
     ASSOCIATIONS,
     DRINKING_HABITS,
+    DRUGS_HABITS,
     GENDERS,
     GENDER_PREFERENCES,
     INTERESTS,
@@ -107,7 +108,7 @@ export class UserProfileService {
             updatedAt: new Date(),
         };
 
-        // this.validateUserProfile(userProfile);
+        this.validateUserProfile(userProfile);
 
         if (await this.userProfiles.select().where({ userId }).first()) {
             await this.userProfiles
@@ -236,7 +237,7 @@ export class UserProfileService {
 
         if (
             userProfile.drinking &&
-            DRINKING_HABITS.find((d) => d.id === userProfile.drinking)
+            !DRINKING_HABITS.find((d) => d.id === userProfile.drinking)
         ) {
             throw new HttpException(
                 'Invalid drinking habit',
@@ -246,7 +247,7 @@ export class UserProfileService {
 
         if (
             userProfile.smoking &&
-            SMOKING_HABITS.find((s) => s.id === userProfile.smoking)
+            !SMOKING_HABITS.find((s) => s.id === userProfile.smoking)
         ) {
             throw new HttpException(
                 'Invalid smoking habit',
@@ -256,7 +257,7 @@ export class UserProfileService {
 
         if (
             userProfile.drugs &&
-            DRINKING_HABITS.find((d) => d.id === userProfile.drugs)
+            !DRUGS_HABITS.find((d) => d.id === userProfile.drugs)
         ) {
             throw new HttpException(
                 'Invalid drugs habit',
@@ -266,7 +267,7 @@ export class UserProfileService {
 
         if (
             userProfile.lookingFor &&
-            LOOKING_FOR.find((l) => l.id === userProfile.lookingFor)
+            !LOOKING_FOR.find((l) => l.id === userProfile.lookingFor)
         ) {
             throw new HttpException(
                 'Invalid looking for',
@@ -276,14 +277,14 @@ export class UserProfileService {
 
         if (
             userProfile.program &&
-            PROGRAMS_ARRAY.find((p) => p.id === userProfile.program)
+            !PROGRAMS_ARRAY.find((p) => p.id === userProfile.program)
         ) {
             throw new HttpException('Invalid program', StatusCodes.BAD_REQUEST);
         }
 
         if (
             userProfile.relationshipType &&
-            RELATIONSHIP_TYPES.find(
+            !RELATIONSHIP_TYPES.find(
                 (r) => r.id === userProfile.relationshipType,
             )
         ) {
@@ -295,7 +296,7 @@ export class UserProfileService {
 
         if (
             userProfile.zodiacSign &&
-            ZODIAC_SIGNS.find((z) => z.id === userProfile.zodiacSign)
+            !ZODIAC_SIGNS.find((z) => z.id === userProfile.zodiacSign)
         ) {
             throw new HttpException(
                 'Invalid zodiac sign',
