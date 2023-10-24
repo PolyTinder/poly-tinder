@@ -108,7 +108,7 @@ export class UserProfileService {
             updatedAt: new Date(),
         };
 
-        // this.validateUserProfile(userProfile);
+        this.validateUserProfile(userProfile);
 
         if (await this.userProfiles.select().where({ userId }).first()) {
             await this.userProfiles
@@ -136,8 +136,12 @@ export class UserProfileService {
             picture4: userProfile.pictures?.[3],
             picture5: userProfile.pictures?.[4],
             picture6: userProfile.pictures?.[5],
-            interests: userProfile.interests?.join(','),
-            associations: userProfile.associations?.join(','),
+            interests: userProfile.interests
+                ?.filter((interest) => interest && interest.length > 0)
+                .join(','),
+            associations: userProfile.associations
+                ?.filter((association) => association && association.length > 0)
+                .join(','),
             languages: userProfile.languages?.join(','),
         };
     }
@@ -182,9 +186,11 @@ export class UserProfileService {
     private validateUserProfile(userProfile: UserProfile): void {
         if (
             userProfile.associations &&
-            !userProfile.associations.every((association) =>
-                ASSOCIATIONS.find((a) => a === association),
-            )
+            !userProfile.associations
+                .filter((association) => association && association.length > 0)
+                .every((association) =>
+                    ASSOCIATIONS.find((a) => a === association),
+                )
         ) {
             throw new HttpException(
                 'Invalid association',
@@ -194,9 +200,9 @@ export class UserProfileService {
 
         if (
             userProfile.interests &&
-            !userProfile.interests.every((interest) =>
-                INTERESTS.find((i) => i === interest),
-            )
+            !userProfile.interests
+                .filter((interest) => interest && interest.length > 0)
+                .every((interest) => INTERESTS.find((i) => i === interest))
         ) {
             throw new HttpException(
                 'Invalid interest',
