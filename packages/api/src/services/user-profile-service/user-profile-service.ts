@@ -184,8 +184,6 @@ export class UserProfileService {
     }
 
     private validateUserProfile(userProfile: UserProfile): void {
-        console.log(userProfile.associations, userProfile.interests);
-
         if (
             userProfile.associations &&
             !userProfile.associations
