@@ -24,7 +24,7 @@ import {
     arrayContainedInValidator,
     containedInValidator,
 } from '../../validators/contained-in-validator';
-import { profilePictureValidator } from '../../validators/profile-picture-validator';
+// import { profilePictureValidator } from '../../validators/profile-picture-validator';
 
 @Component({
     selector: 'app-user-profile-form',
@@ -34,7 +34,7 @@ import { profilePictureValidator } from '../../validators/profile-picture-valida
 export class UserProfileFormComponent {
     userProfileForm = new FormGroup({
         pictures: new FormControl(new Array<string | undefined>(), [
-            profilePictureValidator,
+            // profilePictureValidator,
         ]),
         name: new FormControl('', [
             Validators.required,
