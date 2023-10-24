@@ -108,7 +108,7 @@ export class UserProfileService {
             updatedAt: new Date(),
         };
 
-        this.validateUserProfile(userProfile);
+        // this.validateUserProfile(userProfile);
 
         if (await this.userProfiles.select().where({ userId }).first()) {
             await this.userProfiles
