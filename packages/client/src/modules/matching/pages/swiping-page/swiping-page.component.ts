@@ -60,7 +60,7 @@ export class SwipingPageComponent {
 
     dislikeUser(user: PublicUserResultClass) {
         this.removeUser(user);
-        this.matchingService.likeUser(user.currentValue.userId).subscribe();
+        this.matchingService.dislikeUser(user.currentValue.userId).subscribe();
     }
 
     onExcludeUser(user: PublicUserResultClass) {
