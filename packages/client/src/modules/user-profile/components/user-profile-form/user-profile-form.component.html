@@ -18,6 +18,7 @@
                 [canDelete]="index !== 0"
             ></app-image-control>
         </div>
+        <mat-error *ngIf="userProfileForm.controls.pictures.getError('picturesNotValid')">Au moins une photo est requise</mat-error>
     </app-card>
 
     <app-card title="Mon profil" icon="fas fa-user">
