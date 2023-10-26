@@ -61,7 +61,7 @@
     &__picture {
         width: 100%;
         aspect-ratio: 3/4;
-        background-color: rgb(240, 240, 240);
+        background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);
         border-radius: $inner-radius;
         object-fit: cover;
         object-position: center;
@@ -147,7 +147,7 @@
             object-fit: cover;
             object-position: center;
             border-radius: $inner-radius;
-            background-color: rgb(240, 240, 240);
+            background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);
         }
 
         &__info {

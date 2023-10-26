@@ -3,10 +3,13 @@
     <div class="user-profile">
         <div class="user-profile__main">
             <img
-                [src]="userProfile.pictures?.[0] + '-/scale_crop/700x1020/center/'"
+                [src]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/center/-/progressive/yes/')"
+                [srcset]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/center/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/center/-/progressive/yes/ 2x')"
                 [alt]="'Photo de ' + userProfile.name"
                 class="user-profile__main__picture"
+                *ngIf="userProfile.pictures?.[0]"
             >
+            <div class="user-profile__main__picture" *ngIf="!userProfile.pictures?.[0]"></div>
             <div class="user-profile__main__info">
                 <p class="user-profile__main__info__name">{{userProfile.name}}</p>
                 <p class="user-profile__main__info__subtitle">
