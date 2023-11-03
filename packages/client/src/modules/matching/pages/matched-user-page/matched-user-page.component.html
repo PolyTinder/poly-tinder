@@ -40,7 +40,7 @@
                     <span class="matched-user-page__content__messages__group__time">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>
                     <div class="matched-user-page__content__messages__group__content">
                         <div class="matched-user-page__content__messages__group__content__sender" *ngIf="!messageGroup.isSelf">
-                            <div class="matched-user-page__content__messages__group__content__sender__avatar"></div>
+                            <div class="matched-user-page__content__messages__group__content__sender__avatar" [style.backgroundImage]="'url(' + (userProfileValue | async)?.pictures?.[0] + '-/scale_crop/20x20/smart/' + ')'"></div>
                         </div>
                         <div class="matched-user-page__content__messages__group__content__messages">
                             <div class="matched-user-page__content__messages__group__content__messages__message" [ngClass]="{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}" *ngFor="let message of messageGroup.messages">
