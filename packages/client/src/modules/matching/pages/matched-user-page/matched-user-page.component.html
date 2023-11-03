@@ -4,7 +4,7 @@
     <div layout-title class="matched-user-page__header__title">
         <ng-container *ngIf="userProfileValue | async; let userProfile">
             <img
-                [src]="userProfile.pictures?.[0] + '-/scale_crop/72x72/center/'"
+                [src]="userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'"
                 [alt]="'Photo de profil de ' + userProfile.name"
                 class="matched-user-page__header__title__avatar"
             >

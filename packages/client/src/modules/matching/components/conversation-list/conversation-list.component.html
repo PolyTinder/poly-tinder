@@ -7,7 +7,7 @@
                         <img
                             *ngIf="value.pictures?.[0]"
                             class="conversation-list__item__image interactable"
-                            [src]="value.pictures?.[0] + '-/scale_crop/144x144/center/'"
+                            [src]="value.pictures?.[0] + '-/scale_crop/144x144/smart/'"
                             [alt]="'Photo de profil de ' + value.name"
                         >
                         <div *ngIf="!value.pictures?.[0]" class="conversation-list__item__image conversation-list__item__image--not-loaded interactable"></div>

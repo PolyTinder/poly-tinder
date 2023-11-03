@@ -3,8 +3,8 @@
     <div class="user-profile">
         <div class="user-profile__main">
             <img
-                [src]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/center/-/progressive/yes/')"
-                [srcset]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/center/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/center/-/progressive/yes/ 2x')"
+                [src]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/')"
+                [srcset]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/smart/-/progressive/yes/ 2x')"
                 [alt]="'Photo de ' + userProfile.name"
                 class="user-profile__main__picture"
                 *ngIf="userProfile.pictures?.[0]"
@@ -30,7 +30,7 @@
         </div>
         
         <img
-            [src]="userProfile.pictures?.[1]+ '-/scale_crop/700x1020/center/'"
+            [src]="userProfile.pictures?.[1]+ '-/scale_crop/700x1020/smart/'"
             *ngIf="userProfile.pictures?.[1]"
             [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
@@ -75,7 +75,7 @@
         </div>
         
         <img
-            [src]="userProfile.pictures?.[2]+ '-/scale_crop/700x1020/center/'"
+            [src]="userProfile.pictures?.[2]+ '-/scale_crop/700x1020/smart/'"
             *ngIf="userProfile.pictures?.[2]"
             [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
@@ -91,7 +91,7 @@
         </div>
         
         <img
-            [src]="userProfile.pictures?.[3]+ '-/scale_crop/700x1020/center/'"
+            [src]="userProfile.pictures?.[3]+ '-/scale_crop/700x1020/smart/'"
             *ngIf="userProfile.pictures?.[3]"
             [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
@@ -107,14 +107,14 @@
         </div>
         
         <img
-            [src]="userProfile.pictures?.[4]+ '-/scale_crop/700x1020/center/'"
+            [src]="userProfile.pictures?.[4]+ '-/scale_crop/700x1020/smart/'"
             *ngIf="userProfile.pictures?.[4]"
             [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
         >
         
         <img
-            [src]="userProfile.pictures?.[5]+ '-/scale_crop/700x1020/center/'"
+            [src]="userProfile.pictures?.[5]+ '-/scale_crop/700x1020/smart/'"
             *ngIf="userProfile.pictures?.[5]"
             [alt]="'Photo de ' + userProfile.name"
             class="user-profile__picture"
