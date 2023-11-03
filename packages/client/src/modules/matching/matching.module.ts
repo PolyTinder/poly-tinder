@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ModalsModule } from '../modals/modals.module';
 import { ModerationModule } from '../moderation/moderation.module';
 import { RouterModule } from '@angular/router';
+import { MatchedUserProfilePageComponent } from './pages/matched-user-profile-page/matched-user-profile-page.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
         MatchedUserPageComponent,
         MatchedModalComponent,
         ConversationListComponent,
+        MatchedUserProfilePageComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +37,10 @@ import { RouterModule } from '@angular/router';
         ModalsModule,
         ModerationModule,
     ],
-    exports: [MatchesPageComponent, MatchedUserPageComponent],
+    exports: [
+        MatchesPageComponent,
+        MatchedUserPageComponent,
+        MatchedUserProfilePageComponent,
+    ],
 })
 export class MatchingModule {}

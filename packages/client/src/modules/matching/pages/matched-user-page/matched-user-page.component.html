@@ -12,7 +12,9 @@
         </ng-container>
     </div>
 
-    <app-layout-action layout-action-right classNames="interactable" icon="fas fa-ellipsis-v" [matMenuTriggerFor]="actionsMenu"></app-layout-action>
+    <app-layout-action layout-action-right class="desktop-only" icon="fas fa-user" content="Voir le profil" [link]="'matches/profile/' + (userProfile | async)?.id"></app-layout-action>
+    <app-layout-action layout-action-right class="mobile-only" icon="fas fa-user" [link]="'matches/profile/' + (userProfile | async)?.id"></app-layout-action>
+    <app-layout-action layout-action-right icon="fas fa-ellipsis-v" [matMenuTriggerFor]="actionsMenu"></app-layout-action>
 
     <mat-menu #actionsMenu="matMenu">
         <button mat-menu-item (click)="unmatchUser()"><i class="fas fa-trash"></i> Supprimer</button>

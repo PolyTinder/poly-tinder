@@ -4,6 +4,7 @@ export const PROFILE_ROUTE = '/profile';
 export const PROFILE_EDIT_ROUTE = '/profile-edit';
 export const PROFILE_PREVIEW_ROUTE = '/profile-preview';
 export const MATCHES_ROUTE = '/matches';
+export const MATCHED_USER_PROFILE_ROUTE = '/matches/profile/:id';
 export const MATCHED_USER_ROUTE = '/matches/:id';
 
 export const LOGIN_ROUTE = '/login';
