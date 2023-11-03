@@ -3,6 +3,7 @@ import { Route, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './authentication/pages/login-page/login-page.component';
 import {
     LOGIN_ROUTE,
+    MATCHED_USER_PROFILE_ROUTE,
     MATCHED_USER_ROUTE,
     MATCHES_ROUTE,
     PASSWORD_RESET_ROUTE,
@@ -23,6 +24,7 @@ import { MatchedUserPageComponent } from './matching/pages/matched-user-page/mat
 import { RequestPasswordResetPageComponent } from './authentication/pages/request-password-reset-page/request-password-reset-page.component';
 import { PasswordResetPageComponent } from './authentication/pages/password-reset-page/password-reset-page.component';
 import { aboutRoutes } from './about/about-routing.module';
+import { MatchedUserProfilePageComponent } from './matching/pages/matched-user-profile-page/matched-user-profile-page.component';
 
 const privateRoute: Route = {
     // canActivate: [privateRouteGuard],
@@ -52,6 +54,11 @@ const routes: Routes = [
         ...privateRoute,
     },
     { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },
+    {
+        path: MATCHED_USER_PROFILE_ROUTE,
+        component: MatchedUserProfilePageComponent,
+        ...privateRoute,
+    },
     {
         path: MATCHED_USER_ROUTE,
         component: MatchedUserPageComponent,

@@ -4350,7 +4350,7 @@
                     }
                 ]
             },
-            "templateData": "<app-card title=\"Mes conversations\" icon=\"fas fa-comment\" anchor=\"conversations\">\n    <div class=\"conversation-list\">\n        <ng-container *ngFor=\"let conversation of conversations\">\n            <ng-container *ngIf=\"conversation.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"conversation-list__item\" [ngClass]=\"{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"conversation-list__item__image interactable\"\n                            [src]=\"value.pictures?.[0] + '-/scale_crop/144x144/center/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"conversation-list__item__image conversation-list__item__image--not-loaded interactable\"></div>\n\n                        <div class=\"conversation-list__item__info\">\n                            <span class=\"conversation-list__item__info__name\">{{value.name}} <span *ngIf=\"conversation.queryInfo.unreadMessagesCount\" class=\"conversation-list__item__info__non-read-count\">{{conversation.queryInfo.unreadMessagesCount}}</span></span>\n                            <span class=\"conversation-list__item__info__subtitle\">\n                                <span class=\"conversation-list__item__info__subtitle__message\">\n                                    <b *ngIf=\"conversation.queryInfo.lastMessageAuthorId != value.userId\">Vous :</b>\n                                    {{conversation.queryInfo.lastMessage}}\n                                </span>\n                                <span class=\"conversation-list__item__info__subtitle__separator\">•</span>\n                                <span class=\"conversation-list__item__info__subtitle__date\">\n                                    {{formatDate(conversation.queryInfo.lastMessageTimestamp)}}\n                                </span>\n                            </span>\n                        </div>\n\n                        <div class=\"conversation-list__item__right\">\n                            <a routerLink=\"/matches\" class=\"conversation-list__item__right__actions interactable\" (click)=\"onActionsClick($event)\" [matMenuTriggerFor]=\"actionsMenu\">\n                                <i class=\"fas fa-ellipsis-h\"></i>\n                            </a>\n                            <mat-menu #actionsMenu=\"matMenu\">\n                                <button mat-menu-item (click)=\"unmatchUser(conversation)\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n                                <button mat-menu-item (click)=\"reportUser(conversation)\"><i class=\"fas fa-flag\"></i> Signaler</button>\n                                <button mat-menu-item (click)=\"blockUser(conversation)\"><i class=\"fas fa-times\"></i> Bloquer</button>\n                            </mat-menu>\n                        </div>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
+            "templateData": "<app-card title=\"Mes conversations\" icon=\"fas fa-comment\" anchor=\"conversations\">\n    <div class=\"conversation-list\">\n        <ng-container *ngFor=\"let conversation of conversations\">\n            <ng-container *ngIf=\"conversation.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"conversation-list__item\" [ngClass]=\"{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"conversation-list__item__image interactable\"\n                            [src]=\"value.pictures?.[0] + '-/scale_crop/144x144/smart/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"conversation-list__item__image conversation-list__item__image--not-loaded interactable\"></div>\n\n                        <div class=\"conversation-list__item__info\">\n                            <span class=\"conversation-list__item__info__name\">{{value.name}} <span *ngIf=\"conversation.queryInfo.unreadMessagesCount\" class=\"conversation-list__item__info__non-read-count\">{{conversation.queryInfo.unreadMessagesCount}}</span></span>\n                            <span class=\"conversation-list__item__info__subtitle\">\n                                <span class=\"conversation-list__item__info__subtitle__message\">\n                                    <b *ngIf=\"conversation.queryInfo.lastMessageAuthorId != value.userId\">Vous :</b>\n                                    {{conversation.queryInfo.lastMessage}}\n                                </span>\n                                <span class=\"conversation-list__item__info__subtitle__separator\">•</span>\n                                <span class=\"conversation-list__item__info__subtitle__date\">\n                                    {{formatDate(conversation.queryInfo.lastMessageTimestamp)}}\n                                </span>\n                            </span>\n                        </div>\n\n                        <div class=\"conversation-list__item__right\">\n                            <a routerLink=\"/matches\" class=\"conversation-list__item__right__actions interactable\" (click)=\"onActionsClick($event)\" [matMenuTriggerFor]=\"actionsMenu\">\n                                <i class=\"fas fa-ellipsis-h\"></i>\n                            </a>\n                            <mat-menu #actionsMenu=\"matMenu\">\n                                <button mat-menu-item (click)=\"unmatchUser(conversation)\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n                                <button mat-menu-item (click)=\"reportUser(conversation)\"><i class=\"fas fa-flag\"></i> Signaler</button>\n                                <button mat-menu-item (click)=\"blockUser(conversation)\"><i class=\"fas fa-times\"></i> Bloquer</button>\n                            </mat-menu>\n                        </div>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
         },
         {
             "name": "DefaultModalComponent",
@@ -5878,11 +5878,11 @@
                     }
                 }
             },
-            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/72x72/center/'\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                class=\"matched-user-page__header__title__avatar\"\n            >\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right classNames=\"interactable\" icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n\n<!-- <div class=\"matched-user-page\" *ngIf=\"!(userProfileValue | async)\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n    </div>\n</div>\n\n<div class=\"matched-user-page\" *ngIf=\"userProfileValue | async; let userProfile\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n        <div class=\"matched-user-page__header__title\">\n            <div class=\"matched-user-page__header__title__avatar\" [style.background-image]=\"'url(' + userProfile.pictures?.[0] + ')'\"></div>\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </div>\n        <div class=\"matched-user-page__header__actions\"></div>\n    </div>\n\n    <div class=\"matched-user-page__content\">\n        <div class=\"matched-user-page__content__messages\">\n            <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n\n            <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                <div class=\"matched-user-page__content__messages__question__actions\">\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                </div>\n            </app-card>\n\n            <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                <div class=\"matched-user-page__content__messages__group__content\">\n                    <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                    </div>\n                    <div class=\"matched-user-page__content__messages__group__content__messages\">\n                        <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                            {{message.content}}\n                        </div>\n                    </div>\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n        <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n        <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n        <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n    </form>\n</div> -->"
+            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                class=\"matched-user-page__header__title__avatar\"\n            >\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right classNames=\"interactable\" icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n\n<!-- <div class=\"matched-user-page\" *ngIf=\"!(userProfileValue | async)\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n    </div>\n</div>\n\n<div class=\"matched-user-page\" *ngIf=\"userProfileValue | async; let userProfile\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n        <div class=\"matched-user-page__header__title\">\n            <div class=\"matched-user-page__header__title__avatar\" [style.background-image]=\"'url(' + userProfile.pictures?.[0] + ')'\"></div>\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </div>\n        <div class=\"matched-user-page__header__actions\"></div>\n    </div>\n\n    <div class=\"matched-user-page__content\">\n        <div class=\"matched-user-page__content__messages\">\n            <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n\n            <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                <div class=\"matched-user-page__content__messages__question__actions\">\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                </div>\n            </app-card>\n\n            <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                <div class=\"matched-user-page__content__messages__group__content\">\n                    <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                    </div>\n                    <div class=\"matched-user-page__content__messages__group__content__messages\">\n                        <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                            {{message.content}}\n                        </div>\n                    </div>\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n        <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n        <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n        <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n    </form>\n</div> -->"
         },
         {
             "name": "MatchesPageComponent",
-            "id": "component-MatchesPageComponent-40e51d5d177cf4c0eec42690c8482ffd870facc8fff9c102a10690aacd2be8e89103d653bf7a41100e6824b56b66fa6c66cb79872fc5c8763e05a13b0901881e",
+            "id": "component-MatchesPageComponent-d03a2d8fe5145407a8b2e69692ed623eadc3190cd6dc6f272b90cfd4d9da5ab0e720681714117ffc21512e3b7a2becf4fd93e3f85c9bbfe5ae4f368a20499ac5",
             "file": "src/modules/matching/pages/matches-page/matches-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5949,7 +5949,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { Observable, map } from 'rxjs';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { MatchListItemClass } from '../../models/match-list-item';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-matches-page',\n    templateUrl: './matches-page.component.html',\n    styleUrls: ['./matches-page.component.scss'],\n})\nexport class MatchesPageComponent {\n    matches: Observable<MatchListItemClass[]>;\n    conversations: Observable<MatchListItemClass[]>;\n    hasMatches: Observable<boolean>;\n    hasConversations: Observable<boolean>;\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {\n        this.matches = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches.filter((match) => match.queryInfo.messagesCount === 0),\n            ),\n        );\n        this.conversations = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches\n                    .filter((match) => match.queryInfo.messagesCount > 0)\n                    .sort((a, b) =>\n                        new Date(a.queryInfo.lastMessageTimestamp) >\n                        new Date(b.queryInfo.lastMessageTimestamp)\n                            ? -1\n                            : 1,\n                    ),\n            ),\n        );\n        this.hasMatches = this.matches.pipe(\n            map((matches) => matches.length > 0),\n        );\n        this.hasConversations = this.conversations.pipe(\n            map((conversations) => conversations.length > 0),\n        );\n\n        this.validationService.userValid.subscribe((userValid) => {\n            if (userValid) {\n                this.publicProfileService.fetchMatches().subscribe();\n            }\n        });\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { Observable, map } from 'rxjs';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { MatchListItemClass } from '../../models/match-list-item';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-matches-page',\n    templateUrl: './matches-page.component.html',\n    styleUrls: ['./matches-page.component.scss'],\n})\nexport class MatchesPageComponent {\n    matches: Observable<MatchListItemClass[]>;\n    conversations: Observable<MatchListItemClass[]>;\n    hasMatches: Observable<boolean>;\n    hasConversations: Observable<boolean>;\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {\n        this.matches = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches.filter((match) => match.queryInfo.messagesCount === 0),\n            ),\n        );\n        this.conversations = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches\n                    .filter((match) => match.queryInfo.messagesCount > 0)\n                    .sort((a, b) =>\n                        new Date(a.queryInfo.lastMessageTimestamp) >\n                        new Date(b.queryInfo.lastMessageTimestamp)\n                            ? -1\n                            : 1,\n                    ),\n            ),\n        );\n        this.hasMatches = this.matches.pipe(\n            map((matches) => matches.length > 0),\n        );\n        this.hasConversations = this.conversations.pipe(\n            map((conversations) => conversations.length > 0),\n        );\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6006,7 +6006,7 @@
                         "name": "userValid",
                         "type": "",
                         "returnType": "",
-                        "line": 53
+                        "line": 47
                     }
                 },
                 "userValidMessage": {
@@ -6015,7 +6015,7 @@
                         "name": "userValidMessage",
                         "type": "",
                         "returnType": "",
-                        "line": 57
+                        "line": 51
                     }
                 }
             },
@@ -6072,7 +6072,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-card [noPadding]=\"true\" title=\"Mes matchs\" icon=\"fas fa-user-friends\" anchor=\"matches\">\n    <div class=\"match-list\">\n        <ng-container *ngFor=\"let match of matches\">\n            <ng-container *ngIf=\"match.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"match-list__item interactable\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"match-list__item__image\"\n                            [src]=\" value.pictures?.[0] + '-/scale_crop/250x334/center/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"match-list__item__image match-list__item__image--not-loaded\"></div>\n\n                        <span class=\"match-list__item__name\">{{value.name}}</span>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
+            "templateData": "<app-card [noPadding]=\"true\" title=\"Mes matchs\" icon=\"fas fa-user-friends\" anchor=\"matches\">\n    <div class=\"match-list\">\n        <ng-container *ngFor=\"let match of matches\">\n            <ng-container *ngIf=\"match.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"match-list__item interactable\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"match-list__item__image\"\n                            [src]=\" value.pictures?.[0] + '-/scale_crop/250x334/smart/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"match-list__item__image match-list__item__image--not-loaded\"></div>\n\n                        <span class=\"match-list__item__name\">{{value.name}}</span>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
         },
         {
             "name": "NavigationComponent",
@@ -6145,7 +6145,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { combineLatest, map } from 'rxjs';\nimport { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';\nimport { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';\nimport { SessionService } from 'src/modules/authentication/services/session-service/session.service';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-navigation',\n    templateUrl: './navigation.component.html',\n    styleUrls: ['./navigation.component.scss'],\n})\nexport class NavigationComponent {\n    constructor(\n        private readonly authenticationService: AuthenticationService,\n        private readonly sessionService: SessionService,\n        private readonly userProfileService: UserProfileService,\n        private readonly router: Router,\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {}\n\n    get navigation() {\n        return this.isLoggedIn.pipe(\n            map((isLoggedIn) =>\n                isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN,\n            ),\n        );\n    }\n\n    get isLoggedIn() {\n        return this.sessionService.isLoggedIn();\n    }\n\n    get user() {\n        return this.sessionService.session.pipe(\n            map((session) => session?.user),\n        );\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    get name() {\n        return combineLatest([this.user, this.userProfile]).pipe(\n            map(([user, userProfile]) => {\n                return userProfile?.name ?? user?.email ?? '';\n            }),\n        );\n    }\n\n    get avatar() {\n        return this.userProfile.pipe(\n            map((userProfile) => {\n                const avatar = userProfile?.pictures?.[0] ?? undefined;\n\n                return avatar\n                    ? `${avatar}-/scale_crop/100x100/center/`\n                    : undefined;\n            }),\n        );\n    }\n\n    get unreadConversationCount() {\n        return this.publicProfileService.unreadConversationCount;\n    }\n\n    get userValidActionsCount() {\n        return this.validationService.userValidActionsCount.pipe(\n            map((count) => count ?? 0),\n        );\n    }\n\n    logout() {\n        this.authenticationService.logout().subscribe();\n    }\n\n    isActiveLink(href: string) {\n        return this.router.url === href;\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { Router } from '@angular/router';\nimport { combineLatest, map } from 'rxjs';\nimport { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';\nimport { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';\nimport { SessionService } from 'src/modules/authentication/services/session-service/session.service';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { UserProfileService } from 'src/modules/user-profile/services/user-profile-service/user-profile.service';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-navigation',\n    templateUrl: './navigation.component.html',\n    styleUrls: ['./navigation.component.scss'],\n})\nexport class NavigationComponent {\n    constructor(\n        private readonly authenticationService: AuthenticationService,\n        private readonly sessionService: SessionService,\n        private readonly userProfileService: UserProfileService,\n        private readonly router: Router,\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {}\n\n    get navigation() {\n        return this.isLoggedIn.pipe(\n            map((isLoggedIn) =>\n                isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN,\n            ),\n        );\n    }\n\n    get isLoggedIn() {\n        return this.sessionService.isLoggedIn();\n    }\n\n    get user() {\n        return this.sessionService.session.pipe(\n            map((session) => session?.user),\n        );\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    get name() {\n        return combineLatest([this.user, this.userProfile]).pipe(\n            map(([user, userProfile]) => {\n                return userProfile?.name ?? user?.email ?? '';\n            }),\n        );\n    }\n\n    get avatar() {\n        return this.userProfile.pipe(\n            map((userProfile) => {\n                const avatar = userProfile?.pictures?.[0] ?? undefined;\n\n                return avatar\n                    ? `${avatar}-/scale_crop/100x100/smart/`\n                    : undefined;\n            }),\n        );\n    }\n\n    get unreadConversationCount() {\n        return this.publicProfileService.unreadConversationCount;\n    }\n\n    get userValidActionsCount() {\n        return this.validationService.userValidActionsCount.pipe(\n            map((count) => count ?? 0),\n        );\n    }\n\n    logout() {\n        this.authenticationService.logout().subscribe();\n    }\n\n    isActiveLink(href: string) {\n        return this.router.url === href;\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7020,7 +7020,7 @@
         },
         {
             "name": "SwipingPageComponent",
-            "id": "component-SwipingPageComponent-6547430979a9c2f458714cceedb1fdd206527eebf8798523622d2dc10488c2bc1881e1fbbd22fabf840b1ce08e09e12d83e9a16a590225d12c1b5b196b23db16",
+            "id": "component-SwipingPageComponent-caef4e225288bacf7608a5caa475ebab948245efee24d2a20859d927db42dfed6d85ea52cf09f6f05375bc1dc45654d27921280108c553f6f641726e8c146a34",
             "file": "src/modules/matching/pages/swiping-page/swiping-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7197,7 +7197,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { BehaviorSubject, combineLatest, timeout } from 'rxjs';\nimport { PublicUserResultClass } from '../../models/public-user-result';\nimport { PublicProfileService } from '../../services/public-profile-service/public-profile.service';\nimport { MatchingService } from '../../services/matching-service/matching.service';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\nimport { SessionService } from 'src/modules/authentication/services/session-service/session.service';\n\n@Component({\n    selector: 'app-swiping-page',\n    templateUrl: './swiping-page.component.html',\n    styleUrls: ['./swiping-page.component.scss'],\n})\nexport class SwipingPageComponent {\n    availableUsers: BehaviorSubject<PublicUserResultClass[]> =\n        new BehaviorSubject<PublicUserResultClass[]>([]);\n    loading = new BehaviorSubject<boolean>(true);\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly matchingService: MatchingService,\n        private readonly sessionService: SessionService,\n        private readonly validationService: ValidationService,\n    ) {\n        combineLatest([\n            this.sessionService.isLoggedIn(),\n            this.validationService.userValid,\n        ]).subscribe(([isLoggedIn, userValid]) => {\n            if (isLoggedIn && userValid) {\n                this.fetchNext();\n            } else {\n                this.availableUsers.next([]);\n            }\n        });\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n\n    get availableUsersDelayed() {\n        return this.availableUsers.pipe(timeout(100));\n    }\n\n    fetchNext() {\n        this.publicProfileService.getAvailableUsers().subscribe((users) => {\n            this.availableUsers.next([...this.availableUsers.value, ...users]);\n            this.loading.next(false);\n        });\n    }\n\n    likeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n        this.matchingService.likeUser(user.currentValue.userId).subscribe();\n    }\n\n    dislikeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n        this.matchingService.likeUser(user.currentValue.userId).subscribe();\n    }\n\n    onExcludeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n    }\n\n    private removeUser(user: PublicUserResultClass) {\n        this.availableUsers.next(\n            this.availableUsers.value.filter((u) => u !== user),\n        );\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { BehaviorSubject, combineLatest, timeout } from 'rxjs';\nimport { PublicUserResultClass } from '../../models/public-user-result';\nimport { PublicProfileService } from '../../services/public-profile-service/public-profile.service';\nimport { MatchingService } from '../../services/matching-service/matching.service';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\nimport { SessionService } from 'src/modules/authentication/services/session-service/session.service';\n\n@Component({\n    selector: 'app-swiping-page',\n    templateUrl: './swiping-page.component.html',\n    styleUrls: ['./swiping-page.component.scss'],\n})\nexport class SwipingPageComponent {\n    availableUsers: BehaviorSubject<PublicUserResultClass[]> =\n        new BehaviorSubject<PublicUserResultClass[]>([]);\n    loading = new BehaviorSubject<boolean>(true);\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly matchingService: MatchingService,\n        private readonly sessionService: SessionService,\n        private readonly validationService: ValidationService,\n    ) {\n        combineLatest([\n            this.sessionService.isLoggedIn(),\n            this.validationService.userValid,\n        ]).subscribe(([isLoggedIn, userValid]) => {\n            if (isLoggedIn && userValid) {\n                this.fetchNext();\n            } else {\n                this.availableUsers.next([]);\n            }\n        });\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n\n    get availableUsersDelayed() {\n        return this.availableUsers.pipe(timeout(100));\n    }\n\n    fetchNext() {\n        this.publicProfileService.getAvailableUsers().subscribe((users) => {\n            this.availableUsers.next([...this.availableUsers.value, ...users]);\n            this.loading.next(false);\n        });\n    }\n\n    likeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n        this.matchingService.likeUser(user.currentValue.userId).subscribe();\n    }\n\n    dislikeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n        this.matchingService.dislikeUser(user.currentValue.userId).subscribe();\n    }\n\n    onExcludeUser(user: PublicUserResultClass) {\n        this.removeUser(user);\n    }\n\n    private removeUser(user: PublicUserResultClass) {\n        this.availableUsers.next(\n            this.availableUsers.value.filter((u) => u !== user),\n        );\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7353,7 +7353,7 @@
         },
         {
             "name": "UserProfileCardComponent",
-            "id": "component-UserProfileCardComponent-b6871885bcb1fdf157a652a15fa3be45a3775a881456778af19dc2d22a82c5f5f296f8580e61c2887f2f9438ee3ecccbd26732078f14794452a4aaf8de9add53",
+            "id": "component-UserProfileCardComponent-4b93c2f882772b7c655156f5d106ec567e62d1b6257914719eaa66e8a5b7a0b27228d80e27438c852011b1240b58dafa40900170d8ee9ee12437c3ae4ab6c7bd",
             "file": "src/modules/user-profile/components/user-profile-card/user-profile-card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7376,7 +7376,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 23,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -7385,7 +7385,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 21,
                     "type": "UserProfile | PublicUserResult | undefined | null",
                     "decorators": []
                 }
@@ -7396,7 +7396,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 24,
                     "type": "EventEmitter<void>"
                 }
             ],
@@ -7408,7 +7408,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 94,
+                    "line": 121,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7418,7 +7418,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 112,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -7432,11 +7432,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport {\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    SEXUAL_ORIENTATIONS,\n    PROGRAMS,\n} from '../../constants';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport {\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    SEXUAL_ORIENTATIONS,\n    PROGRAMS,\n    WORKOUT_HABITS,\n    DRINKING_HABITS,\n    SMOKING_HABITS,\n} from '../../constants';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get workout() {\n        return WORKOUT_HABITS.find(\n            (workout) => workout.id === this.userProfile?.workout,\n        );\n    }\n\n    get drinking() {\n        return DRINKING_HABITS.find(\n            (drinking) => drinking.id === this.userProfile?.drinking,\n        );\n    }\n\n    get smoking() {\n        return SMOKING_HABITS.find(\n            (smoking) => smoking.id === this.userProfile?.smoking,\n        );\n    }\n\n    get drugs() {\n        return DRINKING_HABITS.find(\n            (drugs) => drugs.id === this.userProfile?.drugs,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/utils';\n@import '../../../../styles/variables';\n\n.user-profile {\n    @include no-select;\n\n    $spacing: 18px;\n    $inner-radius: 10px;\n\n    height: 100%;\n    width: 100%;\n    background-color: var(--theme-background);\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: 16px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding: $spacing;\n    display: flex;\n    flex-direction: column;\n    gap: $spacing;\n    box-sizing: border-box;\n    box-shadow: $default-shadow;\n    -ms-overflow-style: none;  /* Internet Explorer 10+ */\n    scrollbar-width: none;  /* Firefox */\n\n    &::-webkit-scrollbar {\n        display: none;  /* Safari and Chrome */\n    }\n\n    &__separator {\n        height: 1px;\n        width: 100%;\n        background-color: rgb(240, 240, 240);\n        border: none;\n        display: block;\n        margin: 0;\n    }\n\n    &__section {\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n        padding: $spacing;\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n    }\n\n    &__section-title {\n        font-size: 0.9em;\n        font-weight: 800;\n        opacity: 0.45;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n\n        i {\n            font-size: 0.8em;\n        }\n    }\n\n    &__picture {\n        width: 100%;\n        aspect-ratio: 3/4;\n        background-color: rgb(240, 240, 240);\n        border-radius: $inner-radius;\n        object-fit: cover;\n        object-position: center;\n    }\n\n    &__table {\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n\n        &__entry {\n            padding: 12px 18px;\n\n            &:not(:last-child) {\n                border-bottom: solid 1px rgb(240, 240, 240);\n            }\n\n            i {\n                width: 18px;\n                margin-right: 8px;\n            }\n\n            &--multiple {\n                display: flex;\n                overflow-y: auto;\n                gap: 36px;\n                -ms-overflow-style: none;  /* Internet Explorer 10+ */\n                scrollbar-width: none;  /* Firefox */\n\n                &::-webkit-scrollbar {\n                    display: none;  /* Safari and Chrome */\n                }\n\n                .user-profile__table__entry__item {\n                    flex-shrink: 0;\n\n                    i {\n                        width: 18px;\n                        margin-right: 2px;\n                    }\n\n                    &:not(:last-child) {\n                        &::after {\n                            content: '';\n                            position: relative;\n                            height: 100%;\n                            width: 1px;\n                            background-color: red;\n                        }\n                    }\n                }\n            }\n        }\n\n        &:empty {\n            display: none;\n            margin-bottom: -$spacing;\n        }\n    }\n\n    &__list {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 6px;\n\n        &__item {\n            border: solid 1px rgb(240, 240, 240);\n            padding: 4px 12px;\n            border-radius: 24px;\n        }\n    }\n\n    &__main {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        align-items: stretch;\n        height: 100%;\n        gap: $spacing;\n        flex-shrink: 0;\n\n        &__picture {\n            display: block;\n            width: 100%;\n            object-fit: cover;\n            object-position: center;\n            border-radius: $inner-radius;\n            background-color: rgb(240, 240, 240);\n        }\n\n        &__info {\n            display: flex;\n            flex-direction: column;\n            gap: $spacing;\n\n            &__name {\n                font-size: 2.4em;\n                font-weight: 800;\n                margin: 0;\n            }\n\n            &__subtitle {\n                margin: 0;\n                font-size: 1.3em;\n                font-weight: 800;\n                opacity: 0.55;\n            }\n        }\n    }\n\n    &__looking-for {\n        &__content {\n            font-size: 1.4em;\n            font-weight: 500;\n        }\n    }\n\n    &__actions {\n        display: flex;\n        flex-direction: column;\n        gap: 12px;\n\n        &__item {\n            display: block;\n            appearance: none;\n            background-color: var(--theme-background);\n            border: solid 1px rgb(240, 240, 240);\n            font-size: inherit;\n            padding: 12px 24px;\n            border-radius: 6px;\n            text-align: center;\n            text-decoration: none;\n            color: var(--theme-background-contrast);\n            box-shadow: $default-shadow;\n\n            i {\n                margin-right: 6px;\n            }\n        }\n    }\n\n    p {\n        margin: 0;\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        $spacing: 12px;\n\n\n        padding: $spacing;\n        gap: $spacing;\n\n        &__section {\n            gap: $spacing;\n            padding: $spacing;\n        }\n\n        &__main {\n            gap: $spacing;\n\n            &__info {\n                gap: $spacing;\n            }\n        }\n    }\n}\n\nhr {\n    width: 100%;\n    border: none;\n    height: 1px;\n    background: rgb(240, 240, 240);\n}",
+                    "data": "@import '../../../../styles/utils';\n@import '../../../../styles/variables';\n\n.user-profile {\n    @include no-select;\n\n    $spacing: 18px;\n    $inner-radius: 10px;\n\n    height: 100%;\n    width: 100%;\n    background-color: var(--theme-background);\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: 16px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding: $spacing;\n    display: flex;\n    flex-direction: column;\n    gap: $spacing;\n    box-sizing: border-box;\n    box-shadow: $default-shadow;\n    -ms-overflow-style: none;  /* Internet Explorer 10+ */\n    scrollbar-width: none;  /* Firefox */\n\n    &::-webkit-scrollbar {\n        display: none;  /* Safari and Chrome */\n    }\n\n    &__separator {\n        height: 1px;\n        width: 100%;\n        background-color: rgb(240, 240, 240);\n        border: none;\n        display: block;\n        margin: 0;\n    }\n\n    &__section {\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n        padding: $spacing;\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n    }\n\n    &__section-title {\n        font-size: 0.9em;\n        font-weight: 800;\n        opacity: 0.45;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n\n        i {\n            font-size: 0.8em;\n        }\n    }\n\n    &__picture {\n        width: 100%;\n        aspect-ratio: 3/4;\n        background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n        border-radius: $inner-radius;\n        object-fit: cover;\n        object-position: center;\n    }\n\n    &__table {\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n\n        &__entry {\n            padding: 12px 18px;\n\n            &:not(:last-child) {\n                border-bottom: solid 1px rgb(240, 240, 240);\n            }\n\n            i {\n                width: 18px;\n                margin-right: 8px;\n            }\n\n            &--multiple {\n                display: flex;\n                overflow-y: auto;\n                gap: 36px;\n                -ms-overflow-style: none;  /* Internet Explorer 10+ */\n                scrollbar-width: none;  /* Firefox */\n\n                &::-webkit-scrollbar {\n                    display: none;  /* Safari and Chrome */\n                }\n\n                .user-profile__table__entry__item {\n                    flex-shrink: 0;\n\n                    i {\n                        width: 18px;\n                        margin-right: 2px;\n                    }\n\n                    &:not(:last-child) {\n                        &::after {\n                            content: '';\n                            position: relative;\n                            height: 100%;\n                            width: 1px;\n                            background-color: red;\n                        }\n                    }\n                }\n            }\n        }\n\n        &:empty {\n            display: none;\n            margin-bottom: -$spacing;\n        }\n    }\n\n    &__list {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 6px;\n\n        &__item {\n            border: solid 1px rgb(240, 240, 240);\n            padding: 4px 12px;\n            border-radius: 24px;\n        }\n    }\n\n    &__main {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        align-items: stretch;\n        height: 100%;\n        gap: $spacing;\n        flex-shrink: 0;\n\n        &__picture {\n            display: block;\n            width: 100%;\n            object-fit: cover;\n            object-position: center;\n            border-radius: $inner-radius;\n            background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n        }\n\n        &__info {\n            display: flex;\n            flex-direction: column;\n            gap: $spacing;\n\n            &__name {\n                font-size: 2.4em;\n                font-weight: 800;\n                margin: 0;\n            }\n\n            &__subtitle {\n                margin: 0;\n                font-size: 1.3em;\n                font-weight: 800;\n                opacity: 0.55;\n            }\n        }\n    }\n\n    &__looking-for {\n        &__content {\n            font-size: 1.4em;\n            font-weight: 500;\n        }\n    }\n\n    &__actions {\n        display: flex;\n        flex-direction: column;\n        gap: 12px;\n\n        &__item {\n            display: block;\n            appearance: none;\n            background-color: var(--theme-background);\n            border: solid 1px rgb(240, 240, 240);\n            font-size: inherit;\n            padding: 12px 24px;\n            border-radius: 6px;\n            text-align: center;\n            text-decoration: none;\n            color: var(--theme-background-contrast);\n            box-shadow: $default-shadow;\n\n            i {\n                margin-right: 6px;\n            }\n        }\n    }\n\n    p {\n        margin: 0;\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        $spacing: 12px;\n\n\n        padding: $spacing;\n        gap: $spacing;\n\n        &__section {\n            gap: $spacing;\n            padding: $spacing;\n        }\n\n        &__main {\n            gap: $spacing;\n\n            &__info {\n                gap: $spacing;\n            }\n        }\n    }\n}\n\nhr {\n    width: 100%;\n    border: none;\n    height: 1px;\n    background: rgb(240, 240, 240);\n}",
                     "styleUrl": "./user-profile-card.component.scss"
                 }
             ],
@@ -7454,7 +7454,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 24,
                 "jsdoctags": [
                     {
                         "name": "moderationService",
@@ -7474,7 +7474,7 @@
                         "name": "program",
                         "type": "",
                         "returnType": "",
-                        "line": 25
+                        "line": 28
                     }
                 },
                 "interests": {
@@ -7483,7 +7483,7 @@
                         "name": "interests",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 32
+                        "line": 35
                     }
                 },
                 "associations": {
@@ -7492,7 +7492,7 @@
                         "name": "associations",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 40
+                        "line": 43
                     }
                 },
                 "zodiacSign": {
@@ -7501,7 +7501,7 @@
                         "name": "zodiacSign",
                         "type": "",
                         "returnType": "",
-                        "line": 48
+                        "line": 51
                     }
                 },
                 "sexualOrientation": {
@@ -7510,7 +7510,7 @@
                         "name": "sexualOrientation",
                         "type": "",
                         "returnType": "",
-                        "line": 54
+                        "line": 57
                     }
                 },
                 "relationshipType": {
@@ -7519,7 +7519,7 @@
                         "name": "relationshipType",
                         "type": "",
                         "returnType": "",
-                        "line": 61
+                        "line": 64
                     }
                 },
                 "lookingFor": {
@@ -7528,7 +7528,43 @@
                         "name": "lookingFor",
                         "type": "",
                         "returnType": "",
-                        "line": 67
+                        "line": 70
+                    }
+                },
+                "workout": {
+                    "name": "workout",
+                    "getSignature": {
+                        "name": "workout",
+                        "type": "",
+                        "returnType": "",
+                        "line": 76
+                    }
+                },
+                "drinking": {
+                    "name": "drinking",
+                    "getSignature": {
+                        "name": "drinking",
+                        "type": "",
+                        "returnType": "",
+                        "line": 82
+                    }
+                },
+                "smoking": {
+                    "name": "smoking",
+                    "getSignature": {
+                        "name": "smoking",
+                        "type": "",
+                        "returnType": "",
+                        "line": 88
+                    }
+                },
+                "drugs": {
+                    "name": "drugs",
+                    "getSignature": {
+                        "name": "drugs",
+                        "type": "",
+                        "returnType": "",
+                        "line": 94
                     }
                 },
                 "height": {
@@ -7537,11 +7573,11 @@
                         "name": "height",
                         "type": "",
                         "returnType": "",
-                        "line": 73
+                        "line": 100
                     }
                 }
             },
-            "templateData": "\n<ng-container *ngIf=\"userProfile\">\n    <div class=\"user-profile\">\n        <div class=\"user-profile__main\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/700x1020/center/'\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                class=\"user-profile__main__picture\"\n            >\n            <div class=\"user-profile__main__info\">\n                <p class=\"user-profile__main__info__name\">{{userProfile.name}}</p>\n                <p class=\"user-profile__main__info__subtitle\">\n                    <span class=\"user-profile__main__info__subtitle__age\">{{userProfile.age}}</span>\n                    <span class=\"user-profile__main__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                </p>\n            </div>\n        </div>\n\n        <div class=\"user-profile__bio user-profile__section\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n            <p>{{userProfile.bio}}</p>\n        </div>\n\n        <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n            <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[1]+ '-/scale_crop/700x1020/center/'\"\n            *ngIf=\"userProfile.pictures?.[1]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__table\">\n            <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                    <i class=\"fas fa-ruler\"></i> {{height}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.workout\">\n                    <i class=\"fas fa-running\"></i> {{userProfile.workout}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.drinking\">\n                    <i class=\"fas fa-wine-glass-alt\"></i> {{userProfile.drinking}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.smoking\">\n                    <i class=\"fas fa-smoking\"></i> {{userProfile.smoking}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.drugs\">\n                    <i class=\"fas fa-cannabis\"></i> {{userProfile.drugs}}\n                </div>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[2]+ '-/scale_crop/700x1020/center/'\"\n            *ngIf=\"userProfile.pictures?.[2]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n            <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                    {{interest}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[3]+ '-/scale_crop/700x1020/center/'\"\n            *ngIf=\"userProfile.pictures?.[3]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n            <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                    {{association}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[4]+ '-/scale_crop/700x1020/center/'\"\n            *ngIf=\"userProfile.pictures?.[4]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n        \n        <img\n            [src]=\"userProfile.pictures?.[5]+ '-/scale_crop/700x1020/center/'\"\n            *ngIf=\"userProfile.pictures?.[5]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <hr>\n\n        <div class=\"user-profile__actions\">\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n        </div>\n    </div>\n</ng-container>"
+            "templateData": "\n<ng-container *ngIf=\"userProfile\">\n    <div class=\"user-profile\">\n        <div class=\"user-profile__main\">\n            <img\n                [src]=\"(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/')\"\n                [srcset]=\"(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/smart/-/progressive/yes/ 2x')\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                class=\"user-profile__main__picture\"\n                *ngIf=\"userProfile.pictures?.[0]\"\n            >\n            <div class=\"user-profile__main__picture\" *ngIf=\"!userProfile.pictures?.[0]\"></div>\n            <div class=\"user-profile__main__info\">\n                <p class=\"user-profile__main__info__name\">{{userProfile.name}}</p>\n                <p class=\"user-profile__main__info__subtitle\">\n                    <span class=\"user-profile__main__info__subtitle__age\">{{userProfile.age}}</span>\n                    <span class=\"user-profile__main__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                </p>\n            </div>\n        </div>\n\n        <div class=\"user-profile__bio user-profile__section\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n            <p>{{userProfile.bio}}</p>\n        </div>\n\n        <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n            <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[1]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[1]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__table\">\n            <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                    <i class=\"fas fa-ruler\"></i> {{height}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"workout\">\n                    <i class=\"fas fa-running\"></i> {{workout.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"drinking\">\n                    <i class=\"fas fa-wine-glass-alt\"></i> {{drinking.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"smoking\">\n                    <i class=\"fas fa-smoking\"></i> {{smoking.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"drugs\">\n                    <i class=\"fas fa-cannabis\"></i> {{drugs.name}}\n                </div>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[2]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[2]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n            <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                    {{interest}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[3]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[3]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n            <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                    {{association}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[4]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[4]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n        \n        <img\n            [src]=\"userProfile.pictures?.[5]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[5]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <hr>\n\n        <div class=\"user-profile__actions\">\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n        </div>\n    </div>\n</ng-container>"
         },
         {
             "name": "UserProfileEditPageComponent",
@@ -7625,7 +7661,7 @@
         },
         {
             "name": "UserProfileFormComponent",
-            "id": "component-UserProfileFormComponent-257da66df35814b09fdcaf1123100b2dc6a30bf96931e9bcdfe8ce1a9ecbbd541dc884443fcd9d073c9a08c472a2de088b11086a74e7d8099bff54f9462943af",
+            "id": "component-UserProfileFormComponent-8456502364d1b56ef0550fb5dbbb95a2925f146f218887abdf5bb20a2628c23a42f650c256fca03aaf4800e0c1c393e346e7c42e45597604c307bda53266dca1",
             "file": "src/modules/user-profile/components/user-profile-form/user-profile-form.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7653,7 +7689,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 143
+                    "line": 146
                 },
                 {
                     "name": "drinkingHabits",
@@ -7663,7 +7699,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 134
+                    "line": 137
                 },
                 {
                     "name": "drugHabits",
@@ -7673,7 +7709,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 136
+                    "line": 139
                 },
                 {
                     "name": "genderIdentities",
@@ -7683,7 +7719,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 139
+                    "line": 142
                 },
                 {
                     "name": "genderPreferences",
@@ -7693,7 +7729,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 140
+                    "line": 143
                 },
                 {
                     "name": "genders",
@@ -7703,7 +7739,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 138
+                    "line": 141
                 },
                 {
                     "name": "interests",
@@ -7713,7 +7749,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 142
+                    "line": 145
                 },
                 {
                     "name": "loading$",
@@ -7723,7 +7759,7 @@
                     "type": "BehaviorSubject<boolean>",
                     "optional": false,
                     "description": "",
-                    "line": 154
+                    "line": 157
                 },
                 {
                     "name": "lookingFor",
@@ -7733,7 +7769,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 131
+                    "line": 134
                 },
                 {
                     "name": "pictures",
@@ -7743,7 +7779,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 145
+                    "line": 148
                 },
                 {
                     "name": "programs",
@@ -7753,7 +7789,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 130
+                    "line": 133
                 },
                 {
                     "name": "relationshipTypes",
@@ -7763,7 +7799,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 132
+                    "line": 135
                 },
                 {
                     "name": "sexualities",
@@ -7773,7 +7809,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 141
+                    "line": 144
                 },
                 {
                     "name": "smokingHabits",
@@ -7783,17 +7819,17 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 135
+                    "line": 138
                 },
                 {
                     "name": "userProfileForm",
-                    "defaultValue": "new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    })",
+                    "defaultValue": "new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), [\n            // profilePictureValidator,\n        ]),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 34
+                    "line": 35
                 },
                 {
                     "name": "workoutHabits",
@@ -7803,7 +7839,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 137
+                    "line": 140
                 },
                 {
                     "name": "zodiacSigns",
@@ -7813,7 +7849,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 133
+                    "line": 136
                 }
             ],
             "methodsClass": [
@@ -7823,7 +7859,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 227,
+                    "line": 230,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -7833,7 +7869,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 185,
+                    "line": 188,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -7847,7 +7883,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport {\n    PROGRAMS_ARRAY,\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    DRINKING_HABITS,\n    DRUGS_HABITS,\n    SMOKING_HABITS,\n    WORKOUT_HABITS,\n    GENDERS,\n    GENDER_IDENTITIES,\n    GENDER_PREFERENCES,\n    SEXUAL_ORIENTATIONS,\n    INTERESTS,\n    ASSOCIATIONS,\n} from '../../constants';\nimport { UserProfileService } from '../../services/user-profile-service/user-profile.service';\nimport { UserProfile } from 'common/models/user';\nimport { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport {\n    arrayContainedInValidator,\n    containedInValidator,\n} from '../../validators/contained-in-validator';\n\n@Component({\n    selector: 'app-user-profile-form',\n    templateUrl: './user-profile-form.component.html',\n    styleUrls: ['./user-profile-form.component.scss'],\n})\nexport class UserProfileFormComponent {\n    userProfileForm = new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), []),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    });\n    programs = PROGRAMS_ARRAY;\n    lookingFor = LOOKING_FOR;\n    relationshipTypes = RELATIONSHIP_TYPES;\n    zodiacSigns = ZODIAC_SIGNS;\n    drinkingHabits = DRINKING_HABITS;\n    smokingHabits = SMOKING_HABITS;\n    drugHabits = DRUGS_HABITS;\n    workoutHabits = WORKOUT_HABITS;\n    genders = GENDERS;\n    genderIdentities = GENDER_IDENTITIES;\n    genderPreferences = GENDER_PREFERENCES;\n    sexualities = SEXUAL_ORIENTATIONS;\n    interests = INTERESTS;\n    associations = ASSOCIATIONS;\n\n    pictures = [\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n    ];\n\n    loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);\n\n    constructor(\n        private readonly userProfileService: UserProfileService,\n        private readonly snackBar: MatSnackBar,\n    ) {\n        this.userProfileService.getUserProfile().subscribe((userProfile) => {\n            if (userProfile) {\n                this.userProfileForm.patchValue(userProfile);\n\n                if (userProfile.pictures) {\n                    for (let i = 0; i < this.pictures.length; i++) {\n                        this.pictures[i].next(userProfile.pictures[i]);\n                    }\n                }\n\n                this.userProfileForm.markAsPristine();\n            }\n        });\n\n        combineLatest(this.pictures)\n            .pipe(debounceTime(1))\n            .subscribe((pictures) => {\n                this.userProfileForm.patchValue({ pictures });\n            });\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    onSubmit() {\n        if (this.userProfileForm.invalid) {\n            return;\n        }\n\n        const res: Omit<Partial<UserProfile>, 'userId'> = {};\n\n        for (const [k, v] of Object.entries(this.userProfileForm.value)) {\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            (res as any)[k] = v ?? undefined;\n        }\n\n        this.loading$.next(true);\n        this.userProfileForm.markAsPending();\n        this.userProfileService.updateUserProfile(res);\n        this.userProfileService\n            .applyUserProfileChanges()\n            .pipe(\n                catchError((err) => {\n                    this.snackBar.open(\n                        'Erreur lors de la mise à jour du profil',\n                        undefined,\n                        {\n                            duration: 2000,\n                            politeness: 'assertive',\n                            verticalPosition: 'top',\n                        },\n                    );\n                    this.loading$.next(false);\n                    return err;\n                }),\n            )\n            .subscribe(() => {\n                this.snackBar.open('Profil mis à jour', undefined, {\n                    duration: 2000,\n                    politeness: 'polite',\n                    verticalPosition: 'top',\n                });\n                this.loading$.next(false);\n            });\n    }\n\n    markDirty() {\n        this.userProfileForm.markAsDirty();\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\nimport {\n    PROGRAMS_ARRAY,\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    DRINKING_HABITS,\n    DRUGS_HABITS,\n    SMOKING_HABITS,\n    WORKOUT_HABITS,\n    GENDERS,\n    GENDER_IDENTITIES,\n    GENDER_PREFERENCES,\n    SEXUAL_ORIENTATIONS,\n    INTERESTS,\n    ASSOCIATIONS,\n} from '../../constants';\nimport { UserProfileService } from '../../services/user-profile-service/user-profile.service';\nimport { UserProfile } from 'common/models/user';\nimport { BehaviorSubject, catchError, combineLatest, debounceTime } from 'rxjs';\nimport { MatSnackBar } from '@angular/material/snack-bar';\nimport {\n    arrayContainedInValidator,\n    containedInValidator,\n} from '../../validators/contained-in-validator';\n// import { profilePictureValidator } from '../../validators/profile-picture-validator';\n\n@Component({\n    selector: 'app-user-profile-form',\n    templateUrl: './user-profile-form.component.html',\n    styleUrls: ['./user-profile-form.component.scss'],\n})\nexport class UserProfileFormComponent {\n    userProfileForm = new FormGroup({\n        pictures: new FormControl(new Array<string | undefined>(), [\n            // profilePictureValidator,\n        ]),\n        name: new FormControl('', [\n            Validators.required,\n            Validators.minLength(3),\n            Validators.maxLength(255),\n        ]),\n        age: new FormControl(0, [\n            Validators.required,\n            Validators.min(0),\n            Validators.max(150),\n        ]),\n        bio: new FormControl('', [\n            Validators.required,\n            Validators.minLength(5),\n            Validators.maxLength(255),\n        ]),\n        program: new FormControl('', [\n            containedInValidator(\n                PROGRAMS_ARRAY,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        height: new FormControl(0, [Validators.min(0), Validators.max(300)]),\n        interests: new FormControl<string[]>(\n            [],\n            [arrayContainedInValidator(INTERESTS)],\n        ),\n        associations: new FormControl<string[]>(\n            [],\n            // [arrayContainedInValidator(ASSOCIATIONS)],\n        ),\n        lookingFor: new FormControl('', [\n            containedInValidator(\n                LOOKING_FOR,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        relationshipType: new FormControl('', [\n            containedInValidator(\n                RELATIONSHIP_TYPES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        zodiacSign: new FormControl('', [\n            containedInValidator(\n                ZODIAC_SIGNS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drinking: new FormControl('', [\n            containedInValidator(\n                DRINKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        smoking: new FormControl('', [\n            containedInValidator(\n                SMOKING_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        drugs: new FormControl('', [\n            containedInValidator(\n                DRUGS_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        workout: new FormControl('', [\n            containedInValidator(\n                WORKOUT_HABITS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        jobTitle: new FormControl(''),\n        jobCompany: new FormControl(''),\n        livingIn: new FormControl(''),\n        gender: new FormControl(''),\n        genderCategory: new FormControl('', [\n            Validators.required,\n            containedInValidator(GENDERS, (item, value) => item.id === value),\n        ]),\n        genderPreference: new FormControl('', [\n            Validators.required,\n            containedInValidator(\n                GENDER_PREFERENCES,\n                (item, value) => item.id === value,\n            ),\n        ]),\n        sexualOrientation: new FormControl('', [\n            containedInValidator(\n                SEXUAL_ORIENTATIONS,\n                (item, value) => item.id === value,\n            ),\n        ]),\n    });\n    programs = PROGRAMS_ARRAY;\n    lookingFor = LOOKING_FOR;\n    relationshipTypes = RELATIONSHIP_TYPES;\n    zodiacSigns = ZODIAC_SIGNS;\n    drinkingHabits = DRINKING_HABITS;\n    smokingHabits = SMOKING_HABITS;\n    drugHabits = DRUGS_HABITS;\n    workoutHabits = WORKOUT_HABITS;\n    genders = GENDERS;\n    genderIdentities = GENDER_IDENTITIES;\n    genderPreferences = GENDER_PREFERENCES;\n    sexualities = SEXUAL_ORIENTATIONS;\n    interests = INTERESTS;\n    associations = ASSOCIATIONS;\n\n    pictures = [\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n        new BehaviorSubject<string | undefined>(undefined),\n    ];\n\n    loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);\n\n    constructor(\n        private readonly userProfileService: UserProfileService,\n        private readonly snackBar: MatSnackBar,\n    ) {\n        this.userProfileService.getUserProfile().subscribe((userProfile) => {\n            if (userProfile) {\n                this.userProfileForm.patchValue(userProfile);\n\n                if (userProfile.pictures) {\n                    for (let i = 0; i < this.pictures.length; i++) {\n                        this.pictures[i].next(userProfile.pictures[i]);\n                    }\n                }\n\n                this.userProfileForm.markAsPristine();\n            }\n        });\n\n        combineLatest(this.pictures)\n            .pipe(debounceTime(1))\n            .subscribe((pictures) => {\n                this.userProfileForm.patchValue({ pictures });\n            });\n    }\n\n    get userProfile() {\n        return this.userProfileService.getUserProfile();\n    }\n\n    onSubmit() {\n        if (this.userProfileForm.invalid) {\n            return;\n        }\n\n        const res: Omit<Partial<UserProfile>, 'userId'> = {};\n\n        for (const [k, v] of Object.entries(this.userProfileForm.value)) {\n            // eslint-disable-next-line @typescript-eslint/no-explicit-any\n            (res as any)[k] = v ?? undefined;\n        }\n\n        this.loading$.next(true);\n        this.userProfileForm.markAsPending();\n        this.userProfileService.updateUserProfile(res);\n        this.userProfileService\n            .applyUserProfileChanges()\n            .pipe(\n                catchError((err) => {\n                    this.snackBar.open(\n                        'Erreur lors de la mise à jour du profil',\n                        undefined,\n                        {\n                            duration: 2000,\n                            politeness: 'assertive',\n                            verticalPosition: 'top',\n                        },\n                    );\n                    this.loading$.next(false);\n                    return err;\n                }),\n            )\n            .subscribe(() => {\n                this.snackBar.open('Profil mis à jour', undefined, {\n                    duration: 2000,\n                    politeness: 'polite',\n                    verticalPosition: 'top',\n                });\n                this.loading$.next(false);\n            });\n    }\n\n    markDirty() {\n        this.userProfileForm.markAsDirty();\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -7875,7 +7911,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 154,
+                "line": 157,
                 "jsdoctags": [
                     {
                         "name": "userProfileService",
@@ -7904,11 +7940,11 @@
                         "name": "userProfile",
                         "type": "",
                         "returnType": "",
-                        "line": 181
+                        "line": 184
                     }
                 }
             },
-            "templateData": "<ng-template #formInvalid>\n    <app-card *ngIf=\"userProfileForm.invalid\" color=\"danger\">\n        Assurez-vous d'avoir rempli tous les champs obligatoires (incluant au moins une image).\n    </app-card>\n</ng-template>\n\n<form [formGroup]=\"userProfileForm\" (submit)=\"onSubmit()\" class=\"form\">\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-card title=\"Mes photos\" icon=\"fas fa-camera-retro\">\n        <div class=\"form__pictures\">\n            <app-image-control\n                *ngFor=\"let picture of pictures; let index = index\"\n                class=\"form__pictures__control\"\n                [value]=\"picture\"\n                crop=\"3:4\"\n                (change)=\"markDirty()\"\n                [canDelete]=\"index !== 0\"\n            ></app-image-control>\n        </div>\n    </app-card>\n\n    <app-card title=\"Mon profil\" icon=\"fas fa-user\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-signature\"></i> Nom</mat-label>\n            <input formControlName=\"name\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-calendar\"></i> Age</mat-label>\n            <input formControlName=\"age\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-book\"></i> À propos de moi</mat-label>\n            <textarea formControlName=\"bio\" rows=\"5\" matInput></textarea>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-ruler\"></i> Taille (cm)</mat-label>\n            <input formControlName=\"height\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-city\"></i> Ville</mat-label>\n            <input formControlName=\"livingIn\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie amoureuse\" icon=\"fas fa-heart\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-heart\"></i> Ouvert à</mat-label>\n            <mat-select formControlName=\"lookingFor\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let lookingFor of lookingFor\" [value]=\"lookingFor.id\">{{ lookingFor.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.lookingFor.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-user-friends\"></i> Type de relation</mat-label>\n            <mat-select formControlName=\"relationshipType\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let relationshipType of relationshipTypes\" [value]=\"relationshipType.id\">{{ relationshipType.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.relationshipType.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Catégorie de genre</mat-label>\n            <mat-select formControlName=\"genderCategory\">\n                <mat-option *ngFor=\"let gender of genders\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderCategory.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Identitée de genre</mat-label>\n            <mat-select formControlName=\"gender\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let gender of genderIdentities\" [value]=\"gender\">{{ gender }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.gender.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> À la recherche de</mat-label>\n            <mat-select formControlName=\"genderPreference\">\n                <mat-option *ngFor=\"let gender of genderPreferences\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderPreference.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-flag\"></i> Sexualité</mat-label>\n            <mat-select formControlName=\"sexualOrientation\">\n                <mat-option *ngFor=\"let sexuality of sexualities\" [value]=\"sexuality.id\">{{ sexuality.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.sexualOrientation.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <a href=\"/about/ressources/inclusivity\" target=\"__BLANK\"><i class=\"fas fa-info-circle\"></i> En savoir plus sur les genres et la sexualité</a>\n    </app-card>\n\n    <app-card title=\"Ma vie à Poly\" icon=\"fas fa-school\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Programme d'étude</mat-label>\n            <mat-select formControlName=\"program\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let program of programs\" [value]=\"program.id\">{{ program.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.program.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Comités et Associations</mat-label>\n            <mat-select formControlName=\"associations\" multiple>\n                <mat-option \n                    *ngFor=\"let association of associations\"\n                    [value]=\"association\"\n                >\n                    {{association}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.associations.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Mon mode de vie\" icon=\"fas fa-leaf\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-star-shooting\"></i> Signe zodiac</mat-label>\n            <mat-select formControlName=\"zodiacSign\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let zodiacSign of zodiacSigns\" [value]=\"zodiacSign.id\">{{ zodiacSign.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.zodiacSign.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-glass-martini\"></i> Alcool</mat-label>\n            <mat-select formControlName=\"drinking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drinkingHabit of drinkingHabits\" [value]=\"drinkingHabit.id\">{{ drinkingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drinking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-smoking\"></i> Cigarette</mat-label>\n            <mat-select formControlName=\"smoking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let smokingHabit of smokingHabits\" [value]=\"smokingHabit.id\">{{ smokingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.smoking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-cannabis\"></i> Drogues</mat-label>\n            <mat-select formControlName=\"drugs\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drugHabit of drugHabits\" [value]=\"drugHabit.id\">{{ drugHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drugs.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-dumbbell\"></i> Sports</mat-label>\n            <mat-select formControlName=\"workout\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let workoutHabit of workoutHabits\" [value]=\"workoutHabit.id\">{{ workoutHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.workout.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Intérets et passes-temps</mat-label>\n            <mat-select formControlName=\"interests\" multiple>\n                <mat-option \n                    *ngFor=\"let interests of interests\"\n                    [value]=\"interests\"\n                >\n                    {{interests}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.interests.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie profesionnelle\" icon=\"fas fa-briefcase\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Emploi</mat-label>\n            <input formControlName=\"jobTitle\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Compagnie</mat-label>\n            <input formControlName=\"jobCompany\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-button\n        class=\"form__submit\"\n        icon=\"fas fa-save\"\n        [shadow]=\"true\"\n        interactable=\"small\"\n        type=\"submit\"\n        [disabled]=\"!userProfileForm.dirty || userProfileForm.invalid\"\n        [isLoading]=\"loading$ | async\"\n        color=\"primary\"\n    >Enregistrer</app-button>\n</form>\n"
+            "templateData": "<ng-template #formInvalid>\n    <app-card *ngIf=\"userProfileForm.invalid\" color=\"danger\">\n        Assurez-vous d'avoir rempli tous les champs obligatoires (incluant au moins une image).\n    </app-card>\n</ng-template>\n\n<form [formGroup]=\"userProfileForm\" (submit)=\"onSubmit()\" class=\"form\">\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-card title=\"Mes photos\" icon=\"fas fa-camera-retro\">\n        <div class=\"form__pictures\">\n            <app-image-control\n                *ngFor=\"let picture of pictures; let index = index\"\n                class=\"form__pictures__control\"\n                [value]=\"picture\"\n                crop=\"3:4\"\n                (change)=\"markDirty()\"\n                [canDelete]=\"index !== 0\"\n            ></app-image-control>\n        </div>\n        <mat-error *ngIf=\"userProfileForm.controls.pictures.getError('picturesNotValid')\">Au moins une photo est requise</mat-error>\n    </app-card>\n\n    <app-card title=\"Mon profil\" icon=\"fas fa-user\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-signature\"></i> Nom</mat-label>\n            <input formControlName=\"name\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-calendar\"></i> Age</mat-label>\n            <input formControlName=\"age\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-book\"></i> À propos de moi</mat-label>\n            <textarea formControlName=\"bio\" rows=\"5\" matInput></textarea>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-ruler\"></i> Taille (cm)</mat-label>\n            <input formControlName=\"height\" matInput type=\"number\">\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-city\"></i> Ville</mat-label>\n            <input formControlName=\"livingIn\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie amoureuse\" icon=\"fas fa-heart\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-heart\"></i> Ouvert à</mat-label>\n            <mat-select formControlName=\"lookingFor\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let lookingFor of lookingFor\" [value]=\"lookingFor.id\">{{ lookingFor.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.lookingFor.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-user-friends\"></i> Type de relation</mat-label>\n            <mat-select formControlName=\"relationshipType\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let relationshipType of relationshipTypes\" [value]=\"relationshipType.id\">{{ relationshipType.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.relationshipType.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Catégorie de genre</mat-label>\n            <mat-select formControlName=\"genderCategory\">\n                <mat-option *ngFor=\"let gender of genders\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderCategory.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> Identitée de genre</mat-label>\n            <mat-select formControlName=\"gender\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let gender of genderIdentities\" [value]=\"gender\">{{ gender }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.gender.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-transgender\"></i> À la recherche de</mat-label>\n            <mat-select formControlName=\"genderPreference\">\n                <mat-option *ngFor=\"let gender of genderPreferences\" [value]=\"gender.id\">{{ gender.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.genderPreference.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-flag\"></i> Sexualité</mat-label>\n            <mat-select formControlName=\"sexualOrientation\">\n                <mat-option *ngFor=\"let sexuality of sexualities\" [value]=\"sexuality.id\">{{ sexuality.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.sexualOrientation.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <a href=\"/about/ressources/inclusivity\" target=\"__BLANK\"><i class=\"fas fa-info-circle\"></i> En savoir plus sur les genres et la sexualité</a>\n    </app-card>\n\n    <app-card title=\"Ma vie à Poly\" icon=\"fas fa-school\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Programme d'étude</mat-label>\n            <mat-select formControlName=\"program\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let program of programs\" [value]=\"program.id\">{{ program.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.program.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Comités et Associations</mat-label>\n            <mat-select formControlName=\"associations\" multiple>\n                <mat-option \n                    *ngFor=\"let association of associations\"\n                    [value]=\"association\"\n                >\n                    {{association}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.associations.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Mon mode de vie\" icon=\"fas fa-leaf\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-star-shooting\"></i> Signe zodiac</mat-label>\n            <mat-select formControlName=\"zodiacSign\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let zodiacSign of zodiacSigns\" [value]=\"zodiacSign.id\">{{ zodiacSign.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.zodiacSign.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-glass-martini\"></i> Alcool</mat-label>\n            <mat-select formControlName=\"drinking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drinkingHabit of drinkingHabits\" [value]=\"drinkingHabit.id\">{{ drinkingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drinking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-smoking\"></i> Cigarette</mat-label>\n            <mat-select formControlName=\"smoking\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let smokingHabit of smokingHabits\" [value]=\"smokingHabit.id\">{{ smokingHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.smoking.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-cannabis\"></i> Drogues</mat-label>\n            <mat-select formControlName=\"drugs\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let drugHabit of drugHabits\" [value]=\"drugHabit.id\">{{ drugHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.drugs.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-dumbbell\"></i> Sports</mat-label>\n            <mat-select formControlName=\"workout\">\n                <mat-option value=\"\">No spécifié</mat-option>\n                <mat-option *ngFor=\"let workoutHabit of workoutHabits\" [value]=\"workoutHabit.id\">{{ workoutHabit.name }}</mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.workout.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-graduation-cap\"></i> Intérets et passes-temps</mat-label>\n            <mat-select formControlName=\"interests\" multiple>\n                <mat-option \n                    *ngFor=\"let interests of interests\"\n                    [value]=\"interests\"\n                >\n                    {{interests}}\n                </mat-option>\n            </mat-select>\n            <mat-error *ngIf=\"userProfileForm.controls.interests.getError('notContainedIn')\">Valeur invalide</mat-error>\n        </mat-form-field>\n    </app-card>\n\n    <app-card title=\"Ma vie profesionnelle\" icon=\"fas fa-briefcase\">\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Emploi</mat-label>\n            <input formControlName=\"jobTitle\" matInput>\n        </mat-form-field>\n\n        <mat-form-field>\n            <mat-label><i class=\"fas fa-briefcase\"></i> Compagnie</mat-label>\n            <input formControlName=\"jobCompany\" matInput>\n        </mat-form-field>\n    </app-card>\n\n    <ng-container *ngTemplateOutlet=\"formInvalid\"></ng-container>\n\n    <app-button\n        class=\"form__submit\"\n        icon=\"fas fa-save\"\n        [shadow]=\"true\"\n        interactable=\"small\"\n        type=\"submit\"\n        [disabled]=\"!userProfileForm.dirty || userProfileForm.invalid\"\n        [isLoading]=\"loading$ | async\"\n        color=\"primary\"\n    >Enregistrer</app-button>\n</form>\n"
         },
         {
             "name": "UserProfilePageComponent",
@@ -8057,7 +8093,7 @@
                     }
                 }
             },
-            "templateData": "<app-layout headerType=\"hidden\">\n    <div class=\"user-profile\" *ngIf=\"userProfile | async; let userProfile\">\n        <app-card color=\"danger\" *ngIf=\"(emailValidated | async) === false\">\n            <p><b>Email non validé</b></p>\n            <p>Veuillez vérifier votre boite de courriel ou cliquez sur le bouton ci-dessous.</p>\n            <app-button (btnClick)=\"requestEmailValidation()\" interactable=\"small\">Réenvoyer un email de validation</app-button>\n        </app-card>\n\n        <div class=\"user-profile__info\">\n            <img \n                class=\"user-profile__info__avatar\"\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/360x360/center/'\"\n                [alt]=\"'Photo de profile de ' + userProfile.name\"\n                *ngIf=\"userProfile.pictures?.[0]\"\n            >\n            <div \n                class=\"user-profile__info__avatar\"\n                *ngIf=\"!userProfile.pictures?.[0]\"\n            ></div>\n            <p class=\"user-profile__info__name\">{{userProfile.name ?? 'Sans nom'}}<span *ngIf=\"userProfile.age\">, {{userProfile.age}}</span></p>\n        </div>\n    \n        <div class=\"user-profile__actions\">\n            <app-button icon=\"fas fa-user-edit\" link=\"/profile-edit\" interactable=\"small\" [shadow]=\"true\">\n                Modifier mon profil\n                <span class=\"user-profile__actions__btn__pill user-profile__actions__btn__pill--error\" *ngIf=\"(userProfileReady | async) === false\">1</span>\n            </app-button>\n\n            <app-button icon=\"fas fa-user\" link=\"/profile-preview\" interactable=\"small\" [shadow]=\"true\">Visualiser mon profil</app-button>\n            <!-- <button class=\"user-profile__actions__btn interactable--small\">\n                <i class=\"fas fa-cog\"></i>\n                Préférences\n            </button> -->\n            <app-button icon=\"fas fa-sign-out\" [shadow]=\"true\" interactable=\"small\" [matMenuTriggerFor]=\"logoutMenu\">Se déconnecter</app-button>\n            <mat-menu #logoutMenu=\"matMenu\">\n                <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n            </mat-menu>\n            \n            <hr>\n            <app-button icon=\"fas fa-info-circle\" link=\"/about\" interactable=\"small\" [shadow]=\"true\">À propos</app-button>\n            <app-button icon=\"fab fa-github\" link=\"https://github.com/PolyTinder/poly-tinder\" interactable=\"small\" [shadow]=\"true\">Github</app-button>\n        </div>\n    </div>\n</app-layout>\n"
+            "templateData": "<app-layout headerType=\"hidden\">\n    <div class=\"user-profile\" *ngIf=\"userProfile | async; let userProfile\">\n        <app-card color=\"danger\" *ngIf=\"(emailValidated | async) === false\">\n            <p><b>Email non validé</b></p>\n            <p>Veuillez vérifier votre boite de courriel ou cliquez sur le bouton ci-dessous.</p>\n            <app-button (btnClick)=\"requestEmailValidation()\" interactable=\"small\">Réenvoyer un email de validation</app-button>\n        </app-card>\n\n        <div class=\"user-profile__info\">\n            <img \n                class=\"user-profile__info__avatar\"\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/360x360/smart/'\"\n                [alt]=\"'Photo de profile de ' + userProfile.name\"\n                *ngIf=\"userProfile.pictures?.[0]\"\n            >\n            <div \n                class=\"user-profile__info__avatar\"\n                *ngIf=\"!userProfile.pictures?.[0]\"\n            ></div>\n            <p class=\"user-profile__info__name\">{{userProfile.name ?? 'Sans nom'}}<span *ngIf=\"userProfile.age\">, {{userProfile.age}}</span></p>\n        </div>\n    \n        <div class=\"user-profile__actions\">\n            <app-button icon=\"fas fa-user-edit\" link=\"/profile-edit\" interactable=\"small\" [shadow]=\"true\">\n                Modifier mon profil\n                <span class=\"user-profile__actions__btn__pill user-profile__actions__btn__pill--error\" *ngIf=\"(userProfileReady | async) === false\">1</span>\n            </app-button>\n\n            <app-button icon=\"fas fa-user\" link=\"/profile-preview\" interactable=\"small\" [shadow]=\"true\">Visualiser mon profil</app-button>\n            <!-- <button class=\"user-profile__actions__btn interactable--small\">\n                <i class=\"fas fa-cog\"></i>\n                Préférences\n            </button> -->\n            <app-button icon=\"fas fa-sign-out\" [shadow]=\"true\" interactable=\"small\" [matMenuTriggerFor]=\"logoutMenu\">Se déconnecter</app-button>\n            <mat-menu #logoutMenu=\"matMenu\">\n                <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n            </mat-menu>\n            \n            <hr>\n            <app-button icon=\"fas fa-info-circle\" link=\"/about\" interactable=\"small\" [shadow]=\"true\">À propos</app-button>\n            <app-button icon=\"fab fa-github\" link=\"https://github.com/PolyTinder/poly-tinder\" interactable=\"small\" [shadow]=\"true\">Github</app-button>\n        </div>\n    </div>\n</app-layout>\n"
         },
         {
             "name": "UserProfilePreviewComponent",
@@ -8882,6 +8918,16 @@
                 "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl<V[]>): ValidationErrors | null => {\n        if (\n            control.value &&\n            !control.value.filter((v) => typeof(v) === 'string' ? v.length : true).every((item: V) =>\n                array.find((arrayItem) => predicate(arrayItem, item)),\n            )\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
             },
             {
+                "name": "arrayContainedInValidator",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl<V[]>): ValidationErrors | null => {\n        if (\n            control.value &&\n            !control.value.filter((v) => typeof(v) === 'string' ? v.length : true).every((item: V) =>\n                array.find((arrayItem) => predicate(arrayItem, item)),\n            )\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+            },
+            {
                 "name": "ASSOCIATIONS",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -8945,6 +8991,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/modules/matching/stories/conversation-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -8960,16 +9016,6 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\n    args: {\n        matches: [\n            {\n                value: of({\n                    userId: 0,\n                    name: 'John Doe',\n                    pictures: [\n                        'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                    ],\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent by me',\n                    lastMessageAuthorId: 1,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n            {\n                value: of({\n                    userId: 2,\n                    name: 'Jane Doe',\n                }),\n                queryInfo: {\n                    messagesCount: 0,\n                    unreadMessagesCount: 0,\n                    lastMessage: 'Last message sent user',\n                    lastMessageAuthorId: 2,\n                    lastMessageTimestamp: new Date(),\n                },\n            },\n        ] as MatchListItemClass[],\n    },\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{}"
             },
             {
                 "name": "Default",
@@ -9315,26 +9361,6 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/modules/matching/stories/conversation-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<ConversationListComponent>",
-                "defaultValue": "{\n    title: 'Matching/Conversation List',\n    component: ConversationListComponent,\n    decorators: [\n        applicationConfig({\n            providers: [provideAnimations()],\n        }),\n        moduleMetadata({\n            imports: [\n                RouterTestingModule.withRoutes([\n                    { path: '**', component: ConversationListComponent },\n                ]),\n                HttpClientTestingModule,\n                MatDialogModule,\n                MatSnackBarModule,\n                MatMenuModule,\n                UiModule,\n            ],\n            providers: [\n                MatchingService,\n                ModerationService,\n                PublicProfileService,\n                ValidationService,\n                ModalService,\n            ],\n        }),\n    ],\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/modules/matching/stories/match-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<MatchListComponent>",
-                "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -9350,6 +9376,26 @@
                 "deprecationMessage": "",
                 "type": "Meta<StatusPageComponent>",
                 "defaultValue": "{\n    title: 'Status Page',\n    component: StatusPageComponent,\n    parameters: {\n        layout: 'fullscreen',\n    },\n    args: {\n        message: 'Loading...',\n        isLoading: true,\n        isError: false,\n    },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ConversationListComponent>",
+                "defaultValue": "{\n    title: 'Matching/Conversation List',\n    component: ConversationListComponent,\n    decorators: [\n        applicationConfig({\n            providers: [provideAnimations()],\n        }),\n        moduleMetadata({\n            imports: [\n                RouterTestingModule.withRoutes([\n                    { path: '**', component: ConversationListComponent },\n                ]),\n                HttpClientTestingModule,\n                MatDialogModule,\n                MatSnackBarModule,\n                MatMenuModule,\n                UiModule,\n            ],\n            providers: [\n                MatchingService,\n                ModerationService,\n                PublicProfileService,\n                ValidationService,\n                ModalService,\n            ],\n        }),\n    ],\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<MatchListComponent>",
+                "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
             },
             {
                 "name": "meta",
@@ -9550,6 +9596,16 @@
                 "deprecationMessage": "",
                 "type": "string",
                 "defaultValue": "'/profile'"
+            },
+            {
+                "name": "profilePictureValidator",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            control.value.filter((v: (string | undefined)) => typeof(v) === 'string' ? v.length : true).length > 0\n        ) {\n            return { picturesNotValid: true };\n        }\n        return null;\n    }"
             },
             {
                 "name": "PROGRAMS",
@@ -9811,28 +9867,6 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<ConversationListComponent>",
-                "file": "src/modules/matching/stories/conversation-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 180
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<MatchListComponent>",
-                "file": "src/modules/matching/stories/match-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 180
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
                 "rawtype": "StoryObj<AuthenticationLayoutComponent>",
                 "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
                 "deprecated": false,
@@ -9846,6 +9880,28 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<StatusPageComponent>",
                 "file": "src/modules/authentication/stories/status-page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ConversationListComponent>",
+                "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<MatchListComponent>",
+                "file": "src/modules/matching/stories/match-list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -10117,6 +10173,28 @@
                     "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            !array.find((item) => predicate(item, control.value))\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
                 }
             ],
+            "src/modules/user-profile/validators/profile-picture-validator.ts": [
+                {
+                    "name": "arrayContainedInValidator",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "<T, V = any>(\n        array: T[],\n        predicate: (item: T, value: V) => boolean = (item, value) => item == (value as unknown),\n    ) =>\n    (control: AbstractControl<V[]>): ValidationErrors | null => {\n        if (\n            control.value &&\n            !control.value.filter((v) => typeof(v) === 'string' ? v.length : true).every((item: V) =>\n                array.find((arrayItem) => predicate(arrayItem, item)),\n            )\n        ) {\n            return { notContainedIn: true };\n        }\n        return null;\n    }"
+                },
+                {
+                    "name": "profilePictureValidator",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(control: AbstractControl): ValidationErrors | null => {\n        if (\n            control.value &&\n            control.value.filter((v: (string | undefined)) => typeof(v) === 'string' ? v.length : true).length > 0\n        ) {\n            return { picturesNotValid: true };\n        }\n        return null;\n    }"
+                }
+            ],
             "src/modules/user-profile/constants/associations.ts": [
                 {
                     "name": "ASSOCIATIONS",
@@ -10205,6 +10283,28 @@
                     "defaultValue": "{\n    title: 'UI/Card',\n    component: CardComponent,\n    args: {\n        title: 'This is a title',\n        icon: 'fas fa-flag',\n        content: 'This is a card',\n        noPadding: false,\n        color: 'default',\n    },\n    render: (args: StoryType) => ({\n        props: args,\n        template: `\n            <app-card\n                [icon]=\"icon\"\n                [title]=\"title\"\n                [anchor]=\"anchor\"\n                [noPadding]=\"noPadding\"\n                [color]=\"color\"\n            >\n                ${args.content}\n            </app-card>\n        `,\n    }),\n}"
                 }
             ],
+            "src/modules/authentication/stories/authentication-layout.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<AuthenticationLayoutComponent>",
+                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
+                }
+            ],
             "src/modules/matching/stories/conversation-list.stories.ts": [
                 {
                     "name": "Default",
@@ -10267,28 +10367,6 @@
                     "deprecationMessage": "",
                     "type": "Meta<MatchListComponent>",
                     "defaultValue": "{\n    title: 'Matching/Match List',\n    component: MatchListComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [UiModule],\n        }),\n    ],\n}"
-                }
-            ],
-            "src/modules/authentication/stories/authentication-layout.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/modules/authentication/stories/authentication-layout.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<AuthenticationLayoutComponent>",
-                    "defaultValue": "{\n    title: 'Authentication/Layout',\n    component: AuthenticationLayoutComponent,\n    decorators: [\n        moduleMetadata({\n            imports: [\n                UiModule,\n                BrowserAnimationsModule,\n                RouterTestingModule,\n                ReactiveFormsModule,\n                MatFormFieldModule,\n                MatInputModule,\n            ],\n        }),\n    ],\n    args: {\n        name: 'Authentication',\n        description: 'Authentication description',\n        formGroup: new FormGroup({\n            email: new FormControl('', []),\n        }),\n        loading: false,\n        disabled: false,\n    },\n    argTypes: {\n        loading: {\n            type: 'boolean',\n        },\n        disabled: {\n            type: 'boolean',\n        },\n        formGroup: {\n            table: {\n                disable: true,\n            },\n        },\n        formsErrors: {\n            table: {\n                disable: true,\n            },\n        },\n    },\n    parameters: {\n        layout: 'fullscreen',\n    },\n    render: (args: AuthenticationLayoutComponent) => ({\n        props: args,\n        template: `\n            <app-authentication-layout\n                [name]=\"name\"\n                [description]=\"description\"\n                [formGroup]=\"formGroup\"\n                [loading]=\"loading\"\n                [disabled]=\"disabled\"\n            >\n                <mat-form-field auth-form-field>\n                    <mat-label><i class=\"fas fa-envelope\"></i> Email</mat-label>\n                    <input formControlName=\"email\" matInput>\n                </mat-form-field>\n            </app-authentication-layout>\n        `,\n    }),\n}"
                 }
             ],
             "src/modules/ui/stories/button.stories.ts": [
@@ -11070,32 +11148,6 @@
                     "kind": 180
                 }
             ],
-            "src/modules/matching/stories/conversation-list.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ConversationListComponent>",
-                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 180
-                }
-            ],
-            "src/modules/matching/stories/match-list.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<MatchListComponent>",
-                    "file": "src/modules/matching/stories/match-list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 180
-                }
-            ],
             "src/modules/authentication/stories/authentication-layout.stories.ts": [
                 {
                     "name": "Story",
@@ -11116,6 +11168,32 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<StatusPageComponent>",
                     "file": "src/modules/authentication/stories/status-page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/matching/stories/conversation-list.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ConversationListComponent>",
+                    "file": "src/modules/matching/stories/conversation-list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/modules/matching/stories/match-list.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<MatchListComponent>",
+                    "file": "src/modules/matching/stories/match-list.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -12655,6 +12733,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "containedInValidator",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "arrayContainedInValidator",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/validators/profile-picture-validator.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "profilePictureValidator",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -59,7 +59,7 @@ export class NavigationComponent {
                 const avatar = userProfile?.pictures?.[0] ?? undefined;
 
                 return avatar
-                    ? `${avatar}-/scale_crop/100x100/center/`
+                    ? `${avatar}-/scale_crop/100x100/smart/`
                     : undefined;
             }),
         );
