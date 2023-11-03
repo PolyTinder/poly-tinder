@@ -239,6 +239,7 @@
             border: solid 1px rgb(240, 240, 240);
             border-radius: $item-size;
             background-color: var(--theme-background);
+            color: var(--theme-background-contrast);
             flex-grow: 0;
             flex-shrink: 0;
             box-sizing: border-box;
