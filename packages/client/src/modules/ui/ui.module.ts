@@ -5,6 +5,7 @@ import { CardComponent } from './components/card/card.component';
 import { LayoutActionComponent } from './components/layout-action/layout-action.component';
 import { ButtonComponent } from './components/button/button.component';
 import { RouterModule } from '@angular/router';
+import { ImageComponent } from './components/image/image.component';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
         CardComponent,
         LayoutActionComponent,
         ButtonComponent,
+        ImageComponent,
     ],
     imports: [CommonModule, RouterModule],
     exports: [
@@ -19,6 +21,7 @@ import { RouterModule } from '@angular/router';
         LayoutActionComponent,
         CardComponent,
         ButtonComponent,
+        ImageComponent,
     ],
 })
 export class UiModule {}

@@ -1,0 +1,15 @@
+@import '../../../../styles/variables';
+
+img {
+    object-fit: cover;
+    object-position: center;
+}
+
+div {
+    background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);
+}
+
+.infer-size {
+    height: 100%;
+    width: 100%;
+}
