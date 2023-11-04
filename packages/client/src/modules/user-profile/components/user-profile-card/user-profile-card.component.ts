@@ -120,13 +120,13 @@ export class UserProfileCardComponent {
 
     get likeScale() {
         return this.currentSwipeX
-            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * 0.001))
+            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * 0.002))
             : 1;
     }
 
     get dislikeScale() {
         return this.currentSwipeX
-            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * -0.001))
+            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * -0.002))
             : 1;
     }
 

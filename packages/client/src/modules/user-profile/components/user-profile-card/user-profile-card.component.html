@@ -19,7 +19,7 @@
                     </p>
                 </div>
     
-                <app-button icon="fas fa-info" color="primary" [iconOnly]="true" *ngIf="!infoVisible"></app-button>
+                <app-button icon="fas fa-arrow-down" color="primary" [iconOnly]="true" class="user-profile__main__content__button"></app-button>
             </div>
     
             <div *ngIf="!disableInteractions" [class]="'user-profile__main__swipe user-profile__main__swipe--' + currentSwipeOutput" (mousedown)="onSwipeStart($event)" (touchstart)="onSwipeStart($event)">
