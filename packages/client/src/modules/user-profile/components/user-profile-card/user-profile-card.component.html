@@ -1,130 +1,187 @@
-
-<ng-container *ngIf="userProfile">
-    <div class="user-profile">
+<div class="user-profile" [ngClass]="{'user-profile--info-visible': infoVisible, 'user-profile--swiping-completed': swipingCompleted}" *ngIf="userProfile">
+    <div class="user-profile__container" (scroll)="onScroll($event)" #container>
         <div class="user-profile__main">
-            <img
-                [src]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/')"
-                [srcset]="(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/smart/-/progressive/yes/ 2x')"
+            <app-image
+                [src]="userProfile.pictures?.[0]"
                 [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 363, height: 486}"
+                [inferSize]="true"
                 class="user-profile__main__picture"
-                *ngIf="userProfile.pictures?.[0]"
-            >
+            ></app-image>
             <div class="user-profile__main__picture" *ngIf="!userProfile.pictures?.[0]"></div>
-            <div class="user-profile__main__info">
-                <p class="user-profile__main__info__name">{{userProfile.name}}</p>
-                <p class="user-profile__main__info__subtitle">
-                    <span class="user-profile__main__info__subtitle__age">{{userProfile.age}}</span>
-                    <span class="user-profile__main__info__subtitle__program" *ngIf="program">, {{program}}</span>
-                </p>
+    
+            <div class="user-profile__main__content" (click)="!infoVisible && showInfo()">
+                <div class="user-profile__main__content__info">
+                    <p class="user-profile__main__content__info__name">{{userProfile.name}}</p>
+                    <p class="user-profile__main__content__info__subtitle">
+                        <span class="user-profile__main__content__info__subtitle__age">{{userProfile.age}}</span>
+                        <span class="user-profile__main__content__info__subtitle__program" *ngIf="program">, {{program}}</span>
+                    </p>
+                </div>
+    
+                <app-button icon="fas fa-info" color="primary" [iconOnly]="true" *ngIf="!infoVisible"></app-button>
+            </div>
+    
+            <div *ngIf="!disableInteractions" [class]="'user-profile__main__swipe user-profile__main__swipe--' + currentSwipeOutput" (mousedown)="onSwipeStart($event)" (touchstart)="onSwipeStart($event)">
+                <button class="user-profile__main__swipe__button" (click)="swipe(false)">
+                    <i class="user-profile__main__swipe__icon fas fa-times" [style.scale]="dislikeScale"></i>
+                </button>
+                <span class="user-profile__main__swipe__direction user-profile__main__swipe__direction--left">
+                    <i class="fas fa-chevron-left"></i>
+                    <i class="fas fa-chevron-left"></i>
+                    <i class="fas fa-chevron-left"></i>
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+                <span class="user-profile__main__swipe__direction user-profile__main__swipe__direction--right">
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+                <button class="user-profile__main__swipe__button" (click)="swipe(true)">
+                    <i class="user-profile__main__swipe__icon fas fa-heart" [style.scale]="likeScale"></i>
+                </button>
+    
+                <div class="user-profile__main__swipe__effect"></div>
             </div>
         </div>
+    
+        <div class="user-profile__content">
+            <div class="user-profile__bio user-profile__section">
+                <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-pen"></i> À propos de moi</p>
+                <p>{{userProfile.bio}}</p>
+            </div>
 
-        <div class="user-profile__bio user-profile__section">
-            <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-pen"></i> À propos de moi</p>
-            <p>{{userProfile.bio}}</p>
-        </div>
+            <div class="user-profile__looking-for user-profile__section" *ngIf="lookingFor">
+                <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-flower-tulip"></i> À la recherche de</p>
+                <p class="user-profile__looking-for__content"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>
+            </div>
+            
+            <app-image
+                [src]="userProfile.pictures?.[1]"
+                *ngIf="userProfile.pictures?.[1]"
+                [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 352, height: 600}"
+                class="user-profile__picture"
+                [inferSize]="true"
+            ></app-image>
+    
+            <div class="user-profile__table" *ngIf="shouldDisplayTable">
+                <div class="user-profile__table__entry user-profile__table__entry--multiple">
+                    <div class="user-profile__table__entry__item" *ngIf="userProfile.height">
+                        <i class="fas fa-ruler"></i> {{height}}
+                    </div>
+                    <div class="user-profile__table__entry__item" *ngIf="workout">
+                        <i class="fas fa-running"></i> {{workout.name}}
+                    </div>
+                    <div class="user-profile__table__entry__item" *ngIf="drinking">
+                        <i class="fas fa-wine-glass-alt"></i> {{drinking.name}}
+                    </div>
+                    <div class="user-profile__table__entry__item" *ngIf="smoking">
+                        <i class="fas fa-smoking"></i> {{smoking.name}}
+                    </div>
+                    <div class="user-profile__table__entry__item" *ngIf="drugs">
+                        <i class="fas fa-cannabis"></i> {{drugs.name}}
+                    </div>
+                </div>
+                <div class="user-profile__table__entry" *ngIf="userProfile.jobTitle">
+                    <i class="fas fa-suitcase"></i> {{userProfile.jobTitle}} <span *ngIf="userProfile.jobCompany">chez {{userProfile.jobCompany}}</span>
+                </div>
+                <div class="user-profile__table__entry" *ngIf="zodiacSign">
+                    <i class="fas fa-star-shooting"></i> {{zodiacSign.name}}
+                </div>
+                <div class="user-profile__table__entry" *ngIf="userProfile.livingIn">
+                    <i class="fas fa-city"></i> {{userProfile.livingIn}}
+                </div>
+                <div class="user-profile__table__entry" *ngIf="sexualOrientation">
+                    <i class="fas fa-flag"></i> {{sexualOrientation.name}}
+                </div>
+                <div class="user-profile__table__entry" *ngIf="relationshipType">
+                    <i class="fas fa-user-friends"></i> {{relationshipType.name}}
+                </div>
+                <div class="user-profile__table__entry" *ngIf="userProfile.gender">
+                    <i class="fas fa-transgender"></i> {{userProfile.gender}}
+                </div>
+            </div>
+            
+            <app-image
+                [src]="userProfile.pictures?.[2]"
+                *ngIf="userProfile.pictures?.[2]"
+                [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 352, height: 600}"
+                class="user-profile__picture"
+                [inferSize]="true"
+            ></app-image>
+    
+            <div class="user-profile__interests user-profile__section" *ngIf="interests">
+                <p class="user-profile__section-title user-profile__interests__title"><i class="fas fa-heart"></i> Mes intérêts</p>
+                <div class="user-profile__list">
+                    <div class="user-profile__list__item" *ngFor="let interest of interests">
+                        {{interest}}
+                    </div>
+                </div>
+            </div>
+            
+            <app-image
+                [src]="userProfile.pictures?.[3]"
+                *ngIf="userProfile.pictures?.[3]"
+                [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 352, height: 600}"
+                class="user-profile__picture"
+                [inferSize]="true"
+            ></app-image>
+    
+            <div class="user-profile__associations user-profile__section" *ngIf="associations">
+                <p class="user-profile__section-title user-profile__associations__title"><i class="fas fa-users"></i> Mes associations</p>
+                <div class="user-profile__list">
+                    <div class="user-profile__list__item" *ngFor="let association of associations">
+                        {{association}}
+                    </div>
+                </div>
+            </div>
 
-        <div class="user-profile__looking-for user-profile__section" *ngIf="lookingFor">
-            <p class="user-profile__section-title user-profile__bio__title"><i class="fas fa-flower-tulip"></i> À la recherche de</p>
-            <p class="user-profile__looking-for__content"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>
-        </div>
+
+            
+            <app-image
+                [src]="userProfile.pictures?.[4]"
+                *ngIf="userProfile.pictures?.[4]"
+                [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 352, height: 600}"
+                class="user-profile__picture"
+                [inferSize]="true"
+            ></app-image>
+            
+            <app-image
+                [src]="userProfile.pictures?.[5]"
+                *ngIf="userProfile.pictures?.[5]"
+                [alt]="'Photo de ' + userProfile.name"
+                [size]="{width: 352, height: 600}"
+                class="user-profile__picture"
+                [inferSize]="true"
+            ></app-image>
         
-        <img
-            [src]="userProfile.pictures?.[1]+ '-/scale_crop/700x1020/smart/'"
-            *ngIf="userProfile.pictures?.[1]"
-            [alt]="'Photo de ' + userProfile.name"
-            class="user-profile__picture"
-        >
-
-        <div class="user-profile__table">
-            <div class="user-profile__table__entry user-profile__table__entry--multiple">
-                <div class="user-profile__table__entry__item" *ngIf="userProfile.height">
-                    <i class="fas fa-ruler"></i> {{height}}
-                </div>
-                <div class="user-profile__table__entry__item" *ngIf="workout">
-                    <i class="fas fa-running"></i> {{workout.name}}
-                </div>
-                <div class="user-profile__table__entry__item" *ngIf="drinking">
-                    <i class="fas fa-wine-glass-alt"></i> {{drinking.name}}
-                </div>
-                <div class="user-profile__table__entry__item" *ngIf="smoking">
-                    <i class="fas fa-smoking"></i> {{smoking.name}}
-                </div>
-                <div class="user-profile__table__entry__item" *ngIf="drugs">
-                    <i class="fas fa-cannabis"></i> {{drugs.name}}
-                </div>
+            <div class="user-profile__user-actions" *ngIf="!disableModeration">
+                <app-button
+                    icon="fas fa-flag"
+                    (btnClick)="reportUser()"
+                    interactable="small"
+                >Signaler</app-button>
+                <app-button
+                    icon="fas fa-times"
+                    (btnClick)="blockUser()"
+                    interactable="small"
+                >Bloquer</app-button>
             </div>
-            <div class="user-profile__table__entry" *ngIf="userProfile.jobTitle">
-                <i class="fas fa-suitcase"></i> {{userProfile.jobTitle}} <span *ngIf="userProfile.jobCompany">chez {{userProfile.jobCompany}}</span>
-            </div>
-            <div class="user-profile__table__entry" *ngIf="zodiacSign">
-                <i class="fas fa-star-shooting"></i> {{zodiacSign.name}}
-            </div>
-            <div class="user-profile__table__entry" *ngIf="userProfile.livingIn">
-                <i class="fas fa-city"></i> {{userProfile.livingIn}}
-            </div>
-            <div class="user-profile__table__entry" *ngIf="sexualOrientation">
-                <i class="fas fa-flag"></i> {{sexualOrientation.name}}
-            </div>
-            <div class="user-profile__table__entry" *ngIf="relationshipType">
-                <i class="fas fa-user-friends"></i> {{relationshipType.name}}
-            </div>
-            <div class="user-profile__table__entry" *ngIf="userProfile.gender">
-                <i class="fas fa-transgender"></i> {{userProfile.gender}}
-            </div>
-        </div>
-        
-        <img
-            [src]="userProfile.pictures?.[2]+ '-/scale_crop/700x1020/smart/'"
-            *ngIf="userProfile.pictures?.[2]"
-            [alt]="'Photo de ' + userProfile.name"
-            class="user-profile__picture"
-        >
-
-        <div class="user-profile__interests user-profile__section" *ngIf="interests">
-            <p class="user-profile__section-title user-profile__interests__title"><i class="fas fa-heart"></i> Mes intérêts</p>
-            <div class="user-profile__list">
-                <div class="user-profile__list__item" *ngFor="let interest of interests">
-                    {{interest}}
-                </div>
-            </div>
-        </div>
-        
-        <img
-            [src]="userProfile.pictures?.[3]+ '-/scale_crop/700x1020/smart/'"
-            *ngIf="userProfile.pictures?.[3]"
-            [alt]="'Photo de ' + userProfile.name"
-            class="user-profile__picture"
-        >
-
-        <div class="user-profile__associations user-profile__section" *ngIf="associations">
-            <p class="user-profile__section-title user-profile__associations__title"><i class="fas fa-users"></i> Mes associations</p>
-            <div class="user-profile__list">
-                <div class="user-profile__list__item" *ngFor="let association of associations">
-                    {{association}}
-                </div>
-            </div>
-        </div>
-        
-        <img
-            [src]="userProfile.pictures?.[4]+ '-/scale_crop/700x1020/smart/'"
-            *ngIf="userProfile.pictures?.[4]"
-            [alt]="'Photo de ' + userProfile.name"
-            class="user-profile__picture"
-        >
-        
-        <img
-            [src]="userProfile.pictures?.[5]+ '-/scale_crop/700x1020/smart/'"
-            *ngIf="userProfile.pictures?.[5]"
-            [alt]="'Photo de ' + userProfile.name"
-            class="user-profile__picture"
-        >
-
-        <hr>
-
-        <div class="user-profile__actions">
-            <button *ngIf="!disableModeration" class="user-profile__actions__item interactable" (click)="reportUser()"><i class="fas fa-flag"></i> Signaler</button>
-            <button *ngIf="!disableModeration" class="user-profile__actions__item interactable" (click)="blockUser()"><i class="fas fa-times"></i> Bloquer</button>
         </div>
     </div>
-</ng-container>
+    
+
+    <div class="user-profile__actions" [ngClass]="{'user-profile__actions--visible': actionsVisible}">
+        <button class="user-profile__actions__button user-profile__actions__button--dislike" (click)="swipe(false)" *ngIf="!disableInteractions">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="user-profile__actions__button user-profile__actions__button--like" (click)="swipe(true)" *ngIf="!disableInteractions">
+            <i class="fas fa-heart"></i>
+        </button>
+    </div>
+</div>

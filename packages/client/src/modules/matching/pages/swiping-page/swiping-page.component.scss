@@ -1,6 +1,12 @@
 @import '../../../../styles/variables';
 @import '../../../../styles/utils';
 
+.profiles-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
 .profile-container {
     height: 100%;
     display: flex;
@@ -8,6 +14,14 @@
     justify-content: center;
     padding: 24px;
     box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    &:first-child {
+        z-index: 2;
+    }
 
     .profile-content {
         display: grid;

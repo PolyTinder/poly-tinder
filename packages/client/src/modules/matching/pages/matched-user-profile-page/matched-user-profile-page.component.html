@@ -2,6 +2,6 @@
     <app-layout-action layout-action-left icon="fas fa-chevron-left" [link]="'/matches/' + userProfile.id"></app-layout-action>
 
     <div class="container">
-        <app-user-profile-card [userProfile]="userProfile.value | async" [disableModeration]="true"></app-user-profile-card>
+        <app-user-profile-card [userProfile]="userProfile.value | async" [disableModeration]="true" [disableInteractions]="true"></app-user-profile-card>
     </div>
 </app-layout>
