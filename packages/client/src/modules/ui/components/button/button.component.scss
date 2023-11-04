@@ -57,7 +57,7 @@
         }
 
         &--primary {
-            background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));
+            background: linear-gradient(90deg, var(--theme-main), var(--theme-main-light));
             color: var(--theme-main-contrast);
             border: none;
         }
