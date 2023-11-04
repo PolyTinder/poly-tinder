@@ -3,12 +3,15 @@ import {
     StoryObj,
     applicationConfig,
     componentWrapperDecorator,
+    moduleMetadata,
 } from '@storybook/angular';
 import { UserProfileCardComponent } from '../components/user-profile-card/user-profile-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { importProvidersFrom } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ImageComponent } from 'src/modules/ui/components/image/image.component';
+import { ButtonComponent } from 'src/modules/ui/components/button/button.component';
 
 const meta: Meta<UserProfileCardComponent> = {
     title: 'User Profile/Card',
@@ -20,6 +23,9 @@ const meta: Meta<UserProfileCardComponent> = {
                 importProvidersFrom(MatSnackBarModule),
                 importProvidersFrom(HttpClientModule),
             ],
+        }),
+        moduleMetadata({
+            declarations: [ImageComponent, ButtonComponent],
         }),
         componentWrapperDecorator(
             (story) =>
@@ -87,6 +93,20 @@ export const Minimal: Story = {
             pictures: [
                 'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',
             ],
+            genderCategory: 'other',
+            genderPreference: 'all',
+        },
+    },
+};
+
+export const NoPictures: Story = {
+    args: {
+        userProfile: {
+            userId: 0,
+            name: 'John Doe',
+            age: 22,
+            bio: 'Hello, I am John Doe',
+            pictures: [],
             genderCategory: 'other',
             genderPreference: 'all',
         },

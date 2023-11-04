@@ -11,22 +11,20 @@
         </div>
     </ng-container>
 
-    <ng-container *ngFor="let user of availableUsers; let index = index">
-        <div class="profile-container" *ngIf="index == 0">
-            <div class="profile-content">
-                <ng-container *ngIf="user.value| async; let userValue">
-                    <app-user-profile-card [userProfile]="userValue" (excludeUser)="onExcludeUser(user)"></app-user-profile-card>
-                </ng-container>
-        
-                <div class="profile-container__swipe-btn-container">
-                    <button class="profile-container__swipe-btn profile-container__swipe-btn--dislike interactable--large" (click)="dislikeUser(user)">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <button class="profile-container__swipe-btn profile-container__swipe-btn--like interactable--large" (click)="likeUser(user)">
-                        <i class="fas fa-heart"></i>
-                    </button>
+    <div class="profiles-container">
+        <ng-container *ngFor="let user of availableUsers; let index = index">
+            <div class="profile-container" *ngIf="index <= 1">
+                <div class="profile-content">
+                    <ng-container *ngIf="user.value| async; let userValue">
+                        <app-user-profile-card
+                            [userProfile]="userValue"
+                            (excludeUser)="onExcludeUser(user)"
+                            (likeUser)="likeUser(user)"
+                            (dislikeUser)="dislikeUser(user)"
+                        ></app-user-profile-card>
+                    </ng-container>
                 </div>
             </div>
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
 </ng-container>
