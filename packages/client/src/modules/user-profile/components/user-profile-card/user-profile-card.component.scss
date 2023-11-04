@@ -221,6 +221,7 @@
         height: 90px;
         margin-bottom: -90px;
         transition: ease-in 0.1s margin-bottom;
+        pointer-events: auto; 
 
         &__button {
             position: relative;
@@ -260,6 +261,8 @@
         flex-direction: column;
         gap: $spacing;
         padding: 0 $spacing 90px $spacing;
+        position: relative;
+        z-index: 1;
     }
 
     &__section {
