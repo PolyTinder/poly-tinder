@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyTinder</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&amp;display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/874ba6ef63.js" crossorigin="anonymous"></script>
+
+    <style>
+        html, body, h1, h2, h3, h4, h5, h6, p, a, ul, li, img {
+            margin: 0;
+            padding: 0;
+            font-family: 'Onest', sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        p {
+            opacity: 0.55;
+        }
+
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgb(250, 250, 250) 0%, rgba(254, 148, 62, 0.075) 100%);
+            z-index: -100;
+        }
+        
+        #container {
+            position: flex;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        #info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="content">
+            <div id="logo">
+                <img src="/assets/logo.svg" height="64px" />
+                <h1>PolyTinder</h1>
+            </div>
+
+            <div id="info">
+                <h2>PolyTinder est fermé</h2>
+                <p>
+                    PolyTinder a suscité un accueil exceptionnel au sein de la communauté étudiante,
+                    avec l'inscription de plusieurs centaines de membres.
+                    Cependant, en raison des coûts élevés liés au maintien en ligne de la plateforme,
+                    j'ai pris la décision de fermer le site.
+                </p>
+                <p>
+                    Cela ne signifie pas la fin de PolyTinder !
+                    Je n'ai actuellement pas le temps de créer un comité ou une société technique pour obtenir l'aide et le financement nécessaires à la poursuite du projet.
+                    Cependant, si vous êtes intéressé à reprendre PolyTinder pour le maintenir ou le transformer,
+                    n'hésitez pas à me contacter à <a href="mailto:poly.tinder.2023@gmail.com">poly.tinder.2023@gmail.com</a>.
+                    Je serais ravis de vous aider à reprendre le projet.
+                </p>
+                <p>
+                    De plus, l'intégralité du code source de PolyTinder est disponible sur <a href="https://github.com/PolyTinder/poly-tinder" target="_blank"><i class="fa-brands fa-github"></i> Github</a>.
+                </p>
+                <p>
+                    Merci à tous ceux qui ont participé à PolyTinder, et à bientôt !
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="background"></div>
+</body>
+</html>
