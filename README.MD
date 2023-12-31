@@ -18,6 +18,16 @@
 
 <hr>
 
+#### ⚠️ PolyTinder is closed ⚠️
+
+PolyTinder has received an exceptional reception within the student community, with the registration of several hundred members. However, due to the high costs associated with keeping the platform online, I made the decision to close the site.
+
+This does not mean the end of PolyTinder! I currently do not have the time to create a committee to get the help and funding necessary to continue the project. However, if you are interested in taking over PolyTinder to maintain or transform it, do not hesitate to contact me at poly.tinder.2023@gmail.com. I would be delighted to help you take over the project.
+
+Thank you to everyone who participated in PolyTinder, and see you soon!
+
+<hr>
+
 <p style="font-size: 24px;" align="center">Faites des rencontres de génies</p>
 
 <p style="font-size: 18px" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
