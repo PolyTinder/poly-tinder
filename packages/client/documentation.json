@@ -120,6 +120,125 @@
             "methods": []
         },
         {
+            "name": "ImageSizeFixed",
+            "id": "interface-ImageSizeFixed-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "file": "src/modules/ui/components/image/image.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "properties": [
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": []
+        },
+        {
+            "name": "ImageSizeHeight",
+            "id": "interface-ImageSizeHeight-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "file": "src/modules/ui/components/image/image.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "properties": [
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "ratio",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": []
+        },
+        {
+            "name": "ImageSizeSquare",
+            "id": "interface-ImageSizeSquare-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "file": "src/modules/ui/components/image/image.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "properties": [
+                {
+                    "name": "square",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": []
+        },
+        {
+            "name": "ImageSizeWidth",
+            "id": "interface-ImageSizeWidth-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "file": "src/modules/ui/components/image/image.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "properties": [
+                {
+                    "name": "ratio",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": []
+        },
+        {
             "name": "LayoutActionContent",
             "id": "interface-LayoutActionContent-c24173a11f88456e4099128bd5a42c491009c49b4f17db17120a8cd1b3f5740594f183807c7fcafb35c27eef9fc9490fd3919e3f040c9364aab4899e68afc2b7",
             "file": "src/modules/ui/models/layout.ts",
@@ -3874,7 +3993,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n\n.btn {\n    appearance: none;\n    background-color: var(--theme-background);\n    color: var(--theme-background-contrast);\n    font: inherit;\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: 6px;\n    padding: 12px 24px;\n    box-sizing: border-box;\n    position: relative;\n    overflow: hidden;\n    width: 100%;\n    display: block;\n    text-decoration: none;\n\n    &:disabled {\n        opacity: 0.55;\n    }\n\n    &__content {\n        display: flex;\n        height: 100%;\n        gap: 12px;\n        align-items: center;\n        justify-content: center;\n        transition: ease-in 0.1s all;\n    }\n\n    &__loading {\n        position: absolute;\n        top: 50%;\n        left: 100%;\n        translate: -50% -50%;\n        opacity: 0;\n        transition: ease-in 0.1s all;\n    }\n\n    &--loading {\n        .btn__content {\n            opacity: 0;\n            translate: -100%;\n            transition: ease-in 0.1s all;\n        }\n\n        .btn__loading {\n            left: 50%;\n            opacity: 1;\n            transition: ease-in 0.1s all;\n        }\n    }\n\n    &--style {\n        &--transparent {\n            border-color: transparent;\n        }\n\n        &--primary {\n            background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));\n            color: var(--theme-main-contrast);\n            border: none;\n        }\n\n        &--danger {\n            background-color: tomato;\n            color: white;\n            border: none;\n        }\n    }\n\n    &--icon-only {\n        height: 46px;\n        width: 46px;\n        padding: 0;\n        font-size: 1.05em;\n    }\n\n    &--shadow {\n        box-shadow: $default-shadow;\n    }\n}",
+                    "data": "@import '../../../../styles/variables';\n\n.btn {\n    appearance: none;\n    background-color: var(--theme-background);\n    color: var(--theme-background-contrast);\n    font: inherit;\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: 6px;\n    padding: 12px 24px;\n    box-sizing: border-box;\n    position: relative;\n    overflow: hidden;\n    width: 100%;\n    display: block;\n    text-decoration: none;\n\n    &:disabled {\n        opacity: 0.55;\n    }\n\n    &__content {\n        display: flex;\n        height: 100%;\n        gap: 12px;\n        align-items: center;\n        justify-content: center;\n        transition: ease-in 0.1s all;\n    }\n\n    &__loading {\n        position: absolute;\n        top: 50%;\n        left: 100%;\n        translate: -50% -50%;\n        opacity: 0;\n        transition: ease-in 0.1s all;\n    }\n\n    &--loading {\n        .btn__content {\n            opacity: 0;\n            translate: -100%;\n            transition: ease-in 0.1s all;\n        }\n\n        .btn__loading {\n            left: 50%;\n            opacity: 1;\n            transition: ease-in 0.1s all;\n        }\n    }\n\n    &--style {\n        &--transparent {\n            border-color: transparent;\n        }\n\n        &--primary {\n            background: linear-gradient(90deg, var(--theme-main), var(--theme-main-light));\n            color: var(--theme-main-contrast);\n            border: none;\n        }\n\n        &--danger {\n            background-color: tomato;\n            color: white;\n            border: none;\n        }\n    }\n\n    &--icon-only {\n        height: 46px;\n        width: 46px;\n        padding: 0;\n        font-size: 1.05em;\n    }\n\n    &--shadow {\n        box-shadow: $default-shadow;\n    }\n}",
                     "styleUrl": "./button.component.scss"
                 }
             ],
@@ -4824,6 +4943,180 @@
             "templateData": "<app-about-layout title=\"Comment supprimer un match\" backLink=\"/about\">\n    <app-card title='Sur la page \"Mes matchs\"'>\n        <ol>\n            <li>Cliquez sur le menu option (le bouton <i class=\"fas fa-ellipsis-h\"></i>) de l'utilisateur à supprimer.</li>\n            <li>Cliquez sur le bouton \"Supprimer\".</li>\n            <li>Confirmer en cliquant sur le bouton \"Supprimer\" de la modale.</li>\n        </ol>\n    </app-card>\n\n    <app-card title='Sur la page de conversation avec un utilisateur'>\n        <ol>\n            <li>Cliquez sur le menu option (le bouton <i class=\"fas fa-ellipsis-h\"></i>) dans le coins supérieur droit.</li>\n            <li>Cliquez sur le bouton \"Supprimer\".</li>\n            <li>Confirmer en cliquant sur le bouton \"Supprimer\" de la modale.</li>\n        </ol>\n    </app-card>\n</app-about-layout>"
         },
         {
+            "name": "ImageComponent",
+            "id": "component-ImageComponent-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "file": "src/modules/ui/components/image/image.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-image",
+            "styleUrls": [
+                "./image.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./image.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "alt",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "string | null",
+                    "decorators": []
+                },
+                {
+                    "name": "inferSize",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "ImageSize | null",
+                    "decorators": []
+                },
+                {
+                    "name": "src",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "string | undefined | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getSizeString",
+                    "args": [
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string | null",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getSrc",
+                    "args": [
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string | undefined | null",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getSrcset",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string | undefined | null",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import '../../../../styles/variables';\n\nimg {\n    object-fit: cover;\n    object-position: center;\n}\n\ndiv {\n    background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n}\n\n.infer-size {\n    height: 100%;\n    width: 100%;\n}",
+                    "styleUrl": "./image.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "width": {
+                    "name": "width",
+                    "getSignature": {
+                        "name": "width",
+                        "type": "",
+                        "returnType": "number | null",
+                        "line": 57
+                    }
+                },
+                "height": {
+                    "name": "height",
+                    "getSignature": {
+                        "name": "height",
+                        "type": "",
+                        "returnType": "number | null",
+                        "line": 77
+                    }
+                }
+            },
+            "templateData": "<img\n    [src]=\"getSrc()\"\n    [srcset]=\"getSrcset()\"\n    [alt]=\"alt\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    *ngIf=\"src\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n>\n<div\n    *ngIf=\"!src\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n></div>"
+        },
+        {
             "name": "ImageControlComponent",
             "id": "component-ImageControlComponent-de15d334211403416abff00cc899738c0887f1427ba1a5e41cf8eac919efbf32327c90905c5ca7d66b27edd571dcf5f6c91bec67f91147af02bfb7fb156d783a",
             "file": "src/modules/image/components/image-control/image-control.component.ts",
@@ -5746,7 +6039,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.matched-user-page {\n    display: grid;\n    grid-template-rows: minmax(0, 1fr);\n    height: 100%;\n\n    // &__header,\n    &__footer {\n        background-color: var(--theme-background);\n        padding: 24px;\n        display: grid;\n        align-items: center;\n        gap: 24px;\n    }\n\n    &__header {\n        &__title {\n            font-size: 1.5em;\n            font-weight: 500;\n            color: var(--theme-background-contrast);\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            gap: 12px;\n\n            &__avatar {\n                height: 36px;\n                width: 36px;\n                background-color: rgb(240, 240, 240);\n                border-radius: 6px;\n                object-fit: cover;\n                object-position: center;\n            }\n        }\n    }\n\n    &__container {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        height: 100%;\n    }\n\n    &__content {\n        display: flex;\n        flex-direction: column-reverse;\n        overflow-y: auto;\n\n        &__messages {\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n            padding: 24px;\n\n            &__system-message {\n                @include no-select;\n\n                width: 100%;\n                background-color: rgb(240, 240, 240);\n                max-width: 600px;\n                align-self: center;\n                padding: 24px;\n                border-radius: 6px;\n                text-align: center;\n                color: rgba(0, 0, 0, 0.55);\n                box-sizing: border-box;\n                margin-bottom: 12px;\n            }\n\n            &__question {\n                max-width: 600px;\n                align-self: center;\n                margin-bottom: 12px;\n                text-align: center;\n\n                &__description {\n                    @include no-select;\n                    opacity: 0.55;\n                    font-style: italic;\n                }\n\n                &__question {\n                    font-size: 1.65em;\n                    font-weight: 500;\n                    margin: 24px 0;\n                    line-height: 1.2em;\n                }\n\n                &__actions {\n                    @include no-select;\n                    display: flex;\n                    gap: 24px;\n                    justify-content: center;\n\n                    &__action {\n                        border: solid 1px rgb(240, 240, 240);\n                        padding: 6px 12px;\n                        border-radius: 6px;\n\n                        i {\n                            margin-right: 6px;\n                        }\n                    }\n                }\n            }\n\n            &__group {\n                width: 100%;\n                display: flex;\n                flex-direction: column;\n                gap: 6px;\n\n                &__time {\n                    @include no-select;\n\n                    opacity: 0.55;\n                    font-weight: 500;\n                    align-self: center;\n                    font-size: 0.85em;\n                }\n\n                &__content {\n                    display: flex;\n                    align-items: flex-end;\n                    gap: 6px;\n\n                    &__sender {\n                        &__avatar {\n                            height: 10px;\n                            width: 10px;\n                            background-color: rgb(220, 220, 220);\n                            border-radius: 10px;\n                        }\n                    }\n\n                    &__messages {\n                        display: flex;\n                        gap: 3px;\n                        flex-direction: column;\n\n                        &__message {\n                            background-color: rgb(220, 220, 220);\n                            padding: 6px 12px;\n                            border-radius: 3px;\n                            max-width: 80%;\n                            word-wrap: break-word;\n\n                            &--only-emoji {\n                                background: none;\n                                font-size: 2em;\n                                padding: 6px 0;\n                                line-height: 1em;\n                            }\n                        }\n                    }\n                }\n\n                &--self {\n                    .matched-user-page__content__messages__group__content {\n                        flex-direction: row-reverse;\n\n                        &__messages {\n                            align-items: flex-end;\n\n                            &__message {\n                                background-color: var(--theme-main);\n                                color: var(--theme-main-contrast);\n                                border-top-left-radius: 12px;\n                                border-bottom-left-radius: 12px;\n\n                                &:first-child {\n                                    border-top-right-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-right-radius: 12px;\n                                }\n\n                                &--only-emoji {\n                                    background: none;\n                                }\n                            }\n                        }\n                    }\n                }\n\n                &--other {\n                    .matched-user-page__content__messages__group__content {\n                        &__messages {\n                            align-items: flex-start;\n\n                            &__message {\n                                border-top-right-radius: 12px;\n                                border-bottom-right-radius: 12px;\n\n                                &:first-child {\n                                    border-top-left-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-left-radius: 12px;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__footer {\n        $item-size: 40px;\n\n        border-top: solid 1px rgb(240, 240, 240);\n        grid-template-columns: 1fr auto;\n\n        &__control {\n            height: $item-size;\n            appearance: none;\n            background-color: rgb(250, 250, 250);\n            border: solid 1px rgb(240, 240, 240);\n            font: inherit;\n            outline: none;\n            border-radius: $item-size;\n            padding: 0 24px;\n            box-sizing: border-box;\n        }\n\n        &__button {\n            @include no-select;\n\n            height: $item-size;\n            width: $item-size;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-size: 1.1em;\n            border: solid 1px rgb(240, 240, 240);\n            border-radius: $item-size;\n            background-color: var(--theme-background);\n            flex-grow: 0;\n            flex-shrink: 0;\n            box-sizing: border-box;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        &__header,\n        &__footer {\n            padding: 12px;\n            gap: 12px;\n        }\n\n        &__header {\n            &__back {\n                height: 32px;\n                width: 32px;\n                font-size: 1.1em;\n\n                i {\n                    margin-left: -1px;\n                }\n            }\n\n            &__title {\n                font-size: 1.2em;\n    \n                &__avatar {\n                    height: 32px;\n                    width: 32px;\n                }\n            }\n        }\n\n        &__footer {\n            $item-size: 32px;\n\n            &__control {\n                padding: 0 12px;\n                height: $item-size;\n            }\n\n            &__button {\n                height: $item-size;\n                width: $item-size;\n                font-size: 1em;\n            }\n\n            @media all and (display-mode: standalone) {\n                padding: 12px 12px 40px 12px;\n            }\n        }\n    }\n}",
+                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.matched-user-page {\n    display: grid;\n    grid-template-rows: minmax(0, 1fr);\n    height: 100%;\n\n    // &__header,\n    &__footer {\n        background-color: var(--theme-background);\n        padding: 24px;\n        display: grid;\n        align-items: center;\n        gap: 24px;\n    }\n\n    &__header {\n        &__title {\n            font-size: 1.5em;\n            font-weight: 500;\n            color: var(--theme-background-contrast);\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            gap: 12px;\n\n            &__avatar {\n                height: 36px;\n                width: 36px;\n                background-color: rgb(240, 240, 240);\n                border-radius: 6px;\n                object-fit: cover;\n                object-position: center;\n            }\n        }\n    }\n\n    &__container {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        height: 100%;\n    }\n\n    &__content {\n        display: flex;\n        flex-direction: column-reverse;\n        overflow-y: auto;\n\n        &__messages {\n            display: flex;\n            flex-direction: column;\n            gap: 12px;\n            padding: 24px;\n\n            &__system-message {\n                @include no-select;\n\n                width: 100%;\n                background-color: rgb(240, 240, 240);\n                max-width: 600px;\n                align-self: center;\n                padding: 24px;\n                border-radius: 6px;\n                text-align: center;\n                color: rgba(0, 0, 0, 0.55);\n                box-sizing: border-box;\n                margin-bottom: 12px;\n            }\n\n            &__question {\n                max-width: 600px;\n                align-self: center;\n                margin-bottom: 12px;\n                text-align: center;\n\n                &__description {\n                    @include no-select;\n                    opacity: 0.55;\n                    font-style: italic;\n                }\n\n                &__question {\n                    font-size: 1.65em;\n                    font-weight: 500;\n                    margin: 24px 0;\n                    line-height: 1.2em;\n                }\n\n                &__actions {\n                    @include no-select;\n                    display: flex;\n                    gap: 24px;\n                    justify-content: center;\n\n                    &__action {\n                        border: solid 1px rgb(240, 240, 240);\n                        padding: 6px 12px;\n                        border-radius: 6px;\n\n                        i {\n                            margin-right: 6px;\n                        }\n                    }\n                }\n            }\n\n            &__group {\n                width: 100%;\n                display: flex;\n                flex-direction: column;\n                gap: 6px;\n\n                &__time {\n                    @include no-select;\n\n                    opacity: 0.55;\n                    font-weight: 500;\n                    align-self: center;\n                    font-size: 0.85em;\n                }\n\n                &__content {\n                    display: flex;\n                    align-items: flex-end;\n                    gap: 6px;\n\n                    &__sender {\n                        &__avatar {\n                            height: 10px;\n                            width: 10px;\n                            background-color: rgb(220, 220, 220);\n                            border-radius: 10px;\n                            background-position: center;\n                            background-size: cover;\n                        }\n                    }\n\n                    &__messages {\n                        display: flex;\n                        gap: 3px;\n                        flex-direction: column;\n\n                        &__message {\n                            background-color: rgb(220, 220, 220);\n                            padding: 6px 12px;\n                            border-radius: 3px;\n                            max-width: 80%;\n                            word-wrap: break-word;\n\n                            &--only-emoji {\n                                background: none;\n                                font-size: 2em;\n                                padding: 6px 0;\n                                line-height: 1em;\n                            }\n                        }\n                    }\n                }\n\n                &--self {\n                    .matched-user-page__content__messages__group__content {\n                        flex-direction: row-reverse;\n\n                        &__messages {\n                            align-items: flex-end;\n\n                            &__message {\n                                background-color: var(--theme-main);\n                                color: var(--theme-main-contrast);\n                                border-top-left-radius: 12px;\n                                border-bottom-left-radius: 12px;\n\n                                &:first-child {\n                                    border-top-right-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-right-radius: 12px;\n                                }\n\n                                &--only-emoji {\n                                    background: none;\n                                }\n                            }\n                        }\n                    }\n                }\n\n                &--other {\n                    .matched-user-page__content__messages__group__content {\n                        &__messages {\n                            align-items: flex-start;\n\n                            &__message {\n                                border-top-right-radius: 12px;\n                                border-bottom-right-radius: 12px;\n\n                                &:first-child {\n                                    border-top-left-radius: 12px;\n                                }\n                                &:last-child {\n                                    border-bottom-left-radius: 12px;\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    &__footer {\n        $item-size: 40px;\n\n        border-top: solid 1px rgb(240, 240, 240);\n        grid-template-columns: 1fr auto;\n\n        &__control {\n            height: $item-size;\n            appearance: none;\n            background-color: rgb(250, 250, 250);\n            border: solid 1px rgb(240, 240, 240);\n            font: inherit;\n            outline: none;\n            border-radius: $item-size;\n            padding: 0 24px;\n            box-sizing: border-box;\n        }\n\n        &__button {\n            @include no-select;\n\n            height: $item-size;\n            width: $item-size;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-size: 1.1em;\n            border: solid 1px rgb(240, 240, 240);\n            border-radius: $item-size;\n            background-color: var(--theme-background);\n            color: var(--theme-background-contrast);\n            flex-grow: 0;\n            flex-shrink: 0;\n            box-sizing: border-box;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        &__header,\n        &__footer {\n            padding: 12px;\n            gap: 12px;\n        }\n\n        &__header {\n            &__back {\n                height: 32px;\n                width: 32px;\n                font-size: 1.1em;\n\n                i {\n                    margin-left: -1px;\n                }\n            }\n\n            &__title {\n                font-size: 1.2em;\n    \n                &__avatar {\n                    height: 32px;\n                    width: 32px;\n                }\n            }\n        }\n\n        &__footer {\n            $item-size: 32px;\n\n            &__control {\n                padding: 0 12px;\n                height: $item-size;\n            }\n\n            &__button {\n                height: $item-size;\n                width: $item-size;\n                font-size: 1em;\n            }\n\n            @media all and (display-mode: standalone) {\n                padding: 12px 12px 40px 12px;\n            }\n        }\n    }\n}",
                     "styleUrl": "./matched-user-page.component.scss"
                 }
             ],
@@ -5878,7 +6171,101 @@
                     }
                 }
             },
-            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                class=\"matched-user-page__header__title__avatar\"\n            >\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right classNames=\"interactable\" icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n\n<!-- <div class=\"matched-user-page\" *ngIf=\"!(userProfileValue | async)\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n    </div>\n</div>\n\n<div class=\"matched-user-page\" *ngIf=\"userProfileValue | async; let userProfile\">\n    <div class=\"matched-user-page__header\">\n        <div class=\"matched-user-page__header__actions\">\n            <a routerLink=\"/matches\" class=\"matched-user-page__header__back interactable\"><i class=\"fas fa-chevron-left\"></i></a>\n        </div>\n        <div class=\"matched-user-page__header__title\">\n            <div class=\"matched-user-page__header__title__avatar\" [style.background-image]=\"'url(' + userProfile.pictures?.[0] + ')'\"></div>\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </div>\n        <div class=\"matched-user-page__header__actions\"></div>\n    </div>\n\n    <div class=\"matched-user-page__content\">\n        <div class=\"matched-user-page__content__messages\">\n            <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n\n            <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                <div class=\"matched-user-page__content__messages__question__actions\">\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                    <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                </div>\n            </app-card>\n\n            <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                <div class=\"matched-user-page__content__messages__group__content\">\n                    <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender__avatar\"></div>\n                    </div>\n                    <div class=\"matched-user-page__content__messages__group__content__messages\">\n                        <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                            {{message.content}}\n                        </div>\n                    </div>\n                    \n                </div>\n            </div>\n        </div>\n    </div>\n    \n    <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n        <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n        <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n        <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n    </form>\n</div> -->"
+            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                class=\"matched-user-page__header__title__avatar\"\n            >\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right class=\"desktop-only\" icon=\"fas fa-user\" content=\"Voir le profil\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right class=\"mobile-only\" icon=\"fas fa-user\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\" [style.backgroundImage]=\"'url(' + (userProfileValue | async)?.pictures?.[0] + '-/scale_crop/20x20/smart/' + ')'\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n"
+        },
+        {
+            "name": "MatchedUserProfilePageComponent",
+            "id": "component-MatchedUserProfilePageComponent-674ab321c65b8ade94c1e8748f76eacb2dc18bf782f3ea2c86e95bd51a0f6d140ef282f34cf0a74b5d3491be26a032cf0d1fd921450a0b430c1e15d1e1718b51",
+            "file": "src/modules/matching/pages/matched-user-profile-page/matched-user-profile-page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-matched-user-profile-page",
+            "styleUrls": [
+                "./matched-user-profile-page.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./matched-user-profile-page.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "userProfile",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<PublicUserResultClass | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { Observable, map, switchMap } from 'rxjs';\nimport { PublicUserResultClass } from '../../models/public-user-result';\nimport { ActivatedRoute } from '@angular/router';\nimport { PublicProfileService } from '../../services/public-profile-service/public-profile.service';\n\n@Component({\n    selector: 'app-matched-user-profile-page',\n    templateUrl: './matched-user-profile-page.component.html',\n    styleUrls: ['./matched-user-profile-page.component.scss'],\n})\nexport class MatchedUserProfilePageComponent {\n    userProfile: Observable<PublicUserResultClass | undefined>;\n\n    constructor(\n        private readonly route: ActivatedRoute,\n        private readonly publicProfileService: PublicProfileService,\n    ) {\n        this.userProfile = this.route.params.pipe(\n            map((params) => {\n                if (!params['id']) {\n                    throw new Error('No id provided');\n                }\n\n                return Number(params['id']);\n            }),\n            switchMap((userId) => this.publicProfileService.getMatch(userId)),\n        );\n    }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import '../../../../styles/variables';\n\n.container {\n    display: grid;\n    grid-template-rows: minmax(0, 1fr);\n    grid-template-columns: minmax(0, 1fr);\n    height: 100%;\n    width: 100%;\n    max-width: 400px;\n    justify-content: center;\n    align-items: center;\n    margin: auto;\n    padding: 24px;\n    box-sizing: border-box;\n\n    app-user-profile-card {\n        flex-grow: 1;\n        width: 100%;\n        max-height: 600px;\n        height: 100%;\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        padding: 12px;\n    }\n}",
+                    "styleUrl": "./matched-user-profile-page.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "publicProfileService",
+                        "type": "PublicProfileService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 13,
+                "jsdoctags": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "publicProfileService",
+                        "type": "PublicProfileService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<app-layout class=\"matched-user-profile-page\" [noGap]=\"true\" *ngIf=\"userProfile | async; let userProfile\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" [link]=\"'/matches/' + userProfile.id\"></app-layout-action>\n\n    <div class=\"container\">\n        <app-user-profile-card [userProfile]=\"userProfile.value | async\" [disableModeration]=\"true\" [disableInteractions]=\"true\"></app-user-profile-card>\n    </div>\n</app-layout>"
         },
         {
             "name": "MatchesPageComponent",
@@ -6076,7 +6463,7 @@
         },
         {
             "name": "NavigationComponent",
-            "id": "component-NavigationComponent-85cb0e70f5e928bca200eba49b1c919976aa9441e92cf664f5840096ea88e8fbb9d57392b61961e2e21f66d18ab20230405ec6aa045666ef691acc10ba69e908",
+            "id": "component-NavigationComponent-bd340d0e9ac967cbd91091f6fda38897f5a139691f38816f06dc9ea5aa503f2ce8896b3292232e47fb49640b0e4f91d868a860b6e9f8496e08c35beb3bf37966",
             "file": "src/components/navigation/navigation.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7201,7 +7588,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.profile-container {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 24px;\n    box-sizing: border-box;\n\n    .profile-content {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        grid-template-columns: minmax(0, 1fr);\n        gap: 24px;\n        height: 100%;\n        width: 100%;\n        max-width: 400px;\n        align-items: center;\n        justify-content: center;\n\n        app-user-profile-card {\n            flex-grow: 1;\n            width: 100%;\n            max-height: 600px;\n            height: 100%;\n        }\n    }\n\n    &__swipe-btn-container {\n        display: flex;\n        justify-content: space-around;\n        gap: 24px;\n        width: 100%;\n    }\n    \n    &__swipe-btn {\n        appearance: none;\n        background: var(--theme-background);\n        border: solid 1px rgb(240, 240, 240);\n        font-size: 2em;\n        height: 56px;\n        width: 56px;\n        border-radius: 48px;\n        cursor: pointer;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        box-shadow: $default-shadow;\n\n        &--like {\n            color: var(--theme-main);\n            i {\n                padding-top: 5px;\n            }\n        }\n\n        &--dislike {\n            color: tomato;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        padding: 12px;\n\n        .profile-content {\n            gap: 12px;\n        }\n    }\n}\n\n.no-profiles {\n    @include no-select;\n\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 24px;\n    box-sizing: border-box;\n\n    p {\n        text-align: center;\n        font-style: italic;\n        font-size: 1.15em;\n        font-weight: 500;\n        opacity: 0.55;\n    }\n}",
+                    "data": "@import '../../../../styles/variables';\n@import '../../../../styles/utils';\n\n.profiles-container {\n    height: 100%;\n    width: 100%;\n    position: relative;\n}\n\n.profile-container {\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 24px;\n    box-sizing: border-box;\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n\n    &:first-child {\n        z-index: 2;\n    }\n\n    .profile-content {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        grid-template-columns: minmax(0, 1fr);\n        gap: 24px;\n        height: 100%;\n        width: 100%;\n        max-width: 400px;\n        align-items: center;\n        justify-content: center;\n\n        app-user-profile-card {\n            flex-grow: 1;\n            width: 100%;\n            max-height: 600px;\n            height: 100%;\n        }\n    }\n\n    &__swipe-btn-container {\n        display: flex;\n        justify-content: space-around;\n        gap: 24px;\n        width: 100%;\n    }\n    \n    &__swipe-btn {\n        appearance: none;\n        background: var(--theme-background);\n        border: solid 1px rgb(240, 240, 240);\n        font-size: 2em;\n        height: 56px;\n        width: 56px;\n        border-radius: 48px;\n        cursor: pointer;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        box-shadow: $default-shadow;\n\n        &--like {\n            color: var(--theme-main);\n            i {\n                padding-top: 5px;\n            }\n        }\n\n        &--dislike {\n            color: tomato;\n        }\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        padding: 12px;\n\n        .profile-content {\n            gap: 12px;\n        }\n    }\n}\n\n.no-profiles {\n    @include no-select;\n\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 24px;\n    box-sizing: border-box;\n\n    p {\n        text-align: center;\n        font-style: italic;\n        font-size: 1.15em;\n        font-weight: 500;\n        opacity: 0.55;\n    }\n}",
                     "styleUrl": "./swiping-page.component.scss"
                 }
             ],
@@ -7306,7 +7693,7 @@
                     }
                 }
             },
-            "templateData": "<ng-container *ngIf=\"availableUsers | async; let availableUsers\">\n    <ng-container *ngIf=\"(userValid | async) === false\">\n        <div class=\"no-profiles\">\n            <p>{{ userValidMessage | async }}</p>\n        </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"availableUsers.length == 0 && !(loading | async) && (userValid | async)\">\n        <div class=\"no-profiles\">\n            <p>Aucun profil disponible pour le moment. Revenez bientôt !</p>\n        </div>\n    </ng-container>\n\n    <ng-container *ngFor=\"let user of availableUsers; let index = index\">\n        <div class=\"profile-container\" *ngIf=\"index == 0\">\n            <div class=\"profile-content\">\n                <ng-container *ngIf=\"user.value| async; let userValue\">\n                    <app-user-profile-card [userProfile]=\"userValue\" (excludeUser)=\"onExcludeUser(user)\"></app-user-profile-card>\n                </ng-container>\n        \n                <div class=\"profile-container__swipe-btn-container\">\n                    <button class=\"profile-container__swipe-btn profile-container__swipe-btn--dislike interactable--large\" (click)=\"dislikeUser(user)\">\n                        <i class=\"fas fa-times\"></i>\n                    </button>\n                    <button class=\"profile-container__swipe-btn profile-container__swipe-btn--like interactable--large\" (click)=\"likeUser(user)\">\n                        <i class=\"fas fa-heart\"></i>\n                    </button>\n                </div>\n            </div>\n        </div>\n    </ng-container>\n</ng-container>"
+            "templateData": "<ng-container *ngIf=\"availableUsers | async; let availableUsers\">\n    <ng-container *ngIf=\"(userValid | async) === false\">\n        <div class=\"no-profiles\">\n            <p>{{ userValidMessage | async }}</p>\n        </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"availableUsers.length == 0 && !(loading | async) && (userValid | async)\">\n        <div class=\"no-profiles\">\n            <p>Aucun profil disponible pour le moment. Revenez bientôt !</p>\n        </div>\n    </ng-container>\n\n    <div class=\"profiles-container\">\n        <ng-container *ngFor=\"let user of availableUsers; let index = index\">\n            <div class=\"profile-container\" *ngIf=\"index <= 1\">\n                <div class=\"profile-content\">\n                    <ng-container *ngIf=\"user.value| async; let userValue\">\n                        <app-user-profile-card\n                            [userProfile]=\"userValue\"\n                            (excludeUser)=\"onExcludeUser(user)\"\n                            (likeUser)=\"likeUser(user)\"\n                            (dislikeUser)=\"dislikeUser(user)\"\n                        ></app-user-profile-card>\n                    </ng-container>\n                </div>\n            </div>\n        </ng-container>\n    </div>\n</ng-container>"
         },
         {
             "name": "TermsAndConditionsComponent",
@@ -7353,7 +7740,7 @@
         },
         {
             "name": "UserProfileCardComponent",
-            "id": "component-UserProfileCardComponent-4b93c2f882772b7c655156f5d106ec567e62d1b6257914719eaa66e8a5b7a0b27228d80e27438c852011b1240b58dafa40900170d8ee9ee12437c3ae4ab6c7bd",
+            "id": "component-UserProfileCardComponent-9593e36573476c69d9ccf36f6bfa2e78a95cb3525cd847342ff142de9a2c3c944705d3c7219458bf274c2560b2ef51042cc2ddce8f11ae9cd92b187b36c3261d",
             "file": "src/modules/user-profile/components/user-profile-card/user-profile-card.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -7372,11 +7759,20 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "disableInteractions",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
                     "name": "disableModeration",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 33,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -7385,22 +7781,137 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 30,
                     "type": "UserProfile | PublicUserResult | undefined | null",
                     "decorators": []
                 }
             ],
             "outputsClass": [
                 {
+                    "name": "dislikeUser",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "EventEmitter<void>"
+                },
+                {
                     "name": "excludeUser",
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 34,
+                    "type": "EventEmitter<void>"
+                },
+                {
+                    "name": "likeUser",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
                     "type": "EventEmitter<void>"
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "actionsVisible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 38
+                },
+                {
+                    "name": "container",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef<Element>",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'container'"
+                        }
+                    ],
+                    "modifierKind": [
+                        167
+                    ]
+                },
+                {
+                    "name": "currentSwipeOutput",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"right\" | \"left\" | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 43
+                },
+                {
+                    "name": "currentSwipeX",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 42
+                },
+                {
+                    "name": "disableSwipe",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 44
+                },
+                {
+                    "name": "infoVisible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 39
+                },
+                {
+                    "name": "initialSwipeX",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "isSwiping",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "swipingCompleted",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 45
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "blockUser",
@@ -7408,9 +7919,131 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 121,
+                    "line": 242,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "onScroll",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSwipeEnd",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 76,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:mouseup', ['$event']"
+                        },
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:touchend', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        167,
+                        167
+                    ]
+                },
+                {
+                    "name": "onSwipeMove",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 89,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:mousemove', ['$event']"
+                        },
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:touchmove', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        167,
+                        167
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onSwipeStart",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 68,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 },
                 {
                     "name": "reportUser",
@@ -7418,25 +8051,118 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 112,
+                    "line": 233,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "showInfo",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "swipe",
+                    "args": [
+                        {
+                            "name": "like",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 108,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "like",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
-            "hostListeners": [],
+            "hostListeners": [
+                {
+                    "name": "window:mousemove",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 89
+                },
+                {
+                    "name": "window:mouseup",
+                    "args": [],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 76
+                },
+                {
+                    "name": "window:touchend",
+                    "args": [],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 76
+                },
+                {
+                    "name": "window:touchmove",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 89
+                }
+            ],
             "standalone": false,
             "imports": [],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport {\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    SEXUAL_ORIENTATIONS,\n    PROGRAMS,\n    WORKOUT_HABITS,\n    DRINKING_HABITS,\n    SMOKING_HABITS,\n} from '../../constants';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get workout() {\n        return WORKOUT_HABITS.find(\n            (workout) => workout.id === this.userProfile?.workout,\n        );\n    }\n\n    get drinking() {\n        return DRINKING_HABITS.find(\n            (drinking) => drinking.id === this.userProfile?.drinking,\n        );\n    }\n\n    get smoking() {\n        return SMOKING_HABITS.find(\n            (smoking) => smoking.id === this.userProfile?.smoking,\n        );\n    }\n\n    get drugs() {\n        return DRINKING_HABITS.find(\n            (drugs) => drugs.id === this.userProfile?.drugs,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
+            "sourceCode": "import {\n    Component,\n    ElementRef,\n    EventEmitter,\n    HostListener,\n    Input,\n    Output,\n    ViewChild,\n} from '@angular/core';\nimport { PublicUserResult, UserProfile } from 'common/models/user';\nimport {\n    LOOKING_FOR,\n    RELATIONSHIP_TYPES,\n    ZODIAC_SIGNS,\n    SEXUAL_ORIENTATIONS,\n    PROGRAMS,\n    WORKOUT_HABITS,\n    DRINKING_HABITS,\n    SMOKING_HABITS,\n} from '../../constants';\nimport { ModerationService } from 'src/modules/moderation/services/moderation.service';\n\n@Component({\n    selector: 'app-user-profile-card',\n    templateUrl: './user-profile-card.component.html',\n    styleUrls: ['./user-profile-card.component.scss'],\n})\nexport class UserProfileCardComponent {\n    @ViewChild('container') container!: ElementRef<Element>;\n    @Input() userProfile: UserProfile | PublicUserResult | undefined | null =\n        null;\n    @Input() disableInteractions: boolean = false;\n    @Input() disableModeration: boolean = false;\n    @Output() excludeUser: EventEmitter<void> = new EventEmitter();\n    @Output() likeUser: EventEmitter<void> = new EventEmitter();\n    @Output() dislikeUser: EventEmitter<void> = new EventEmitter();\n\n    actionsVisible: boolean = false;\n    infoVisible: boolean = false;\n    isSwiping: boolean = false;\n    initialSwipeX: number | null = null;\n    currentSwipeX: number | null = null;\n    currentSwipeOutput: 'right' | 'left' | null = null;\n    disableSwipe: boolean = false;\n    swipingCompleted: boolean = false;\n\n    constructor(private readonly moderationService: ModerationService) {}\n\n    showInfo() {\n        this.infoVisible = true;\n        this.container.nativeElement.scrollTop =\n            this.container.nativeElement.clientHeight * 0.8;\n    }\n\n    onScroll(event: Event) {\n        const target = event.target as Element | null;\n\n        if (!target) return;\n\n        if (target.scrollTop <= 0) {\n            target.scrollTop = 0;\n            this.infoVisible = false;\n        }\n\n        this.actionsVisible = target.scrollTop >= 90;\n    }\n\n    onSwipeStart(event: Event) {\n        if (this.disableSwipe) return;\n        this.isSwiping = true;\n        this.initialSwipeX = (event as MouseEvent).pageX;\n    }\n\n    @HostListener('window:mouseup', ['$event'])\n    @HostListener('window:touchend', ['$event'])\n    onSwipeEnd() {\n        if (this.isSwiping) {\n            if (this.currentSwipeOutput) {\n                this.swipe(this.currentSwipeOutput === 'right');\n            }\n\n            this.isSwiping = false;\n            this.currentSwipeX = null;\n        }\n    }\n\n    @HostListener('window:mousemove', ['$event'])\n    @HostListener('window:touchmove', ['$event'])\n    onSwipeMove(event: MouseEvent) {\n        if (!this.isSwiping || this.initialSwipeX === null) return;\n        this.currentSwipeX = event.pageX - this.initialSwipeX;\n\n        if (\n            this.currentSwipeX >\n            this.container.nativeElement.clientWidth * 0.3\n        ) {\n            this.currentSwipeOutput = 'right';\n        } else if (\n            this.currentSwipeX <\n            -this.container.nativeElement.clientWidth * 0.3\n        ) {\n            this.currentSwipeOutput = 'left';\n        } else {\n            this.currentSwipeOutput = null;\n        }\n    }\n\n    swipe(like: boolean) {\n        this.disableSwipe = true;\n        this.swipingCompleted = true;\n        setTimeout(() => {\n            if (like) {\n                this.likeUser.emit();\n            }\n            if (!like) {\n                this.dislikeUser.emit();\n            }\n        }, 250);\n    }\n\n    get likeScale() {\n        return this.currentSwipeX\n            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * 0.002))\n            : 1;\n    }\n\n    get dislikeScale() {\n        return this.currentSwipeX\n            ? Math.min(1.5, Math.max(1, 1 + this.currentSwipeX * -0.002))\n            : 1;\n    }\n\n    get program() {\n        return this.userProfile?.program\n            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any\n              (PROGRAMS as any)[this.userProfile?.program]\n            : undefined;\n    }\n\n    get interests(): string[] | undefined {\n        const interests = this.userProfile?.interests?.filter(\n            (interest) => interest.length > 0,\n        );\n\n        return (interests?.length ?? 0) > 0 ? interests : undefined;\n    }\n\n    get associations(): string[] | undefined {\n        const associations = this.userProfile?.associations?.filter(\n            (association) => association.length > 0,\n        );\n\n        return (associations?.length ?? 0) > 0 ? associations : undefined;\n    }\n\n    get zodiacSign() {\n        return ZODIAC_SIGNS.find(\n            (zodiac) => zodiac.id === this.userProfile?.zodiacSign,\n        );\n    }\n\n    get sexualOrientation() {\n        return SEXUAL_ORIENTATIONS.find(\n            (orientation) =>\n                orientation.id === this.userProfile?.sexualOrientation,\n        );\n    }\n\n    get relationshipType() {\n        return RELATIONSHIP_TYPES.find(\n            (status) => status.id === this.userProfile?.relationshipType,\n        );\n    }\n\n    get lookingFor() {\n        return LOOKING_FOR.find(\n            (lookingFor) => lookingFor.id === this.userProfile?.lookingFor,\n        );\n    }\n\n    get workout() {\n        return WORKOUT_HABITS.find(\n            (workout) => workout.id === this.userProfile?.workout,\n        );\n    }\n\n    get drinking() {\n        return DRINKING_HABITS.find(\n            (drinking) => drinking.id === this.userProfile?.drinking,\n        );\n    }\n\n    get smoking() {\n        return SMOKING_HABITS.find(\n            (smoking) => smoking.id === this.userProfile?.smoking,\n        );\n    }\n\n    get drugs() {\n        return DRINKING_HABITS.find(\n            (drugs) => drugs.id === this.userProfile?.drugs,\n        );\n    }\n\n    get height() {\n        if (!this.userProfile?.height) {\n            return undefined;\n        }\n\n        const heightCm = this.userProfile.height;\n        const heightFeet = Math.floor(heightCm / 30.48);\n        const heightInches = Math.round((heightCm % 30.48) / 2.54);\n\n        return `${heightCm} cm / ${heightFeet}'${heightInches}\"`;\n    }\n\n    get shouldDisplayTable() {\n        return (\n            (this.userProfile?.interests ?? []).length > 0 ||\n            (this.userProfile?.associations ?? []).length > 0 ||\n            this.userProfile?.zodiacSign ||\n            this.userProfile?.sexualOrientation ||\n            this.userProfile?.relationshipType ||\n            this.userProfile?.lookingFor ||\n            this.userProfile?.workout ||\n            this.userProfile?.drinking ||\n            this.userProfile?.smoking ||\n            this.userProfile?.drugs ||\n            this.userProfile?.height\n        );\n    }\n\n    reportUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService.openReportUserModal(\n            this.userProfile.userId,\n            this.userProfile.name ?? '',\n        );\n    }\n\n    blockUser() {\n        if (!this.userProfile) throw new Error('User profile is undefined');\n\n        this.moderationService\n            .openBlockUserModal(\n                this.userProfile.userId,\n                this.userProfile.name ?? '',\n            )\n            .subscribe(() => {\n                this.excludeUser.emit();\n            });\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/utils';\n@import '../../../../styles/variables';\n\n.user-profile {\n    @include no-select;\n\n    $spacing: 18px;\n    $inner-radius: 10px;\n\n    height: 100%;\n    width: 100%;\n    background-color: var(--theme-background);\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: 16px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    padding: $spacing;\n    display: flex;\n    flex-direction: column;\n    gap: $spacing;\n    box-sizing: border-box;\n    box-shadow: $default-shadow;\n    -ms-overflow-style: none;  /* Internet Explorer 10+ */\n    scrollbar-width: none;  /* Firefox */\n\n    &::-webkit-scrollbar {\n        display: none;  /* Safari and Chrome */\n    }\n\n    &__separator {\n        height: 1px;\n        width: 100%;\n        background-color: rgb(240, 240, 240);\n        border: none;\n        display: block;\n        margin: 0;\n    }\n\n    &__section {\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n        padding: $spacing;\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n    }\n\n    &__section-title {\n        font-size: 0.9em;\n        font-weight: 800;\n        opacity: 0.45;\n        display: flex;\n        gap: 6px;\n        align-items: center;\n\n        i {\n            font-size: 0.8em;\n        }\n    }\n\n    &__picture {\n        width: 100%;\n        aspect-ratio: 3/4;\n        background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n        border-radius: $inner-radius;\n        object-fit: cover;\n        object-position: center;\n    }\n\n    &__table {\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n\n        &__entry {\n            padding: 12px 18px;\n\n            &:not(:last-child) {\n                border-bottom: solid 1px rgb(240, 240, 240);\n            }\n\n            i {\n                width: 18px;\n                margin-right: 8px;\n            }\n\n            &--multiple {\n                display: flex;\n                overflow-y: auto;\n                gap: 36px;\n                -ms-overflow-style: none;  /* Internet Explorer 10+ */\n                scrollbar-width: none;  /* Firefox */\n\n                &::-webkit-scrollbar {\n                    display: none;  /* Safari and Chrome */\n                }\n\n                .user-profile__table__entry__item {\n                    flex-shrink: 0;\n\n                    i {\n                        width: 18px;\n                        margin-right: 2px;\n                    }\n\n                    &:not(:last-child) {\n                        &::after {\n                            content: '';\n                            position: relative;\n                            height: 100%;\n                            width: 1px;\n                            background-color: red;\n                        }\n                    }\n                }\n            }\n        }\n\n        &:empty {\n            display: none;\n            margin-bottom: -$spacing;\n        }\n    }\n\n    &__list {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 6px;\n\n        &__item {\n            border: solid 1px rgb(240, 240, 240);\n            padding: 4px 12px;\n            border-radius: 24px;\n        }\n    }\n\n    &__main {\n        display: grid;\n        grid-template-rows: minmax(0, 1fr) auto;\n        align-items: stretch;\n        height: 100%;\n        gap: $spacing;\n        flex-shrink: 0;\n\n        &__picture {\n            display: block;\n            width: 100%;\n            object-fit: cover;\n            object-position: center;\n            border-radius: $inner-radius;\n            background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n        }\n\n        &__info {\n            display: flex;\n            flex-direction: column;\n            gap: $spacing;\n\n            &__name {\n                font-size: 2.4em;\n                font-weight: 800;\n                margin: 0;\n            }\n\n            &__subtitle {\n                margin: 0;\n                font-size: 1.3em;\n                font-weight: 800;\n                opacity: 0.55;\n            }\n        }\n    }\n\n    &__looking-for {\n        &__content {\n            font-size: 1.4em;\n            font-weight: 500;\n        }\n    }\n\n    &__actions {\n        display: flex;\n        flex-direction: column;\n        gap: 12px;\n\n        &__item {\n            display: block;\n            appearance: none;\n            background-color: var(--theme-background);\n            border: solid 1px rgb(240, 240, 240);\n            font-size: inherit;\n            padding: 12px 24px;\n            border-radius: 6px;\n            text-align: center;\n            text-decoration: none;\n            color: var(--theme-background-contrast);\n            box-shadow: $default-shadow;\n\n            i {\n                margin-right: 6px;\n            }\n        }\n    }\n\n    p {\n        margin: 0;\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        $spacing: 12px;\n\n\n        padding: $spacing;\n        gap: $spacing;\n\n        &__section {\n            gap: $spacing;\n            padding: $spacing;\n        }\n\n        &__main {\n            gap: $spacing;\n\n            &__info {\n                gap: $spacing;\n            }\n        }\n    }\n}\n\nhr {\n    width: 100%;\n    border: none;\n    height: 1px;\n    background: rgb(240, 240, 240);\n}",
+                    "data": "@import '../../../../styles/utils';\n@import '../../../../styles/variables';\n\n.user-profile {\n    @include no-select;\n\n    $spacing: 18px;\n    $outer-radius: 16px;\n    $inner-radius: 10px;\n\n    position: relative;\n    height: 100%;\n    width: 100%;\n    background-color: var(--theme-background);\n    border: solid 1px rgb(240, 240, 240);\n    border-radius: $outer-radius;\n    overflow-y: hidden;\n    overflow-x: hidden;\n    box-shadow: $default-shadow;\n    transition: ease-in 0.2s opacity, ease-in 0.2s scale;\n    \n\n    &__container {\n        height: 100%;\n        width: 100%;\n        overflow-y: hidden;\n        overflow-x: hidden;\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n\n        scroll-behavior: smooth;\n        -ms-overflow-style: none;  /* Internet Explorer 10+ */\n        scrollbar-width: none;  /* Firefox */\n\n        &::-webkit-scrollbar {\n            display: none;  /* Safari and Chrome */\n        }\n    }\n\n    &__main {\n        height: 100%;\n        border-radius: $outer-radius;\n        overflow: hidden;\n        position: relative;\n        display: flex;\n        flex-direction: column;\n        justify-content: flex-end;\n        flex-shrink: 0;\n        box-sizing: border-box;\n\n        &__picture {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 100%;\n            width: 100%;\n        }\n\n        &__content {\n            z-index: 1;\n            position: relative;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            background-color: rgba(255, 255, 255, 0.9);\n            border-top-left-radius: $inner-radius;\n            border-top-right-radius: $inner-radius;\n            padding: $spacing;\n            width: 100%;\n            box-sizing: border-box;\n            cursor: pointer;\n\n            &__info {\n                p {\n                    margin: 0;\n                    width: 100%;\n                    overflow-x: hidden;\n                    white-space: nowrap;\n                    text-overflow: ellipsis;\n                    flex-shrink: 0;\n                    line-height: 1.2em;\n                }\n    \n                &__name {\n                    font-size: 1.9em;\n                    font-weight: 800;\n                    margin: 0;\n                }\n    \n                &__subtitle {\n                    margin: 0;\n                    font-size: 1.3em;\n                    font-weight: 800;\n                    opacity: 0.55;\n                }\n            }\n\n            &__button {\n                transition: ease-in 0.1s opacity;\n            }\n\n            @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {\n                background-color: rgba(255, 255, 255, .85);\n                -webkit-backdrop-filter: blur(2em);\n                backdrop-filter: blur(2em);\n            }\n        }\n\n        &__swipe {\n            position: relative;\n            z-index: 1;\n            background-color: white;\n            padding: $spacing;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            height: 70px;\n            box-sizing: border-box;\n            transition: ease-in 0.1s margin-bottom;\n            cursor: grab;\n            overflow: hidden;\n\n            &__button {\n                appearance: none;\n                background: none;\n                border: none;\n                font-size: inherit;\n                padding: 8px;\n                border-radius: 3px;\n                z-index: 1;\n\n                &:active {\n                    background: rgb(0, 0, 0, 0.1);\n                }\n            }\n            \n            &__icon {\n                font-size: 1.7em;\n                transition: ease-in 0.1s opacity;\n                z-index: 1;\n\n                &.fa-times {\n                    color: tomato;\n                }\n\n                &.fa-heart {\n                    color: var(--theme-main);\n                }\n            }\n\n            &__direction {\n                opacity: 0.2;\n                transition: ease-in 0.1s opacity;\n                z-index: 1;\n            }\n\n            &__effect {\n                width: calc(100% + 24px);\n                aspect-ratio: 1;\n                border-radius: 50%;\n                position: absolute;\n                top: 50%;\n                left: 50%;\n                translate: -50% -50%;\n                scale: 0;\n                transition: ease-in 0.1s scale;\n            }\n\n            &--right,\n            &--left {\n                .user-profile__main__swipe__icon {\n                    color: white;\n                }\n                .user-profile__main__swipe__effect {\n                    scale: 1;\n                }\n            }\n\n            &--right {\n                .user-profile__main__swipe__icon {\n                    &.fa-times {\n                        opacity: 0;\n                    }\n                }\n\n                .user-profile__main__swipe__direction {\n                    &--left {\n                        opacity: 0;\n                    }\n                }\n\n                .user-profile__main__swipe__effect {\n                    background-color: var(--theme-main);\n                }\n            }\n\n            &--left {\n                .user-profile__main__swipe__icon {\n                    &.fa-heart {\n                        opacity: 0;\n                    }\n                }\n\n                .user-profile__main__swipe__direction {\n                    &--right {\n                        opacity: 0;\n                    }\n                }\n\n                .user-profile__main__swipe__effect {\n                    background-color: tomato;\n                }\n            }\n        }\n    }\n\n    &__actions {\n        position: absolute;\n        bottom: 0;\n        width: 100%;\n        display: flex;\n        justify-content: space-around;\n        align-items: center;\n        height: 90px;\n        margin-bottom: -90px;\n        transition: ease-in 0.1s margin-bottom;\n        pointer-events: auto; \n\n        &__button {\n            position: relative;\n            z-index: 2;\n            appearance: none;\n            background: var(--theme-background);\n            border: solid 1px rgb(240, 240, 240);\n            font-size: 2em;\n            height: 56px;\n            width: 56px;\n            border-radius: 48px;\n            cursor: pointer;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            box-shadow: $default-shadow;\n\n            &--like {\n                color: var(--theme-main);\n                i {\n                    padding-top: 5px;\n                }\n            }\n\n            &--dislike {\n                color: tomato;\n            }\n        }\n\n        &--visible {\n            margin-bottom: 0;\n        }\n    }\n\n    &__content {\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n        padding: 0 $spacing 90px $spacing;\n        position: relative;\n        z-index: 1;\n    }\n\n    &__section {\n        display: flex;\n        flex-direction: column;\n        gap: $spacing;\n        padding: $spacing;\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n    }\n\n    app-image {\n        border-radius: $inner-radius;\n        overflow: hidden;\n    }\n\n    &__table {\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: $inner-radius;\n\n        &__entry {\n            padding: 12px 18px;\n\n            &:not(:last-child) {\n                border-bottom: solid 1px rgb(240, 240, 240);\n            }\n\n            i {\n                width: 18px;\n                margin-right: 8px;\n            }\n\n            &--multiple {\n                display: flex;\n                overflow-y: auto;\n                gap: 36px;\n                -ms-overflow-style: none;  /* Internet Explorer 10+ */\n                scrollbar-width: none;  /* Firefox */\n\n                &::-webkit-scrollbar {\n                    display: none;  /* Safari and Chrome */\n                }\n\n                .user-profile__table__entry__item {\n                    flex-shrink: 0;\n\n                    i {\n                        width: 18px;\n                        margin-right: 2px;\n                    }\n\n                    &:not(:last-child) {\n                        &::after {\n                            content: '';\n                            position: relative;\n                            height: 100%;\n                            width: 1px;\n                        }\n                    }\n                }\n            }\n        }\n\n        &:empty {\n            display: none;\n            margin-bottom: -$spacing;\n        }\n    }\n\n    &__list {\n        display: flex;\n        flex-wrap: wrap;\n        gap: 6px;\n\n        &__item {\n            border: solid 1px rgb(240, 240, 240);\n            padding: 4px 12px;\n            border-radius: 24px;\n        }\n    }\n\n    &__user-actions {\n        display: flex;\n        flex-direction: column;\n        gap: 4px;\n    }\n\n    &--info-visible {\n        .user-profile__container {\n            overflow-y: auto;\n        }\n\n        .user-profile__main {\n            &__content {\n                &__button {\n                    opacity: 0;\n                    visibility: hidden;\n                }\n            }\n\n            &__swipe {\n                margin-bottom: -70px;\n            }\n        }\n    }\n\n    &--swiping-completed {\n        scale: 1.1;\n        opacity: 0;\n        pointer-events: none;\n    }\n\n    @media screen and (max-width: $mobile-breakpoint) {\n        $spacing: 12px;\n        \n        .user-profile__container {\n            gap: $spacing;\n        }\n\n        .user-profile__content {\n            gap: $spacing;\n            padding: 0 $spacing 90px $spacing;\n        }\n    }\n}\n",
                     "styleUrl": "./user-profile-card.component.scss"
                 }
             ],
@@ -7454,7 +8180,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 24,
+                "line": 45,
                 "jsdoctags": [
                     {
                         "name": "moderationService",
@@ -7468,13 +8194,31 @@
                 ]
             },
             "accessors": {
+                "likeScale": {
+                    "name": "likeScale",
+                    "getSignature": {
+                        "name": "likeScale",
+                        "type": "",
+                        "returnType": "",
+                        "line": 121
+                    }
+                },
+                "dislikeScale": {
+                    "name": "dislikeScale",
+                    "getSignature": {
+                        "name": "dislikeScale",
+                        "type": "",
+                        "returnType": "",
+                        "line": 127
+                    }
+                },
                 "program": {
                     "name": "program",
                     "getSignature": {
                         "name": "program",
                         "type": "",
                         "returnType": "",
-                        "line": 28
+                        "line": 133
                     }
                 },
                 "interests": {
@@ -7483,7 +8227,7 @@
                         "name": "interests",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 35
+                        "line": 140
                     }
                 },
                 "associations": {
@@ -7492,7 +8236,7 @@
                         "name": "associations",
                         "type": "",
                         "returnType": "[] | undefined",
-                        "line": 43
+                        "line": 148
                     }
                 },
                 "zodiacSign": {
@@ -7501,7 +8245,7 @@
                         "name": "zodiacSign",
                         "type": "",
                         "returnType": "",
-                        "line": 51
+                        "line": 156
                     }
                 },
                 "sexualOrientation": {
@@ -7510,7 +8254,7 @@
                         "name": "sexualOrientation",
                         "type": "",
                         "returnType": "",
-                        "line": 57
+                        "line": 162
                     }
                 },
                 "relationshipType": {
@@ -7519,7 +8263,7 @@
                         "name": "relationshipType",
                         "type": "",
                         "returnType": "",
-                        "line": 64
+                        "line": 169
                     }
                 },
                 "lookingFor": {
@@ -7528,7 +8272,7 @@
                         "name": "lookingFor",
                         "type": "",
                         "returnType": "",
-                        "line": 70
+                        "line": 175
                     }
                 },
                 "workout": {
@@ -7537,7 +8281,7 @@
                         "name": "workout",
                         "type": "",
                         "returnType": "",
-                        "line": 76
+                        "line": 181
                     }
                 },
                 "drinking": {
@@ -7546,7 +8290,7 @@
                         "name": "drinking",
                         "type": "",
                         "returnType": "",
-                        "line": 82
+                        "line": 187
                     }
                 },
                 "smoking": {
@@ -7555,7 +8299,7 @@
                         "name": "smoking",
                         "type": "",
                         "returnType": "",
-                        "line": 88
+                        "line": 193
                     }
                 },
                 "drugs": {
@@ -7564,7 +8308,7 @@
                         "name": "drugs",
                         "type": "",
                         "returnType": "",
-                        "line": 94
+                        "line": 199
                     }
                 },
                 "height": {
@@ -7573,11 +8317,20 @@
                         "name": "height",
                         "type": "",
                         "returnType": "",
-                        "line": 100
+                        "line": 205
+                    }
+                },
+                "shouldDisplayTable": {
+                    "name": "shouldDisplayTable",
+                    "getSignature": {
+                        "name": "shouldDisplayTable",
+                        "type": "",
+                        "returnType": "",
+                        "line": 217
                     }
                 }
             },
-            "templateData": "\n<ng-container *ngIf=\"userProfile\">\n    <div class=\"user-profile\">\n        <div class=\"user-profile__main\">\n            <img\n                [src]=\"(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/')\"\n                [srcset]=\"(userProfile.pictures?.[0] + '-/scale_crop/363x486/smart/-/progressive/yes/ 1x, ' + userProfile.pictures?.[0] + '-/scale_crop/726x972/smart/-/progressive/yes/ 2x')\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                class=\"user-profile__main__picture\"\n                *ngIf=\"userProfile.pictures?.[0]\"\n            >\n            <div class=\"user-profile__main__picture\" *ngIf=\"!userProfile.pictures?.[0]\"></div>\n            <div class=\"user-profile__main__info\">\n                <p class=\"user-profile__main__info__name\">{{userProfile.name}}</p>\n                <p class=\"user-profile__main__info__subtitle\">\n                    <span class=\"user-profile__main__info__subtitle__age\">{{userProfile.age}}</span>\n                    <span class=\"user-profile__main__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                </p>\n            </div>\n        </div>\n\n        <div class=\"user-profile__bio user-profile__section\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n            <p>{{userProfile.bio}}</p>\n        </div>\n\n        <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n            <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n            <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[1]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[1]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__table\">\n            <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                    <i class=\"fas fa-ruler\"></i> {{height}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"workout\">\n                    <i class=\"fas fa-running\"></i> {{workout.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"drinking\">\n                    <i class=\"fas fa-wine-glass-alt\"></i> {{drinking.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"smoking\">\n                    <i class=\"fas fa-smoking\"></i> {{smoking.name}}\n                </div>\n                <div class=\"user-profile__table__entry__item\" *ngIf=\"drugs\">\n                    <i class=\"fas fa-cannabis\"></i> {{drugs.name}}\n                </div>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n            </div>\n            <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[2]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[2]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n            <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                    {{interest}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[3]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[3]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n            <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n            <div class=\"user-profile__list\">\n                <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                    {{association}}\n                </div>\n            </div>\n        </div>\n        \n        <img\n            [src]=\"userProfile.pictures?.[4]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[4]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n        \n        <img\n            [src]=\"userProfile.pictures?.[5]+ '-/scale_crop/700x1020/smart/'\"\n            *ngIf=\"userProfile.pictures?.[5]\"\n            [alt]=\"'Photo de ' + userProfile.name\"\n            class=\"user-profile__picture\"\n        >\n\n        <hr>\n\n        <div class=\"user-profile__actions\">\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n            <button *ngIf=\"!disableModeration\" class=\"user-profile__actions__item interactable\" (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n        </div>\n    </div>\n</ng-container>"
+            "templateData": "<div class=\"user-profile\" [ngClass]=\"{'user-profile--info-visible': infoVisible, 'user-profile--swiping-completed': swipingCompleted}\" *ngIf=\"userProfile\">\n    <div class=\"user-profile__container\" (scroll)=\"onScroll($event)\" #container>\n        <div class=\"user-profile__main\">\n            <app-image\n                [src]=\"userProfile.pictures?.[0]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 363, height: 486}\"\n                [inferSize]=\"true\"\n                class=\"user-profile__main__picture\"\n            ></app-image>\n            <div class=\"user-profile__main__picture\" *ngIf=\"!userProfile.pictures?.[0]\"></div>\n    \n            <div class=\"user-profile__main__content\" (click)=\"!infoVisible && showInfo()\">\n                <div class=\"user-profile__main__content__info\">\n                    <p class=\"user-profile__main__content__info__name\">{{userProfile.name}}</p>\n                    <p class=\"user-profile__main__content__info__subtitle\">\n                        <span class=\"user-profile__main__content__info__subtitle__age\">{{userProfile.age}}</span>\n                        <span class=\"user-profile__main__content__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                    </p>\n                </div>\n    \n                <app-button icon=\"fas fa-arrow-down\" color=\"primary\" [iconOnly]=\"true\" class=\"user-profile__main__content__button\"></app-button>\n            </div>\n    \n            <div *ngIf=\"!disableInteractions\" [class]=\"'user-profile__main__swipe user-profile__main__swipe--' + currentSwipeOutput\" (mousedown)=\"onSwipeStart($event)\" (touchstart)=\"onSwipeStart($event)\">\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(false)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-times\" [style.scale]=\"dislikeScale\"></i>\n                </button>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--left\">\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                </span>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--right\">\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                </span>\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(true)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-heart\" [style.scale]=\"likeScale\"></i>\n                </button>\n    \n                <div class=\"user-profile__main__swipe__effect\"></div>\n            </div>\n        </div>\n    \n        <div class=\"user-profile__content\">\n            <div class=\"user-profile__bio user-profile__section\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n                <p>{{userProfile.bio}}</p>\n            </div>\n\n            <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n                <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[1]\"\n                *ngIf=\"userProfile.pictures?.[1]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__table\" *ngIf=\"shouldDisplayTable\">\n                <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                        <i class=\"fas fa-ruler\"></i> {{height}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"workout\">\n                        <i class=\"fas fa-running\"></i> {{workout.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drinking\">\n                        <i class=\"fas fa-wine-glass-alt\"></i> {{drinking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"smoking\">\n                        <i class=\"fas fa-smoking\"></i> {{smoking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drugs\">\n                        <i class=\"fas fa-cannabis\"></i> {{drugs.name}}\n                    </div>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                    <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                    <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                    <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                    <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                    <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                    <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n                </div>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[2]\"\n                *ngIf=\"userProfile.pictures?.[2]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n                <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                        {{interest}}\n                    </div>\n                </div>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[3]\"\n                *ngIf=\"userProfile.pictures?.[3]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n                <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                        {{association}}\n                    </div>\n                </div>\n            </div>\n\n\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[4]\"\n                *ngIf=\"userProfile.pictures?.[4]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[5]\"\n                *ngIf=\"userProfile.pictures?.[5]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n        \n            <div class=\"user-profile__user-actions\" *ngIf=\"!disableModeration\">\n                <app-button\n                    icon=\"fas fa-flag\"\n                    (btnClick)=\"reportUser()\"\n                    interactable=\"small\"\n                >Signaler</app-button>\n                <app-button\n                    icon=\"fas fa-times\"\n                    (btnClick)=\"blockUser()\"\n                    interactable=\"small\"\n                >Bloquer</app-button>\n            </div>\n        </div>\n    </div>\n    \n\n    <div class=\"user-profile__actions\" [ngClass]=\"{'user-profile__actions--visible': actionsVisible}\">\n        <button class=\"user-profile__actions__button user-profile__actions__button--dislike\" (click)=\"swipe(false)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-times\"></i>\n        </button>\n        <button class=\"user-profile__actions__button user-profile__actions__button--like\" (click)=\"swipe(true)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-heart\"></i>\n        </button>\n    </div>\n</div>\n"
         },
         {
             "name": "UserProfileEditPageComponent",
@@ -8173,7 +8926,7 @@
                     }
                 }
             },
-            "templateData": "<app-layout headerType=\"transparent\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/profile\"></app-layout-action>\n\n    <span layout-title>Visualiser mon profil</span>\n\n    <div class=\"container\">\n        <app-user-profile-card [userProfile]=\"userProfile | async\" [disableModeration]=\"true\"></app-user-profile-card>\n    </div>\n</app-layout>"
+            "templateData": "<app-layout headerType=\"transparent\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/profile\"></app-layout-action>\n\n    <span layout-title>Visualiser mon profil</span>\n\n    <div class=\"container\">\n        <app-user-profile-card [userProfile]=\"userProfile | async\" [disableModeration]=\"true\" [disableInteractions]=\"true\"></app-user-profile-card>\n    </div>\n</app-layout>"
         }
     ],
     "modules": [
@@ -8344,13 +9097,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-051c93e1042677b5f2688065d97043b211eab0d889fa8c128f7217668f453ade492a28934e5d6612c0fc439cb6813d1befd33acb05be3d82dc978db80e183ae5",
+            "id": "module-AppRoutingModule-8e3bc08c81a8709fa8db3f42c18727e87e9f1f88885475faaef0423c845d050ee3bf9e4a71c87a83d7874bde2cb089138002f3fe39a8355a749b99c1028d6b30",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Route, RouterModule, Routes } from '@angular/router';\nimport { LoginPageComponent } from './authentication/pages/login-page/login-page.component';\nimport {\n    LOGIN_ROUTE,\n    MATCHED_USER_ROUTE,\n    MATCHES_ROUTE,\n    PASSWORD_RESET_ROUTE,\n    PROFILE_EDIT_ROUTE,\n    PROFILE_PREVIEW_ROUTE,\n    PROFILE_ROUTE,\n    REQUEST_PASSWORD_RESET_ROUTE,\n    SIGNUP_ROUTE,\n    SWIPING_ROUTE,\n} from 'src/constants/routes';\nimport { SignupPageComponent } from './authentication/pages/signup-page/signup-page.component';\nimport { UserProfilePageComponent } from './user-profile/pages/user-profile-page/user-profile-page.component';\nimport { MatchesPageComponent } from './matching/pages/matches-page/matches-page.component';\nimport { SwipingPageComponent } from './matching/pages/swiping-page/swiping-page.component';\nimport { UserProfileEditPageComponent } from './user-profile/pages/user-profile-edit-page/user-profile-edit-page.component';\nimport { UserProfilePreviewComponent } from './user-profile/pages/user-profile-preview/user-profile-preview.component';\nimport { MatchedUserPageComponent } from './matching/pages/matched-user-page/matched-user-page.component';\nimport { RequestPasswordResetPageComponent } from './authentication/pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './authentication/pages/password-reset-page/password-reset-page.component';\nimport { aboutRoutes } from './about/about-routing.module';\n\nconst privateRoute: Route = {\n    // canActivate: [privateRouteGuard],\n    runGuardsAndResolvers: 'paramsOrQueryParamsChange',\n};\n\nconst publicRoute: Route = {\n    // canActivate: [publicRouteGuard],\n    runGuardsAndResolvers: 'paramsOrQueryParamsChange',\n};\n\nconst routes: Routes = [\n    { path: SWIPING_ROUTE, component: SwipingPageComponent, ...privateRoute },\n    {\n        path: PROFILE_ROUTE,\n        component: UserProfilePageComponent,\n        ...privateRoute,\n    },\n    {\n        path: PROFILE_EDIT_ROUTE,\n        component: UserProfileEditPageComponent,\n        ...privateRoute,\n    },\n    {\n        path: PROFILE_PREVIEW_ROUTE,\n        component: UserProfilePreviewComponent,\n        ...privateRoute,\n    },\n    { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },\n    {\n        path: MATCHED_USER_ROUTE,\n        component: MatchedUserPageComponent,\n        ...privateRoute,\n    },\n    { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },\n    { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },\n    {\n        path: REQUEST_PASSWORD_RESET_ROUTE,\n        component: RequestPasswordResetPageComponent,\n        ...publicRoute,\n    },\n    {\n        path: PASSWORD_RESET_ROUTE,\n        component: PasswordResetPageComponent,\n        ...publicRoute,\n    },\n];\n\nconst notFoundRoutes: Routes = [\n    { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },\n];\n\nconst routeNames = routes.map((route) => ({\n    ...route,\n    path: route.path?.replace(/^\\//, ''),\n}));\n\n@NgModule({\n    imports: [\n        RouterModule.forRoot(routeNames, {\n            scrollPositionRestoration: 'top',\n        }),\n        RouterModule.forRoot(aboutRoutes, {\n            scrollPositionRestoration: 'top',\n        }),\n        RouterModule.forRoot(notFoundRoutes, {\n            scrollPositionRestoration: 'top',\n        }),\n    ],\n    exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { Route, RouterModule, Routes } from '@angular/router';\nimport { LoginPageComponent } from './authentication/pages/login-page/login-page.component';\nimport {\n    LOGIN_ROUTE,\n    MATCHED_USER_PROFILE_ROUTE,\n    MATCHED_USER_ROUTE,\n    MATCHES_ROUTE,\n    PASSWORD_RESET_ROUTE,\n    PROFILE_EDIT_ROUTE,\n    PROFILE_PREVIEW_ROUTE,\n    PROFILE_ROUTE,\n    REQUEST_PASSWORD_RESET_ROUTE,\n    SIGNUP_ROUTE,\n    SWIPING_ROUTE,\n} from 'src/constants/routes';\nimport { SignupPageComponent } from './authentication/pages/signup-page/signup-page.component';\nimport { UserProfilePageComponent } from './user-profile/pages/user-profile-page/user-profile-page.component';\nimport { MatchesPageComponent } from './matching/pages/matches-page/matches-page.component';\nimport { SwipingPageComponent } from './matching/pages/swiping-page/swiping-page.component';\nimport { UserProfileEditPageComponent } from './user-profile/pages/user-profile-edit-page/user-profile-edit-page.component';\nimport { UserProfilePreviewComponent } from './user-profile/pages/user-profile-preview/user-profile-preview.component';\nimport { MatchedUserPageComponent } from './matching/pages/matched-user-page/matched-user-page.component';\nimport { RequestPasswordResetPageComponent } from './authentication/pages/request-password-reset-page/request-password-reset-page.component';\nimport { PasswordResetPageComponent } from './authentication/pages/password-reset-page/password-reset-page.component';\nimport { aboutRoutes } from './about/about-routing.module';\nimport { MatchedUserProfilePageComponent } from './matching/pages/matched-user-profile-page/matched-user-profile-page.component';\n\nconst privateRoute: Route = {\n    // canActivate: [privateRouteGuard],\n    runGuardsAndResolvers: 'paramsOrQueryParamsChange',\n};\n\nconst publicRoute: Route = {\n    // canActivate: [publicRouteGuard],\n    runGuardsAndResolvers: 'paramsOrQueryParamsChange',\n};\n\nconst routes: Routes = [\n    { path: SWIPING_ROUTE, component: SwipingPageComponent, ...privateRoute },\n    {\n        path: PROFILE_ROUTE,\n        component: UserProfilePageComponent,\n        ...privateRoute,\n    },\n    {\n        path: PROFILE_EDIT_ROUTE,\n        component: UserProfileEditPageComponent,\n        ...privateRoute,\n    },\n    {\n        path: PROFILE_PREVIEW_ROUTE,\n        component: UserProfilePreviewComponent,\n        ...privateRoute,\n    },\n    { path: MATCHES_ROUTE, component: MatchesPageComponent, ...privateRoute },\n    {\n        path: MATCHED_USER_PROFILE_ROUTE,\n        component: MatchedUserProfilePageComponent,\n        ...privateRoute,\n    },\n    {\n        path: MATCHED_USER_ROUTE,\n        component: MatchedUserPageComponent,\n        ...privateRoute,\n    },\n    { path: LOGIN_ROUTE, component: LoginPageComponent, ...publicRoute },\n    { path: SIGNUP_ROUTE, component: SignupPageComponent, ...publicRoute },\n    {\n        path: REQUEST_PASSWORD_RESET_ROUTE,\n        component: RequestPasswordResetPageComponent,\n        ...publicRoute,\n    },\n    {\n        path: PASSWORD_RESET_ROUTE,\n        component: PasswordResetPageComponent,\n        ...publicRoute,\n    },\n];\n\nconst notFoundRoutes: Routes = [\n    { path: '**', redirectTo: SWIPING_ROUTE, pathMatch: 'full' },\n];\n\nconst routeNames = routes.map((route) => ({\n    ...route,\n    path: route.path?.replace(/^\\//, ''),\n}));\n\n@NgModule({\n    imports: [\n        RouterModule.forRoot(routeNames, {\n            scrollPositionRestoration: 'top',\n        }),\n        RouterModule.forRoot(aboutRoutes, {\n            scrollPositionRestoration: 'top',\n        }),\n        RouterModule.forRoot(notFoundRoutes, {\n            scrollPositionRestoration: 'top',\n        }),\n    ],\n    exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8493,13 +9246,13 @@
         },
         {
             "name": "MatchingModule",
-            "id": "module-MatchingModule-0da0755f56b21b5547113bf93da710c583c890544513853f2e17975194e2a327b61d581ff05fbba7bf45fabb70531c068875d9408d7f6f4af240128edb8f3760",
+            "id": "module-MatchingModule-f3fd78101c29dd2496be4fa08b2312041972630a563786174c8216b4f999fb895d6ffadffa27957467f90bd0ae209623a586646e07b241c8066c50494c532f59",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/matching/matching.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatchesPageComponent } from './pages/matches-page/matches-page.component';\nimport { UserProfileModule } from '../user-profile/user-profile.module';\nimport { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { MatchListComponent } from './components/match-list/match-list.component';\nimport { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { MatchedModalComponent } from './components/matched-modal/matched-modal.component';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { ConversationListComponent } from './components/conversation-list/conversation-list.component';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { ModalsModule } from '../modals/modals.module';\nimport { ModerationModule } from '../moderation/moderation.module';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        MatchesPageComponent,\n        SwipingPageComponent,\n        MatchListComponent,\n        MatchedUserPageComponent,\n        MatchedModalComponent,\n        ConversationListComponent,\n    ],\n    imports: [\n        CommonModule,\n        RouterModule,\n        MatDialogModule,\n        ReactiveFormsModule,\n        UserProfileModule,\n        UiModule,\n        MatMenuModule,\n        ModalsModule,\n        ModerationModule,\n    ],\n    exports: [MatchesPageComponent, MatchedUserPageComponent],\n})\nexport class MatchingModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatchesPageComponent } from './pages/matches-page/matches-page.component';\nimport { UserProfileModule } from '../user-profile/user-profile.module';\nimport { SwipingPageComponent } from './pages/swiping-page/swiping-page.component';\nimport { UiModule } from '../ui/ui.module';\nimport { MatchListComponent } from './components/match-list/match-list.component';\nimport { MatchedUserPageComponent } from './pages/matched-user-page/matched-user-page.component';\nimport { ReactiveFormsModule } from '@angular/forms';\nimport { MatchedModalComponent } from './components/matched-modal/matched-modal.component';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { ConversationListComponent } from './components/conversation-list/conversation-list.component';\nimport { MatMenuModule } from '@angular/material/menu';\nimport { ModalsModule } from '../modals/modals.module';\nimport { ModerationModule } from '../moderation/moderation.module';\nimport { RouterModule } from '@angular/router';\nimport { MatchedUserProfilePageComponent } from './pages/matched-user-profile-page/matched-user-profile-page.component';\n\n@NgModule({\n    declarations: [\n        MatchesPageComponent,\n        SwipingPageComponent,\n        MatchListComponent,\n        MatchedUserPageComponent,\n        MatchedModalComponent,\n        ConversationListComponent,\n        MatchedUserProfilePageComponent,\n    ],\n    imports: [\n        CommonModule,\n        RouterModule,\n        MatDialogModule,\n        ReactiveFormsModule,\n        UserProfileModule,\n        UiModule,\n        MatMenuModule,\n        ModalsModule,\n        ModerationModule,\n    ],\n    exports: [\n        MatchesPageComponent,\n        MatchedUserPageComponent,\n        MatchedUserProfilePageComponent,\n    ],\n})\nexport class MatchingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8519,6 +9272,9 @@
                         },
                         {
                             "name": "MatchedUserPageComponent"
+                        },
+                        {
+                            "name": "MatchedUserProfilePageComponent"
                         },
                         {
                             "name": "MatchesPageComponent"
@@ -8550,6 +9306,9 @@
                     "elements": [
                         {
                             "name": "MatchedUserPageComponent"
+                        },
+                        {
+                            "name": "MatchedUserProfilePageComponent"
                         },
                         {
                             "name": "MatchesPageComponent"
@@ -8652,13 +9411,13 @@
         },
         {
             "name": "UiModule",
-            "id": "module-UiModule-dd14571df8168bfef878275d2eeca68810447b9c5a9a7f2bf2a5b31daba3dd479b745365da8ca968fdf7263c0d3092cbb2f038b308a7ca045a41d78d7cd7283c",
+            "id": "module-UiModule-4f938e15fa55763b1a1ddd91a4157848b5062ffb3e22c0f91ad09af48a7dea615199fcf434b2e45eb8277c103809bb7068bf8c337b961a6496ab2099c42599e6",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/ui/ui.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\nimport { RouterModule } from '@angular/router';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n    ],\n    imports: [CommonModule, RouterModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n    ],\n})\nexport class UiModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\nimport { RouterModule } from '@angular/router';\nimport { ImageComponent } from './components/image/image.component';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n    imports: [CommonModule, RouterModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n})\nexport class UiModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -8672,6 +9431,9 @@
                         },
                         {
                             "name": "CardComponent"
+                        },
+                        {
+                            "name": "ImageComponent"
                         },
                         {
                             "name": "LayoutActionComponent"
@@ -8693,6 +9455,9 @@
                         },
                         {
                             "name": "CardComponent"
+                        },
+                        {
+                            "name": "ImageComponent"
                         },
                         {
                             "name": "LayoutActionComponent"
@@ -9318,6 +10083,16 @@
                 "defaultValue": "[\n    {\n        id: 'lt',\n        name: 'Long terme',\n        emoji: '💕',\n        color: '234, 46, 172',\n    },\n    {\n        id: 'ltst',\n        name: 'Long terme, ouvert à du court terme',\n        emoji: '💖',\n        color: '238, 106, 192',\n    },\n    {\n        id: 'stlt',\n        name: 'Court terme, ouvert à du long terme',\n        emoji: '🍻',\n        color: '253, 223, 131',\n    },\n    {\n        id: 'fun',\n        name: 'Fun',\n        emoji: '🍆',\n        color: '110, 55, 107',\n    },\n    {\n        id: 'friend',\n        name: 'Amitié',\n        emoji: '🤝',\n        color: '255, 228, 115',\n    },\n    {\n        id: 'idk',\n        name: 'Je sais pas',\n        emoji: '🤷‍♀️',\n        color: '255, 228, 115',\n    },\n]"
             },
             {
+                "name": "MATCHED_USER_PROFILE_ROUTE",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/constants/routes.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string",
+                "defaultValue": "'/matches/profile/:id'"
+            },
+            {
                 "name": "MATCHED_USER_ROUTE",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -9435,7 +10210,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<UserProfileCardComponent>",
-                "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
+                "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        moduleMetadata({\n            declarations: [ImageComponent, ButtonComponent],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
             },
             {
                 "name": "Minimal",
@@ -9476,6 +10251,16 @@
                 "deprecationMessage": "",
                 "type": "[]",
                 "defaultValue": "[MATCHED_USER_ROUTE]"
+            },
+            {
+                "name": "NoPictures",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
             },
             {
                 "name": "NotLoggedIn",
@@ -9645,7 +10430,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "string",
-                "defaultValue": "'0448417545b554817758'"
+                "defaultValue": "'c0ec01f83f7cfe5121f1'"
             },
             {
                 "name": "PUBLIC_ROUTES_PATH",
@@ -9830,6 +10615,17 @@
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "ImageSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "ImageSizeFixed | ImageSizeWidth | ImageSizeHeight | ImageSizeSquare",
+                "file": "src/modules/ui/components/image/image.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 189
+            },
             {
                 "name": "LayoutAction",
                 "ctype": "miscellaneous",
@@ -10236,7 +11032,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
-                    "defaultValue": "'0448417545b554817758'"
+                    "defaultValue": "'c0ec01f83f7cfe5121f1'"
                 }
             ],
             "src/modules/authentication/validators/confirm-password-validator.ts": [
@@ -10452,7 +11248,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<UserProfileCardComponent>",
-                    "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
+                    "defaultValue": "{\n    title: 'User Profile/Card',\n    component: UserProfileCardComponent,\n    decorators: [\n        applicationConfig({\n            providers: [\n                importProvidersFrom(MatDialogModule),\n                importProvidersFrom(MatSnackBarModule),\n                importProvidersFrom(HttpClientModule),\n            ],\n        }),\n        moduleMetadata({\n            declarations: [ImageComponent, ButtonComponent],\n        }),\n        componentWrapperDecorator(\n            (story) =>\n                `<div style=\"max-width: 400px; height: 600px;\">${story}</div>`,\n        ),\n    ],\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            interests: ['Dogs', 'Taylor Swift'],\n            associations: ['PolyRad', 'Poly-Hab'],\n            program: 'bacc_log',\n            height: 186,\n            lookingFor: 'ltst',\n            relationshipType: 'mono',\n            zodiacSign: 'cancer',\n            drinking: 'never',\n            smoking: 'never',\n            drugs: 'never',\n            workout: 'sometimes',\n            jobTitle: 'Barista',\n            jobCompany: 'Starbucks',\n            livingIn: 'Montreal',\n            gender: 'Man',\n            genderCategory: 'other',\n            genderPreference: 'all',\n            sexualOrientation: 'Queer',\n        },\n    },\n    render: (args) => ({\n        props: args,\n        template: `\n            <app-user-profile-card\n                [userProfile]=\"userProfile\"\n                [disableModeration]=\"disableModeration\"\n                style=\"width: 100%; height: 100%;\"\n            ></app-user-profile-card>\n        `,\n    }),\n}"
                 },
                 {
                     "name": "Minimal",
@@ -10463,6 +11259,16 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [\n                'https://ucarecdn.com/890d60d3-21aa-42f6-9124-3ca0da561f4b/-/crop/626x834/252,0/-/preview/',\n            ],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
+                },
+                {
+                    "name": "NoPictures",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n    args: {\n        userProfile: {\n            userId: 0,\n            name: 'John Doe',\n            age: 22,\n            bio: 'Hello, I am John Doe',\n            pictures: [],\n            genderCategory: 'other',\n            genderPreference: 'all',\n        },\n    },\n}"
                 }
             ],
             "src/modules/user-profile/constants/lifestyle.ts": [
@@ -10691,6 +11497,16 @@
                     "deprecationMessage": "",
                     "type": "string",
                     "defaultValue": "'/login'"
+                },
+                {
+                    "name": "MATCHED_USER_PROFILE_ROUTE",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/constants/routes.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'/matches/profile/:id'"
                 },
                 {
                     "name": "MATCHED_USER_ROUTE",
@@ -11087,6 +11903,19 @@
             ]
         },
         "groupedTypeAliases": {
+            "src/modules/ui/components/image/image.component.ts": [
+                {
+                    "name": "ImageSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "ImageSizeFixed | ImageSizeWidth | ImageSizeHeight | ImageSizeSquare",
+                    "file": "src/modules/ui/components/image/image.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 189
+                }
+            ],
             "src/modules/ui/models/layout.ts": [
                 {
                     "name": "LayoutAction",
@@ -11360,6 +12189,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "LOGIN_ROUTE",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/constants/routes.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MATCHED_USER_PROFILE_ROUTE",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -12121,6 +12960,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/modules/matching/pages/matched-user-profile-page/matched-user-profile-page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MatchedUserProfilePageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "src/modules/matching/pages/matches-page/matches-page.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -12348,6 +13196,51 @@
                 "status": "low"
             },
             {
+                "filePath": "src/modules/ui/components/image/image.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ImageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/components/image/image.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ImageSizeFixed",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/components/image/image.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ImageSizeHeight",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/components/image/image.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ImageSizeSquare",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/ui/components/image/image.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ImageSizeWidth",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
                 "filePath": "src/modules/ui/components/layout-action/layout-action.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -12479,7 +13372,7 @@
                 "linktype": "component",
                 "name": "UserProfileCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/29",
                 "status": "low"
             },
             {
@@ -12713,6 +13606,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Minimal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/modules/user-profile/stories/user-profile-card.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "NoPictures",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
