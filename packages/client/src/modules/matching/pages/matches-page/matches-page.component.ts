@@ -42,6 +42,12 @@ export class MatchesPageComponent {
         this.hasConversations = this.conversations.pipe(
             map((conversations) => conversations.length > 0),
         );
+
+        this.validationService.userValid.subscribe((userValid) => {
+            if (userValid) {
+                this.publicProfileService.fetchMatches().subscribe();
+            }
+        });
     }
 
     get userValid() {
