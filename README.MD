@@ -2,9 +2,9 @@
     <img src="./assets/logo.svg" width="175">
 </p>
 
-<h1 style="border: none;" align="center">PolyTinder</h1>
+<h1 style="border: none;" align="center">Projet AGIR</h1>
 
-<p align="center">
+<!-- <p align="center">
     <img src="https://img.shields.io/github/last-commit/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/downloads/PolyTinder/poly-tinder/total.svg">
     <img src="https://img.shields.io/github/contributors/PolyTinder/poly-tinder.svg">
@@ -14,23 +14,13 @@
     <img src="https://img.shields.io/github/issues-closed/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/issues-pr/PolyTinder/poly-tinder.svg">
     <img src="https://img.shields.io/github/issues-pr-closed/PolyTinder/poly-tinder.svg">
-</p>
+</p> -->
 
 <hr>
 
-#### ⚠️ PolyTinder is closed ⚠️
+<!-- <p style="font-size: 24px;" align="center">Faites des rencontres de génies</p>
 
-PolyTinder has received an exceptional reception within the student community, with the registration of several hundred members. However, due to the high costs associated with keeping the platform online, I made the decision to close the site.
-
-This does not mean the end of PolyTinder! I currently do not have the time to create a committee to get the help and funding necessary to continue the project. However, if you are interested in taking over PolyTinder to maintain or transform it, do not hesitate to contact me at poly.tinder.2023@gmail.com. I would be delighted to help you take over the project.
-
-Thank you to everyone who participated in PolyTinder, and see you soon!
-
-<hr>
-
-<p style="font-size: 24px;" align="center">Faites des rencontres de génies</p>
-
-<p style="font-size: 18px" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p>
+<p style="font-size: 18px" align="center">Visit the app now at <a href="https://polytinder.com">polytinder.com</a> !</p> -->
 
 <p align="center">
     <a href="#-about">About</a>
@@ -44,15 +34,15 @@ Thank you to everyone who participated in PolyTinder, and see you soon!
     <a href="#-more-documentation">More documentation</a>
 </p>
 
-![PolyTinder](./assets/preview.png)
+<!-- ![PolyTinder](./assets/preview.png) -->
 
 ## 📋 About
 
-Based on the original idea from [PolyGossip](https://www.instagram.com/poly_gossip/), the PolyTinder app aims to bring Polytechnique students closer together and create new relationships.
+<!-- Based on the original idea from [PolyGossip](https://www.instagram.com/poly_gossip/), the PolyTinder app aims to bring Polytechnique students closer together and create new relationships.
 
-The app is developed by Polytechnique students, for Polytechnique students.
+The app is developed by Polytechnique students, for Polytechnique students. -->
 
-## 💪 How to contribute
+<!-- ## 💪 How to contribute
 
 The PolyTinder project is never finished! We are always looking for new features to add, bugs to fix and new ideas to implement.
 
@@ -68,7 +58,7 @@ If you are a programmer, you can contribute by create new fix or features issues
 4. Checkout the new branch and start working on the issue.
 5. Open a pull request when you are done. Describe the changes you made and link the issue. If the pull request takes a long time to complete, you can open it before you are done to get feedback on your work.
 6. Make sure the pull request passes all the checks (CI, lint, etc.) and that the code is well formatted.
-7. Assign a reviewer to the pull request. This person will review your code and give you feedback. If you are not sure who to assign, assign the person who created the issue or assign the `PolyTinder` account.
+7. Assign a reviewer to the pull request. This person will review your code and give you feedback. If you are not sure who to assign, assign the person who created the issue or assign the `PolyTinder` account. -->
 
 ## 🏗️ Project structure
 
@@ -103,13 +93,13 @@ Then, the application stack is launched with Docker Compose to launch all the ne
 1. Clone the project
 
     ```bash
-    git clone git@github.com:PolyTinder/poly-tinder.git
+    git clone git@github.com:ProjetAGIR/projet-agir.git
     ```
 
 2. Open the project in VSCode
 
     ```bash
-    cd poly-tinder
+    cd projet-agir
     code .
     ```
 
