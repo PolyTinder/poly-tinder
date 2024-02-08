@@ -4,13 +4,13 @@
             <ng-container *ngIf="match.value | async; let value">
                 <a [routerLink]="'/matches/' + value.userId">
                     <div class="match-list__item interactable">
-                        <img
-                            *ngIf="value.pictures?.[0]"
+                        <app-image
                             class="match-list__item__image"
-                            [src]=" value.pictures?.[0] + '-/scale_crop/250x334/smart/'"
+                            [publicID]="value.pictures?.[0]"
                             [alt]="'Photo de profil de ' + value.name"
-                        >
-                        <div *ngIf="!value.pictures?.[0]" class="match-list__item__image match-list__item__image--not-loaded"></div>
+                            [size]="{width: 250, height: 334}"
+                            [inferSize]="true"
+                        ></app-image>
 
                         <span class="match-list__item__name">{{value.name}}</span>
                     </div>

@@ -6,6 +6,7 @@ import { LayoutActionComponent } from './components/layout-action/layout-action.
 import { ButtonComponent } from './components/button/button.component';
 import { RouterModule } from '@angular/router';
 import { ImageComponent } from './components/image/image.component';
+import { CloudinaryModule } from '@cloudinary/ng';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,7 @@ import { ImageComponent } from './components/image/image.component';
         ButtonComponent,
         ImageComponent,
     ],
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, CloudinaryModule],
     exports: [
         LayoutComponent,
         LayoutActionComponent,

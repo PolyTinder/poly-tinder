@@ -2,13 +2,12 @@
     <div class="user-profile__container" (scroll)="onScroll($event)" #container>
         <div class="user-profile__main">
             <app-image
-                [src]="userProfile.pictures?.[0]"
+                [publicID]="userProfile.pictures?.[0]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 363, height: 486}"
                 [inferSize]="true"
                 class="user-profile__main__picture"
             ></app-image>
-            <div class="user-profile__main__picture" *ngIf="!userProfile.pictures?.[0]"></div>
     
             <div class="user-profile__main__content" (click)="!infoVisible && showInfo()">
                 <div class="user-profile__main__content__info">
@@ -58,7 +57,7 @@
             </div>
             
             <app-image
-                [src]="userProfile.pictures?.[1]"
+                [publicID]="userProfile.pictures?.[1]"
                 *ngIf="userProfile.pictures?.[1]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 352, height: 600}"
@@ -105,7 +104,7 @@
             </div>
             
             <app-image
-                [src]="userProfile.pictures?.[2]"
+                [publicID]="userProfile.pictures?.[2]"
                 *ngIf="userProfile.pictures?.[2]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 352, height: 600}"
@@ -123,7 +122,7 @@
             </div>
             
             <app-image
-                [src]="userProfile.pictures?.[3]"
+                [publicID]="userProfile.pictures?.[3]"
                 *ngIf="userProfile.pictures?.[3]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 352, height: 600}"
@@ -143,7 +142,7 @@
 
             
             <app-image
-                [src]="userProfile.pictures?.[4]"
+                [publicID]="userProfile.pictures?.[4]"
                 *ngIf="userProfile.pictures?.[4]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 352, height: 600}"
@@ -152,7 +151,7 @@
             ></app-image>
             
             <app-image
-                [src]="userProfile.pictures?.[5]"
+                [publicID]="userProfile.pictures?.[5]"
                 *ngIf="userProfile.pictures?.[5]"
                 [alt]="'Photo de ' + userProfile.name"
                 [size]="{width: 352, height: 600}"

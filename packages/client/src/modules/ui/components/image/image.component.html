@@ -1,14 +1,15 @@
 <img
+    *ngIf="getSrc()"
     [src]="getSrc()"
     [srcset]="getSrcset()"
     [alt]="alt"
     [style.height]="!inferSize && height"
     [style.width]="!inferSize && width"
-    *ngIf="src"
     [ngClass]="{'infer-size': inferSize}"
->
+/>
+
 <div
-    *ngIf="!src"
+    *ngIf="!getSrc()"
     [style.height]="!inferSize && height"
     [style.width]="!inferSize && width"
     [ngClass]="{'infer-size': inferSize}"

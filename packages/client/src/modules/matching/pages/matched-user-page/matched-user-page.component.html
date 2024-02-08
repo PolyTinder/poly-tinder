@@ -3,11 +3,13 @@
 
     <div layout-title class="matched-user-page__header__title">
         <ng-container *ngIf="userProfileValue | async; let userProfile">
-            <img
-                [src]="userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'"
+            <app-image
+                [publicID]="userProfile.pictures?.[0]"
+                [size]="{square: 72}"
                 [alt]="'Photo de profil de ' + userProfile.name"
+                [inferSize]="true"
                 class="matched-user-page__header__title__avatar"
-            >
+            ></app-image>
             <span class="matched-user-page__header__title__content">{{userProfile.name}}</span>
         </ng-container>
     </div>
