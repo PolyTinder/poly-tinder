@@ -52,11 +52,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd packages/$SERVICE
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      # - id: 'auth'
+      #   name: 'Authenticate to Google Cloud'
+      #   uses: 'google-github-actions/auth@v1'
+      #   with:
+      #     credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - name: Build
         run: |
           docker buildx build \
@@ -65,11 +65,11 @@ jobs:
             --target prod \
             -t $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE \
             .
-      - name: Configure Docker
-        run: gcloud auth configure-docker $REGION-docker.pkg.dev
-      - name: Push
-        if: startsWith(github.event.ref, 'refs/tags/')
-        run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE
+      # - name: Configure Docker
+      #   run: gcloud auth configure-docker $REGION-docker.pkg.dev
+      # - name: Push
+      #   if: startsWith(github.event.ref, 'refs/tags/')
+      #   run: docker push $REGION-docker.pkg.dev/$PROJECT/$PROJECT-$ENVIRONMENT/$SERVICE
 
   # deploy:
   #   runs-on: ubuntu-latest
