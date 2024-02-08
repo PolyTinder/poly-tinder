@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
+import { thumbnail } from '@cloudinary/url-gen/actions/resize';
 
 interface ImageSizeFixed {
     height: number;
@@ -31,26 +33,44 @@ type ImageSize =
     styleUrls: ['./image.component.scss'],
 })
 export class ImageComponent {
-    @Input() src: string | undefined | null = null;
-    @Input() alt: string | null = null;
+    @Input() publicID: string | undefined | null = null;
+    @Input() alt!: string;
     @Input() size: ImageSize | null = null;
     @Input() inferSize: boolean = false;
 
-    getSrc(scale: number = 1): string | undefined | null {
-        return (
-            this.src &&
-            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`
-        );
+    getSrc(scale: number = 1): string | null {
+        let image = this.getImage();
+
+        if (!image) return null;
+
+        image = this.resizeImage(image, scale);
+
+        return image.toURL();
     }
 
-    getSrcset(): string | undefined | null {
-        return (
-            this.src &&
-            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${
-                this.src
-            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${
-                this.src
-            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`
+    getSrcset(): string | null {
+        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(
+            2,
+        )} 2x`;
+    }
+
+    private resizeImage(
+        image: CloudinaryImage,
+        scale: number = 1,
+    ): CloudinaryImage {
+        let resize = thumbnail();
+
+        if (this.height) resize = resize.height(this.height * scale);
+        if (this.width) resize = resize.width(this.width * scale);
+
+        return image.resize(resize);
+    }
+
+    private getImage(): CloudinaryImage | null {
+        if (!this.publicID) return null;
+
+        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(
+            this.publicID,
         );
     }
 
@@ -64,7 +84,7 @@ export class ImageComponent {
         }
 
         if ('height' in this.size) {
-            return this.size.height * this.size.ratio;
+            return Math.floor(this.size.height * this.size.ratio);
         }
 
         if ('square' in this.size) {
@@ -84,7 +104,7 @@ export class ImageComponent {
         }
 
         if ('width' in this.size) {
-            return this.size.width * this.size.ratio;
+            return Math.floor(this.size.width * this.size.ratio);
         }
 
         if ('square' in this.size) {
@@ -92,29 +112,5 @@ export class ImageComponent {
         }
 
         return null;
-    }
-
-    private getSizeString(scale: number = 1): string | null {
-        if (!this.size) {
-            return '';
-        }
-
-        if ('height' in this.size && 'width' in this.size) {
-            return `${this.size.width * scale}x${this.size.height * scale}`;
-        }
-
-        if ('width' in this.size) {
-            return `${this.size.width * scale}x`;
-        }
-
-        if ('height' in this.size) {
-            return `x${this.size.height * scale}`;
-        }
-
-        if ('square' in this.size) {
-            return `${this.size.square * scale}x${this.size.square * scale}`;
-        }
-
-        return '';
     }
 }

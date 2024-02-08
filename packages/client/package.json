@@ -26,15 +26,16 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@angular/service-worker": "^16.2.0",
+    "@cloudinary/ng": "^2.0.1",
+    "@cloudinary/url-gen": "^1.16.1",
     "@types/disposable-email-domains": "^1.0.5",
     "@uploadcare/blocks": "^0.25.6",
+    "cloudinary": "^2.0.1",
     "common": "file:../common",
     "disposable-email-domains": "^1.0.62",
-    "ngx-uploadcare-widget": "^4.0.0",
     "rxjs": "~7.8.0",
     "socket.io-client": "^4.7.2",
     "tslib": "^2.3.0",
-    "uploadcare-widget": "^3.21.2",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

@@ -1,79 +1,89 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import {
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    Output,
-    ViewChild,
-} from '@angular/core';
-import * as LR from '@uploadcare/blocks';
-import { MAX_FILE_SIZE_BYTES, PUBLIC_KEY } from '../../constants/uploadcare';
-import { UcWidgetComponent } from 'ngx-uploadcare-widget';
-import { BehaviorSubject, Observable, map } from 'rxjs';
-
-LR.registerBlocks(LR);
+    CloudinaryWidget,
+    CloudinaryWidgetEvent,
+    CloudinaryWidgetEventSuccess,
+    CloudinaryWidgetSourceType,
+} from 'src/types/cloudinary';
 
 @Component({
     selector: 'app-image-control',
     templateUrl: './image-control.component.html',
     styleUrls: ['./image-control.component.scss'],
 })
-export class ImageControlComponent {
-    @Input() id: string = '';
-    @Input() imageOnly: boolean = true;
-    @Input() sources: string =
-        'local, url, camera, dropbox, gphotos, instagram';
-    @Input() crop: string | undefined;
+export class ImageControlComponent implements OnInit {
     @Input() value: BehaviorSubject<string | undefined> = new BehaviorSubject<
         string | undefined
     >(undefined);
     @Input() canDelete: boolean = true;
+    @Input() sources: CloudinaryWidgetSourceType[] = [
+        'local',
+        'camera',
+        'dropbox',
+        'google_drive',
+    ];
     @Output() change = new EventEmitter<string | undefined>();
-    @ViewChild('widget') widget!: ElementRef & { widget: UcWidgetComponent };
 
-    publicKey = PUBLIC_KEY;
-    maxFileSizeBytes = MAX_FILE_SIZE_BYTES;
+    uploadWidget: CloudinaryWidget | undefined;
     loading$ = new BehaviorSubject<boolean>(false);
 
-    get url(): Observable<string | undefined> {
-        return this.value.pipe(
-            map((value) => {
-                if (value) {
-                    return `${value}-/resize/200x/`;
-                }
-                return undefined;
-            }),
+    ngOnInit(): void {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.uploadWidget = (window as any).cloudinary.createUploadWidget(
+            {
+                cloudName: 'dofjtcdow',
+                uploadPreset: 'profile_picture',
+                sources: this.sources,
+                multiple: false,
+            },
+            this.onImageUpdate.bind(this),
         );
     }
 
-    get urlRetina(): Observable<string | undefined> {
-        return this.value.pipe(
-            map((value) => {
-                if (value) {
-                    return `${value}-/resize/400x/`;
-                }
-                return undefined;
-            }),
-        );
-    }
+    openWidget() {
+        if (!this.uploadWidget) return;
 
-    openDialog() {
-        this.widget.widget.openDialog();
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onUploadComplete(info: any) {
-        this.value.next(info.cdnUrl);
-        this.change.next(info.cdnUrl);
-        this.loading$.next(false);
-    }
-
-    onProgress() {
-        this.loading$.next(true);
+        this.uploadWidget.open();
     }
 
     deleteImage() {
         this.value.next(undefined);
         this.change.next(undefined);
+    }
+
+    private onImageUpdate(
+        error: object | undefined,
+        result: CloudinaryWidgetEvent | undefined,
+    ) {
+        if (error) {
+            // eslint-disable-next-line no-console
+            console.error(error);
+            return;
+        }
+
+        if (result) {
+            switch (result.event) {
+                case 'upload-added':
+                    this.handleImageUploadStart();
+                    break;
+                case 'success':
+                    this.handleImageUploadComplete(
+                        result as CloudinaryWidgetEventSuccess,
+                    );
+                    break;
+            }
+        }
+    }
+
+    private handleImageUploadStart() {
+        this.value.next(undefined);
+        this.loading$.next(true);
+    }
+
+    private handleImageUploadComplete(event: CloudinaryWidgetEventSuccess) {
+        this.value.next(event.info.public_id);
+        this.change.next(event.info.public_id);
+        this.loading$.next(false);
     }
 }

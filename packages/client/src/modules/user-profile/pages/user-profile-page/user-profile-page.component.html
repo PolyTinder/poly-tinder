@@ -7,16 +7,12 @@
         </app-card>
 
         <div class="user-profile__info">
-            <img 
+            <app-image
                 class="user-profile__info__avatar"
-                [src]="userProfile.pictures?.[0] + '-/scale_crop/360x360/smart/'"
+                [publicID]="userProfile.pictures?.[0]"
+                [size]="{ square: 180 }"
                 [alt]="'Photo de profile de ' + userProfile.name"
-                *ngIf="userProfile.pictures?.[0]"
-            >
-            <div 
-                class="user-profile__info__avatar"
-                *ngIf="!userProfile.pictures?.[0]"
-            ></div>
+            ></app-image>
             <p class="user-profile__info__name">{{userProfile.name ?? 'Sans nom'}}<span *ngIf="userProfile.age">, {{userProfile.age}}</span></p>
         </div>
     
