@@ -2,6 +2,181 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "CloudinaryWidget",
+            "id": "interface-CloudinaryWidget-bd3d766179cb3833125894024e2b81998e6c7307b32b0edd0f5cb76b0149745a62aaaddd05ec2e9d95936c011e4315b1a51bfc51c494c3f6eadd9d0bca83ab54",
+            "file": "src/types/cloudinary.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface CloudinaryWidget {\n    open(): void;\n    close(): void;\n    show(): void;\n}\n\nexport type CloudinaryWidgetSourceType =\n    | 'local'\n    | 'url'\n    | 'camera'\n    | 'dropbox'\n    | 'image_search'\n    | 'shutterstock'\n    | 'gettyimages'\n    | 'istock'\n    | 'unsplash'\n    | 'google_drive';\n\nexport interface CloudinaryWidgetEvent {\n    event: string;\n    info: object;\n}\n\nexport interface CloudinaryWidgetEventUploadAdded\n    extends CloudinaryWidgetEvent {\n    event: 'upload-added';\n    info: {\n        id: string;\n        publicId: string;\n        file: {\n            lastModified: number;\n            lastModifiedDate: string;\n            name: string;\n            size: number;\n            type: string;\n        };\n    };\n}\n\nexport interface CloudinaryWidgetEventSuccess extends CloudinaryWidgetEvent {\n    event: 'success';\n    info: {\n        id: string;\n        asset_id: string;\n        bytes: number;\n        create_at: string;\n        etag: string;\n        folder: string;\n        format: string;\n        height: number;\n        path: string;\n        public_id: string;\n        resource_type: 'image' | 'video';\n        secure_url: string;\n        signature: string;\n        tags: string[];\n        thumbnail_url: string;\n        url: string;\n        version: number;\n        version_id: string;\n        width: number;\n    };\n}\n\nexport interface CloudinaryWidgetEventClose extends CloudinaryWidgetEvent {\n    event: 'close';\n    info: {\n        message: string;\n    };\n}\n",
+            "properties": [],
+            "indexSignatures": [],
+            "kind": 170,
+            "methods": [
+                {
+                    "name": "close",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 3,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "open",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 2,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "show",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 4,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ]
+        },
+        {
+            "name": "CloudinaryWidgetEvent",
+            "id": "interface-CloudinaryWidgetEvent-bd3d766179cb3833125894024e2b81998e6c7307b32b0edd0f5cb76b0149745a62aaaddd05ec2e9d95936c011e4315b1a51bfc51c494c3f6eadd9d0bca83ab54",
+            "file": "src/types/cloudinary.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface CloudinaryWidget {\n    open(): void;\n    close(): void;\n    show(): void;\n}\n\nexport type CloudinaryWidgetSourceType =\n    | 'local'\n    | 'url'\n    | 'camera'\n    | 'dropbox'\n    | 'image_search'\n    | 'shutterstock'\n    | 'gettyimages'\n    | 'istock'\n    | 'unsplash'\n    | 'google_drive';\n\nexport interface CloudinaryWidgetEvent {\n    event: string;\n    info: object;\n}\n\nexport interface CloudinaryWidgetEventUploadAdded\n    extends CloudinaryWidgetEvent {\n    event: 'upload-added';\n    info: {\n        id: string;\n        publicId: string;\n        file: {\n            lastModified: number;\n            lastModifiedDate: string;\n            name: string;\n            size: number;\n            type: string;\n        };\n    };\n}\n\nexport interface CloudinaryWidgetEventSuccess extends CloudinaryWidgetEvent {\n    event: 'success';\n    info: {\n        id: string;\n        asset_id: string;\n        bytes: number;\n        create_at: string;\n        etag: string;\n        folder: string;\n        format: string;\n        height: number;\n        path: string;\n        public_id: string;\n        resource_type: 'image' | 'video';\n        secure_url: string;\n        signature: string;\n        tags: string[];\n        thumbnail_url: string;\n        url: string;\n        version: number;\n        version_id: string;\n        width: number;\n    };\n}\n\nexport interface CloudinaryWidgetEventClose extends CloudinaryWidgetEvent {\n    event: 'close';\n    info: {\n        message: string;\n    };\n}\n",
+            "properties": [
+                {
+                    "name": "event",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "info",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": []
+        },
+        {
+            "name": "CloudinaryWidgetEventClose",
+            "id": "interface-CloudinaryWidgetEventClose-bd3d766179cb3833125894024e2b81998e6c7307b32b0edd0f5cb76b0149745a62aaaddd05ec2e9d95936c011e4315b1a51bfc51c494c3f6eadd9d0bca83ab54",
+            "file": "src/types/cloudinary.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface CloudinaryWidget {\n    open(): void;\n    close(): void;\n    show(): void;\n}\n\nexport type CloudinaryWidgetSourceType =\n    | 'local'\n    | 'url'\n    | 'camera'\n    | 'dropbox'\n    | 'image_search'\n    | 'shutterstock'\n    | 'gettyimages'\n    | 'istock'\n    | 'unsplash'\n    | 'google_drive';\n\nexport interface CloudinaryWidgetEvent {\n    event: string;\n    info: object;\n}\n\nexport interface CloudinaryWidgetEventUploadAdded\n    extends CloudinaryWidgetEvent {\n    event: 'upload-added';\n    info: {\n        id: string;\n        publicId: string;\n        file: {\n            lastModified: number;\n            lastModifiedDate: string;\n            name: string;\n            size: number;\n            type: string;\n        };\n    };\n}\n\nexport interface CloudinaryWidgetEventSuccess extends CloudinaryWidgetEvent {\n    event: 'success';\n    info: {\n        id: string;\n        asset_id: string;\n        bytes: number;\n        create_at: string;\n        etag: string;\n        folder: string;\n        format: string;\n        height: number;\n        path: string;\n        public_id: string;\n        resource_type: 'image' | 'video';\n        secure_url: string;\n        signature: string;\n        tags: string[];\n        thumbnail_url: string;\n        url: string;\n        version: number;\n        version_id: string;\n        width: number;\n    };\n}\n\nexport interface CloudinaryWidgetEventClose extends CloudinaryWidgetEvent {\n    event: 'close';\n    info: {\n        message: string;\n    };\n}\n",
+            "properties": [
+                {
+                    "name": "event",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 66
+                },
+                {
+                    "name": "info",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": [],
+            "extends": "CloudinaryWidgetEvent"
+        },
+        {
+            "name": "CloudinaryWidgetEventSuccess",
+            "id": "interface-CloudinaryWidgetEventSuccess-bd3d766179cb3833125894024e2b81998e6c7307b32b0edd0f5cb76b0149745a62aaaddd05ec2e9d95936c011e4315b1a51bfc51c494c3f6eadd9d0bca83ab54",
+            "file": "src/types/cloudinary.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface CloudinaryWidget {\n    open(): void;\n    close(): void;\n    show(): void;\n}\n\nexport type CloudinaryWidgetSourceType =\n    | 'local'\n    | 'url'\n    | 'camera'\n    | 'dropbox'\n    | 'image_search'\n    | 'shutterstock'\n    | 'gettyimages'\n    | 'istock'\n    | 'unsplash'\n    | 'google_drive';\n\nexport interface CloudinaryWidgetEvent {\n    event: string;\n    info: object;\n}\n\nexport interface CloudinaryWidgetEventUploadAdded\n    extends CloudinaryWidgetEvent {\n    event: 'upload-added';\n    info: {\n        id: string;\n        publicId: string;\n        file: {\n            lastModified: number;\n            lastModifiedDate: string;\n            name: string;\n            size: number;\n            type: string;\n        };\n    };\n}\n\nexport interface CloudinaryWidgetEventSuccess extends CloudinaryWidgetEvent {\n    event: 'success';\n    info: {\n        id: string;\n        asset_id: string;\n        bytes: number;\n        create_at: string;\n        etag: string;\n        folder: string;\n        format: string;\n        height: number;\n        path: string;\n        public_id: string;\n        resource_type: 'image' | 'video';\n        secure_url: string;\n        signature: string;\n        tags: string[];\n        thumbnail_url: string;\n        url: string;\n        version: number;\n        version_id: string;\n        width: number;\n    };\n}\n\nexport interface CloudinaryWidgetEventClose extends CloudinaryWidgetEvent {\n    event: 'close';\n    info: {\n        message: string;\n    };\n}\n",
+            "properties": [
+                {
+                    "name": "event",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "info",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 42
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": [],
+            "extends": "CloudinaryWidgetEvent"
+        },
+        {
+            "name": "CloudinaryWidgetEventUploadAdded",
+            "id": "interface-CloudinaryWidgetEventUploadAdded-bd3d766179cb3833125894024e2b81998e6c7307b32b0edd0f5cb76b0149745a62aaaddd05ec2e9d95936c011e4315b1a51bfc51c494c3f6eadd9d0bca83ab54",
+            "file": "src/types/cloudinary.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface CloudinaryWidget {\n    open(): void;\n    close(): void;\n    show(): void;\n}\n\nexport type CloudinaryWidgetSourceType =\n    | 'local'\n    | 'url'\n    | 'camera'\n    | 'dropbox'\n    | 'image_search'\n    | 'shutterstock'\n    | 'gettyimages'\n    | 'istock'\n    | 'unsplash'\n    | 'google_drive';\n\nexport interface CloudinaryWidgetEvent {\n    event: string;\n    info: object;\n}\n\nexport interface CloudinaryWidgetEventUploadAdded\n    extends CloudinaryWidgetEvent {\n    event: 'upload-added';\n    info: {\n        id: string;\n        publicId: string;\n        file: {\n            lastModified: number;\n            lastModifiedDate: string;\n            name: string;\n            size: number;\n            type: string;\n        };\n    };\n}\n\nexport interface CloudinaryWidgetEventSuccess extends CloudinaryWidgetEvent {\n    event: 'success';\n    info: {\n        id: string;\n        asset_id: string;\n        bytes: number;\n        create_at: string;\n        etag: string;\n        folder: string;\n        format: string;\n        height: number;\n        path: string;\n        public_id: string;\n        resource_type: 'image' | 'video';\n        secure_url: string;\n        signature: string;\n        tags: string[];\n        thumbnail_url: string;\n        url: string;\n        version: number;\n        version_id: string;\n        width: number;\n    };\n}\n\nexport interface CloudinaryWidgetEventClose extends CloudinaryWidgetEvent {\n    event: 'close';\n    info: {\n        message: string;\n    };\n}\n",
+            "properties": [
+                {
+                    "name": "event",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "info",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 168,
+            "methods": [],
+            "extends": "CloudinaryWidgetEvent"
+        },
+        {
             "name": "DefaultModalButtonParameters",
             "id": "interface-DefaultModalButtonParameters-4ab7f0cf188adf189a5d4068afe37c05340b100c79ef4caae089e35f78aa598489ad5588543471cad589d9140b0cd275b9183a63280542cbd5573970e2a0d2ca",
             "file": "src/modules/modals/types/default-modal.ts",
@@ -121,12 +296,12 @@
         },
         {
             "name": "ImageSizeFixed",
-            "id": "interface-ImageSizeFixed-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "id": "interface-ImageSizeFixed-9bcc9c150ed1500790771bc4e02987cfe11b16c3fbd497765357cf94846caa129daf0767a782f15709232c96627af77e19fdc332e3782f33336dcf830cd0139c",
             "file": "src/modules/ui/components/image/image.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';\nimport { thumbnail } from '@cloudinary/url-gen/actions/resize';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() publicID: string | undefined | null = null;\n    @Input() alt!: string;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | null {\n        let image = this.getImage();\n\n        if (!image) return null;\n\n        image = this.resizeImage(image, scale);\n\n        return image.toURL();\n    }\n\n    getSrcset(): string | null {\n        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(\n            2,\n        )} 2x`;\n    }\n\n    private resizeImage(\n        image: CloudinaryImage,\n        scale: number = 1,\n    ): CloudinaryImage {\n        let resize = thumbnail();\n\n        if (this.height) resize = resize.height(this.height * scale);\n        if (this.width) resize = resize.width(this.width * scale);\n\n        return image.resize(resize);\n    }\n\n    private getImage(): CloudinaryImage | null {\n        if (!this.publicID) return null;\n\n        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(\n            this.publicID,\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return Math.floor(this.size.height * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return Math.floor(this.size.width * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n}\n",
             "properties": [
                 {
                     "name": "height",
@@ -135,7 +310,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 4
+                    "line": 6
                 },
                 {
                     "name": "width",
@@ -144,7 +319,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 5
+                    "line": 7
                 }
             ],
             "indexSignatures": [],
@@ -153,12 +328,12 @@
         },
         {
             "name": "ImageSizeHeight",
-            "id": "interface-ImageSizeHeight-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "id": "interface-ImageSizeHeight-9bcc9c150ed1500790771bc4e02987cfe11b16c3fbd497765357cf94846caa129daf0767a782f15709232c96627af77e19fdc332e3782f33336dcf830cd0139c",
             "file": "src/modules/ui/components/image/image.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';\nimport { thumbnail } from '@cloudinary/url-gen/actions/resize';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() publicID: string | undefined | null = null;\n    @Input() alt!: string;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | null {\n        let image = this.getImage();\n\n        if (!image) return null;\n\n        image = this.resizeImage(image, scale);\n\n        return image.toURL();\n    }\n\n    getSrcset(): string | null {\n        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(\n            2,\n        )} 2x`;\n    }\n\n    private resizeImage(\n        image: CloudinaryImage,\n        scale: number = 1,\n    ): CloudinaryImage {\n        let resize = thumbnail();\n\n        if (this.height) resize = resize.height(this.height * scale);\n        if (this.width) resize = resize.width(this.width * scale);\n\n        return image.resize(resize);\n    }\n\n    private getImage(): CloudinaryImage | null {\n        if (!this.publicID) return null;\n\n        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(\n            this.publicID,\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return Math.floor(this.size.height * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return Math.floor(this.size.width * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n}\n",
             "properties": [
                 {
                     "name": "height",
@@ -167,7 +342,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 16
                 },
                 {
                     "name": "ratio",
@@ -176,7 +351,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 17
                 }
             ],
             "indexSignatures": [],
@@ -185,12 +360,12 @@
         },
         {
             "name": "ImageSizeSquare",
-            "id": "interface-ImageSizeSquare-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "id": "interface-ImageSizeSquare-9bcc9c150ed1500790771bc4e02987cfe11b16c3fbd497765357cf94846caa129daf0767a782f15709232c96627af77e19fdc332e3782f33336dcf830cd0139c",
             "file": "src/modules/ui/components/image/image.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';\nimport { thumbnail } from '@cloudinary/url-gen/actions/resize';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() publicID: string | undefined | null = null;\n    @Input() alt!: string;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | null {\n        let image = this.getImage();\n\n        if (!image) return null;\n\n        image = this.resizeImage(image, scale);\n\n        return image.toURL();\n    }\n\n    getSrcset(): string | null {\n        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(\n            2,\n        )} 2x`;\n    }\n\n    private resizeImage(\n        image: CloudinaryImage,\n        scale: number = 1,\n    ): CloudinaryImage {\n        let resize = thumbnail();\n\n        if (this.height) resize = resize.height(this.height * scale);\n        if (this.width) resize = resize.width(this.width * scale);\n\n        return image.resize(resize);\n    }\n\n    private getImage(): CloudinaryImage | null {\n        if (!this.publicID) return null;\n\n        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(\n            this.publicID,\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return Math.floor(this.size.height * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return Math.floor(this.size.width * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n}\n",
             "properties": [
                 {
                     "name": "square",
@@ -199,7 +374,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 21
                 }
             ],
             "indexSignatures": [],
@@ -208,12 +383,12 @@
         },
         {
             "name": "ImageSizeWidth",
-            "id": "interface-ImageSizeWidth-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "id": "interface-ImageSizeWidth-9bcc9c150ed1500790771bc4e02987cfe11b16c3fbd497765357cf94846caa129daf0767a782f15709232c96627af77e19fdc332e3782f33336dcf830cd0139c",
             "file": "src/modules/ui/components/image/image.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';\nimport { thumbnail } from '@cloudinary/url-gen/actions/resize';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() publicID: string | undefined | null = null;\n    @Input() alt!: string;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | null {\n        let image = this.getImage();\n\n        if (!image) return null;\n\n        image = this.resizeImage(image, scale);\n\n        return image.toURL();\n    }\n\n    getSrcset(): string | null {\n        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(\n            2,\n        )} 2x`;\n    }\n\n    private resizeImage(\n        image: CloudinaryImage,\n        scale: number = 1,\n    ): CloudinaryImage {\n        let resize = thumbnail();\n\n        if (this.height) resize = resize.height(this.height * scale);\n        if (this.width) resize = resize.width(this.width * scale);\n\n        return image.resize(resize);\n    }\n\n    private getImage(): CloudinaryImage | null {\n        if (!this.publicID) return null;\n\n        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(\n            this.publicID,\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return Math.floor(this.size.height * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return Math.floor(this.size.width * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n}\n",
             "properties": [
                 {
                     "name": "ratio",
@@ -222,7 +397,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 10
+                    "line": 12
                 },
                 {
                     "name": "width",
@@ -231,7 +406,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 11
                 }
             ],
             "indexSignatures": [],
@@ -3525,7 +3700,7 @@
         },
         {
             "name": "AidOrganizationsPageComponent",
-            "id": "component-AidOrganizationsPageComponent-6e1e415008f150688f1038c49edd18d6cfff230c92f40cfef63869e52680e7c7477db5980e5aacee98a59700e7caa4860be3022848327a358a59af71e6d1c213",
+            "id": "component-AidOrganizationsPageComponent-8424208fe1bee23ae50b1249a92f927417ed7ca302acfc7bbb68b08387bdcbd57af452d7ea9744cbe6c725c9235593d49248a09b69d8ca5015ea8b7958d6df17",
             "file": "src/modules/about/pages/ressources/aid-organizations-page/aid-organizations-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3555,7 +3730,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-aid-organizations-page',\n  templateUrl: './aid-organizations-page.component.html',\n  styleUrls: ['./aid-organizations-page.component.scss']\n})\nexport class AidOrganizationsPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-aid-organizations-page',\n    templateUrl: './aid-organizations-page.component.html',\n    styleUrls: ['./aid-organizations-page.component.scss'],\n})\nexport class AidOrganizationsPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4180,7 +4355,7 @@
         },
         {
             "name": "ConsentPageComponent",
-            "id": "component-ConsentPageComponent-9955e4796a387c1ebcd7230760496c332fb6d0b362c3d18c6fdf3637030de0c58b51d0a340293d37fc66c86150ac797f5c6382ac47a5a2663c947e9d4e149f4e",
+            "id": "component-ConsentPageComponent-6a7c91ada5a5f2dd13d83d837c50c851116d13c0919b5edeb5e3f95f3510eccfb0699d4f66add711bcc1c14b257f5b6b40fad70394026105fb94aae98c5a209f",
             "file": "src/modules/about/pages/ressources/consent-page/consent-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4210,7 +4385,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-consent-page',\n  templateUrl: './consent-page.component.html',\n  styleUrls: ['./consent-page.component.scss']\n})\nexport class ConsentPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-consent-page',\n    templateUrl: './consent-page.component.html',\n    styleUrls: ['./consent-page.component.scss'],\n})\nexport class ConsentPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4469,7 +4644,7 @@
                     }
                 ]
             },
-            "templateData": "<app-card title=\"Mes conversations\" icon=\"fas fa-comment\" anchor=\"conversations\">\n    <div class=\"conversation-list\">\n        <ng-container *ngFor=\"let conversation of conversations\">\n            <ng-container *ngIf=\"conversation.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"conversation-list__item\" [ngClass]=\"{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"conversation-list__item__image interactable\"\n                            [src]=\"value.pictures?.[0] + '-/scale_crop/144x144/smart/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"conversation-list__item__image conversation-list__item__image--not-loaded interactable\"></div>\n\n                        <div class=\"conversation-list__item__info\">\n                            <span class=\"conversation-list__item__info__name\">{{value.name}} <span *ngIf=\"conversation.queryInfo.unreadMessagesCount\" class=\"conversation-list__item__info__non-read-count\">{{conversation.queryInfo.unreadMessagesCount}}</span></span>\n                            <span class=\"conversation-list__item__info__subtitle\">\n                                <span class=\"conversation-list__item__info__subtitle__message\">\n                                    <b *ngIf=\"conversation.queryInfo.lastMessageAuthorId != value.userId\">Vous :</b>\n                                    {{conversation.queryInfo.lastMessage}}\n                                </span>\n                                <span class=\"conversation-list__item__info__subtitle__separator\">•</span>\n                                <span class=\"conversation-list__item__info__subtitle__date\">\n                                    {{formatDate(conversation.queryInfo.lastMessageTimestamp)}}\n                                </span>\n                            </span>\n                        </div>\n\n                        <div class=\"conversation-list__item__right\">\n                            <a routerLink=\"/matches\" class=\"conversation-list__item__right__actions interactable\" (click)=\"onActionsClick($event)\" [matMenuTriggerFor]=\"actionsMenu\">\n                                <i class=\"fas fa-ellipsis-h\"></i>\n                            </a>\n                            <mat-menu #actionsMenu=\"matMenu\">\n                                <button mat-menu-item (click)=\"unmatchUser(conversation)\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n                                <button mat-menu-item (click)=\"reportUser(conversation)\"><i class=\"fas fa-flag\"></i> Signaler</button>\n                                <button mat-menu-item (click)=\"blockUser(conversation)\"><i class=\"fas fa-times\"></i> Bloquer</button>\n                            </mat-menu>\n                        </div>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
+            "templateData": "<app-card title=\"Mes conversations\" icon=\"fas fa-comment\" anchor=\"conversations\">\n    <div class=\"conversation-list\">\n        <ng-container *ngFor=\"let conversation of conversations\">\n            <ng-container *ngIf=\"conversation.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"conversation-list__item\" [ngClass]=\"{'conversation-list__item--not-read': conversation.queryInfo.unreadMessagesCount}\">\n                        <app-image\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"conversation-list__item__image interactable\"\n                            [publicID]=\"value.pictures?.[0]\"\n                            [size]=\"{square: 144}\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                            [inferSize]=\"true\"\n                        ></app-image>\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"conversation-list__item__image conversation-list__item__image--not-loaded interactable\"></div>\n\n                        <div class=\"conversation-list__item__info\">\n                            <span class=\"conversation-list__item__info__name\">{{value.name}} <span *ngIf=\"conversation.queryInfo.unreadMessagesCount\" class=\"conversation-list__item__info__non-read-count\">{{conversation.queryInfo.unreadMessagesCount}}</span></span>\n                            <span class=\"conversation-list__item__info__subtitle\">\n                                <span class=\"conversation-list__item__info__subtitle__message\">\n                                    <b *ngIf=\"conversation.queryInfo.lastMessageAuthorId != value.userId\">Vous :</b>\n                                    {{conversation.queryInfo.lastMessage}}\n                                </span>\n                                <span class=\"conversation-list__item__info__subtitle__separator\">•</span>\n                                <span class=\"conversation-list__item__info__subtitle__date\">\n                                    {{formatDate(conversation.queryInfo.lastMessageTimestamp)}}\n                                </span>\n                            </span>\n                        </div>\n\n                        <div class=\"conversation-list__item__right\">\n                            <a routerLink=\"/matches\" class=\"conversation-list__item__right__actions interactable\" (click)=\"onActionsClick($event)\" [matMenuTriggerFor]=\"actionsMenu\">\n                                <i class=\"fas fa-ellipsis-h\"></i>\n                            </a>\n                            <mat-menu #actionsMenu=\"matMenu\">\n                                <button mat-menu-item (click)=\"unmatchUser(conversation)\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n                                <button mat-menu-item (click)=\"reportUser(conversation)\"><i class=\"fas fa-flag\"></i> Signaler</button>\n                                <button mat-menu-item (click)=\"blockUser(conversation)\"><i class=\"fas fa-times\"></i> Bloquer</button>\n                            </mat-menu>\n                        </div>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
         },
         {
             "name": "DefaultModalComponent",
@@ -4772,7 +4947,7 @@
         },
         {
             "name": "GeneralRulesPageComponent",
-            "id": "component-GeneralRulesPageComponent-af43ebf04c08f9be5669fd498ffd40a3d181ab8498633ea4d1f744e82371c7f2399bc7924c11daf641df5d403ea54cfc76e6fb7890a29661faeb48d794a15bc7",
+            "id": "component-GeneralRulesPageComponent-a9ac128eaca5f87ed00ae4066a326a6399ced1f6ef11813a17bb7a496d5756701f41cda68c3d61f16010171dc6bb6f33b3cda5ae74c979f3a0cd8924687d0def",
             "file": "src/modules/about/pages/application-rules/general-rules-page/general-rules-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4802,7 +4977,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-general-rules-page',\n  templateUrl: './general-rules-page.component.html',\n  styleUrls: ['./general-rules-page.component.scss']\n})\nexport class GeneralRulesPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-general-rules-page',\n    templateUrl: './general-rules-page.component.html',\n    styleUrls: ['./general-rules-page.component.scss'],\n})\nexport class GeneralRulesPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4815,7 +4990,7 @@
         },
         {
             "name": "HowToBlockPageComponent",
-            "id": "component-HowToBlockPageComponent-313a4a7ff9de30565e5c25078ad1e9a71c8e6d3deb74d337603e4865ff7feae777a1552f2bb5922928f163d78ef6207c10c615a9c55e50fe1346ad1069cdb679",
+            "id": "component-HowToBlockPageComponent-698a530f2e0ca46bc6886fb48751327a250744055d9ca730acfcc238aa8ed55a0b3a267750e7f3cdd3ad2377fca4419121865c0af9b8b163f305b0613dcfd4d1",
             "file": "src/modules/about/pages/security/how-to-block-page/how-to-block-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4845,7 +5020,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-how-to-block-page',\n  templateUrl: './how-to-block-page.component.html',\n  styleUrls: ['./how-to-block-page.component.scss']\n})\nexport class HowToBlockPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-how-to-block-page',\n    templateUrl: './how-to-block-page.component.html',\n    styleUrls: ['./how-to-block-page.component.scss'],\n})\nexport class HowToBlockPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4858,7 +5033,7 @@
         },
         {
             "name": "HowToReportPageComponent",
-            "id": "component-HowToReportPageComponent-f9eecbd5bb5ef6be6da7eaa9a8f315aa07db4205b06ced459f066c5ca6ad8fef64183c4e5fb8207c82383ba6f765e946c99defe38eee1f6947d778a6eb2b1e67",
+            "id": "component-HowToReportPageComponent-07b966fb56d10fd17ed07a5ea654780fa1cf52aed7a0a445f420cec3a7a73508687e178b73d277930e51f4b418b4770d7c7cf8c6ff3b18c4aa19178779526769",
             "file": "src/modules/about/pages/security/how-to-report-page/how-to-report-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4888,7 +5063,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-how-to-report-page',\n  templateUrl: './how-to-report-page.component.html',\n  styleUrls: ['./how-to-report-page.component.scss']\n})\nexport class HowToReportPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-how-to-report-page',\n    templateUrl: './how-to-report-page.component.html',\n    styleUrls: ['./how-to-report-page.component.scss'],\n})\nexport class HowToReportPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4901,7 +5076,7 @@
         },
         {
             "name": "HowToUnmatchComponent",
-            "id": "component-HowToUnmatchComponent-aeb6047e908ac5d7538336f5d644e4f860d1f62f594671c6f77ea1253c2e002c11a21960e2f1cca08c1a00eccc2c3d014ce1e46435ec8bd199fa41d9f600b3b5",
+            "id": "component-HowToUnmatchComponent-217e53f51516e05e4238ae5d24375353edfe361ec35c043e505325a1a19d9ad1270fa685dd8caf4f6bdfcf4b031e02b16d6470a12a834d5960790dd3b62f2cfd",
             "file": "src/modules/about/pages/security/how-to-unmatch/how-to-unmatch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4931,7 +5106,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-how-to-unmatch',\n  templateUrl: './how-to-unmatch.component.html',\n  styleUrls: ['./how-to-unmatch.component.scss']\n})\nexport class HowToUnmatchComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-how-to-unmatch',\n    templateUrl: './how-to-unmatch.component.html',\n    styleUrls: ['./how-to-unmatch.component.scss'],\n})\nexport class HowToUnmatchComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4944,7 +5119,7 @@
         },
         {
             "name": "ImageComponent",
-            "id": "component-ImageComponent-ea7d59dcf96c0dced2d45ce2e03fa3abb7ae8dea70f3b57100427017374eea3e96a9de664463f570de77141940d9ccd6300bab08b57d4c682f5f04cf6cd0faaf",
+            "id": "component-ImageComponent-9bcc9c150ed1500790771bc4e02987cfe11b16c3fbd497765357cf94846caa129daf0767a782f15709232c96627af77e19fdc332e3782f33336dcf830cd0139c",
             "file": "src/modules/ui/components/image/image.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4964,11 +5139,10 @@
             "inputsClass": [
                 {
                     "name": "alt",
-                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
-                    "type": "string | null",
+                    "line": 37,
+                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -4976,8 +5150,17 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 39,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "publicID",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string | undefined | null",
                     "decorators": []
                 },
                 {
@@ -4985,17 +5168,8 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 38,
                     "type": "ImageSize | null",
-                    "decorators": []
-                },
-                {
-                    "name": "src",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 34,
-                    "type": "string | undefined | null",
                     "decorators": []
                 }
             ],
@@ -5003,36 +5177,16 @@
             "propertiesClass": [],
             "methodsClass": [
                 {
-                    "name": "getSizeString",
-                    "args": [
-                        {
-                            "name": "scale",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "defaultValue": "1"
-                        }
-                    ],
+                    "name": "getImage",
+                    "args": [],
                     "optional": false,
-                    "returnType": "string | null",
+                    "returnType": "CloudinaryImage | null",
                     "typeParameters": [],
-                    "line": 97,
+                    "line": 69,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
                         121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": "scale",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "defaultValue": "1",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
                     ]
                 },
                 {
@@ -5047,9 +5201,9 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "string | undefined | null",
+                    "returnType": "string | null",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -5069,11 +5223,59 @@
                     "name": "getSrcset",
                     "args": [],
                     "optional": false,
-                    "returnType": "string | undefined | null",
+                    "returnType": "string | null",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "resizeImage",
+                    "args": [
+                        {
+                            "name": "image",
+                            "type": "CloudinaryImage",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "CloudinaryImage",
+                    "typeParameters": [],
+                    "line": 57,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "image",
+                            "type": "CloudinaryImage",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "scale",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "1",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "deprecated": false,
@@ -5085,11 +5287,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() src: string | undefined | null = null;\n    @Input() alt: string | null = null;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(scale)}/smart/`\n        );\n    }\n\n    getSrcset(): string | undefined | null {\n        return (\n            this.src &&\n            `${this.src}-/scale_crop/${this.getSizeString(0.5)}/smart/ 0.5x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(1)}/smart/ 1x, ${\n                this.src\n            }-/scale_crop/${this.getSizeString(2)}/smart/ 2x`\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width * this.size.ratio;\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    private getSizeString(scale: number = 1): string | null {\n        if (!this.size) {\n            return '';\n        }\n\n        if ('height' in this.size && 'width' in this.size) {\n            return `${this.size.width * scale}x${this.size.height * scale}`;\n        }\n\n        if ('width' in this.size) {\n            return `${this.size.width * scale}x`;\n        }\n\n        if ('height' in this.size) {\n            return `x${this.size.height * scale}`;\n        }\n\n        if ('square' in this.size) {\n            return `${this.size.square * scale}x${this.size.square * scale}`;\n        }\n\n        return '';\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';\nimport { thumbnail } from '@cloudinary/url-gen/actions/resize';\n\ninterface ImageSizeFixed {\n    height: number;\n    width: number;\n}\n\ninterface ImageSizeWidth {\n    width: number;\n    ratio: number;\n}\n\ninterface ImageSizeHeight {\n    height: number;\n    ratio: number;\n}\n\ninterface ImageSizeSquare {\n    square: number;\n}\n\ntype ImageSize =\n    | ImageSizeFixed\n    | ImageSizeWidth\n    | ImageSizeHeight\n    | ImageSizeSquare;\n\n@Component({\n    selector: 'app-image',\n    templateUrl: './image.component.html',\n    styleUrls: ['./image.component.scss'],\n})\nexport class ImageComponent {\n    @Input() publicID: string | undefined | null = null;\n    @Input() alt!: string;\n    @Input() size: ImageSize | null = null;\n    @Input() inferSize: boolean = false;\n\n    getSrc(scale: number = 1): string | null {\n        let image = this.getImage();\n\n        if (!image) return null;\n\n        image = this.resizeImage(image, scale);\n\n        return image.toURL();\n    }\n\n    getSrcset(): string | null {\n        return `${this.getSrc(0.5)} 0.5x, ${this.getSrc(1)} 1x, ${this.getSrc(\n            2,\n        )} 2x`;\n    }\n\n    private resizeImage(\n        image: CloudinaryImage,\n        scale: number = 1,\n    ): CloudinaryImage {\n        let resize = thumbnail();\n\n        if (this.height) resize = resize.height(this.height * scale);\n        if (this.width) resize = resize.width(this.width * scale);\n\n        return image.resize(resize);\n    }\n\n    private getImage(): CloudinaryImage | null {\n        if (!this.publicID) return null;\n\n        return new Cloudinary({ cloud: { cloudName: 'dofjtcdow' } }).image(\n            this.publicID,\n        );\n    }\n\n    get width(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('width' in this.size) {\n            return this.size.width;\n        }\n\n        if ('height' in this.size) {\n            return Math.floor(this.size.height * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n\n    get height(): number | null {\n        if (!this.size) {\n            return null;\n        }\n\n        if ('height' in this.size) {\n            return this.size.height;\n        }\n\n        if ('width' in this.size) {\n            return Math.floor(this.size.width * this.size.ratio);\n        }\n\n        if ('square' in this.size) {\n            return this.size.square;\n        }\n\n        return null;\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n\nimg {\n    object-fit: cover;\n    object-position: center;\n}\n\ndiv {\n    background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n}\n\n.infer-size {\n    height: 100%;\n    width: 100%;\n}",
+                    "data": "@import '../../../../styles/variables';\n\nimg {\n    object-fit: cover;\n    object-position: center;\n    border-radius: inherit;\n}\n\ndiv {\n    background: linear-gradient(180deg, var(--theme-background-secondary) 0%, rgba(var(--theme-main-rgb), 0.075) 100%);\n}\n\n.infer-size {\n    height: 100%;\n    width: 100%;\n}",
                     "styleUrl": "./image.component.scss"
                 }
             ],
@@ -5101,7 +5303,7 @@
                         "name": "width",
                         "type": "",
                         "returnType": "number | null",
-                        "line": 57
+                        "line": 77
                     }
                 },
                 "height": {
@@ -5110,15 +5312,15 @@
                         "name": "height",
                         "type": "",
                         "returnType": "number | null",
-                        "line": 77
+                        "line": 97
                     }
                 }
             },
-            "templateData": "<img\n    [src]=\"getSrc()\"\n    [srcset]=\"getSrcset()\"\n    [alt]=\"alt\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    *ngIf=\"src\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n>\n<div\n    *ngIf=\"!src\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n></div>"
+            "templateData": "<img\n    *ngIf=\"getSrc()\"\n    [src]=\"getSrc()\"\n    [srcset]=\"getSrcset()\"\n    [alt]=\"alt\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n/>\n\n<div\n    *ngIf=\"!getSrc()\"\n    [style.height]=\"!inferSize && height\"\n    [style.width]=\"!inferSize && width\"\n    [ngClass]=\"{'infer-size': inferSize}\"\n></div>"
         },
         {
             "name": "ImageControlComponent",
-            "id": "component-ImageControlComponent-de15d334211403416abff00cc899738c0887f1427ba1a5e41cf8eac919efbf32327c90905c5ca7d66b27edd571dcf5f6c91bec67f91147af02bfb7fb156d783a",
+            "id": "component-ImageControlComponent-2ca3cbfa3932c9698fe7bb9fab0f3f8377bd7eb627c8c32718ee2196762cd0fa60845bfb1c1d30529d45e79af74a3efbf6db249078944e902559923a4cbafa72",
             "file": "src/modules/image/components/image-control/image-control.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5141,43 +5343,17 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 30,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "crop",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 26,
-                    "type": "string | undefined",
-                    "decorators": []
-                },
-                {
-                    "name": "id",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 22,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imageOnly",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 23,
+                    "line": 19,
                     "type": "boolean",
                     "decorators": []
                 },
                 {
                     "name": "sources",
-                    "defaultValue": "'local, url, camera, dropbox, gphotos, instagram'",
+                    "defaultValue": "[\n        'local',\n        'camera',\n        'dropbox',\n        'google_drive',\n    ]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
-                    "type": "string",
+                    "line": 20,
+                    "type": "CloudinaryWidgetSourceType[]",
                     "decorators": []
                 },
                 {
@@ -5185,7 +5361,7 @@
                     "defaultValue": "new BehaviorSubject<\n        string | undefined\n    >(undefined)",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 16,
                     "type": "BehaviorSubject<string | undefined>",
                     "decorators": []
                 }
@@ -5196,7 +5372,7 @@
                     "defaultValue": "new EventEmitter<string | undefined>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 26,
                     "type": "EventEmitter"
                 }
             ],
@@ -5209,45 +5385,16 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 36
+                    "line": 29
                 },
                 {
-                    "name": "maxFileSizeBytes",
-                    "defaultValue": "MAX_FILE_SIZE_BYTES",
+                    "name": "uploadWidget",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "CloudinaryWidget | undefined",
                     "optional": false,
                     "description": "",
-                    "line": 35
-                },
-                {
-                    "name": "publicKey",
-                    "defaultValue": "PUBLIC_KEY",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 34
-                },
-                {
-                    "name": "widget",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 32,
-                    "decorators": [
-                        {
-                            "name": "ViewChild",
-                            "stringifiedArguments": "'widget'"
-                        }
-                    ],
-                    "modifierKind": [
-                        167
-                    ]
+                    "line": 28
                 }
             ],
             "methodsClass": [
@@ -5257,26 +5404,16 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 75,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
                 {
-                    "name": "onProgress",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 71,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onUploadComplete",
+                    "name": "handleImageUploadComplete",
                     "args": [
                         {
-                            "name": "info",
-                            "type": "any",
+                            "name": "event",
+                            "type": "CloudinaryWidgetEventSuccess",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -5284,13 +5421,16 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
                     "jsdoctags": [
                         {
-                            "name": "info",
-                            "type": "any",
+                            "name": "event",
+                            "type": "CloudinaryWidgetEventSuccess",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -5300,12 +5440,81 @@
                     ]
                 },
                 {
-                    "name": "openDialog",
+                    "name": "handleImageUploadStart",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onImageUpdate",
+                    "args": [
+                        {
+                            "name": "error",
+                            "type": "object | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "result",
+                            "type": "CloudinaryWidgetEvent | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "error",
+                            "type": "object | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "result",
+                            "type": "CloudinaryWidgetEvent | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "openWidget",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5319,40 +5528,23 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n    Component,\n    ElementRef,\n    EventEmitter,\n    Input,\n    Output,\n    ViewChild,\n} from '@angular/core';\nimport * as LR from '@uploadcare/blocks';\nimport { MAX_FILE_SIZE_BYTES, PUBLIC_KEY } from '../../constants/uploadcare';\nimport { UcWidgetComponent } from 'ngx-uploadcare-widget';\nimport { BehaviorSubject, Observable, map } from 'rxjs';\n\nLR.registerBlocks(LR);\n\n@Component({\n    selector: 'app-image-control',\n    templateUrl: './image-control.component.html',\n    styleUrls: ['./image-control.component.scss'],\n})\nexport class ImageControlComponent {\n    @Input() id: string = '';\n    @Input() imageOnly: boolean = true;\n    @Input() sources: string =\n        'local, url, camera, dropbox, gphotos, instagram';\n    @Input() crop: string | undefined;\n    @Input() value: BehaviorSubject<string | undefined> = new BehaviorSubject<\n        string | undefined\n    >(undefined);\n    @Input() canDelete: boolean = true;\n    @Output() change = new EventEmitter<string | undefined>();\n    @ViewChild('widget') widget!: ElementRef & { widget: UcWidgetComponent };\n\n    publicKey = PUBLIC_KEY;\n    maxFileSizeBytes = MAX_FILE_SIZE_BYTES;\n    loading$ = new BehaviorSubject<boolean>(false);\n\n    get url(): Observable<string | undefined> {\n        return this.value.pipe(\n            map((value) => {\n                if (value) {\n                    return `${value}-/resize/200x/`;\n                }\n                return undefined;\n            }),\n        );\n    }\n\n    get urlRetina(): Observable<string | undefined> {\n        return this.value.pipe(\n            map((value) => {\n                if (value) {\n                    return `${value}-/resize/400x/`;\n                }\n                return undefined;\n            }),\n        );\n    }\n\n    openDialog() {\n        this.widget.widget.openDialog();\n    }\n\n    // eslint-disable-next-line @typescript-eslint/no-explicit-any\n    onUploadComplete(info: any) {\n        this.value.next(info.cdnUrl);\n        this.change.next(info.cdnUrl);\n        this.loading$.next(false);\n    }\n\n    onProgress() {\n        this.loading$.next(true);\n    }\n\n    deleteImage() {\n        this.value.next(undefined);\n        this.change.next(undefined);\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { BehaviorSubject } from 'rxjs';\nimport {\n    CloudinaryWidget,\n    CloudinaryWidgetEvent,\n    CloudinaryWidgetEventSuccess,\n    CloudinaryWidgetSourceType,\n} from 'src/types/cloudinary';\n\n@Component({\n    selector: 'app-image-control',\n    templateUrl: './image-control.component.html',\n    styleUrls: ['./image-control.component.scss'],\n})\nexport class ImageControlComponent implements OnInit {\n    @Input() value: BehaviorSubject<string | undefined> = new BehaviorSubject<\n        string | undefined\n    >(undefined);\n    @Input() canDelete: boolean = true;\n    @Input() sources: CloudinaryWidgetSourceType[] = [\n        'local',\n        'camera',\n        'dropbox',\n        'google_drive',\n    ];\n    @Output() change = new EventEmitter<string | undefined>();\n\n    uploadWidget: CloudinaryWidget | undefined;\n    loading$ = new BehaviorSubject<boolean>(false);\n\n    ngOnInit(): void {\n        // eslint-disable-next-line @typescript-eslint/no-explicit-any\n        this.uploadWidget = (window as any).cloudinary.createUploadWidget(\n            {\n                cloudName: 'dofjtcdow',\n                uploadPreset: 'profile_picture',\n                sources: this.sources,\n                multiple: false,\n            },\n            this.onImageUpdate.bind(this),\n        );\n    }\n\n    openWidget() {\n        if (!this.uploadWidget) return;\n\n        this.uploadWidget.open();\n    }\n\n    deleteImage() {\n        this.value.next(undefined);\n        this.change.next(undefined);\n    }\n\n    private onImageUpdate(\n        error: object | undefined,\n        result: CloudinaryWidgetEvent | undefined,\n    ) {\n        if (error) {\n            // eslint-disable-next-line no-console\n            console.error(error);\n            return;\n        }\n\n        if (result) {\n            switch (result.event) {\n                case 'upload-added':\n                    this.handleImageUploadStart();\n                    break;\n                case 'success':\n                    this.handleImageUploadComplete(\n                        result as CloudinaryWidgetEventSuccess,\n                    );\n                    break;\n            }\n        }\n    }\n\n    private handleImageUploadStart() {\n        this.value.next(undefined);\n        this.loading$.next(true);\n    }\n\n    private handleImageUploadComplete(event: CloudinaryWidgetEventSuccess) {\n        this.value.next(event.info.public_id);\n        this.change.next(event.info.public_id);\n        this.loading$.next(false);\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".default-widget {\n    position: absolute;\n    top: -1000px;\n    left: -1000px;\n    display: none;\n    visibility: hidden;\n    opacity: 0;\n}\n\n.control-view {\n    display: flex;\n    border-radius: 6px;\n    box-sizing: border-box;\n    height: 100%;\n    width: 100%;\n    cursor: pointer;\n    position: relative;\n    \n    &--no-image {\n        border: dashed 2px var(--theme-main);\n        color: var(--theme-main);\n        justify-content: center;\n        align-items: center;\n        font-size: 2em;\n        transition: ease-in 0.1s background-color;\n\n        @media (hover: hover) {\n            &:hover {\n                background-color: rgba(var(--theme-main-rgb), 0.1);\n                transition: ease-in 0.05s background-color;\n            }\n        }\n    }\n\n    &--image {\n        background-color: rgba(var(--theme-main-rgb), 0.25);\n    }\n\n    &__image {\n        border-radius: 6px;\n    }\n\n    &__delete-btn {\n        position: absolute;\n        top: 0;\n        right: 0;\n        translate: 50% -50%;\n        height: 36px;\n        width: 36px;\n        appearance: none;\n        background-color: var(--theme-main-contrast);\n        color: var(--theme-main);\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: 36px;\n        font-size: 1.1em;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n    }\n}",
+                    "data": ".default-widget {\n    position: absolute;\n    top: -1000px;\n    left: -1000px;\n    display: none;\n    visibility: hidden;\n    opacity: 0;\n}\n\n.control-view {\n    display: flex;\n    border-radius: 6px;\n    box-sizing: border-box;\n    height: 100%;\n    width: 100%;\n    cursor: pointer;\n    position: relative;\n    \n    &--no-image {\n        border: dashed 2px var(--theme-main);\n        color: var(--theme-main);\n        justify-content: center;\n        align-items: center;\n        font-size: 2em;\n        transition: ease-in 0.1s background-color;\n\n        @media (hover: hover) {\n            &:hover {\n                background-color: rgba(var(--theme-main-rgb), 0.1);\n                transition: ease-in 0.05s background-color;\n            }\n        }\n    }\n\n    &--image {\n        background-color: rgba(var(--theme-main-rgb), 0.25);\n    }\n\n    &__image {\n        border-radius: 6px;\n        height: 100%;\n        width: 100%;\n    }\n\n    &__delete-btn {\n        position: absolute;\n        top: 0;\n        right: 0;\n        translate: 50% -50%;\n        height: 36px;\n        width: 36px;\n        appearance: none;\n        background-color: var(--theme-main-contrast);\n        color: var(--theme-main);\n        border: solid 1px rgb(240, 240, 240);\n        border-radius: 36px;\n        font-size: 1.1em;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n    }\n}",
                     "styleUrl": "./image-control.component.scss"
                 }
             ],
             "stylesData": "",
-            "accessors": {
-                "url": {
-                    "name": "url",
-                    "getSignature": {
-                        "name": "url",
-                        "type": "",
-                        "returnType": "Observable<string | undefined>",
-                        "line": 38
-                    }
-                },
-                "urlRetina": {
-                    "name": "urlRetina",
-                    "getSignature": {
-                        "name": "urlRetina",
-                        "type": "",
-                        "returnType": "Observable<string | undefined>",
-                        "line": 49
-                    }
-                }
-            },
-            "templateData": "<ng-container *ngIf=\"url | async\">\n    <div class=\"control-view\">\n        <img\n            [src]=\"url | async\"\n            [srcset]=\"(url | async) + ' 1x, ' + (urlRetina | async) + ' 2x'\"\n            alt=\"\"\n            (click)=\"openDialog()\"\n            class=\"control-view__image control-view--image\"\n        >\n        <button *ngIf=\"canDelete\" class=\"control-view__delete-btn interactable\" (click)=\"deleteImage()\"><i class=\"fas fa-trash\"></i></button>\n    </div>\n</ng-container>\n\n<ng-container *ngIf=\"!(value | async)\">\n    <div (click)=\"openDialog()\" class=\"control-view control-view--no-image\">\n        <i class=\"far fa-plus\" *ngIf=\"!(loading$ | async)\"></i>\n        <i class=\"far fa-spinner-third fa-spin\" *ngIf=\"loading$ | async\"></i>\n    </div>\n</ng-container>\n\n<ngx-uploadcare-widget\n    #widget\n    [images-only]=\"true\"\n    [multiple]=\"false\"\n    [public-key]=\"publicKey\"\n    [crop]=\"crop\"\n    tabs=\"file camera url gphotos instagram\"\n    (on-upload-complete)=\"onUploadComplete($event)\"\n    (on-progress)=\"onProgress()\"\n    [value]=\"(value | async) ?? ''\"\n    class=\"default-widget\"\n>\n</ngx-uploadcare-widget>"
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<ng-container *ngIf=\"value | async\">\n    <div class=\"control-view\">\n        <app-image\n            [publicID]=\"value | async\"\n            [size]=\"{ width: 400, ratio: 4/3 }\"\n            class=\"control-view__image control-view--image\"\n            (click)=\"openWidget()\"\n            [inferSize]=\"true\"\n        ></app-image>\n        <button *ngIf=\"canDelete\" class=\"control-view__delete-btn interactable\" (click)=\"deleteImage()\"><i class=\"fas fa-trash\"></i></button>\n    </div>\n</ng-container>\n\n<ng-container *ngIf=\"!(value | async)\">\n    <div (click)=\"openWidget()\" class=\"control-view control-view--no-image\">\n        <i class=\"far fa-plus\" *ngIf=\"!(loading$ | async)\"></i>\n        <i class=\"far fa-spinner-third fa-spin\" *ngIf=\"loading$ | async\"></i>\n    </div>\n</ng-container>\n"
         },
         {
             "name": "InclusivityPageComponent",
-            "id": "component-InclusivityPageComponent-7f31632435dd8af183c7de3d18109008387bc83b82b6017d42cc526c01cd2f7f50635c1f0a9d0a9f891f27bdd4e10f6937b5df5a2137c00c8c17aa17bd9033da",
+            "id": "component-InclusivityPageComponent-0f4f0de3782e24fa92b4ed884e4a688875d762d548f7591d2b405070e020e3e4b876c7b76dddd560d8f4b905e34b89fd7ddf7dcd2de5406fb6c0f18cbf8734e7",
             "file": "src/modules/about/pages/ressources/inclusivity-page/inclusivity-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5382,7 +5574,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-inclusivity-page',\n  templateUrl: './inclusivity-page.component.html',\n  styleUrls: ['./inclusivity-page.component.scss']\n})\nexport class InclusivityPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-inclusivity-page',\n    templateUrl: './inclusivity-page.component.html',\n    styleUrls: ['./inclusivity-page.component.scss'],\n})\nexport class InclusivityPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6171,7 +6363,7 @@
                     }
                 }
             },
-            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <img\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/72x72/smart/'\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                class=\"matched-user-page__header__title__avatar\"\n            >\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right class=\"desktop-only\" icon=\"fas fa-user\" content=\"Voir le profil\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right class=\"mobile-only\" icon=\"fas fa-user\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\" [style.backgroundImage]=\"'url(' + (userProfileValue | async)?.pictures?.[0] + '-/scale_crop/20x20/smart/' + ')'\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n"
+            "templateData": "<app-layout class=\"matched-user-page\" [noGap]=\"true\">\n    <app-layout-action layout-action-left icon=\"fas fa-chevron-left\" link=\"/matches\"></app-layout-action>\n\n    <div layout-title class=\"matched-user-page__header__title\">\n        <ng-container *ngIf=\"userProfileValue | async; let userProfile\">\n            <app-image\n                [publicID]=\"userProfile.pictures?.[0]\"\n                [size]=\"{square: 72}\"\n                [alt]=\"'Photo de profil de ' + userProfile.name\"\n                [inferSize]=\"true\"\n                class=\"matched-user-page__header__title__avatar\"\n            ></app-image>\n            <span class=\"matched-user-page__header__title__content\">{{userProfile.name}}</span>\n        </ng-container>\n    </div>\n\n    <app-layout-action layout-action-right class=\"desktop-only\" icon=\"fas fa-user\" content=\"Voir le profil\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right class=\"mobile-only\" icon=\"fas fa-user\" [link]=\"'matches/profile/' + (userProfile | async)?.id\"></app-layout-action>\n    <app-layout-action layout-action-right icon=\"fas fa-ellipsis-v\" [matMenuTriggerFor]=\"actionsMenu\"></app-layout-action>\n\n    <mat-menu #actionsMenu=\"matMenu\">\n        <button mat-menu-item (click)=\"unmatchUser()\"><i class=\"fas fa-trash\"></i> Supprimer</button>\n        <button mat-menu-item (click)=\"reportUser()\"><i class=\"fas fa-flag\"></i> Signaler</button>\n        <button mat-menu-item (click)=\"blockUser()\"><i class=\"fas fa-times\"></i> Bloquer</button>\n    </mat-menu>\n    \n    <div class=\"matched-user-page__container\">\n        <div class=\"matched-user-page__content\">\n            <div class=\"matched-user-page__content__messages\">\n                <div class=\"matched-user-page__content__messages__system-message\">Pour garantir votre sécurité, veillez à ne pas partager d'informations personnelles ou confidentielles dans les messages, car ceux-ci ne sont pas encryptés. Restons prudents et respectons la confidentialité.</div>\n    \n                <app-card class=\"matched-user-page__content__messages__question\" *ngIf=\"((messages | async)?.length ?? 0) == 0\">\n                    <span class=\"matched-user-page__content__messages__question__description\">Voici un idée de question pour débuter la conversation :</span>\n                    <div class=\"matched-user-page__content__messages__question__question\">{{question}}</div>\n                    <div class=\"matched-user-page__content__messages__question__actions\">\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"updateQuestion()\"><i class=\"fas fa-sync\"></i> Nouvelle question</a>\n                        <a class=\"matched-user-page__content__messages__question__actions__action interactable\" (click)=\"sendMessage(question).subscribe()\"><i class=\"fas fa-paper-plane\"></i> Envoyer</a>\n                    </div>\n                </app-card>\n    \n                <div class=\"matched-user-page__content__messages__group\" [ngClass]=\"{'matched-user-page__content__messages__group--self': messageGroup.isSelf, 'matched-user-page__content__messages__group--other': !messageGroup.isSelf}\" *ngFor=\"let messageGroup of messages | async\">\n                    <span class=\"matched-user-page__content__messages__group__time\">{{messageGroup.timestamp | date: 'MMM d, h:mm'}}</span>\n                    <div class=\"matched-user-page__content__messages__group__content\">\n                        <div class=\"matched-user-page__content__messages__group__content__sender\" *ngIf=\"!messageGroup.isSelf\">\n                            <div class=\"matched-user-page__content__messages__group__content__sender__avatar\" [style.backgroundImage]=\"'url(' + (userProfileValue | async)?.pictures?.[0] + '-/scale_crop/20x20/smart/' + ')'\"></div>\n                        </div>\n                        <div class=\"matched-user-page__content__messages__group__content__messages\">\n                            <div class=\"matched-user-page__content__messages__group__content__messages__message\" [ngClass]=\"{ 'matched-user-page__content__messages__group__content__messages__message--only-emoji': message.onlyEmoji}\" *ngFor=\"let message of messageGroup.messages\">\n                                {{message.content}}\n                            </div>\n                        </div>\n                        \n                    </div>\n                </div>\n            </div>\n        </div>\n        \n        <form class=\"matched-user-page__footer\" (submit)=\"onSubmit()\" [formGroup]=\"form\">\n            <input class=\"matched-user-page__footer__control\" placeholder=\"Aa\" type=\"text\" formControlName=\"message\">\n            <button class=\"matched-user-page__footer__button interactable\" type=\"submit\" *ngIf=\"(form.value.message?.length ?? 0) > 0\"><i class=\"fas fa-paper-plane\"></i></button>\n            <a class=\"matched-user-page__footer__button interactable\" (click)=\"sendMessage('👍').subscribe()\" *ngIf=\"(form.value.message?.length ?? 0) === 0\"><span class=\"emoji\">👍</span></a>\n        </form>\n    </div>\n</app-layout>\n"
         },
         {
             "name": "MatchedUserProfilePageComponent",
@@ -6269,7 +6461,7 @@
         },
         {
             "name": "MatchesPageComponent",
-            "id": "component-MatchesPageComponent-d03a2d8fe5145407a8b2e69692ed623eadc3190cd6dc6f272b90cfd4d9da5ab0e720681714117ffc21512e3b7a2becf4fd93e3f85c9bbfe5ae4f368a20499ac5",
+            "id": "component-MatchesPageComponent-40e51d5d177cf4c0eec42690c8482ffd870facc8fff9c102a10690aacd2be8e89103d653bf7a41100e6824b56b66fa6c66cb79872fc5c8763e05a13b0901881e",
             "file": "src/modules/matching/pages/matches-page/matches-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6336,7 +6528,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { Observable, map } from 'rxjs';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { MatchListItemClass } from '../../models/match-list-item';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-matches-page',\n    templateUrl: './matches-page.component.html',\n    styleUrls: ['./matches-page.component.scss'],\n})\nexport class MatchesPageComponent {\n    matches: Observable<MatchListItemClass[]>;\n    conversations: Observable<MatchListItemClass[]>;\n    hasMatches: Observable<boolean>;\n    hasConversations: Observable<boolean>;\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {\n        this.matches = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches.filter((match) => match.queryInfo.messagesCount === 0),\n            ),\n        );\n        this.conversations = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches\n                    .filter((match) => match.queryInfo.messagesCount > 0)\n                    .sort((a, b) =>\n                        new Date(a.queryInfo.lastMessageTimestamp) >\n                        new Date(b.queryInfo.lastMessageTimestamp)\n                            ? -1\n                            : 1,\n                    ),\n            ),\n        );\n        this.hasMatches = this.matches.pipe(\n            map((matches) => matches.length > 0),\n        );\n        this.hasConversations = this.conversations.pipe(\n            map((conversations) => conversations.length > 0),\n        );\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { Observable, map } from 'rxjs';\nimport { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';\nimport { MatchListItemClass } from '../../models/match-list-item';\nimport { ValidationService } from 'src/modules/validation/services/validation.service';\n\n@Component({\n    selector: 'app-matches-page',\n    templateUrl: './matches-page.component.html',\n    styleUrls: ['./matches-page.component.scss'],\n})\nexport class MatchesPageComponent {\n    matches: Observable<MatchListItemClass[]>;\n    conversations: Observable<MatchListItemClass[]>;\n    hasMatches: Observable<boolean>;\n    hasConversations: Observable<boolean>;\n\n    constructor(\n        private readonly publicProfileService: PublicProfileService,\n        private readonly validationService: ValidationService,\n    ) {\n        this.matches = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches.filter((match) => match.queryInfo.messagesCount === 0),\n            ),\n        );\n        this.conversations = this.publicProfileService.matches.pipe(\n            map((matches) =>\n                matches\n                    .filter((match) => match.queryInfo.messagesCount > 0)\n                    .sort((a, b) =>\n                        new Date(a.queryInfo.lastMessageTimestamp) >\n                        new Date(b.queryInfo.lastMessageTimestamp)\n                            ? -1\n                            : 1,\n                    ),\n            ),\n        );\n        this.hasMatches = this.matches.pipe(\n            map((matches) => matches.length > 0),\n        );\n        this.hasConversations = this.conversations.pipe(\n            map((conversations) => conversations.length > 0),\n        );\n\n        this.validationService.userValid.subscribe((userValid) => {\n            if (userValid) {\n                this.publicProfileService.fetchMatches().subscribe();\n            }\n        });\n    }\n\n    get userValid() {\n        return this.validationService.userValid;\n    }\n\n    get userValidMessage() {\n        return this.validationService.userValidMessage;\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6393,7 +6585,7 @@
                         "name": "userValid",
                         "type": "",
                         "returnType": "",
-                        "line": 47
+                        "line": 53
                     }
                 },
                 "userValidMessage": {
@@ -6402,7 +6594,7 @@
                         "name": "userValidMessage",
                         "type": "",
                         "returnType": "",
-                        "line": 51
+                        "line": 57
                     }
                 }
             },
@@ -6459,7 +6651,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<app-card [noPadding]=\"true\" title=\"Mes matchs\" icon=\"fas fa-user-friends\" anchor=\"matches\">\n    <div class=\"match-list\">\n        <ng-container *ngFor=\"let match of matches\">\n            <ng-container *ngIf=\"match.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"match-list__item interactable\">\n                        <img\n                            *ngIf=\"value.pictures?.[0]\"\n                            class=\"match-list__item__image\"\n                            [src]=\" value.pictures?.[0] + '-/scale_crop/250x334/smart/'\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                        >\n                        <div *ngIf=\"!value.pictures?.[0]\" class=\"match-list__item__image match-list__item__image--not-loaded\"></div>\n\n                        <span class=\"match-list__item__name\">{{value.name}}</span>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
+            "templateData": "<app-card [noPadding]=\"true\" title=\"Mes matchs\" icon=\"fas fa-user-friends\" anchor=\"matches\">\n    <div class=\"match-list\">\n        <ng-container *ngFor=\"let match of matches\">\n            <ng-container *ngIf=\"match.value | async; let value\">\n                <a [routerLink]=\"'/matches/' + value.userId\">\n                    <div class=\"match-list__item interactable\">\n                        <app-image\n                            class=\"match-list__item__image\"\n                            [publicID]=\"value.pictures?.[0]\"\n                            [alt]=\"'Photo de profil de ' + value.name\"\n                            [size]=\"{width: 250, height: 334}\"\n                            [inferSize]=\"true\"\n                        ></app-image>\n\n                        <span class=\"match-list__item__name\">{{value.name}}</span>\n                    </div>\n                </a>\n            </ng-container>\n        </ng-container>\n    </div>\n</app-card>"
         },
         {
             "name": "NavigationComponent",
@@ -6716,7 +6908,7 @@
                     }
                 }
             },
-            "templateData": "<nav class=\"navigation\">\n    <div class=\"navigation__top\">\n        <br class=\"desktop-only\">\n\n        <div class=\"navigation__top__brand desktop-only\">\n            <img\n                src=\"/assets/logo.svg\"\n                alt=\"PolyTinder logo\"\n                class=\"navigation__top__brand__logo\"\n            >\n            <span class=\"navigation__top__brand__name\">PolyTinder</span>\n        </div>\n\n        <div class=\"navigation__top__menu\">\n            <li *ngFor=\"let item of (navigation | async)\" class=\"navigation__top__menu__item\">\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    [color]=\"isActiveLink(item.href) ? 'primary' : 'transparent'\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    [icon]=\"'fas fa-' + item.icon\"\n                    class=\"desktop-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <span class=\"navigation__top__menu__item__content__text\">{{item.text}}</span>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n\n\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    color=\"transparent\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    class=\"mobile-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <i [class]=\"'fa-' + item.icon + ' fas navigation__top__menu__item__content__icon'\"></i>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n            </li>\n        </div>\n    </div>\n\n    <div class=\"navigation__bottom desktop-only\">\n        <ul class=\"navigation__bottom__left\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button link=\"/about\" icon=\"fas fa-info-circle\" [iconOnly]=\"true\"></app-button>\n            </li>\n            <li class=\"navigation__bottom__left__item\" matTooltip=\"Github\">\n                <app-button link=\"https://github.com/PolyTinder/poly-tinder\" icon=\"fab fa-github\" [iconOnly]=\"true\"></app-button>\n            </li>\n        </ul>\n\n        <ul class=\"navigation__bottom__right\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button [matMenuTriggerFor]=\"logoutMenu\" icon=\"fas fa-sign-out\" [iconOnly]=\"true\" [forceFocusable]=\"true\"></app-button>\n\n                <mat-menu #logoutMenu=\"matMenu\">\n                    <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n                </mat-menu>\n            </li>\n        </ul>\n    </div>\n</nav>\n"
+            "templateData": "<nav class=\"navigation\">\n    <div class=\"navigation__top\">\n        <br class=\"desktop-only\">\n\n        <div class=\"navigation__top__brand desktop-only\">\n            <img\n                src=\"/assets/logo.svg\"\n                alt=\"INSA Meet logo\"\n                class=\"navigation__top__brand__logo\"\n            >\n            <span class=\"navigation__top__brand__name\">INSA Meet</span>\n        </div>\n\n        <div class=\"navigation__top__menu\">\n            <li *ngFor=\"let item of (navigation | async)\" class=\"navigation__top__menu__item\">\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    [color]=\"isActiveLink(item.href) ? 'primary' : 'transparent'\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    [icon]=\"'fas fa-' + item.icon\"\n                    class=\"desktop-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <span class=\"navigation__top__menu__item__content__text\">{{item.text}}</span>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n\n\n                <app-button\n                    [link]=\"isActiveLink(item.href) ? undefined : item.href\"\n                    color=\"transparent\"\n                    [interactable]=\"isActiveLink(item.href) ? 'none' : 'small'\"\n                    class=\"mobile-only\"\n                >\n                    <div\n                        class=\"navigation__top__menu__item__content\"\n                        [ngClass]=\"{'navigation__top__menu__item__content--active': isActiveLink(item.href)}\"\n                    >\n                        <i [class]=\"'fa-' + item.icon + ' fas navigation__top__menu__item__content__icon'\"></i>\n                        <span class=\"navigation__top__menu__item__content__pill\" *ngIf=\"item.href === '/matches' && (unreadConversationCount | async) != '0'\">{{ unreadConversationCount | async }}</span>\n                        <span class=\"navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error\" *ngIf=\"item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0\">{{userValidActionsCount | async}}</span>\n                    </div>\n                </app-button>\n            </li>\n        </div>\n    </div>\n\n    <div class=\"navigation__bottom desktop-only\">\n        <ul class=\"navigation__bottom__left\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button link=\"/about\" icon=\"fas fa-info-circle\" [iconOnly]=\"true\"></app-button>\n            </li>\n            <li class=\"navigation__bottom__left__item\" matTooltip=\"Github\">\n                <app-button link=\"https://github.com/PolyTinder/poly-tinder\" icon=\"fab fa-github\" [iconOnly]=\"true\"></app-button>\n            </li>\n        </ul>\n\n        <ul class=\"navigation__bottom__right\">\n            <li\n                class=\"navigation__bottom__left__item\"\n                matTooltip=\"À propos\"\n                *ngIf=\"isLoggedIn | async\"\n            >\n                <app-button [matMenuTriggerFor]=\"logoutMenu\" icon=\"fas fa-sign-out\" [iconOnly]=\"true\" [forceFocusable]=\"true\"></app-button>\n\n                <mat-menu #logoutMenu=\"matMenu\">\n                    <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n                </mat-menu>\n            </li>\n        </ul>\n    </div>\n</nav>\n"
         },
         {
             "name": "PasswordResetPageComponent",
@@ -6856,7 +7048,7 @@
         },
         {
             "name": "PoliciesPageComponent",
-            "id": "component-PoliciesPageComponent-726d9c8071d5d49b2803d68761fa8b5a649d87b48bf1df114b87966ee0058ac908a85d99ed298b021596bd97498cc70bfbd083cf745197f633fa2ab092633d85",
+            "id": "component-PoliciesPageComponent-47c9a1bd37bc4f0188c28b17d6bf444238231ba297ffc0c888f07703cc0d4d43252d18ba2b602e224e6034596d5cb4429d37597752d55d10bb4570d8cb0aa0ca",
             "file": "src/modules/about/pages/application-rules/policies-page/policies-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6886,7 +7078,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-policies-page',\n  templateUrl: './policies-page.component.html',\n  styleUrls: ['./policies-page.component.scss']\n})\nexport class PoliciesPageComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app-policies-page',\n    templateUrl: './policies-page.component.html',\n    styleUrls: ['./policies-page.component.scss'],\n})\nexport class PoliciesPageComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -8330,7 +8522,7 @@
                     }
                 }
             },
-            "templateData": "<div class=\"user-profile\" [ngClass]=\"{'user-profile--info-visible': infoVisible, 'user-profile--swiping-completed': swipingCompleted}\" *ngIf=\"userProfile\">\n    <div class=\"user-profile__container\" (scroll)=\"onScroll($event)\" #container>\n        <div class=\"user-profile__main\">\n            <app-image\n                [src]=\"userProfile.pictures?.[0]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 363, height: 486}\"\n                [inferSize]=\"true\"\n                class=\"user-profile__main__picture\"\n            ></app-image>\n            <div class=\"user-profile__main__picture\" *ngIf=\"!userProfile.pictures?.[0]\"></div>\n    \n            <div class=\"user-profile__main__content\" (click)=\"!infoVisible && showInfo()\">\n                <div class=\"user-profile__main__content__info\">\n                    <p class=\"user-profile__main__content__info__name\">{{userProfile.name}}</p>\n                    <p class=\"user-profile__main__content__info__subtitle\">\n                        <span class=\"user-profile__main__content__info__subtitle__age\">{{userProfile.age}}</span>\n                        <span class=\"user-profile__main__content__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                    </p>\n                </div>\n    \n                <app-button icon=\"fas fa-arrow-down\" color=\"primary\" [iconOnly]=\"true\" class=\"user-profile__main__content__button\"></app-button>\n            </div>\n    \n            <div *ngIf=\"!disableInteractions\" [class]=\"'user-profile__main__swipe user-profile__main__swipe--' + currentSwipeOutput\" (mousedown)=\"onSwipeStart($event)\" (touchstart)=\"onSwipeStart($event)\">\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(false)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-times\" [style.scale]=\"dislikeScale\"></i>\n                </button>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--left\">\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                </span>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--right\">\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                </span>\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(true)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-heart\" [style.scale]=\"likeScale\"></i>\n                </button>\n    \n                <div class=\"user-profile__main__swipe__effect\"></div>\n            </div>\n        </div>\n    \n        <div class=\"user-profile__content\">\n            <div class=\"user-profile__bio user-profile__section\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n                <p>{{userProfile.bio}}</p>\n            </div>\n\n            <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n                <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[1]\"\n                *ngIf=\"userProfile.pictures?.[1]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__table\" *ngIf=\"shouldDisplayTable\">\n                <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                        <i class=\"fas fa-ruler\"></i> {{height}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"workout\">\n                        <i class=\"fas fa-running\"></i> {{workout.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drinking\">\n                        <i class=\"fas fa-wine-glass-alt\"></i> {{drinking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"smoking\">\n                        <i class=\"fas fa-smoking\"></i> {{smoking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drugs\">\n                        <i class=\"fas fa-cannabis\"></i> {{drugs.name}}\n                    </div>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                    <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                    <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                    <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                    <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                    <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                    <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n                </div>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[2]\"\n                *ngIf=\"userProfile.pictures?.[2]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n                <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                        {{interest}}\n                    </div>\n                </div>\n            </div>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[3]\"\n                *ngIf=\"userProfile.pictures?.[3]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n                <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                        {{association}}\n                    </div>\n                </div>\n            </div>\n\n\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[4]\"\n                *ngIf=\"userProfile.pictures?.[4]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n            \n            <app-image\n                [src]=\"userProfile.pictures?.[5]\"\n                *ngIf=\"userProfile.pictures?.[5]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n        \n            <div class=\"user-profile__user-actions\" *ngIf=\"!disableModeration\">\n                <app-button\n                    icon=\"fas fa-flag\"\n                    (btnClick)=\"reportUser()\"\n                    interactable=\"small\"\n                >Signaler</app-button>\n                <app-button\n                    icon=\"fas fa-times\"\n                    (btnClick)=\"blockUser()\"\n                    interactable=\"small\"\n                >Bloquer</app-button>\n            </div>\n        </div>\n    </div>\n    \n\n    <div class=\"user-profile__actions\" [ngClass]=\"{'user-profile__actions--visible': actionsVisible}\">\n        <button class=\"user-profile__actions__button user-profile__actions__button--dislike\" (click)=\"swipe(false)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-times\"></i>\n        </button>\n        <button class=\"user-profile__actions__button user-profile__actions__button--like\" (click)=\"swipe(true)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-heart\"></i>\n        </button>\n    </div>\n</div>\n"
+            "templateData": "<div class=\"user-profile\" [ngClass]=\"{'user-profile--info-visible': infoVisible, 'user-profile--swiping-completed': swipingCompleted}\" *ngIf=\"userProfile\">\n    <div class=\"user-profile__container\" (scroll)=\"onScroll($event)\" #container>\n        <div class=\"user-profile__main\">\n            <app-image\n                [publicID]=\"userProfile.pictures?.[0]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 363, height: 486}\"\n                [inferSize]=\"true\"\n                class=\"user-profile__main__picture\"\n            ></app-image>\n    \n            <div class=\"user-profile__main__content\" (click)=\"!infoVisible && showInfo()\">\n                <div class=\"user-profile__main__content__info\">\n                    <p class=\"user-profile__main__content__info__name\">{{userProfile.name}}</p>\n                    <p class=\"user-profile__main__content__info__subtitle\">\n                        <span class=\"user-profile__main__content__info__subtitle__age\">{{userProfile.age}}</span>\n                        <span class=\"user-profile__main__content__info__subtitle__program\" *ngIf=\"program\">, {{program}}</span>\n                    </p>\n                </div>\n    \n                <app-button icon=\"fas fa-arrow-down\" color=\"primary\" [iconOnly]=\"true\" class=\"user-profile__main__content__button\"></app-button>\n            </div>\n    \n            <div *ngIf=\"!disableInteractions\" [class]=\"'user-profile__main__swipe user-profile__main__swipe--' + currentSwipeOutput\" (mousedown)=\"onSwipeStart($event)\" (touchstart)=\"onSwipeStart($event)\">\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(false)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-times\" [style.scale]=\"dislikeScale\"></i>\n                </button>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--left\">\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                    <i class=\"fas fa-chevron-left\"></i>\n                </span>\n                <span class=\"user-profile__main__swipe__direction user-profile__main__swipe__direction--right\">\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                    <i class=\"fas fa-chevron-right\"></i>\n                </span>\n                <button class=\"user-profile__main__swipe__button\" (click)=\"swipe(true)\">\n                    <i class=\"user-profile__main__swipe__icon fas fa-heart\" [style.scale]=\"likeScale\"></i>\n                </button>\n    \n                <div class=\"user-profile__main__swipe__effect\"></div>\n            </div>\n        </div>\n    \n        <div class=\"user-profile__content\">\n            <div class=\"user-profile__bio user-profile__section\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-pen\"></i> À propos de moi</p>\n                <p>{{userProfile.bio}}</p>\n            </div>\n\n            <div class=\"user-profile__looking-for user-profile__section\" *ngIf=\"lookingFor\">\n                <p class=\"user-profile__section-title user-profile__bio__title\"><i class=\"fas fa-flower-tulip\"></i> À la recherche de</p>\n                <p class=\"user-profile__looking-for__content\"><span>{{lookingFor.emoji}}</span> {{lookingFor.name}}</p>\n            </div>\n            \n            <app-image\n                [publicID]=\"userProfile.pictures?.[1]\"\n                *ngIf=\"userProfile.pictures?.[1]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__table\" *ngIf=\"shouldDisplayTable\">\n                <div class=\"user-profile__table__entry user-profile__table__entry--multiple\">\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"userProfile.height\">\n                        <i class=\"fas fa-ruler\"></i> {{height}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"workout\">\n                        <i class=\"fas fa-running\"></i> {{workout.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drinking\">\n                        <i class=\"fas fa-wine-glass-alt\"></i> {{drinking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"smoking\">\n                        <i class=\"fas fa-smoking\"></i> {{smoking.name}}\n                    </div>\n                    <div class=\"user-profile__table__entry__item\" *ngIf=\"drugs\">\n                        <i class=\"fas fa-cannabis\"></i> {{drugs.name}}\n                    </div>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.jobTitle\">\n                    <i class=\"fas fa-suitcase\"></i> {{userProfile.jobTitle}} <span *ngIf=\"userProfile.jobCompany\">chez {{userProfile.jobCompany}}</span>\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"zodiacSign\">\n                    <i class=\"fas fa-star-shooting\"></i> {{zodiacSign.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.livingIn\">\n                    <i class=\"fas fa-city\"></i> {{userProfile.livingIn}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"sexualOrientation\">\n                    <i class=\"fas fa-flag\"></i> {{sexualOrientation.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"relationshipType\">\n                    <i class=\"fas fa-user-friends\"></i> {{relationshipType.name}}\n                </div>\n                <div class=\"user-profile__table__entry\" *ngIf=\"userProfile.gender\">\n                    <i class=\"fas fa-transgender\"></i> {{userProfile.gender}}\n                </div>\n            </div>\n            \n            <app-image\n                [publicID]=\"userProfile.pictures?.[2]\"\n                *ngIf=\"userProfile.pictures?.[2]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__interests user-profile__section\" *ngIf=\"interests\">\n                <p class=\"user-profile__section-title user-profile__interests__title\"><i class=\"fas fa-heart\"></i> Mes intérêts</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let interest of interests\">\n                        {{interest}}\n                    </div>\n                </div>\n            </div>\n            \n            <app-image\n                [publicID]=\"userProfile.pictures?.[3]\"\n                *ngIf=\"userProfile.pictures?.[3]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n    \n            <div class=\"user-profile__associations user-profile__section\" *ngIf=\"associations\">\n                <p class=\"user-profile__section-title user-profile__associations__title\"><i class=\"fas fa-users\"></i> Mes associations</p>\n                <div class=\"user-profile__list\">\n                    <div class=\"user-profile__list__item\" *ngFor=\"let association of associations\">\n                        {{association}}\n                    </div>\n                </div>\n            </div>\n\n\n            \n            <app-image\n                [publicID]=\"userProfile.pictures?.[4]\"\n                *ngIf=\"userProfile.pictures?.[4]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n            \n            <app-image\n                [publicID]=\"userProfile.pictures?.[5]\"\n                *ngIf=\"userProfile.pictures?.[5]\"\n                [alt]=\"'Photo de ' + userProfile.name\"\n                [size]=\"{width: 352, height: 600}\"\n                class=\"user-profile__picture\"\n                [inferSize]=\"true\"\n            ></app-image>\n        \n            <div class=\"user-profile__user-actions\" *ngIf=\"!disableModeration\">\n                <app-button\n                    icon=\"fas fa-flag\"\n                    (btnClick)=\"reportUser()\"\n                    interactable=\"small\"\n                >Signaler</app-button>\n                <app-button\n                    icon=\"fas fa-times\"\n                    (btnClick)=\"blockUser()\"\n                    interactable=\"small\"\n                >Bloquer</app-button>\n            </div>\n        </div>\n    </div>\n    \n\n    <div class=\"user-profile__actions\" [ngClass]=\"{'user-profile__actions--visible': actionsVisible}\">\n        <button class=\"user-profile__actions__button user-profile__actions__button--dislike\" (click)=\"swipe(false)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-times\"></i>\n        </button>\n        <button class=\"user-profile__actions__button user-profile__actions__button--like\" (click)=\"swipe(true)\" *ngIf=\"!disableInteractions\">\n            <i class=\"fas fa-heart\"></i>\n        </button>\n    </div>\n</div>\n"
         },
         {
             "name": "UserProfileEditPageComponent",
@@ -8756,7 +8948,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import '../../../../styles/variables';\n\n.user-profile {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    gap: 24px;\n    padding: 64px 24px;\n\n    &__info {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        gap: 16px;\n\n        &__avatar {\n            height: 180px;\n            width: 180px;\n            object-fit: cover;\n            border-radius: 12px;\n            box-shadow: $default-shadow;\n            background-color: rgb(240, 240, 240);\n        }\n\n        &__name {\n            font-size: 24px;\n            font-weight: 500;\n        }\n    }\n\n    &__actions {\n        display: flex;\n        flex-direction: column;\n        gap: 16px;\n        width: 100%;\n        max-width: 450px;\n\n        &__btn {\n            &__pill {\n                background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));\n                color: var(--theme-main-contrast);\n                font-size: 0.9em;\n                padding: 2px 12px;\n                border-radius: 20px;\n\n                &--error {\n                    background: tomato !important;\n                }\n            }\n        }\n    }\n}\n\nhr {\n    width: 100%;\n    border: none;\n    height: 1px;\n    background: rgb(240, 240, 240);\n}",
+                    "data": "@import '../../../../styles/variables';\n\n.user-profile {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    gap: 24px;\n    padding: 64px 24px;\n\n    &__info {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        gap: 16px;\n\n        &__avatar {\n            height: 180px;\n            width: 180px;\n            object-fit: cover;\n            border-radius: 12px;\n            box-shadow: $default-shadow;\n            background-color: rgb(240, 240, 240);\n            overflow: hidden;\n        }\n\n        &__name {\n            font-size: 24px;\n            font-weight: 500;\n        }\n    }\n\n    &__actions {\n        display: flex;\n        flex-direction: column;\n        gap: 16px;\n        width: 100%;\n        max-width: 450px;\n\n        &__btn {\n            &__pill {\n                background: linear-gradient(90deg, var(--theme-main), rgba(var(--theme-main-rgb), 0.6));\n                color: var(--theme-main-contrast);\n                font-size: 0.9em;\n                padding: 2px 12px;\n                border-radius: 20px;\n\n                &--error {\n                    background: tomato !important;\n                }\n            }\n        }\n    }\n}\n\nhr {\n    width: 100%;\n    border: none;\n    height: 1px;\n    background: rgb(240, 240, 240);\n}",
                     "styleUrl": "./user-profile-page.component.scss"
                 }
             ],
@@ -8846,7 +9038,7 @@
                     }
                 }
             },
-            "templateData": "<app-layout headerType=\"hidden\">\n    <div class=\"user-profile\" *ngIf=\"userProfile | async; let userProfile\">\n        <app-card color=\"danger\" *ngIf=\"(emailValidated | async) === false\">\n            <p><b>Email non validé</b></p>\n            <p>Veuillez vérifier votre boite de courriel ou cliquez sur le bouton ci-dessous.</p>\n            <app-button (btnClick)=\"requestEmailValidation()\" interactable=\"small\">Réenvoyer un email de validation</app-button>\n        </app-card>\n\n        <div class=\"user-profile__info\">\n            <img \n                class=\"user-profile__info__avatar\"\n                [src]=\"userProfile.pictures?.[0] + '-/scale_crop/360x360/smart/'\"\n                [alt]=\"'Photo de profile de ' + userProfile.name\"\n                *ngIf=\"userProfile.pictures?.[0]\"\n            >\n            <div \n                class=\"user-profile__info__avatar\"\n                *ngIf=\"!userProfile.pictures?.[0]\"\n            ></div>\n            <p class=\"user-profile__info__name\">{{userProfile.name ?? 'Sans nom'}}<span *ngIf=\"userProfile.age\">, {{userProfile.age}}</span></p>\n        </div>\n    \n        <div class=\"user-profile__actions\">\n            <app-button icon=\"fas fa-user-edit\" link=\"/profile-edit\" interactable=\"small\" [shadow]=\"true\">\n                Modifier mon profil\n                <span class=\"user-profile__actions__btn__pill user-profile__actions__btn__pill--error\" *ngIf=\"(userProfileReady | async) === false\">1</span>\n            </app-button>\n\n            <app-button icon=\"fas fa-user\" link=\"/profile-preview\" interactable=\"small\" [shadow]=\"true\">Visualiser mon profil</app-button>\n            <!-- <button class=\"user-profile__actions__btn interactable--small\">\n                <i class=\"fas fa-cog\"></i>\n                Préférences\n            </button> -->\n            <app-button icon=\"fas fa-sign-out\" [shadow]=\"true\" interactable=\"small\" [matMenuTriggerFor]=\"logoutMenu\">Se déconnecter</app-button>\n            <mat-menu #logoutMenu=\"matMenu\">\n                <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n            </mat-menu>\n            \n            <hr>\n            <app-button icon=\"fas fa-info-circle\" link=\"/about\" interactable=\"small\" [shadow]=\"true\">À propos</app-button>\n            <app-button icon=\"fab fa-github\" link=\"https://github.com/PolyTinder/poly-tinder\" interactable=\"small\" [shadow]=\"true\">Github</app-button>\n        </div>\n    </div>\n</app-layout>\n"
+            "templateData": "<app-layout headerType=\"hidden\">\n    <div class=\"user-profile\" *ngIf=\"userProfile | async; let userProfile\">\n        <app-card color=\"danger\" *ngIf=\"(emailValidated | async) === false\">\n            <p><b>Email non validé</b></p>\n            <p>Veuillez vérifier votre boite de courriel ou cliquez sur le bouton ci-dessous.</p>\n            <app-button (btnClick)=\"requestEmailValidation()\" interactable=\"small\">Réenvoyer un email de validation</app-button>\n        </app-card>\n\n        <div class=\"user-profile__info\">\n            <app-image\n                class=\"user-profile__info__avatar\"\n                [publicID]=\"userProfile.pictures?.[0]\"\n                [size]=\"{ square: 180 }\"\n                [alt]=\"'Photo de profile de ' + userProfile.name\"\n            ></app-image>\n            <p class=\"user-profile__info__name\">{{userProfile.name ?? 'Sans nom'}}<span *ngIf=\"userProfile.age\">, {{userProfile.age}}</span></p>\n        </div>\n    \n        <div class=\"user-profile__actions\">\n            <app-button icon=\"fas fa-user-edit\" link=\"/profile-edit\" interactable=\"small\" [shadow]=\"true\">\n                Modifier mon profil\n                <span class=\"user-profile__actions__btn__pill user-profile__actions__btn__pill--error\" *ngIf=\"(userProfileReady | async) === false\">1</span>\n            </app-button>\n\n            <app-button icon=\"fas fa-user\" link=\"/profile-preview\" interactable=\"small\" [shadow]=\"true\">Visualiser mon profil</app-button>\n            <!-- <button class=\"user-profile__actions__btn interactable--small\">\n                <i class=\"fas fa-cog\"></i>\n                Préférences\n            </button> -->\n            <app-button icon=\"fas fa-sign-out\" [shadow]=\"true\" interactable=\"small\" [matMenuTriggerFor]=\"logoutMenu\">Se déconnecter</app-button>\n            <mat-menu #logoutMenu=\"matMenu\">\n                <button (click)=\"logout()\" mat-menu-item><i class=\"fas fa-sign-out\"></i> Se déconnecter</button>\n            </mat-menu>\n            \n            <hr>\n            <app-button icon=\"fas fa-info-circle\" link=\"/about\" interactable=\"small\" [shadow]=\"true\">À propos</app-button>\n            <app-button icon=\"fab fa-github\" link=\"https://github.com/PolyTinder/poly-tinder\" interactable=\"small\" [shadow]=\"true\">Github</app-button>\n        </div>\n    </div>\n</app-layout>\n"
         },
         {
             "name": "UserProfilePreviewComponent",
@@ -9202,13 +9394,13 @@
         },
         {
             "name": "ImageModule",
-            "id": "module-ImageModule-e9683ea52d76f542646d8311bd90c06ce78b29e0e4e4c6d44d47eb9fd84428f1b9389b519d5053838bdc896526e3d1d0877ec1dfe2f2f3547aa43ebf64d928b0",
+            "id": "module-ImageModule-311aafeca051810e46b7c1f924862497bcbb8f693e403e89729230ca79b8805f97b4797fa883f0412e73e35615076c44dce25d9729b761c5f43266d55c79913e",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/image/image.module.ts",
             "methods": [],
-            "sourceCode": "import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ImageControlComponent } from './components/image-control/image-control.component';\nimport { UcWidgetModule } from 'ngx-uploadcare-widget';\n\n@NgModule({\n    declarations: [ImageControlComponent],\n    imports: [CommonModule, UcWidgetModule],\n    exports: [ImageControlComponent],\n    schemas: [CUSTOM_ELEMENTS_SCHEMA],\n})\nexport class ImageModule {}\n",
+            "sourceCode": "import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { ImageControlComponent } from './components/image-control/image-control.component';\nimport { CloudinaryModule } from '@cloudinary/ng';\nimport { UiModule } from '../ui/ui.module';\n\n@NgModule({\n    declarations: [ImageControlComponent],\n    imports: [CommonModule, CloudinaryModule, UiModule],\n    exports: [ImageControlComponent],\n    schemas: [CUSTOM_ELEMENTS_SCHEMA],\n})\nexport class ImageModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -9224,7 +9416,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "UiModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -9411,13 +9607,13 @@
         },
         {
             "name": "UiModule",
-            "id": "module-UiModule-4f938e15fa55763b1a1ddd91a4157848b5062ffb3e22c0f91ad09af48a7dea615199fcf434b2e45eb8277c103809bb7068bf8c337b961a6496ab2099c42599e6",
+            "id": "module-UiModule-c83aa2542a6432bc1bf84c5386a3cc2210a72e0840cda29810f3023bf6cc1acc3093d6c3a2bc1c9fd20c0b3dcbe27a435c097b64f6fa7deb75fe41b1b7a30aae",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/modules/ui/ui.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\nimport { RouterModule } from '@angular/router';\nimport { ImageComponent } from './components/image/image.component';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n    imports: [CommonModule, RouterModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n})\nexport class UiModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { LayoutComponent } from './components/layout/layout.component';\nimport { CardComponent } from './components/card/card.component';\nimport { LayoutActionComponent } from './components/layout-action/layout-action.component';\nimport { ButtonComponent } from './components/button/button.component';\nimport { RouterModule } from '@angular/router';\nimport { ImageComponent } from './components/image/image.component';\nimport { CloudinaryModule } from '@cloudinary/ng';\n\n@NgModule({\n    declarations: [\n        LayoutComponent,\n        CardComponent,\n        LayoutActionComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n    imports: [CommonModule, RouterModule, CloudinaryModule],\n    exports: [\n        LayoutComponent,\n        LayoutActionComponent,\n        CardComponent,\n        ButtonComponent,\n        ImageComponent,\n    ],\n})\nexport class UiModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -10615,6 +10811,17 @@
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "CloudinaryWidgetSourceType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"local\" | \"url\" | \"camera\" | \"dropbox\" | \"image_search\" | \"shutterstock\" | \"gettyimages\" | \"istock\" | \"unsplash\" | \"google_drive\"",
+                "file": "src/types/cloudinary.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 189
+            },
             {
                 "name": "ImageSize",
                 "ctype": "miscellaneous",
@@ -11903,6 +12110,19 @@
             ]
         },
         "groupedTypeAliases": {
+            "src/types/cloudinary.ts": [
+                {
+                    "name": "CloudinaryWidgetSourceType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"local\" | \"url\" | \"camera\" | \"dropbox\" | \"image_search\" | \"shutterstock\" | \"gettyimages\" | \"istock\" | \"unsplash\" | \"google_drive\"",
+                    "file": "src/types/cloudinary.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 189
+                }
+            ],
             "src/modules/ui/components/image/image.component.ts": [
                 {
                     "name": "ImageSize",
@@ -12826,7 +13046,7 @@
                 "linktype": "component",
                 "name": "ImageControlComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/16",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -13201,7 +13421,7 @@
                 "linktype": "component",
                 "name": "ImageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -13742,6 +13962,51 @@
                 "name": "NotLoggedIn",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/types/cloudinary.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CloudinaryWidget",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/types/cloudinary.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CloudinaryWidgetEvent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/types/cloudinary.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CloudinaryWidgetEventClose",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/types/cloudinary.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CloudinaryWidgetEventSuccess",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/types/cloudinary.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "CloudinaryWidgetEventUploadAdded",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             }
         ]
