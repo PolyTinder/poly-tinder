@@ -24,8 +24,8 @@ defaults:
 env:
   DIR: api
   SERVICE: api-admin
-  REGION: us-east1
-  PROJECT: polytinder
+  REGION: europe-west1
+  PROJECT: projet-agir-2024
   ENVIRONMENT: prod
 
 jobs:
