@@ -11,7 +11,7 @@
         </div>
     </ng-container>
 
-    <div class="profiles-container">
+    <div class="profiles-container" *ngIf="availableUsers.length > 0">
         <ng-container *ngFor="let user of availableUsers; let index = index">
             <div class="profile-container" *ngIf="index <= 1">
                 <div class="profile-content">

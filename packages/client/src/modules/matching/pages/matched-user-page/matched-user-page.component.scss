@@ -249,8 +249,15 @@
     @media screen and (max-width: $mobile-breakpoint) {
         &__header,
         &__footer {
-            padding: 12px;
             gap: 12px;
+        }
+
+        &__header {
+            padding: 12px;
+        }
+
+        &__footer {
+            padding: 12px 12px max(env(safe-area-inset-bottom), 12px) 12px;
         }
 
         &__header {
@@ -286,10 +293,6 @@
                 height: $item-size;
                 width: $item-size;
                 font-size: 1em;
-            }
-
-            @media all and (display-mode: standalone) {
-                padding: 12px 12px 40px 12px;
             }
         }
     }

@@ -94,7 +94,7 @@ export class UserValidationService {
      *
      * @param userId ID of the user to request an email validation for
      */
-    async requestEmailValidation(userId: number): Promise<void> {
+    async requestEmailValidation(userId: number): Promise<unknown> {
         const user = await this.userService.getUser(userId);
         const token = await this.verificationTokenService.generateToken(
             userId,
@@ -103,17 +103,31 @@ export class UserValidationService {
 
         const url = `${
             env.NODE_ENV === 'production'
-                ? 'https://polytinder.com'
+                ? 'https://projet-agir-2024-prod-client-rbzlbnwr7q-ew.a.run.app'
                 : 'http://localhost:4200'
         }/verify-email?token=${encodeURIComponent(token)}`;
 
         const content = `
-            <h1>PolyTinder</h1>
-            <h2>Vérifiez votre email</h2>
-            <p>Allez à cet URL <a href="${url}">${url}</a> pour vérifier votre email.</p>
+            <table style="margin: 0 auto; text-align: center; font-family: 'Onest', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important">
+                <tbody>
+                    <tr>
+                        <th>
+                            <a href=""><img height="100" src="https://projet-agir-2024-prod-client-rbzlbnwr7q-ew.a.run.app/assets/logo.svg" alt="INSA Meet logo"></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <h1>Confirmer votre email</h1>
+                            <p style="font-weight: 400;">Veuillez confirmer votre email afin d'utiliser l'application INSA Meet</p>
+                            <a href="${url}" style="text-decoration: none; text-align: center; cursor: pointer;"><button style="cursor: pointer; padding: 12px 24px; width: 100%; max-width: 300px; border-radius: 6px; font-size: 1em; font-weight: 500; background: linear-gradient(90deg, rgb(210, 59, 44), #CF6A5C); border: none; color: white;">Confirmer mon email</button></a>
+                            <p style="font-weight: 400;">Ou cliquez sur le lien suivant <a href="${url}">${url}</a></p>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
         `;
 
-        await this.emailService.sendEmail(
+        return await this.emailService.sendEmail(
             user.email,
             'Vérifiez votre email',
             content,

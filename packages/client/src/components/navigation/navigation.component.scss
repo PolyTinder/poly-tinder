@@ -4,6 +4,7 @@
 .navigation {
     @include no-select;
 
+    background-color: white;
     border-right: solid 1px rgb(240, 240, 240);
     height: 100%;
     overflow-y: auto;
@@ -118,7 +119,7 @@
         max-width: none;
         min-width: none;
         border: none;
-        padding: 8px;
+        padding: 8px 8px max(env(safe-area-inset-bottom), 8px) 8px;
         border-top: solid 1px rgb(240, 240, 240);
 
         &__top {
@@ -157,10 +158,6 @@
                     }
                 }
             }
-        }
-
-        @media all and (display-mode: standalone) {
-            padding: 8px 8px 36px 8px;
         }
     }
 }

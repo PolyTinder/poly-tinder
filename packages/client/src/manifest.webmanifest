@@ -1,7 +1,7 @@
 {
-  "name": "PolyTinder",
-  "short_name": "PolyTinder",
-  "theme_color": "#fe943e",
+  "name": "INSA Meet",
+  "short_name": "INSA Meet",
+  "theme_color": "#d23b2c",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",

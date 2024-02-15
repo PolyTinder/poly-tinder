@@ -37,6 +37,7 @@ export class EmailService {
                     {
                         From: {
                             Email: env.EMAIL,
+                            Name: 'INSA Meet',
                         },
                         To: [
                             {
