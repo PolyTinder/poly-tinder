@@ -19,6 +19,7 @@ export class ButtonComponent {
     @Input() shadow: boolean = false;
     @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
     @Input() forceFocusable: boolean = false;
+    @Input() replaceUrl: boolean = false;
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
 
     constructor(private readonly router: Router) {}
@@ -30,7 +31,9 @@ export class ButtonComponent {
             if (this.isLinkExternal) {
                 window.open(this.link, this.linkTarget);
             } else {
-                this.router.navigate([this.link]);
+                this.router.navigate([this.link], {
+                    replaceUrl: this.replaceUrl,
+                });
             }
         }
 

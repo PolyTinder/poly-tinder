@@ -18,6 +18,7 @@
                     [color]="isActiveLink(item.href) ? 'primary' : 'transparent'"
                     [interactable]="isActiveLink(item.href) ? 'none' : 'small'"
                     [icon]="'fas fa-' + item.icon"
+                    [replaceUrl]="true"
                     class="desktop-only"
                 >
                     <div
@@ -35,6 +36,7 @@
                     [link]="isActiveLink(item.href) ? undefined : item.href"
                     color="transparent"
                     [interactable]="isActiveLink(item.href) ? 'none' : 'small'"
+                    [replaceUrl]="true"
                     class="mobile-only"
                 >
                     <div
