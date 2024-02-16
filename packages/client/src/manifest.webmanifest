@@ -55,5 +55,13 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
+  ],
+  "id": "INSA Meet",
+  "description": "Social app for students at INSA Lyon",
+  "dir": "ltr",
+  "lang": "fr",
+  "orientation": "portrait",
+  "categories": [
+    "social"
   ]
 }
