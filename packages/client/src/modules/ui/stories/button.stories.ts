@@ -23,7 +23,6 @@ const meta: Meta<StoryType> = {
         icon: 'fas fa-flag',
         iconOnly: false,
         isLoading: false,
-        shadow: false,
         interactable: 'small',
     },
     decorators: [

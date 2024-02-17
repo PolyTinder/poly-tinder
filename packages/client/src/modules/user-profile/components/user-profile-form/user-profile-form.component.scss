@@ -54,24 +54,26 @@
         font-size: 1.2em;
         z-index: 2;
     }
-
+    
     @media screen and (max-width: $mobile-breakpoint) {
         gap: 12px;
-        padding: 12px;
-
+        padding: 12px 0;
+        
         section {
             padding: 12px;
         }
-
+        
         &__pictures {
             gap: 12px;
         }
-
+        
         &__submit {
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+
             bottom: 61px;
             left: 50%;
             translate: -50% 0;
-            margin-bottom: 12px;
+            margin-bottom: calc(12px + var(--safe-area-inset-bottom));
             width: calc(100% - 24px);
             max-width: 225px;
         }

@@ -7,7 +7,7 @@ app-about-layout {
 
         font-size: 1.4em;
         font-weight: 600;
-        margin: 16px 0 0 0;
+        margin: 16px 12px 0 12px;
         padding-top: 12px;
         border-top: solid 1px rgb(240, 240, 240);
     }
@@ -39,6 +39,10 @@ app-about-layout {
 
         @media screen and (max-width: 400px) {
             grid-template-columns: repeat(1, 1fr);
+        }
+
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding: 0 12px;
         }
     }
 }

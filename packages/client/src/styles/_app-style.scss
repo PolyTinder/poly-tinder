@@ -1,0 +1,205 @@
+@import './variables';
+
+$sides: (
+    'all': '',
+    't': '-top',
+    'b': '-bottom',
+    'l': '-left',
+    'r': '-right',
+);
+
+$radius-corners: (
+    'all': 'border-radius',
+    'tl': 'border-top-left-radius',
+    'tr': 'border-top-right-radius',
+    'bl': 'border-bottom-left-radius',
+    'br': 'border-bottom-right-radius',
+);
+
+$border: (
+    'default': solid 1px rgb(240, 240, 240),
+    'danger': solid 1px tomato,
+    'none': none,
+);
+
+$radius: (
+    'default': 6px,
+    's': 3px,
+    'l': 12px,
+    'xl': 24px,
+    'xxl': 48px,
+    'none': 0,
+);
+
+$spacing: (
+    'default': 24px,
+    's': 12px,
+    'l': 48px,
+    'xl': 96px,
+    'xxl': 192px,
+    'none': 0,
+);
+
+@mixin app-style {
+    &--border { 
+        @each $side-label, $side in $sides {
+            &--#{$side-label} {
+                @each $label, $value in $border {
+                    &--#{$label} {
+                        border#{$side}: $value;
+                    }
+                }
+            }
+        }
+        
+        &--h {
+            @each $label, $value in $border {
+                &--#{$label} {
+                    border-top: $value;
+                    border-bottom: $value;
+                }
+            }
+        }
+        
+        &--v {
+            @each $label, $value in $border {
+                &--#{$label} {
+                    border-left: $value;
+                    border-right: $value;
+                }
+            }
+        }
+    }
+
+    &--radius {
+        @each $radius-corner-label, $radius-corner in $radius-corners {
+            &--#{$radius-corner-label} {
+                @each $label, $size in $radius {
+                    &--#{$label} {
+                        #{$radius-corner}: $size;
+                    }
+                }
+            }
+        }
+
+        &--t {
+            @each $label, $size in $radius {
+                &--#{$label} {
+                    border-top-left-radius: $size;
+                    border-top-right-radius: $size;
+                }
+            }
+        }
+
+        &--b {
+            @each $label, $size in $radius {
+                &--#{$label} {
+                    border-bottom-left-radius: $size;
+                    border-bottom-right-radius: $size;
+                }
+            }
+        }
+
+        &--l {
+            @each $label, $size in $radius {
+                &--#{$label} {
+                    border-top-left-radius: $size;
+                    border-bottom-left-radius: $size;
+                }
+            }
+        }
+
+        &--r {
+            @each $label, $size in $radius {
+                &--#{$label} {
+                    border-top-right-radius: $size;
+                    border-bottom-right-radius: $size;
+                }
+            }
+        }
+    }
+
+    &--padding {
+        @each $side-label, $side in $sides {
+            &--#{$side-label} {
+                @each $label, $value in $spacing {
+                    &--#{$label} {
+                        padding#{$side}: $value;
+                    }
+                }
+            }
+        }
+
+        &--h {
+            @each $label, $value in $spacing {
+                &--#{$label} {
+                    padding-left: $value;
+                    padding-right: $value;
+                }
+            }
+        }
+
+        &--v {
+            @each $label, $value in $spacing {
+                &--#{$label} {
+                    padding-top: $value;
+                    padding-bottom: $value;
+                }
+            }
+        }
+    }
+
+    &--margin {
+        @each $side-label, $side in $sides {
+            &--#{$side-label} {
+                @each $label, $value in $spacing {
+                    &--#{$label} {
+                        margin#{$side}: $value;
+                    }
+                }
+            }
+        }
+
+        &--h {
+            @each $label, $value in $spacing {
+                &--#{$label} {
+                    margin-left: $value;
+                    margin-right: $value;
+                }
+            }
+        }
+
+        &--v {
+            @each $label, $value in $spacing {
+                &--#{$label} {
+                    margin-top: $value;
+                    margin-bottom: $value;
+                }
+            }
+        }
+    }
+
+    &--gap {
+        @each $label, $value in $spacing {
+            &--#{$label} {
+                gap: $value;
+            }
+        }
+    }
+}
+
+.app-style {
+    @include app-style();
+
+    &--m {
+        @media screen and (max-width: $mobile-breakpoint) {
+            @include app-style();
+        }
+    }
+
+    &--d {
+        @media screen and (min-width: $mobile-breakpoint) {
+            @include app-style();
+        }
+    }
+}

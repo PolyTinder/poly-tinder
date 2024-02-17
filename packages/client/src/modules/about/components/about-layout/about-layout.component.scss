@@ -10,6 +10,6 @@ main {
     margin: 0 auto;
 
     @media screen and (max-width: $mobile-breakpoint) {
-        padding: 0 12px 12px 12px;
+        padding: 0 0 12px 0;
     }
 }

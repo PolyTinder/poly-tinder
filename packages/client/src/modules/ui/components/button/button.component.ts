@@ -16,8 +16,8 @@ export class ButtonComponent {
     @Input() icon?: string;
     @Input() iconOnly: boolean = false;
     @Input() isLoading: boolean | null = false;
-    @Input() shadow: boolean = false;
     @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
+    @Input() fullWidth: 'never' | 'always' | 'mobile' = 'never';
     @Input() forceFocusable: boolean = false;
     @Input() replaceUrl: boolean = false;
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
@@ -48,7 +48,7 @@ export class ButtonComponent {
                 (this.interactable === 'default'
                     ? ''
                     : `--${this.interactable}`),
-            this.shadow ? 'btn--shadow' : '',
+            `btn--full-width--${this.fullWidth}`,
             this.isLoading ? 'btn--loading' : '',
             this.disabled ? 'btn--disabled' : '',
             this.iconOnly ? 'btn--icon-only' : '',

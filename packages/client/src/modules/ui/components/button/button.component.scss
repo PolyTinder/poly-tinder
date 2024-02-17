@@ -5,8 +5,6 @@
     background-color: var(--theme-background);
     color: var(--theme-background-contrast);
     font: inherit;
-    border: solid 1px rgb(240, 240, 240);
-    border-radius: 6px;
     padding: 12px 24px;
     box-sizing: border-box;
     position: relative;
@@ -51,6 +49,31 @@
         }
     }
 
+    &--full-width {
+        &--always {
+            border-top: solid 1px rgb(240, 240, 240);
+            border-bottom: solid 1px rgb(240, 240, 240);
+        }
+
+        &--never,
+        &--mobile {
+            border: solid 1px rgb(240, 240, 240);
+            border-radius: 6px;
+        }
+    }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        &--full-width {
+            &--mobile {
+                border-top: solid 1px rgb(240, 240, 240);
+                border-bottom: solid 1px rgb(240, 240, 240);
+                border-left: none;
+                border-right: none;
+                border-radius: 0;
+            }
+        }
+    }
+
     &--style {
         &--transparent {
             border-color: transparent;
@@ -74,9 +97,5 @@
         width: 46px;
         padding: 0;
         font-size: 1.05em;
-    }
-
-    &--shadow {
-        box-shadow: $default-shadow;
     }
 }

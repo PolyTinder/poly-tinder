@@ -1,4 +1,11 @@
 <app-layout headerType="hidden">
+    <!-- <div class="test" [appStyle]="{border: 'danger', radius: true}">
+        Bonjour
+    </div>
+    <div class="test" [appStyle]="{border: {h: true, l: 'danger'}, radius: {l: 'xxl'}, mobile: {radius: false}}">
+        Bonjour
+    </div> -->
+
     <div class="user-profile" *ngIf="userProfile | async; let userProfile">
         <app-card color="danger" *ngIf="(emailValidated | async) === false">
             <p><b>Email non validé</b></p>
@@ -17,24 +24,24 @@
         </div>
     
         <div class="user-profile__actions">
-            <app-button icon="fas fa-user-edit" link="/profile-edit" interactable="small" [shadow]="true">
+            <app-button icon="fas fa-user-edit" link="/profile-edit" interactable="small" fullWidth="mobile">
                 Modifier mon profil
                 <span class="user-profile__actions__btn__pill user-profile__actions__btn__pill--error" *ngIf="(userProfileReady | async) === false">1</span>
             </app-button>
 
-            <app-button icon="fas fa-user" link="/profile-preview" interactable="small" [shadow]="true">Visualiser mon profil</app-button>
+            <app-button icon="fas fa-user" link="/profile-preview" interactable="small" fullWidth="mobile" [appStyle]="{}">Visualiser mon profil</app-button>
             <!-- <button class="user-profile__actions__btn interactable--small">
                 <i class="fas fa-cog"></i>
                 Préférences
             </button> -->
-            <app-button icon="fas fa-sign-out" [shadow]="true" interactable="small" [matMenuTriggerFor]="logoutMenu">Se déconnecter</app-button>
+            <app-button icon="fas fa-sign-out" interactable="small" [matMenuTriggerFor]="logoutMenu" fullWidth="mobile">Se déconnecter</app-button>
             <mat-menu #logoutMenu="matMenu">
                 <button (click)="logout()" mat-menu-item><i class="fas fa-sign-out"></i> Se déconnecter</button>
             </mat-menu>
             
             <hr>
-            <app-button icon="fas fa-info-circle" link="/about" interactable="small" [shadow]="true">À propos</app-button>
-            <app-button icon="fab fa-github" link="https://github.com/PolyTinder/poly-tinder" interactable="small" [shadow]="true">Github</app-button>
+            <app-button icon="fas fa-info-circle" link="/about" interactable="small" fullWidth="mobile">À propos</app-button>
+            <app-button icon="fab fa-github" link="https://github.com/PolyTinder/poly-tinder" interactable="small" fullWidth="mobile">Github</app-button>
         </div>
     </div>
 </app-layout>

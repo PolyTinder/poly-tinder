@@ -67,4 +67,9 @@
             }
         }
     }
+
+    @media screen and (max-width: $mobile-breakpoint){
+        padding: 12px 0;
+        gap: 12px;
+    }
 }

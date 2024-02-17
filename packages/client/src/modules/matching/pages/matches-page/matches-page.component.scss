@@ -8,7 +8,7 @@ main {
     gap: 24px;
 
     @media screen and (max-width: $mobile-breakpoint) {
-        padding: 0 12px 12px 12px;
+        padding: 0 0 12px 0;
         gap: 12px;
     }
 

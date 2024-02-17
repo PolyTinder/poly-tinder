@@ -4,8 +4,6 @@
 .card {
     background-color: var(--theme-background);
     color: var(--theme-background-contrast);
-    border: solid 1px rgb(240, 240, 240);
-    border-radius: 12px;
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -47,6 +45,19 @@
         }
     }
 
+    &--full-width {
+        &--always {
+            border-top: solid 1px rgb(240, 240, 240);
+            border-bottom: solid 1px rgb(240, 240, 240);
+        }
+
+        &--never,
+        &--mobile {
+            border: solid 1px rgb(240, 240, 240);
+            border-radius: 12px;
+        }
+    }
+
     @media screen and (max-width: $mobile-breakpoint) {
         padding: 12px;
         gap: 12px;
@@ -57,6 +68,16 @@
         
             .card__title {
                 padding: 12px 0 0 12px;
+            }
+        }
+
+        &--full-width {
+            &--mobile {
+                border-top: solid 1px rgb(240, 240, 240);
+                border-bottom: solid 1px rgb(240, 240, 240);
+                border-left: none;
+                border-right: none;
+                border-radius: 0;
             }
         }
     }

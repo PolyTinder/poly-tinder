@@ -52,6 +52,16 @@
             }
         }
     }
+
+    @media screen and (max-width: $mobile-breakpoint) {
+        padding-left: 0;
+        padding-right: 0;
+
+        &__actions {
+            max-width: none;
+            gap: 6px;
+        }
+    }
 }
 
 hr {

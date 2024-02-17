@@ -7,6 +7,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { RouterModule } from '@angular/router';
 import { ImageComponent } from './components/image/image.component';
 import { CloudinaryModule } from '@cloudinary/ng';
+import { StyleDirective } from './directives/style.directive';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { CloudinaryModule } from '@cloudinary/ng';
         LayoutActionComponent,
         ButtonComponent,
         ImageComponent,
+        StyleDirective,
     ],
     imports: [CommonModule, RouterModule, CloudinaryModule],
     exports: [
@@ -23,6 +25,7 @@ import { CloudinaryModule } from '@cloudinary/ng';
         CardComponent,
         ButtonComponent,
         ImageComponent,
+        StyleDirective,
     ],
 })
 export class UiModule {}
