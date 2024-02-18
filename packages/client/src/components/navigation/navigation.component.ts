@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
-import { NAVIGATION, NAVIGATION_NOT_LOGGED_IN } from 'src/constants/navigation';
+import { Observable, combineLatest, map } from 'rxjs';
+import {
+    NAVIGATION,
+    NAVIGATION_NOT_LOGGED_IN,
+    NavigationItem,
+} from 'src/constants/navigation';
 import { AuthenticationService } from 'src/modules/authentication/services/authentication-service/authentication.service';
 import { SessionService } from 'src/modules/authentication/services/session-service/session.service';
 import { PublicProfileService } from 'src/modules/matching/services/public-profile-service/public-profile.service';
@@ -23,7 +27,7 @@ export class NavigationComponent {
         private readonly validationService: ValidationService,
     ) {}
 
-    get navigation() {
+    get navigation(): Observable<NavigationItem[]> {
         return this.isLoggedIn.pipe(
             map((isLoggedIn) =>
                 isLoggedIn ? NAVIGATION : NAVIGATION_NOT_LOGGED_IN,

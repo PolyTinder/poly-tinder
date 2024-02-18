@@ -15,6 +15,6 @@
     @media screen and (max-width: $mobile-breakpoint) {
         --safe-area-inset-bottom: env(safe-area-inset-bottom);
 
-        padding-bottom: calc(42px + var(--safe-area-inset-bottom));
+        padding-bottom: calc(55px + 12px + var(--safe-area-inset-bottom));
     }
 }

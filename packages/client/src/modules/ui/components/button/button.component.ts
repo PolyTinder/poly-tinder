@@ -18,6 +18,7 @@ export class ButtonComponent {
     @Input() isLoading: boolean | null = false;
     @Input() interactable: 'default' | 'large' | 'small' | 'none' = 'default';
     @Input() fullWidth: 'never' | 'always' | 'mobile' = 'never';
+    @Input() noPadding: boolean = false;
     @Input() forceFocusable: boolean = false;
     @Input() replaceUrl: boolean = false;
     @Output() btnClick: EventEmitter<Event> = new EventEmitter<Event>();
@@ -52,6 +53,7 @@ export class ButtonComponent {
             this.isLoading ? 'btn--loading' : '',
             this.disabled ? 'btn--disabled' : '',
             this.iconOnly ? 'btn--icon-only' : '',
+            this.noPadding ? 'btn--no-padding' : '',
         ].join(' ');
     }
 

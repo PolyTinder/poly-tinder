@@ -38,12 +38,14 @@
                     [interactable]="isActiveLink(item.href) ? 'none' : 'small'"
                     [replaceUrl]="true"
                     class="mobile-only"
+                    [noPadding]="true"
                 >
                     <div
                         class="navigation__top__menu__item__content"
                         [ngClass]="{'navigation__top__menu__item__content--active': isActiveLink(item.href)}"
                     >
                         <i [class]="'fa-' + item.icon + ' fas navigation__top__menu__item__content__icon'"></i>
+                        <span class="navigation__top__menu__item__content__text">{{item.shortText}}</span>
                         <span class="navigation__top__menu__item__content__pill" *ngIf="item.href === '/matches' && (unreadConversationCount | async) != '0'">{{ unreadConversationCount | async }}</span>
                         <span class="navigation__top__menu__item__content__pill navigation__top__menu__item__content__pill--error" *ngIf="item.href === '/profile' && ((userValidActionsCount | async) ?? 0) > 0">{{userValidActionsCount | async}}</span>
                     </div>
