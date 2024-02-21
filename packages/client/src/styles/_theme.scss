@@ -1,0 +1,64 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$agir-palette: (
+    50: rgb(255, 245, 245),
+    100: rgb(255, 205, 210),
+    200: rgb(239, 154, 154),
+    300: rgb(229, 115, 115),
+    400: rgb(239, 83, 80),
+    500: rgb(210, 59, 44),
+    600: rgb(198, 40, 40),
+    700: rgb(183, 28, 28),
+    800: rgb(169, 17, 17),
+    900: rgb(156, 0, 0),
+    contrast: (
+        50: rgb(0, 0, 0),
+        100: rgb(0, 0, 0),
+        200: rgb(0, 0, 0),
+        300: rgb(0, 0, 0),
+        400: rgb(0, 0, 0),
+        500: rgb(255, 255, 255),
+        600: rgb(255, 255, 255),
+        700: rgb(255, 255, 255),
+        800: rgb(255, 255, 255),
+        900: rgb(255, 255, 255)
+    )
+);
+
+$warn-palette: (
+    50: rgb(255, 224, 178),
+    100: rgb(255, 204, 128),
+    200: rgb(255, 183, 77),
+    300: rgb(255, 167, 38),
+    400: rgb(255, 152, 0),
+    500: rgb(255, 152, 0),
+    600: rgb(251, 140, 0),
+    700: rgb(245, 124, 0),
+    800: rgb(239, 108, 0),
+    900: rgb(230, 81, 0),
+    contrast: (
+        50: rgb(0, 0, 0),
+        100: rgb(0, 0, 0),
+        200: rgb(0, 0, 0),
+        300: rgb(0, 0, 0),
+        400: rgb(0, 0, 0),
+        500: rgb(0, 0, 0),
+        600: rgb(0, 0, 0),
+        700: rgb(0, 0, 0),
+        800: rgb(0, 0, 0),
+        900: rgb(0, 0, 0)
+    )
+);
+
+$my-theme: mat.define-light-theme((
+    color: (
+        primary: mat.define-palette($agir-palette),
+        accent: mat.define-palette($agir-palette, 500),
+        warn: mat.define-palette($warn-palette)
+    ),
+));
+
+@include mat.core-theme($my-theme);
+@include mat.all-component-themes($my-theme);

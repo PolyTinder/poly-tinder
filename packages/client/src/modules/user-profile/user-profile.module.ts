@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserProfilePreviewComponent } from './pages/user-profile-preview/user-profile-preview.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { UserProfilePreviewComponent } from './pages/user-profile-preview/user-p
         MatInputModule,
         MatSelectModule,
         MatSnackBarModule,
+        MatCheckboxModule,
     ],
     exports: [
         UserProfilePageComponent,

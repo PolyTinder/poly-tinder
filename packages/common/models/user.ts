@@ -39,6 +39,7 @@ export interface UserProfile {
     sexualOrientation?: string;
     createdAt?: Date;
     updatedAt?: Date;
+    automaticallyConnect?: boolean;
 }
 
 export type UnsafeUserProfileAttributes = 'pictures' | 'interests' | 'associations' | 'languages';

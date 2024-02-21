@@ -106,6 +106,7 @@ export class UserProfileService {
             genderPreference: converted.genderPreference ?? null,
             sexualOrientation: converted.sexualOrientation ?? null,
             updatedAt: new Date(),
+            automaticallyConnect: converted.automaticallyConnect ?? null,
         };
 
         this.validateUserProfile(userProfile);

@@ -1,5 +1,4 @@
-@import './styles/helpers';
-@import './styles/app-style';
+@import './styles/theme';
 
 :root {
     --theme-main-rgb: 210, 59, 44;
@@ -15,6 +14,9 @@
     --theme-background-secondary-rgb: 250, 250, 250;
     --theme-background-secondary: rgb(var(--theme-background-secondary-rgb));
 }
+
+@import './styles/helpers';
+@import './styles/app-style';
 
 html, body {
     margin: 0;

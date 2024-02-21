@@ -129,6 +129,7 @@ export class UserProfileFormComponent {
                 (item, value) => item.id === value,
             ),
         ]),
+        automaticallyConnect: new FormControl(false),
     });
     programs = PROGRAMS_ARRAY;
     lookingFor = LOOKING_FOR;
