@@ -51,6 +51,7 @@
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.3",
     "@types/supertest": "^2.0.12",
+    "@types/web-push": "^3.6.3",
     "bcrypt": "^5.1.1",
     "common": "file:../common",
     "cors": "^2.8.5",
@@ -72,6 +73,7 @@
     "socket.io": "^4.7.2",
     "tsyringe": "^4.7.0",
     "uuid": "^9.0.1",
+    "web-push": "^3.6.7",
     "winston": "^3.8.2"
   }
 }
