@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../services/authentication-service/aut
 import { AuthenticationUser } from 'common/models/authentication';
 import { BehaviorSubject } from 'rxjs';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { NotificationService } from 'src/services/notification-service/notification.service';
 
 @Component({
     selector: 'app-login-page',
@@ -22,6 +23,7 @@ export class LoginPageComponent {
 
     constructor(
         private readonly authenticationService: AuthenticationService,
+        private readonly notificationService: NotificationService,
     ) {}
 
     onSubmit() {
@@ -30,7 +32,8 @@ export class LoginPageComponent {
         this.authenticationService
             .login(this.loginForm.value as AuthenticationUser)
             .subscribe({
-                next: () => {
+                next: (user) => {
+                    this.notificationService.subscribe(user.user.userId);
                     this.loading.next(false);
                 },
                 error: (error: HttpErrorResponse) => {

@@ -1,10 +1,10 @@
 import { singleton } from 'tsyringe';
 import { DatabaseService } from '../database-service/database-service';
-import { UserProfile } from 'common/models/user';
+import { Knex } from 'knex';
+import { NotificationSubscription } from 'common/models/notification-subscription';
 import {
     sendNotification,
     PushSubscription,
-    SendResult,
     VapidKeys,
     setVapidDetails,
 } from 'web-push';
@@ -16,9 +16,10 @@ export class NotificationService {
             'BC7J1hDqhmWAb-N88JCvA_vgasQ433M8sD4Fl6qWyfiinOgW3qh62vJfrs2wWLg6I26JdsXwoXX2u7YS13XQbJA',
         privateKey: 'A1Nj53Yi95sVuPCN_xpUjyCnf13xwKh03mf2tXj98VQ',
     };
-    readonly payload = {
+    payload = {
         notification: {
             title: 'Test Notification',
+            body: '',
             data: {
                 onActionClick: {
                     default: {
@@ -32,16 +33,60 @@ export class NotificationService {
 
     constructor(private readonly databaseService: DatabaseService) {}
 
-    private get subscribedUsers() {
-        return this.databaseService.database<UserProfile>('user');
+    private get subscriptions(): Knex.QueryBuilder<NotificationSubscription> {
+        return this.databaseService.database<NotificationSubscription>(
+            'notification-subscription',
+        );
     }
 
-    async subscribe(sub: PushSubscription): Promise<SendResult> {
+    async subscribe(userId: number, sub: PushSubscription): Promise<void> {
+        await this.subscriptions.delete().where({ userId });
+        const subscription: NotificationSubscription = {
+            endpoint: sub.endpoint,
+            auth: sub.keys.auth,
+            p256dh: sub.keys.p256dh,
+            userId: userId,
+        };
+        await this.subscriptions.insert(subscription);
+    }
+
+    async unsubscribe(userId: number): Promise<void> {
+        await this.subscriptions.delete().where({ userId });
+    }
+
+    async notifyUser(
+        userId: number,
+        title: string,
+        text?: string,
+    ): Promise<void> {
         setVapidDetails(
             'mailto:miguel.vpereira14@gmail.com',
             this.vapidKey.publicKey,
             this.vapidKey.privateKey,
         );
-        return sendNotification(sub, JSON.stringify(this.payload));
+        const sub: NotificationSubscription = await this.subscriptions
+            .where({
+                userId,
+            })
+            .first();
+        if (sub) {
+            const subscription: PushSubscription = {
+                endpoint: sub.endpoint,
+                keys: {
+                    auth: sub.auth,
+                    p256dh: sub.p256dh,
+                },
+            };
+            this.payload.notification.title = title;
+            this.payload.notification.body = text || '';
+            try {
+                await sendNotification(
+                    subscription,
+                    JSON.stringify(this.payload),
+                );
+            } catch (error) {
+                /* empty */
+            }
+        }
     }
 }

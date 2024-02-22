@@ -13,10 +13,32 @@ export class NotificationController extends AbstractController {
     protected configureRouter(router: Router): void {
         router.post(
             '/subscribe',
-            async (req: Request<PushSubscription>, res, next) => {
+            async (
+                req: Request<{ userId: number; sub: PushSubscription }>,
+                res,
+                next,
+            ) => {
                 try {
                     res.status(StatusCodes.OK).json(
-                        await this.notificationService.subscribe(req.body),
+                        await this.notificationService.subscribe(
+                            req.body.userId,
+                            req.body.sub,
+                        ),
+                    );
+                } catch (error) {
+                    next(error);
+                }
+            },
+        );
+
+        router.post(
+            '/unsubscribe',
+            async (req: Request<{ userID: number }>, res, next) => {
+                try {
+                    res.status(StatusCodes.OK).json(
+                        await this.notificationService.unsubscribe(
+                            req.body.userID,
+                        ),
                     );
                 } catch (error) {
                     next(error);

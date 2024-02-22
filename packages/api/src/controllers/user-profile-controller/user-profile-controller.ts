@@ -6,6 +6,7 @@ import { UserProfileService } from '../../services/user-profile-service/user-pro
 import { auth } from '../../middlewares/auth';
 import { UserRequest } from '../../types/requests';
 import { UserProfile } from 'common/models/user';
+import { NotificationService } from '../../services/notification-service/notification-service';
 
 @singleton()
 export class UserProfileController extends AbstractController {
@@ -38,6 +39,7 @@ export class UserProfileController extends AbstractController {
                         req.body.session.user.userId,
                         req.body.userProfile ?? {},
                     );
+
                     res.status(StatusCodes.OK).json();
                 } catch (e) {
                     next(e);

@@ -7,6 +7,8 @@ import { WsService } from '../ws-service/ws-service';
 import { ModerationService } from '../moderation-service/moderation-service';
 import { HttpException } from '../../models/http-exception';
 import { StatusCodes } from 'http-status-codes';
+import { NotificationService } from '../notification-service/notification-service';
+import { UserProfileService } from '../user-profile-service/user-profile-service';
 
 @singleton()
 export class MessagesService {
@@ -15,6 +17,8 @@ export class MessagesService {
         private readonly matchingService: MatchingService,
         private readonly moderationService: ModerationService,
         private readonly wsService: WsService,
+        private readonly notificationService: NotificationService,
+        private readonly userProfileService: UserProfileService,
     ) {}
 
     private get messages(): Knex.QueryBuilder<Message> {
@@ -60,6 +64,13 @@ export class MessagesService {
         };
 
         await this.messages.insert(message);
+
+        const sender = await this.userProfileService.getUserProfile(senderId);
+        this.notificationService.notifyUser(
+            recipientId,
+            `New message from ${sender.name}`,
+            content,
+        );
 
         this.wsService.emitToUserIfConnected(
             recipientId,

@@ -31,7 +31,6 @@ export class ButtonComponent {
 
     onClick(event: Event) {
         if (this.disabled) return;
-        this.notificationService.createNotification();
 
         if (this.link) {
             if (this.isLinkExternal) {
