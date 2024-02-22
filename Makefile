@@ -1,5 +1,5 @@
 dev:
-	docker compose -f docker-compose.dev.yml up
+	docker compose -f docker-compose.dev.yml up api client admin api-admin db
 
 dev-minimal:
 	docker compose -f docker-compose.dev.yml up api client db
